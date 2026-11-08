@@ -1,0 +1,17 @@
+{"record_id": "R3129",
+ "items": {
+  "6":  {"answer": "yes", "quote": "a deep network architecture combined with 3D convolutional neural network (3D CNN) and bidirectional convolutional gated recurrent unit (BiConvGRU) is proposed to learn the spatiotemporal features for ischemic MMD detection.", "section": "abstract"},
+  "9":  {"answer": "yes", "quote": "Gaussian filter function was used to remove mechanical noise, and the moving noise can be removed by NLM algorithms [29]. The second step was image normalization", "section": "methods"},
+  "10": {"answer": "yes", "quote": "In our study, 10 images were extracted from each DSA sequence.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "the gray images and optical flow images were randomly assigned to nonoverlapping training set and test set, 189 cases were separated as the test set", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "we used tensorflow and keras to realize the model.", "section": "results"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The experimental results showed a detection accuracy of 0.9788, sensitivity and specificity were 0.9780 and 0.9796, respectively, and area under curve (AUC) was 0.9856.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "Figure 6 shows the ROC curves among different structures based on convolutional GRU.", "section": "results"}
+ }}

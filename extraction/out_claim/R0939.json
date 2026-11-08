@@ -1,0 +1,17 @@
+{"record_id": "R0939",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aims to investigate the utility of a deep learning approach for the automated detection of GI bleeding on DSA images, specifically by comparing 2D and 3D ResUNet++ architectures.", "section": "methods"},
+  "9": {"answer": "yes", "quote": "downscaling the original 1064 × 1064-pixel images to 128 × 128 or 256 × 256 pixels", "section": "discussion"},
+  "10": {"answer": "yes", "quote": "The bleeding images were cropped to highlight the hemorrhage in higher resolution.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Although manual segmentation is labor-intensive, it remains the gold standard for validation, as emphasized by Yepes-Calderon et al.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Segmentation masks were created manually using Photoshop (Adobe Inc., San Jose, CA, USA) with a thresholding tool to isolate the bleeding.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "data were split at the patient level for training and testing.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The convolutional ResUNet++ networks were implemented using the Keras framework[8] with a TensorFlow backend (Google, Inc.),[9] using Python version 3.9.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "For each model and imaging configuration, the Dice coefficients were computed on a per-sample basis and summarized as mean values with corresponding 95% confidence intervals (CIs).", "section": "methods"},
+  "38": {"answer": "yes", "quote": "The control represents cases without post-processing, whereas the other cases used the superimposition post-processing technique. Error bars indicate one standard deviation.", "section": "results"}
+ }}

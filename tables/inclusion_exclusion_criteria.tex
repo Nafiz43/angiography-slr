@@ -1,0 +1,39 @@
+\renewcommand{\arraystretch}{1.25}
+\begin{table*}[pos=ht]
+\centering
+\caption{Eligibility criteria applied at title--abstract screening, with the number of the 5,064 screened records failing each inclusion criterion or excluded on each exclusion criterion in the final screening run. A record can fail several inclusion criteria, so those counts overlap; overall, 4,831 records failed the inclusion gate, 99 were excluded at the exclusion gate and 134 were included.}
+\label{tab:criteria}
+\begin{tabularx}{\textwidth}{@{}l l X r@{}}
+\toprule
+\textbf{ID} & \textbf{Type} & \textbf{Criterion} & \textbf{Records} \\
+\midrule
+I1 & Modality
+   & Angiographic imaging: catheter angiography, DSA or contrast fluoroscopy with vessels opacified by an intravascular contrast medium. CT/MR angiography, ultrasound, OCT, retinal imaging and \edit{fluoroscopy outside catheter-based angiographic procedures} do not qualify.
+   & 4,154 \\
+\dashedrule
+I2 & Temporal sequence
+   & Temporally ordered multi-frame data (run, series, cine, video or frame sequence) rather than single images only.
+   & 4,451 \\
+\dashedrule
+I3 & Task
+   & At least one in-scope computational task (e.g., enhancement, denoising, motion correction, registration, segmentation, detection, classification, tracking, flow or perfusion quantification, outcome prediction), by deep learning, classical machine learning or image processing.
+   & 1,098 \\
+\dashedrule
+I4 & Evaluation
+   & The method is evaluated against data (any quantitative result, comparison with a reference, or stated validation procedure).
+   & 914 \\
+\midrule
+E1 & Not full length
+   & Conference or meeting abstract, poster or extended abstract without a full methods section.
+   & 3 \\
+\dashedrule
+E2 & Non-research document
+   & Editorial, commentary, letter, review, case report, correction, erratum or retraction notice; also set from the PubMed publication type.
+   & 95 \\
+\dashedrule
+E3 & Not in English
+   & Full text not available in English.
+   & 1 \\
+\bottomrule
+\end{tabularx}
+\end{table*}

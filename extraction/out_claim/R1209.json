@@ -1,0 +1,17 @@
+{"record_id": "R1209",
+ "items": {
+  "6": {"answer": "yes", "quote": "this work aims to develop and validate a fully automatic and quantitative framework for perfusion DSA.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "As pre-processing, we resized all frames to 1024 × 1024 pixels and normalized the intensity values to [0 _,_ 1].", "section": "methods"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "As the annotations were created by a single individual, interannotator variability was not quantitatively assessed.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "An experienced medical doctor created the annotations of the supraclinoid segment of the ICA vessels in the whole dataset, with the assistance of an in-house developed tool in MeVisLab [32].", "section": "methods"},
+  "20": {"answer": "yes", "quote": "We randomly split the dataset into training, validation, and testing sets with a ratio of 50%-20%-30% on the patient level", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The framework was implemented in PyTorch", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The proposed perfDSA framework achieved an overall Dice of 0.73 (±0.21)", "section": "results"},
+  "38": {"answer": "yes", "quote": "perfDSA was able to distinguish favorable functional outcomes with an area under the ROC curve (AUC) of 0.63 (Fig. 4).", "section": "results"}
+ }}

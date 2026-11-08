@@ -1,0 +1,38 @@
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Principal Findings}
+
+This systematic literature review examined \edit{115} studies of computational methods for angiographic sequence analysis. \edit{Publications} increased rapidly after 2020, with 78\% appearing from 2022 onward. However, shared evaluation, reproducibility, and clinical validation remain limited in the reviewed corpus. \edit{We summarize the main takeaways in four points.}
+
+First, data temporality is commonly used, but the way it is modeled varies substantially among the reviewed studies. Because eligibility required temporally ordered multi-frame data, these proportions characterize the selected sequence-analysis literature rather than angiographic AI as a whole. Although \edit{95} studies \edit{(82.6\%)} used sequential data, \edit{50} use fixed operations, and only \edit{45} learn temporal representations. Learned temporal models are concentrated in classification tasks and remain scarce in device tracking and outcome prediction. Flow analysis is a special case: \edit{all} 8 of its studies use temporal data, but 6 do so through physics-based models such as time-intensity curves, contrast transit times, or physics-informed networks, and only one study learns a temporal representation. These models encode known hemodynamics, remain interpretable, and need little training data, which likely explains why they are preferred in this task. \edit{In addition,} 41 studies use short frame stacks rather than complete acquisitions, and \edit{50} of the \edit{95} studies that used sequential data still identify limited temporal modeling as a limitation. As shown in Table~\ref{tab:temporal_taxonomy}, using sequence data therefore covers approaches with very different temporal capabilities. Future research could assess the benefits of learned temporal representations over simpler methods through controlled comparisons using the same data, inputs, and evaluation protocol.
+
+Second, the literature is concentrated in a small number of clinical settings. Cardiac and neurologic applications constitute nearly 90\% of the included studies, and only five studies use both DSA and fluoroscopy. Evidence from these settings does not establish performance in other vascular territories or acquisition conditions. Broader evaluation should therefore include differences in anatomy, imaging vendors, frame rates, and acquisition protocols, rather than relying only on additional data from the development setting.
+
+Third, reported performance is generally high, but its interpretation is limited by inconsistent evaluation. Public datasets are used by 20 studies, yet only three release their own data, and there is no common evaluation framework across the reviewed tasks. Differences in datasets, reference standards, and metrics make cross-study rankings unreliable. Public data benchmarks with defined test sets and consistent outcome definitions could address this deficit.
+
+Fourth, evidence supporting clinical use remains limited. Only 19 studies report external validation, three use a prospective design, and four report clinical deployment or live use. These findings indicate that most evidence concerns technical performance rather than benefit during clinical care. \edit{The reporting comparison in Table~\ref{tab:claim2024_temporal} also found} no statistically significant differences between studies published up to 2024 and those published from 2025 onward. 
+
+% The twelve research gaps bring these findings together. Table~\ref{tab:research_gaps} shows that model development is closely connected to data availability, annotation quality, evaluation, and clinical integration. Generalization, public benchmarks, and temporal modeling are the most frequently documented gaps, appearing in \edit{67, 64,} and \edit{61} studies, respectively. These provide immediate priorities for further work. Federated learning, language models, and structured reporting are less represented and should be treated as directions requiring evaluation rather than established solutions.
+
+\subsection{Comparison with Prior Work}
+
+The surveys by Litjens et al.~\cite{Litjens2017} and Shen et al.~\cite{Shen2017} examine deep learning across medical imaging, while Moccia et al.~\cite{Moccia2018} review blood vessel segmentation, datasets, and evaluation metrics. Also, the reviews by Iezzi et al.~\cite{Iezzi2019}, Gurgitano et al.~\cite{Gurgitano2021}, and Mukhtar et al.~\cite{Mukhtar2025} examine AI across interventional radiology, including planning, guidance, interpretation, and clinical workflow.
+
+
+
+Our review complements the prior research by focusing on temporally ordered angiographic data and distinguishing fixed temporal operations from learned temporal representations. For the selected studies, we also examined data availability, external validation, evaluation, clinical implementation, tasks, architectures, and temporal modeling. None of these prior reviews performed such analyses.
+
+\subsection{Limitations}
+\label{sec:limitations}
+The study has several limitations:
+
+First, our search was limited to PubMed/\allowbreak MEDLINE and Semantic Scholar, which offered programmatic access. We did not search Scopus, Web of Science or Embase because API access was restricted. Relevant studies indexed elsewhere may therefore have been missed, limiting the completeness of the review and potentially affecting the distribution of topics and publication venues. 
+
+
+Second, full-text extraction relied on an LLM, and two reviewers audited six studies, representing 5\% of the corpus. Although 97.1\% of audited values were correct, this sample cannot establish the same accuracy for every field. Errors in interpretive categories, including temporal modeling and research gaps, may affect the synthesis. The gap analysis also depends on limitations and future directions stated by authors. Therefore, problems and limitations that were not explicitly discussed may be underrepresented. 
+
+Third, this review aimed to map methods and reporting practices rather than estimate the effect of a single intervention. We assessed reporting completeness using CLAIM 2024 but did not apply a dedicated risk-of-bias tool; reporting completeness does not establish that a study is free from bias. We also did not conduct a meta-analysis because the studies addressed different tasks and reported different outputs and performance metrics (e.g., Dice, AUC, accuracy, and tracking error), making their results unsuitable for pooling. The performance distributions therefore summarize the reported results and should not be interpreted as pooled estimates of generalization or clinical effectiveness.
+
+\subsection{Conclusion}
+
+This review shows growing interest in angiographic sequence analysis across classification, detection, segmentation, tracking, and image enhancement. Although temporal information is widely used, methods that learn temporal representations remain concentrated in a few tasks. Reported performance is often high, but limited data sharing, inconsistent evaluation, and scarce prospective evidence make it difficult to assess generalization and clinical benefit. Further progress requires shared multi-institutional datasets, task-specific benchmarks, controlled comparisons of temporal methods, and validation across vascular territories and acquisition settings. Prospective studies are then needed to determine whether these methods improve clinical decisions, procedural workflows, and patient outcomes. Together, these efforts would support the development and evaluation of reliable tools for angiography-guided care.

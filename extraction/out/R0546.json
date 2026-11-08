@@ -1,0 +1,145 @@
+{
+  "record_id": "R0546",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep learning-based frame synthesis enables radiation dose reduction in digital subtraction angiography imaging: a multicenter study",
+    "year": 2026,
+    "venue": "Frontiers in Medicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D-DSA (planar, fixed C-arm position) and 3D rotational DSA (continuous 180-degree C-arm rotation)",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral DSA (head and neck), with some thorax sequences; IA, CVS, AVM, AVF, moyamoya disease",
+    "acquisition_geometry": "mixed",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["Siemens (AXIOM Artis)", "GE Medical Systems", "Philips (Azurion 5M20)"]
+  },
+  "dataset": {
+    "n_patients": 15286,
+    "n_sequences": 20590,
+    "n_images_or_frames": null,
+    "n_centers": 3,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": "Only reader responses/scores provided as Supplementary Data; no image data release stated"},
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "none",
+      "n_annotators": 5,
+      "annotator_expertise": "Interventional radiologists with 10-15 years of experience (visual Turing test and quality ratings; real frames serve as ground truth)",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Turing test Fleiss' kappa 0.020-0.126 (1-6 frames), 0.108 (3D); quality rating kappa as low as 0.454 (2D AVF); diagnostic confidence kappa 0.645-1.000 for generated sequences"
+    }
+  },
+  "task": {
+    "primary_task": "image_enhancement_denoising",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Intermediate frame synthesis (video frame interpolation) in 2D and 3D DSA sequences from sparsely acquired real frames, generating up to 6 frames between real frames to reduce radiation dose to 1/7.",
+    "clinical_application": "Radiation dose reduction in cerebrovascular DSA imaging for diagnosis and interventional neuroradiology"
+  },
+  "method": {
+    "architecture_names": ["SAVE-Net", "Direction-Aware Convolution Block (DACB)", "Multi-scale Feature Encoder (MFE)", "Flow-Guided Frame Synthesis (FGFS)", "Spatio-Temporal Fusion Bottleneck (STFB)", "Frame Transformer (FT)", "Multi-scale Feature Decoder (MFD)", "ResNet34 (perceptual loss)"],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "The FGFS module combined a bidirectional optical flow estimation network with a feature refinement sub-network, enabling the synthesis of intermediate frame features across multiple scales.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Pretrained ResNet34 features used for feature-space loss; model trained at 128x128 then fine-tuned on 512x512 crops",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Dataset 2: 3,255 DSA sequences from two external hospitals (GE Medical Systems and Philips Azurion 5M20), used exclusively for external evaluation",
+    "metrics": [
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.951 [95% CI: (0.948, 0.956)]", "value_0_100": null, "split": "external", "task": "6-frame synthesis, all categories"},
+      {"metric": "PSNR", "family": "psnr", "value_raw": "40.764 dB [95% CI: (40.673, 40.798)]", "value_0_100": null, "split": "external", "task": "6-frame synthesis, all categories"},
+      {"metric": "Generation time per frame", "family": "time", "value_raw": "0.04 s/frame", "value_0_100": null, "split": "external", "task": "frame synthesis"},
+      {"metric": "Average generation time", "family": "time", "value_raw": "0.212 s", "value_0_100": null, "split": "external", "task": "6-frame synthesis"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.943", "value_0_100": null, "split": "external", "task": "6-frame synthesis, 3D-DSA subgroup"},
+      {"metric": "PSNR", "family": "psnr", "value_raw": "40.573 dB", "value_0_100": null, "split": "external", "task": "6-frame synthesis, 3D-DSA subgroup"},
+      {"metric": "Average generation time per frame", "family": "time", "value_raw": "0.180 s", "value_0_100": null, "split": "external", "task": "3D-DSA synthesis"},
+      {"metric": "SSIM (range over 1-8 generated frames)", "family": "ssim", "value_raw": "0.954 [95% CI: (0.953, 0.955)] to 0.964 [95% CI: (0.962, 0.965)]", "value_0_100": null, "split": "test", "task": "1- to 8-frame synthesis, all categories (Dataset 1)"},
+      {"metric": "PSNR (range over 1-8 generated frames)", "family": "psnr", "value_raw": "40.391 dB [95% CI: (40.270, 40.513)] to 42.568 dB [95% CI: (42.397, 42.739)]", "value_0_100": null, "split": "test", "task": "1- to 8-frame synthesis, all categories (Dataset 1)"},
+      {"metric": "Generation time (range over 1-8 generated frames)", "family": "time", "value_raw": "0.123 s to 0.270 s", "value_0_100": null, "split": "test", "task": "1- to 8-frame synthesis (Dataset 1)"},
+      {"metric": "SSIM (range over 1-6 generated frames)", "family": "ssim", "value_raw": "0.947 to 0.957", "value_0_100": null, "split": "test", "task": "1- to 6-frame synthesis, 3D-DSA (Dataset 1)"},
+      {"metric": "PSNR (range over 1-6 generated frames)", "family": "psnr", "value_raw": "consistently above 40 dB", "value_0_100": null, "split": "test", "task": "1- to 6-frame synthesis, 3D-DSA (Dataset 1)"},
+      {"metric": "SSIM (2D-AVF / 2D-AVM / 3D-AVF / 3D-AVM)", "family": "ssim", "value_raw": "0.974 / 0.975 / 0.947 / 0.948", "value_0_100": null, "split": "other", "task": "frame synthesis, AV-shunt subgroups"},
+      {"metric": "Normalized time-intensity signal intensity error", "family": "other", "value_raw": "below 0.02", "value_0_100": null, "split": "other", "task": "hemodynamic fidelity of generated sequences"},
+      {"metric": "Guidewire tip displacement error", "family": "error_distance", "value_raw": "within 1.5 pixels", "value_0_100": null, "split": "other", "task": "guidewire position fidelity in generated 2D thorax sequence"},
+      {"metric": "Overall image quality score (5-point)", "family": "other", "value_raw": "4.919 +/- 0.276 (real 4.940 +/- 0.237)", "value_0_100": null, "split": "other", "task": "reader quality assessment of generated sequences"},
+      {"metric": "Diagnostic confidence score (5-point)", "family": "other", "value_raw": "4.838 +/- 0.397 (real 4.910 +/- 0.293)", "value_0_100": null, "split": "other", "task": "reader diagnostic confidence of generated sequences"},
+      {"metric": "Visual Turing test Fleiss' kappa (1-6 frames)", "family": "kappa", "value_raw": "0.020 to 0.126", "value_0_100": null, "split": "other", "task": "real vs generated discrimination by radiologists"},
+      {"metric": "Visual Turing test Fleiss' kappa (3D sequences)", "family": "kappa", "value_raw": "0.108", "value_0_100": 10.8, "split": "other", "task": "real vs generated discrimination by radiologists, 3D-DSA"},
+      {"metric": "Visual Turing test Fleiss' kappa (AV-shunt cases)", "family": "kappa", "value_raw": "0.089", "value_0_100": 8.9, "split": "other", "task": "real vs generated discrimination by radiologists, AV-shunts"},
+      {"metric": "SSIM (2D IA / CVS / AVM, diseases excluded from training)", "family": "ssim", "value_raw": "0.971 (0.966, 0.980) / 0.973 (0.970, 0.980) / 0.966 (0.950, 0.970)", "value_0_100": null, "split": "external", "task": "out-of-distribution cross-category generation, 2D-DSA"},
+      {"metric": "PSNR (2D IA / CVS / AVM, diseases excluded from training)", "family": "psnr", "value_raw": "42.153 (39.510, 43.602) / 42.124 (39.977, 44.842) / 41.576 (40.117, 42.841)", "value_0_100": null, "split": "external", "task": "out-of-distribution cross-category generation, 2D-DSA"},
+      {"metric": "SSIM (3D IA / CVS / AVM, diseases excluded from training)", "family": "ssim", "value_raw": "0.940 (0.929, 0.945) / 0.944 (0.934, 0.955) / 0.940 (0.930, 0.954)", "value_0_100": null, "split": "external", "task": "out-of-distribution cross-category generation, 3D-DSA"},
+      {"metric": "PSNR (3D IA / CVS / AVM, diseases excluded from training)", "family": "psnr", "value_raw": "39.740 (38.009, 41.555) / 39.621 (38.289, 41.008) / 39.766 (38.339, 40.928)", "value_0_100": null, "split": "external", "task": "out-of-distribution cross-category generation, 3D-DSA"}
+    ],
+    "comparators": ["GenDSA", "GaraMoSt"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "both", "quote": "This dataset was used exclusively for external evaluation to assess the generalizability of the proposed model across different scanner manufacturers.", "section": "results"},
+    "G3": {"status": "both", "quote": "existing deep learning methods often achieve only modest dose reductions and frequently suffer from inter-frame discontinuity, limiting their clinical applicability", "section": "introduction"},
+    "G4": {"status": "addresses", "quote": "solving the problem of dynamic vascular overlap in 3D rotational sequences and ensuring the anatomical fidelity of generated frames", "section": "methods"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "documents", "quote": "it has not yet been evaluated on real-world clinical tasks", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Lower scores and Kappa coefficients for some disease types in clinical assessment",
+    "Fails to remove artifacts or reconstruct vessels when all input frames contain severe artifacts",
+    "Artifact suppression may introduce mild blurring in some frames",
+    "No formal diagnostic consistency metrics prospectively defined"
+  ],
+  "future_work": [
+    "Incorporate data with more complex vascular structures",
+    "Extend to more anatomical regions such as heart and limbs",
+    "Evaluate generated sequences on downstream tasks such as IA segmentation and CVS detection"
+  ],
+  "claim2024": {
+    "items": "yyyyynynyynnyyyyynnnnyyyyyyyyynyyyyyyynyyynn"
+  }
+}

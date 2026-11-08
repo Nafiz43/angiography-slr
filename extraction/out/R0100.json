@@ -1,0 +1,140 @@
+{
+  "record_id": "R0100",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Real-time planar angiographic cerebral perfusion imaging",
+    "year": 2026,
+    "venue": "International Journal of Computer Assisted Radiology and Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Germany"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Diagnostic cerebral DSA (Philips Allura XPER FD20/20, 2 fps, 1024x1024 px) captured at runtime via HDMI video splitter and frame-grabber; only posterior-anterior plane analyzed",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral perfusion; ICA angiograms of the skull (anterior-posterior), stroke/thrombectomy patients",
+    "acquisition_geometry": "monoplane",
+    "frame_rate_fps": 2,
+    "frames_per_sequence": "up to 22 images (11 s); shorter runs padded to 22",
+    "vendors": ["Philips"]
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 80,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "contrast_flow_analysis",
+    "other_label": null,
+    "secondary_tasks": ["vessel_segmentation"],
+    "task_description": "Real-time computation of planar DSA cerebral perfusion parameter maps (CBF, CBV, TTP, MTT) from video-output duplicated angiograms, comparing Gaussian curve fitting, a 1D CNN predicting curve-fit parameters per pixel, numerical curve feature estimation, and SVD deconvolution with an AIF derived from U-Net segmentation of the ICA C4 segment; computation times compared.",
+    "clinical_application": "Runtime cerebral perfusion assessment during angiography/thrombectomy for stroke"
+  },
+  "method": {
+    "architecture_names": ["custom convolutional neural network (convolution and linear layers with ReLU)", "U-Net", "SVD deconvolution", "Gaussian curve fitting (SciPy curve_fit)"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "The resulting density series for each pixel was used to fit a Gaussian distribution with four parameters",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Dice (ICA C4-segment segmentation)", "family": "dice", "value_raw": "0.79 ± 0.14", "value_0_100": 79.0, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Correlation coefficient with Gaussian fit, CBF (neural network inference)", "family": "correlation", "value_raw": "0.897", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, CBV (neural network inference)", "family": "correlation", "value_raw": "0.962", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, TTP (neural network inference)", "family": "correlation", "value_raw": "0.934", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, CBF (numerical)", "family": "correlation", "value_raw": "0.669", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, CBV (numerical)", "family": "correlation", "value_raw": "0.998", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, TTP (numerical)", "family": "correlation", "value_raw": "0.952", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, CBF (SVD)", "family": "correlation", "value_raw": "0.747", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, CBV (SVD)", "family": "correlation", "value_raw": "0.615", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Correlation coefficient with Gaussian fit, TTP (SVD)", "family": "correlation", "value_raw": "0.952", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Computation time, optimized curve fitting (all maps)", "family": "time", "value_raw": "4.6 min", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Computation time, neural network inference (all maps per angiogram)", "family": "time", "value_raw": "30.8 s", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Computation time, numerical estimation", "family": "time", "value_raw": "less than 1 s", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Computation time, automated segmentation + AIF + SVD maps", "family": "time", "value_raw": "2.2 s", "value_0_100": null, "split": "test", "task": "contrast_flow_analysis"},
+      {"metric": "Curve fitting failure rate (pixels)", "family": "other", "value_raw": "56,380 out of 5,242,880 pxs (1.08%)", "value_0_100": null, "split": "other", "task": "contrast_flow_analysis"}
+    ],
+    "comparators": ["Gaussian curve fitting (reference)", "unoptimized curve fitting implementation"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": true,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the lack of similar results in the literature impedes a comparative, absolute validation of any of these planar angiography perfusion estimations", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "All the images used in neural network training and perfusion map estimation were acquired in a single center using the same angiography machine and software.", "section": "discussion"},
+    "G3": {"status": "documents", "quote": "angiographic runs tend to be limited in their ability to display parenchymal and venous contrast dynamics due to their shortness of several seconds only", "section": "discussion"},
+    "G4": {"status": "documents", "quote": "It is not representative of current state-of-the-art physiologic perfusion models and cannot account for geometric limitations of the imaging modality.", "section": "discussion"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "documents", "quote": "systematic evaluation of its added value in clinical decision-making has yet to be performed", "section": "introduction"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Symmetric Gaussian bolus model is physiologically suboptimal and cannot represent arterial-venous overlay",
+    "Arterial-tissue delay not accounted for",
+    "Non-physiological injection pressures during contrast injection",
+    "No systematic comparison with tomographic (CT/MR) perfusion",
+    "Analysis limited to the posterior-anterior plane"
+  ],
+  "future_work": [
+    "Systematic optimization of network architecture against training and inference times",
+    "Bayesian inference and improved SVD/curve models accounting for vessel overlay",
+    "Comparison of angiographic perfusion maps with tomographic counterparts",
+    "Validation in different settings/centers",
+    "Faster hardware and optimized processing for more sophisticated analyses",
+    "Clinical studies using runtime angiographic perfusion"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyynnnyyynnyyynynnnyyynnnnynnyynnnyyyny"
+  }
+}

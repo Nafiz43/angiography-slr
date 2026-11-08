@@ -1,0 +1,17 @@
+{"record_id": "R3128",
+ "items": {
+  "6": {"answer": "yes", "quote": "We developed an automatic method for CFR computation based on coronary angiography and assessed its feasibility.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "all frames of the angiographic run covering the entire contrast injection were segmented", "section": "discussion"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "it is important to note that the manual computational method based on frame count is not the clinical standard for CFR measurement. The reproducibility of CFRmanual is only moderate", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "in all patients were semi-automatically annotated by experienced analysts, trained in quantitative coronary angiography (QCA) and regularly audited at the core laboratory", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The automatically computed CFR (CFRauto) was validated on a different sample of patients, other than the one used for the development of the CNN model", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "mean dice coefficients values of 0.780 ± 0.007, 0.722 ± ± 0.005, and 0.758 ± 0.003 for LAD, LCx, and RCA, respectively", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

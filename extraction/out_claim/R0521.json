@@ -1,0 +1,17 @@
+{"record_id": "R0521",
+ "items": {
+  "6":  {"answer": "yes", "quote": "We sought to evaluate the feasibility and effectiveness of an automated computer vision disease prediction algorithm in 1) correctly identifying and highlighting clinically relevant major vessel disease in coronary angiograms, and 2) correctly recognizing anatomic indications for CABG.", "section": "introduction"},
+  "9":  {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "impute the best frame by multiscale top hat transformation to quick segment coronary arteries, followed by selection of the frame with maximum average contrast", "section": "methods"},
+  "12": {"answer": "yes", "quote": "screened for patients with a primary indication for CABG and having available coronary angiogram operative reports", "section": "methods"},
+  "15": {"answer": "yes", "quote": "The accuracy of CAD detection was determined by comparison with clinical report, which could over- or underestimate the exact location and quantity of disease.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Lesions in corresponding arteries reported by a cardiologist in the angiogram report.", "section": "results"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "Optimal model selection focused on convolutional neural network specific training objectives, including mean average precision calculated at an intersection over union threshold of 0.5 (mAP50), precision, recall, loss convergence (class and box), F1", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Model performance (Table 1) was evaluated in LM (Acc: 82.2%; PPV: 45.1%; NPV: 91.1%)", "section": "results"},
+  "38": {"answer": "yes", "quote": "A Brier Score was calculated as a measure of calibration", "section": "methods"}
+ }}

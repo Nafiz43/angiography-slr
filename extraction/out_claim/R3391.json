@@ -1,0 +1,75 @@
+{
+ "record_id": "R3391",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "This effectiveness exploratory study demonstrates for the first time, that prognosis of the DCI in SAH patients, is feasible",
+   "section": "abstract"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "The arterial input API parameters were used to normalize each average ROI parameter.",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "manual selection of lateral and AP sequences was done based on variables such as total brain activity, image clarity, and presence of imaging/patient artifacts.",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "These labels were obtained by endovascular research fellows who analyzed follow up imaging and doctors’ notes to decide whether the patient suffered from a DCI or not.",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "The dataset of 125 cases was split into training and testing set with a ratio of 70:30 (87 cases: 38 cases).",
+   "section": "methods"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "yes",
+   "quote": "A multivariate logistic regression mode was developed using Sklearn [24].",
+   "section": "methods"
+  },
+  "26": {
+   "answer": "yes",
+   "quote": "Data driven analysis using Logistic Regression was performed for various API parameters and ROIs to find the optimal configuration to maximize the prognosis accuracy.",
+   "section": "abstract"
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "this combination achieved a accuracy of 0.60 ± 0.11 (0.55,0.65) and AUROC of 0.67 ± 0.12 (0.61,0.72).",
+   "section": "discussion"
+  },
+  "38": {
+   "answer": "yes",
+   "quote": "Results are in the format average ± standard deviation (95% confidence interval).",
+   "section": "discussion"
+  }
+ }
+}

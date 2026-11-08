@@ -1,0 +1,249 @@
+{
+  "record_id": "R2263",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Background Subtraction Angiography with Deep Learning Using Multi-frame Spatiotemporal Angiographic Input",
+    "year": 2024,
+    "venue": "Journal of Imaging Informatics in Medicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA_and_fluoroscopy",
+    "modality_detail": "Raw (native) cerebral catheter angiographic frames as input; DSA computed from motionless series used as target; 12-bit DICOM downsampled to 512 x 512",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral neuroangiography (common/internal/external carotid, vertebral and other injections)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "Acquisitions 1-6 fps; series with fewer than 16 frames discarded; models use 16 contiguous frames (1 to 16 input frames tested)",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 404,
+    "n_sequences": 8784,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical_plus_synthetic",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "IRB has not allowed raw angiographic data to be made publicly available"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "background_subtraction",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Motion-resistant, maskless background subtraction of raw neuroangiographic sequences via image-to-image regression with 2D+t networks trained on synthetic affine motion-augmented data derived from motionless DSA series.",
+    "clinical_application": "Reducing misregistration/motion artifacts in cerebral DSA to avoid repeat acquisitions; potential real-time use in the neuroangiography suite"
+  },
+  "method": {
+    "architecture_names": [
+      "3D U-Net (Isensee-style, residual blocks, deep supervision)",
+      "2D U-Net",
+      "SegResNet",
+      "UNETR"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "The architecture utilizes 3D convolutional blocks in the encoding and decoding pathways, with additional deep supervision layers",
+      "section": "other"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "RMSE (16-frame 3D U-Net, Tensorflow)",
+        "family": "error_distance",
+        "value_raw": "23.14 ± 9.56",
+        "value_0_100": null,
+        "split": "test",
+        "task": "background_subtraction"
+      },
+      {
+        "metric": "SSIM (16-frame 3D U-Net, Tensorflow)",
+        "family": "ssim",
+        "value_raw": "0.858 ± 0.065",
+        "value_0_100": null,
+        "split": "test",
+        "task": "background_subtraction"
+      },
+      {
+        "metric": "MS-SSIM (16-frame 3D U-Net, Tensorflow)",
+        "family": "ssim",
+        "value_raw": "0.928 ± 0.051",
+        "value_0_100": null,
+        "split": "test",
+        "task": "background_subtraction"
+      },
+      {
+        "metric": "RMSE (16-frame 3D U-Net, PyTorch)",
+        "family": "error_distance",
+        "value_raw": "23.20 ± 7.55",
+        "value_0_100": null,
+        "split": "test",
+        "task": "background_subtraction"
+      },
+      {
+        "metric": "SSIM (16-frame 3D U-Net, PyTorch)",
+        "family": "ssim",
+        "value_raw": "0.846 ± 0.068",
+        "value_0_100": null,
+        "split": "test",
+        "task": "background_subtraction"
+      },
+      {
+        "metric": "MS-SSIM (16-frame 3D U-Net, PyTorch)",
+        "family": "ssim",
+        "value_raw": "0.923 ± 0.054",
+        "value_0_100": null,
+        "split": "test",
+        "task": "background_subtraction"
+      },
+      {
+        "metric": "Inference time per feed-forward pass (16-frame 3D U-Net)",
+        "family": "time",
+        "value_raw": "14.98 ms ± 3.97",
+        "value_0_100": null,
+        "split": "test",
+        "task": "background_subtraction"
+      }
+    ],
+    "comparators": [
+      "Traditional DSA",
+      "1-frame 2D U-Net",
+      "2-, 4-, 8-frame U-Nets",
+      "SegResNet",
+      "UNETR"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "despite its carefully engineered domain-specific realism, remains synthetic. Therefore, generalizability to new data must be carefully assessed.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "However, these 2D approaches ignore the highly informative temporal information within angiographic timeseries.",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G5": {
+      "status": "both",
+      "quote": "the manual creation of large ground truth datasets, which can be useful for the generation of binary segmentation masks, is prohibitively time-consuming for image regression/generation tasks",
+      "section": "introduction"
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "Future efforts will be directed toward formal and critical evaluation of the inference predictions by expert clinicians.",
+      "section": "discussion"
+    },
+    "G7": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "documents",
+      "quote": "as a result, magnified acquisitions are under-represented in our training and test sets.",
+      "section": "methods"
+    },
+    "G10": {
+      "status": "documents",
+      "quote": "Due to the risk of an inadvertent leak of Private Health Information, our Institutional Review Board has not allowed us to make the raw angiographic data publicly available",
+      "section": "other"
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Mild misregistration artifacts persist in the synthetic 'motionless' DSA ground truth",
+    "Global RMSE/SSIM metrics fail to capture spatially localized inference errors",
+    "Loss of spatial resolution and small-vessel discontinuities near moving dense bony structures",
+    "Feature-based motion pipeline not robust stand-alone and fails with feature-poor masks",
+    "Motion augmentation limited to affine (rigid, in-plane) transformations"
+  ],
+  "future_work": [
+    "Optimize the motion threshold hyperparameter as larger datasets become available",
+    "Formal evaluation of inference predictions by expert clinicians",
+    "Unsupervised or self-supervised approaches for subdomains with complex motion (e.g. cardiac angiography)"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyyyynyaayyyayynnyyyynnnynyyyynnyyyyy"
+  }
+}

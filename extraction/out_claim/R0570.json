@@ -1,0 +1,17 @@
+{"record_id": "R0570",
+ "items": {
+  "6":  {"answer": "yes", "quote": "the system incorporates a multi-stage deep learning-based drug delivery monitoring algorithm coupled with a highprecision mechanical injection device, enabling real-time monitoring, adaptive dynamic flow regulation, and precision braking during TACE procedures", "section": "introduction"},
+  "9":  {"answer": "yes", "quote": "fluoroscopic sequences larger than 512×512 pixels were resized to this dimension", "section": "methods"},
+  "10": {"answer": "yes", "quote": "We further selected patients with clearly visible reflux manifestations from this cohort to construct a drug reflux segmentation dataset.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "DSA images were excluded from analysis for those with missing or incomplete clinical data (n = 3,110), incomplete imaging records (n = 1,099)", "section": "methods"},
+  "15": {"answer": "yes", "quote": "Another limitation is the inherent subjectivity in visually assessing reflux on 2D DSA images, despite using inter-observer consensus and Kappa coefficients.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Two authors (Y.X. and Y.Y.), each with over three years of interventional surgery experience, annotated the DSA images using Labelme software", "section": "methods"},
+  "20": {"answer": "yes", "quote": "evaluated the segmentation adaptability and accuracy of the model at the patient level without overlap in different clinical scenarios", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The model architecture achieved segmentation AUCs of 98.15% and 97.23% in two external validation cohorts.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "Accuracy, and Area Under Receiver Operating Characteristic (AUC) were calculated at the patient level for each dataset, and their 95% confidence intervals were calculated.", "section": "methods"}
+ }}

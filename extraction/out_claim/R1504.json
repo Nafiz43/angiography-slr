@@ -1,0 +1,75 @@
+{
+ "record_id": "R1504",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "this study proposes GenDSA, a large-scale pretrained multi-frame generative model-based real-time and low-dose DSA imaging system",
+   "section": "abstract"
+  },
+  "9": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "10": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "17": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "24,240 video sequences (from centers 1–7) were utilized, and 2,877 video sequences (from centers 8–10) were used for external testing",
+   "section": "results"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "38.94 ± 3.38 and 0.935 ± 0.046 (Data-Neusoft) and 34.51 ± 3.92 and 0.941 ± 0.028 (Data-Netherlands)",
+   "section": "results"
+  },
+  "38": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  }
+ }
+}

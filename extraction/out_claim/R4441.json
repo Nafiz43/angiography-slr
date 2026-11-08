@@ -1,0 +1,17 @@
+{"record_id": "R4441",
+ "items": {
+  "6": {"answer": "yes", "quote": "a deep learning method is applied to detect the intracranial aneurysm in 3D Rotational Angiography (3D-RA) based on a spatial information fusion (SIF) method", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "we perform Gamma Correction on the original image and then stretch or shrink its intensity to right levels.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "15 uniformly distributed frames of each original sequences were picked out by radiologists", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "an initial test are conducted to select the appropriate model for this task. Non-augmented SIF-3 features were used as the data set. As the TABLE I shows, VGG16 is chosen for its better and steady performance.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Finally, our method achieve 98.86% accuracy, 99.38% sensitivity and 98.19% specificity.", "section": "conclusion"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

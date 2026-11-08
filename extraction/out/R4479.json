@@ -1,0 +1,134 @@
+{
+  "record_id": "R4479",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Fully automated intracranial aneurysm detection and segmentation from digital subtraction angiography series using an end-to-end spatiotemporal deep neural network",
+    "year": 2020,
+    "venue": "Journal of NeuroInterventional Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D+time cerebral DSA sequences (AP and lateral views)",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial (cerebral) arteries; intracranial aneurysms",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "average 25 frames; 16 frames around the central frame used",
+    "vendors": ["GE", "Philips", "Siemens"]
+  },
+  "dataset": {
+    "n_patients": 493,
+    "n_sequences": 3216,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": "Data available upon reasonable request to the corresponding author"},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Two experienced neurologists contoured IAs; a third neurologist adjudicated disagreements",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": ["vessel_segmentation"],
+    "task_description": "End-to-end detection and segmentation of intracranial aneurysms from 2D+time DSA sequences using a U-shaped network with bidirectional ConvLSTM modules and deep supervision, outputting a 2D aneurysm mask per sequence.",
+    "clinical_application": "Assisting neurologists in detecting and contouring intracranial aneurysms on 2D DSA during diagnosis"
+  },
+  "method": {
+    "architecture_names": ["U-Net-style fully convolutional network", "BiConvLSTM", "ConvLSTM", "deep supervision", "squeeze and excitation", "group normalization"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "a bidirectional convolutional long short- term memory module is introduced at each level of the network to capture the change in contrast medium flow across the 2D Dsa frames",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "UIA sample weights multiplied by 100 in DSC loss; focal loss modulating factor of 2",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "ROI-level sensitivity (at 3.77 FP per view)", "family": "sensitivity_recall", "value_raw": "89.3% (95% CI 83.2% to 95.4%)", "value_0_100": 89.3, "split": "test", "task": "aneurysm detection"},
+      {"metric": "False positives per DSA view", "family": "other", "value_raw": "3.77", "value_0_100": null, "split": "test", "task": "aneurysm detection"},
+      {"metric": "Vessel-level sensitivity", "family": "sensitivity_recall", "value_raw": "94.3% (95% CI 89.8% to 98.8%)", "value_0_100": 94.3, "split": "test", "task": "aneurysm detection"},
+      {"metric": "Patient-level sensitivity", "family": "sensitivity_recall", "value_raw": "97.7% (95% CI 94.7% to 100.0%)", "value_0_100": 97.7, "split": "test", "task": "aneurysm detection"},
+      {"metric": "ROI-level sensitivity, small IAs (<=3 mm)", "family": "sensitivity_recall", "value_raw": "74.4% (95% CI 65.9% to 83.0%)", "value_0_100": 74.4, "split": "test", "task": "aneurysm detection (small IAs)"},
+      {"metric": "Vessel-level sensitivity, small IAs (<=3 mm)", "family": "sensitivity_recall", "value_raw": "74.1% (95% CI 65.5% to 82.7%)", "value_0_100": 74.1, "split": "test", "task": "aneurysm detection (small IAs)"},
+      {"metric": "Patient-level sensitivity, small IAs (<=3 mm)", "family": "sensitivity_recall", "value_raw": "76.0% (95% CI 67.5% to 84.4%)", "value_0_100": 76.0, "split": "test", "task": "aneurysm detection (small IAs)"},
+      {"metric": "ROI-level sensitivity, large IAs (>3 mm)", "family": "sensitivity_recall", "value_raw": "91.1% (95% CI 85.6% to 96.7%)", "value_0_100": 91.1, "split": "test", "task": "aneurysm detection (large IAs)"},
+      {"metric": "Vessel-level sensitivity, large IAs (>3 mm)", "family": "sensitivity_recall", "value_raw": "96.2% (95% CI 92.4% to 99.9%)", "value_0_100": 96.2, "split": "test", "task": "aneurysm detection (large IAs)"},
+      {"metric": "Patient-level sensitivity, large IAs (>3 mm)", "family": "sensitivity_recall", "value_raw": "98.3% (95% CI 95.7% to 100.0%)", "value_0_100": 98.3, "split": "test", "task": "aneurysm detection (large IAs)"},
+      {"metric": "Mean DSC of detected IAs", "family": "dice", "value_raw": "0.533", "value_0_100": 53.3, "split": "test", "task": "aneurysm segmentation"},
+      {"metric": "Mean overlap ratio of detected IAs", "family": "other", "value_raw": "0.875", "value_0_100": null, "split": "test", "task": "aneurysm segmentation"},
+      {"metric": "Running time per sequence", "family": "time", "value_raw": "less than one second per sequence", "value_0_100": null, "split": "test", "task": "aneurysm detection and segmentation"}
+    ],
+    "comparators": ["Vanilla ConvLSTM U-Net (ablation model 1)", "BiConvLSTM U-Net without deep supervision (ablation model 2)", "Previously reported study (ROI sensitivity 89.47% with four FPs, literature comparison)"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "addresses", "quote": "the performance of our system was evaluated on images from 149 patients obtained by multiple DSA devices", "section": "discussion"},
+    "G3": {"status": "addresses", "quote": "The resulting network incorporates both spatial and temporal information from Dsa sequences and can be trained end- to- end.", "section": "abstract"},
+    "G4": {"status": "documents", "quote": "Owing to highly overlapped tissues, the detection and segmentation of small IAs remains difficult, making an average output DSC score relatively low.", "section": "discussion"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "addresses", "quote": "We multiplied the imbalanced UIA sample weights by a factor of 100 in the DSC loss during training", "section": "methods"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "False positives from normal vessel curling, bending or folding",
+    "Part of the parent artery mistaken for aneurysm, lowering DSC",
+    "Relatively low average DSC, especially for small aneurysms"
+  ],
+  "future_work": [
+    "Increase detection sensitivity for small IAs",
+    "Reduce the number of false positives",
+    "Extend to aneurysm detection and segmentation in 3D DSA",
+    "Extend to MRA aneurysm detection"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyyyyyyynynnyyynyyyynynnynyyyyynyyyyy"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "record_id": "R4482",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Optimization of DSA image data input to a machine learning aneurysm identifier",
+    "year": 2020,
+    "venue": "Proc. of SPIE Vol. 11317, Medical Imaging 2020: Biomedical Applications in Molecular, Structural, and Functional Imaging",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "USA (Buffalo, New York)"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D DSA sequences of intracranial aneurysms (pre-/post-coiling and post-pipeline), flattened along the time axis",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial saccular aneurysms (carotid injection)",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["Canon Infinix-i Biplane (Canon Medical Systems Corporation)"]
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 547,
+    "n_images_or_frames": 547,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "frame",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "Users with 1-year minimum exposure to analysis and evaluation of neurovascular angiograms",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Semantic segmentation of the intracranial aneurysm sac on time-flattened DSA frames with an encoder-decoder CNN; comparison of four temporal flattening schemes (average, median, standard deviation, minimum) and class-activation map analysis of network saliency.",
+    "clinical_application": "Automating aneurysm contouring for angiographic parametric imaging and quantitative aneurysm assessment"
+  },
+  "method": {
+    "architecture_names": ["VGG-16 encoder-decoder", "Global average pooling (GAP) layer for class-activation maps"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "the frames in the DSA sequences were flattened along the time-axis when the IAs were fully opacified to create a single frame",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Combined Dice loss and binary cross-entropy loss, stated as suited to large class-size imbalance",
+    "uncertainty_quantification": false,
+    "explainability_method": "Class-activation maps (CAMs) via global average pooling layer",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "DSC (average flattening)", "family": "dice", "value_raw": "0.765 [95% CI 0.714-0.816]", "value_0_100": 76.5, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "Jaccard Index (average flattening)", "family": "iou", "value_raw": "0.624 [95% CI 0.562-0.686]", "value_0_100": 62.4, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "DSC (minimum flattening)", "family": "dice", "value_raw": "0.449 [95% CI 0.274-0.624]", "value_0_100": 44.9, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "Jaccard Index (minimum flattening)", "family": "iou", "value_raw": "0.341 [95% CI 0.166-0.516]", "value_0_100": 34.1, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "DSC (standard deviation flattening)", "family": "dice", "value_raw": "0.469 [95% CI 0.274-0.664]", "value_0_100": 46.9, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "Jaccard Index (standard deviation flattening)", "family": "iou", "value_raw": "0.381 [95% CI 0.201-0.561]", "value_0_100": 38.1, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "DSC (median flattening)", "family": "dice", "value_raw": "0.557 [95% CI 0.354-0.760]", "value_0_100": 55.7, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "Jaccard Index (median flattening)", "family": "iou", "value_raw": "0.451 [95% CI 0.257-0.645]", "value_0_100": 45.1, "split": "test", "task": "aneurysm sac segmentation"},
+      {"metric": "Segmentation + CAM inference time per frame", "family": "time", "value_raw": "approximately 4 seconds", "value_0_100": null, "split": "test", "task": "aneurysm sac segmentation"}
+    ],
+    "comparators": ["Median flattening input", "Standard deviation flattening input", "Minimum value flattening input"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "caused by limited numbers of image data used to train the segmentation network", "section": "methods"},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "documents", "quote": "investigation into utilizing the entire un-flattened sequence for IA segmentation may yield superior segmentation results due to the contrast motion in and out of the IA sac not being averaged across", "section": "discussion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "Our aneurysm labels were created by multiple authors, hence, this process is subject to intra- and inter-observer variability which may lead to the introduction of bias.", "section": "discussion"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "both", "quote": "as a “black-box” technique, it does not allow users to understand which image features are most important", "section": "abstract"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "No actual true-negative images; true negatives created by cropping during augmentation may add bias",
+    "Spurious network activation outside the aneurysm sac",
+    "Reduced performance for small aneurysms located off the internal carotid artery",
+    "CAMs assessed only for average-flattened inputs"
+  ],
+  "future_work": [
+    "Automatic extraction of aneurysm morphology (dome-to-neck ratio, aspect ratio, neck size) from segmented masks",
+    "Investigate additional pre-processing such as bilateral filtering",
+    "Use the entire un-flattened DSA sequence for aneurysm segmentation",
+    "Optimize network input pre-processing to improve segmentation",
+    "Apply to aneurysm occlusion prediction and surgical guidance"
+  ],
+  "claim2024": {
+    "items": "ynyyyyynynnnyyynyyyynynyynynynyynyynnnnyynnn"
+  }
+}

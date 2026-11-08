@@ -1,0 +1,117 @@
+{
+ "record_id": "R1222",
+ "schema_version": "2.0",
+ "study": {
+  "title": "LT-YOLO: long-term temporal enhanced YOLO for stenosis detection on invasive coronary angiography",
+  "year": 2025,
+  "venue": "Frontiers in Molecular Biosciences",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Invasive coronary angiography (ICA) videos from X-ray cardiovascular angiography equipment (CADICA dataset)",
+  "territory": "cardiac",
+  "territory_detail": "Coronary arteries",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "10 consecutive contrast-filled frames",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 42,
+  "n_sequences": 350,
+  "n_images_or_frames": null,
+  "n_centers": null,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": true, "detail": "CADICA (Coronary Angiography Digital Imaging and Communication Archive)"},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "not_reported",
+  "annotation": {
+   "type": "not_reported",
+   "n_annotators": null,
+   "annotator_expertise": null,
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "object_detection_localization",
+  "other_label": null,
+  "secondary_tasks": ["disease_classification_grading"],
+  "task_description": "Frame-wise detection of coronary stenoses with bounding boxes and severity assessment into three classes (<50%, 50-70%, >70%) on ICA video sequences using a Mamba-enhanced YOLOv8.",
+  "clinical_application": "Computer-aided diagnosis of coronary artery disease"
+ },
+ "method": {
+  "architecture_names": ["LT-YOLO", "YOLOv8", "dynamic transformer block", "dual-stream self-attention", "temporal Mamba (bidirectional SSM)", "PANet", "detail-aware detection head"],
+  "architecture_family": "detector",
+  "temporal_category": "transformer_ssm",
+  "temporal_evidence": {"quote": "it splits the feature map from each level into several patches and sees each patch as a state. The temporal information is conveyed through the Mamba within each level.", "section": "methods"},
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "cross_validation",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "AP p0-50 (small stenosis)", "family": "other", "value_raw": "70.1%", "value_0_100": null, "split": "cross_validation", "task": "stenosis detection"},
+   {"metric": "AP p50-70 (moderate stenosis)", "family": "other", "value_raw": "80.4%", "value_0_100": null, "split": "cross_validation", "task": "stenosis detection"},
+   {"metric": "AP p70-100 (severe stenosis)", "family": "other", "value_raw": "78.6%", "value_0_100": null, "split": "cross_validation", "task": "stenosis detection"},
+   {"metric": "mAP@0.5", "family": "other", "value_raw": "76.4%", "value_0_100": null, "split": "cross_validation", "task": "stenosis detection"}
+  ],
+  "comparators": ["RetinaNet", "Faster R-CNN", "Mask R-CNN", "Cascade R-CNN", "YOLOv3", "YOLOv5", "YOLOv8"],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "documents", "quote": "future work should focus on multi-center validation to evaluate the model’s performance across different patient populations and imaging protocols", "section": "conclusion"},
+  "G3": {"status": "both", "quote": "existing automated methods ignore long-temporal information mining", "section": "abstract"},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Spatial-aware backbone decreases AP for small stenoses (loss of detail)",
+  "Detail-aware head introduces minor noise, slightly lowering severe-stenosis AP",
+  "Slightly slower inference than YOLOv8"
+ ],
+ "future_work": [
+  "Multi-center validation across different patient populations and imaging protocols"
+ ],
+ "claim2024": {"items": "ynyyynynnnnnnynnyyynnynnynynnnnynnnynynyynnn"}
+}

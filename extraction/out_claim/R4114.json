@@ -1,0 +1,75 @@
+{
+ "record_id": "R4114",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "The study design was a single center retrospective analysis.",
+   "section": "methods"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "initial 45 frame was extracted and resized to make input data with 224 x 224 pixels 2-dimensional CAG images",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "From each CAG video, initial 45 frame was extracted",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "yes",
+   "quote": "Various quantitative analyses for detection of clinically meaningful coronary 75% or greater stenosis were attempted, but no standard methods were established yet.",
+   "section": "discussion"
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "Highly trained Cardiologists out-side of this study (Haruhito Yuki, MD) independently determined whether any of these major three branches had",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "there are no overlap in any patients for model",
+   "section": "methods"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "yes",
+   "quote": "using Keras framework version 2.1.6 (https://keras.io) and TensorFlow version 1.8.0 as backend.",
+   "section": "methods"
+  },
+  "26": {
+   "answer": "yes",
+   "quote": "The model with best c-statistics on validation set within the 30 epochs was chosen as the “final model” to be further evaluated.",
+   "section": "methods"
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "Our AI model showed a c-statistic of 0.61 in validation dataset and 0.61 in test dataset, respectively.",
+   "section": "abstract"
+  },
+  "38": {
+   "answer": "yes",
+   "quote": "(ROC) analysis was conducted to calculate the area under the curve (AUC) to quantify the predictive accuracy of the developed model.",
+   "section": "methods"
+  }
+ }
+}

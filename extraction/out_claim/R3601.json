@@ -1,0 +1,17 @@
+{"record_id": "R3601",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this work, we study the feasibility of automated perforation detection and localization.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "the input images were down-sampled to 640x640 pixels, converted to RGB, and normalized using ImageNet (Deng et al., 2009) mean ([123.675, 116.28, 103.53]) and standard deviation ([58.395, 57.12, 57.375])", "section": "methods"},
+  "10": {"answer": "yes", "quote": "From the randomly selected negative patient subset, one DSA series was randomly chosen from each patient.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "As a result, a certain level of uncertainty at the borders is expected in the annotated ground truth bounding boxes.", "section": "methods"},
+  "17": {"answer": "yes", "quote": "an experienced radiologist (hereafter referred to as expert 1) thoroughly reviewed the DSA images for all perforation cases and annotated the perforation locations with bounding boxes", "section": "methods"},
+  "20": {"answer": "yes", "quote": "a stratified ten-fold cross-validation procedure with all patients randomly grouped into ten even subsets", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The described models were developed in Python using PyTorch (Paszke et al., 2019).", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "yes", "quote": "we combined the classification results of the four ST+SO models by taking the median value of series level classification probabilities.", "section": "results"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "As shown in Table 1, an average AUC of 0.908 (±0.007) is achieved by the RN+BiLSTM+SO model in term of series level classification", "section": "results"},
+  "38": {"answer": "yes", "quote": "an average AUC of 0.908 (±0.007) is achieved by the RN+BiLSTM+SO model in term of series level classification", "section": "results"}
+ }}

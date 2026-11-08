@@ -1,0 +1,370 @@
+{
+  "record_id": "R1422",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep Learning Models for Automatic Classification of Anatomic Location in Abdominopelvic Digital Subtraction Angiography",
+    "year": 2025,
+    "venue": "Journal of Imaging Informatics in Medicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Routine abdominopelvic DSA sequences; unsubtracted sequences excluded; 16-bit 1024x1024 DICOM resized to 256x256 8-bit JPEG",
+    "territory": "abdominopelvic",
+    "territory_detail": "Abdominal aorta, celiac trunk, SMA, IMA, right and left external iliac arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "Sequences capped at 50 images; 21,129 images in 819 sequences",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 205,
+    "n_sequences": 819,
+    "n_images_or_frames": 21129,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Deidentified DSA images and labels available from the corresponding author by request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Interventional radiology attending physicians with 4 and 5 years of post-fellowship experience",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Cohen's kappa 0.989 for location class; 0.629 for initial and final key images"
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [
+      "temporal_sequence_modeling"
+    ],
+    "task_description": "Six-class sequence-level classification of anatomic location (aorta, celiac, SMA, IMA, right/left EIA) in abdominopelvic DSA using Mode models aggregating per-image ResNet50 predictions (trained on full or key-image data) and an attention-based MIL model that also identifies key images.",
+    "clinical_application": "Automated anatomic localization in DSA as an initial step toward automated interpretation, report generation, coding and billing"
+  },
+  "method": {
+    "architecture_names": [
+      "ResNet50",
+      "Mode ModelFull",
+      "Mode ModelKey",
+      "MIL model (ResNet50 + transformer encoder + attention MLP)"
+    ],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "transformer_ssm",
+    "temporal_evidence": {
+      "quote": "A transformer encoder is attached to the end of that backbone after average pooling to account for dependencies in features identified in individual images within a sequence.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "mixed",
+    "pretraining": "ResNet50 pre-trained on ImageNet",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Supplemented IMA class with 46 additional procedures; split chosen for most even class balance via search of 9e6 permutations",
+    "uncertainty_quantification": false,
+    "explainability_method": "MIL attention weights identifying top-5 contributing images compared with manual key images",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "accuracy",
+        "family": "accuracy",
+        "value_raw": "0.9664 (95% CI 0.9328-0.9916)",
+        "value_0_100": 96.64,
+        "split": "test",
+        "task": "location classification, MIL model, DFull test"
+      },
+      {
+        "metric": "weighted precision",
+        "family": "precision_ppv",
+        "value_raw": "0.9702 (0.9468, 0.9937)",
+        "value_0_100": 97.02,
+        "split": "test",
+        "task": "location classification, MIL model, DFull test"
+      },
+      {
+        "metric": "weighted recall",
+        "family": "sensitivity_recall",
+        "value_raw": "0.9664 (0.9328, 0.9916)",
+        "value_0_100": 96.64,
+        "split": "test",
+        "task": "location classification, MIL model, DFull test"
+      },
+      {
+        "metric": "weighted F1",
+        "family": "f1",
+        "value_raw": "0.9665 (0.9315, 0.9918)",
+        "value_0_100": 96.65,
+        "split": "test",
+        "task": "location classification, MIL model, DFull test"
+      },
+      {
+        "metric": "accuracy",
+        "family": "accuracy",
+        "value_raw": "0.9748 (95% CI 0.9412-1)",
+        "value_0_100": 97.48,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DKey test"
+      },
+      {
+        "metric": "weighted precision",
+        "family": "precision_ppv",
+        "value_raw": "0.9761 (0.9501, 1.0)",
+        "value_0_100": 97.61,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DKey test"
+      },
+      {
+        "metric": "weighted recall",
+        "family": "sensitivity_recall",
+        "value_raw": "0.9748 (0.9412, 1.0)",
+        "value_0_100": 97.48,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DKey test"
+      },
+      {
+        "metric": "weighted F1",
+        "family": "f1",
+        "value_raw": "0.9744 (0.9455, 1.0)",
+        "value_0_100": 97.44,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DKey test"
+      },
+      {
+        "metric": "accuracy",
+        "family": "accuracy",
+        "value_raw": "0.8824 (95% CI 0.8235-0.9328)",
+        "value_0_100": 88.24,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DFull test"
+      },
+      {
+        "metric": "weighted precision",
+        "family": "precision_ppv",
+        "value_raw": "0.8925 (0.8485, 0.944)",
+        "value_0_100": 89.25,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DFull test"
+      },
+      {
+        "metric": "weighted recall",
+        "family": "sensitivity_recall",
+        "value_raw": "0.8824 (0.8235, 0.9412)",
+        "value_0_100": 88.24,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DFull test"
+      },
+      {
+        "metric": "weighted F1",
+        "family": "f1",
+        "value_raw": "0.8814 (0.8211, 0.933)",
+        "value_0_100": 88.14,
+        "split": "test",
+        "task": "location classification, Mode ModelKey, DFull test"
+      },
+      {
+        "metric": "accuracy",
+        "family": "accuracy",
+        "value_raw": "0.8571 (95% CI 0.7983-0.916)",
+        "value_0_100": 85.71,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DFull test"
+      },
+      {
+        "metric": "weighted precision",
+        "family": "precision_ppv",
+        "value_raw": "0.8653 (0.8106, 0.9236)",
+        "value_0_100": 86.53,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DFull test"
+      },
+      {
+        "metric": "weighted recall",
+        "family": "sensitivity_recall",
+        "value_raw": "0.8571 (0.7899, 0.9162)",
+        "value_0_100": 85.71,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DFull test"
+      },
+      {
+        "metric": "weighted F1",
+        "family": "f1",
+        "value_raw": "0.852 (0.7791, 0.9153)",
+        "value_0_100": 85.2,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DFull test"
+      },
+      {
+        "metric": "accuracy",
+        "family": "accuracy",
+        "value_raw": "0.9244 (95% CI 0.8739-0.9664)",
+        "value_0_100": 92.44,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DKey test"
+      },
+      {
+        "metric": "weighted precision",
+        "family": "precision_ppv",
+        "value_raw": "0.9301 (0.8893, 0.9697)",
+        "value_0_100": 93.01,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DKey test"
+      },
+      {
+        "metric": "weighted recall",
+        "family": "sensitivity_recall",
+        "value_raw": "0.9244 (0.8739, 0.9664)",
+        "value_0_100": 92.44,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DKey test"
+      },
+      {
+        "metric": "weighted F1",
+        "family": "f1",
+        "value_raw": "0.9232 (0.8749, 0.9663)",
+        "value_0_100": 92.32,
+        "split": "test",
+        "task": "location classification, Mode ModelFull, DKey test"
+      },
+      {
+        "metric": "average overlap of top-5 attention images with manual key images",
+        "family": "other",
+        "value_raw": "92.5%",
+        "value_0_100": null,
+        "split": "test",
+        "task": "key image identification, MIL model"
+      },
+      {
+        "metric": "sequences with at least one top-5 match to key images",
+        "family": "other",
+        "value_raw": "98.3%",
+        "value_0_100": null,
+        "split": "test",
+        "task": "key image identification, MIL model"
+      }
+    ],
+    "comparators": [
+      "VGG-16",
+      "Inception-V3",
+      "Swin-Transformer",
+      "EfficientNet-B7",
+      "Mode ModelFull vs Mode ModelKey vs MIL model"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "GitHub repository regoldman/DSA_Classification"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "Data used for the model development and evaluation were relatively small, constrained by the time required for manual labeling.",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "The data are acquired from a single institution with imaging equipment from a single vendor.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "The temporal relationship between images within the sequence is not captured in this architecture",
+      "section": "methods"
+    },
+    "G4": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G5": {
+      "status": "both",
+      "quote": "This cost may stand as a substantial barrier to scalability of a manual “key” frame identification approach to larger and more diverse datasets.",
+      "section": "discussion"
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "The retrospective nature of the data acquisition may produce bias with respect to the spectrum of vascular anatomy and pathology.",
+      "section": "discussion"
+    },
+    "G7": {
+      "status": "addresses",
+      "quote": "provide a weighted score of the contribution of each individual image to the classification based on an attention mechanism",
+      "section": "methods"
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "both",
+      "quote": "a larger and more balanced dataset could potentially enhance training and testing results",
+      "section": "discussion"
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Post-surgical vascular anatomy (e.g., transplant anastomoses) excluded",
+    "Label set limited to major first-order abdominopelvic arteries, excluding many DSA sequences",
+    "Manual key-frame approach limited to retrospective analyses"
+  ],
+  "future_work": [
+    "Expand classification to additional first and second order vascular structures",
+    "Larger and more balanced datasets",
+    "Automated assistance of report generation, coding and billing",
+    "Component of a fully automated DSA interpretation system and physician decision support"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyyyynyyyyyyyyyynynyyynyynyyyyynyyyyy"
+  }
+}

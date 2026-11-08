@@ -1,0 +1,17 @@
+{"record_id": "R2873",
+ "items": {
+  "6": {"answer": "yes", "quote": "To develop an automated approach to predict LVEF from left coronary angiograms.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "All coronary angiography study videos were extracted in the Digital Imaging and Communication in Medicine (DICOM) format and converted to a 512 × 512-pixel video file removing all identifying information.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Videos from all angiographic studies were first analyzed using CathAI, a previously described DNN pipeline,[20] to automatically identify videos containing the left coronary artery (LCA) as their primary anatomic structure.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Angiograms lacking a TTE LVEF were excluded.", "section": "methods"},
+  "15": {"answer": "yes", "quote": "our model was developed using TTEs obtained 3 months before or up to 1 month after the angiogram, during which LVEF may have changed", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Three boardcertified cardiologists (C.Y.G., Z.A., K.C.) performed a medical record review to extract the LVEF and patient-specific data.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "Patients and their respective coronary angiograms/LVEF pairs were randomlyassignedtotraining(70%),development(10%),andtest (20%) data sets", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "In the external validation data set, the videobased DNN had an AUROC of 0.906 (95% CI, 0.881-0.931)", "section": "results"},
+  "38": {"answer": "yes", "quote": "specificity was 81.3% (95% CI, 78.8%-84.1%), and sensitivity was 83.9% (95% CI, 78.2%-89.1%)", "section": "results"}
+ }}

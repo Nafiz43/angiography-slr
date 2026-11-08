@@ -1,0 +1,396 @@
+{
+ "record_id": "R0939",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Gastrointestinal bleeding detection on digital subtraction angiography using convolutional neural networks with and without temporal information",
+  "year": 2025,
+  "venue": "Diagnostic and Interventional Radiology",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "USA"
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Mesenteric artery angiograms and arterial embolization DSA acquired on Siemens fluoroscopy imaging systems",
+  "territory": "abdominopelvic",
+  "territory_detail": "Mesenteric arteries; lower GI bleeding in small and large intestines",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "On average 11 bleeding images per series",
+  "vendors": [
+   "Siemens Healthineers"
+  ]
+ },
+ "dataset": {
+  "n_patients": 26,
+  "n_sequences": 39,
+  "n_images_or_frames": null,
+  "n_centers": 1,
+  "n_vendors": 1,
+  "data_origin": "clinical",
+  "public_dataset_used": {
+   "value": false,
+   "detail": "Single-institution Mayo Clinic Phoenix data (2007-2021)"
+  },
+  "data_released": {
+   "value": null,
+   "detail": null
+  },
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 1,
+   "annotator_expertise": "Single individual created masks with thresholding in Photoshop/MATLAB; validated by a team of fellowship-trained interventional radiologists",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "object_detection_localization",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Pixel-wise segmentation/localization of active GI bleeding (contrast extravasation) on DSA frames using 2D and 3D ResUNet++ with and without a superimposition post-processing (SIPP) temporal-consistency step",
+  "clinical_application": "Real-time decision support to locate GI bleeding before transarterial embolization"
+ },
+ "method": {
+  "architecture_names": [
+   "2D ResUNet++",
+   "3D ResUNet++",
+   "superimposition post-processing (SIPP)"
+  ],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "cnn3d_video",
+  "temporal_evidence": {
+   "quote": "A single DSA frame served as the input image for the 2D network, whereas the entire DSA series served as the input for the 3D network.",
+   "section": "methods"
+  },
+  "input_dimensionality": "mixed",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": "Negative controls drawn from non-bleeding frames of the same sequences of bleeding-positive patients instead of all 70 negative patients",
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "accuracy (Keras, training/testing)",
+    "family": "accuracy",
+    "value_raw": "0.95",
+    "value_0_100": 95.0,
+    "split": "test",
+    "task": "bleed segmentation, 2D 128x128 ResUNet++"
+   },
+   {
+    "metric": "IoU",
+    "family": "iou",
+    "value_raw": "0.62",
+    "value_0_100": 62.0,
+    "split": "test",
+    "task": "bleed segmentation, 2D 128x128 ResUNet++"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "0.99",
+    "value_0_100": 99.0,
+    "split": "test",
+    "task": "bleed segmentation, 2D 128x128 ResUNet++"
+   },
+   {
+    "metric": "accuracy (Keras, training/testing)",
+    "family": "accuracy",
+    "value_raw": "0.96",
+    "value_0_100": 96.0,
+    "split": "test",
+    "task": "bleed segmentation, 2D 256x256 ResUNet++"
+   },
+   {
+    "metric": "IoU",
+    "family": "iou",
+    "value_raw": "0.61",
+    "value_0_100": 61.0,
+    "split": "test",
+    "task": "bleed segmentation, 2D 256x256 ResUNet++"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "0.98",
+    "value_0_100": 98.0,
+    "split": "test",
+    "task": "bleed segmentation, 2D 256x256 ResUNet++"
+   },
+   {
+    "metric": "accuracy (Keras, training/testing)",
+    "family": "accuracy",
+    "value_raw": "0.96",
+    "value_0_100": 96.0,
+    "split": "test",
+    "task": "bleed segmentation, 3D 128x128 ResUNet++"
+   },
+   {
+    "metric": "IoU",
+    "family": "iou",
+    "value_raw": "0.06",
+    "value_0_100": 6.0,
+    "split": "test",
+    "task": "bleed segmentation, 3D 128x128 ResUNet++"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "0.95",
+    "value_0_100": 95.0,
+    "split": "test",
+    "task": "bleed segmentation, 3D 128x128 ResUNet++"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.042",
+    "value_0_100": 4.2,
+    "split": "test",
+    "task": "bleed segmentation, 2D uncropped 128x128"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.019",
+    "value_0_100": 1.9,
+    "split": "test",
+    "task": "bleed segmentation, 2D uncropped 128x128 w/SIPP"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.798",
+    "value_0_100": 79.8,
+    "split": "test",
+    "task": "bleed segmentation, 2D cropped 128x128"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.190",
+    "value_0_100": 19.0,
+    "split": "test",
+    "task": "bleed segmentation, 2D cropped 128x128 w/SIPP"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.069",
+    "value_0_100": 6.9,
+    "split": "test",
+    "task": "bleed segmentation, 2D uncropped 256x256"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.065",
+    "value_0_100": 6.5,
+    "split": "test",
+    "task": "bleed segmentation, 2D uncropped 256x256 w/SIPP"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.797",
+    "value_0_100": 79.7,
+    "split": "test",
+    "task": "bleed segmentation, 2D cropped 256x256"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.278",
+    "value_0_100": 27.8,
+    "split": "test",
+    "task": "bleed segmentation, 2D cropped 256x256 w/SIPP"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.054",
+    "value_0_100": 5.4,
+    "split": "test",
+    "task": "bleed segmentation, 3D uncropped 128x128"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.064",
+    "value_0_100": 6.4,
+    "split": "test",
+    "task": "bleed segmentation, 3D uncropped 128x128 w/SIPP"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.334",
+    "value_0_100": 33.4,
+    "split": "test",
+    "task": "bleed segmentation, 3D cropped 128x128"
+   },
+   {
+    "metric": "mean Dice similarity coefficient",
+    "family": "dice",
+    "value_raw": "0.281",
+    "value_0_100": 28.1,
+    "split": "test",
+    "task": "bleed segmentation, 3D cropped 128x128 w/SIPP"
+   },
+   {
+    "metric": "quantitative true positive rate (pixel accuracy)",
+    "family": "sensitivity_recall",
+    "value_raw": "0.961",
+    "value_0_100": 96.1,
+    "split": "test",
+    "task": "bleed segmentation, 2D cropped 128x128 w/SIPP"
+   },
+   {
+    "metric": "quantitative true positive rate (pixel accuracy)",
+    "family": "sensitivity_recall",
+    "value_raw": "0.956",
+    "value_0_100": 95.6,
+    "split": "test",
+    "task": "bleed segmentation, 2D cropped 256x256 w/SIPP"
+   },
+   {
+    "metric": "qualitative true positive rate",
+    "family": "sensitivity_recall",
+    "value_raw": "0.999",
+    "value_0_100": 99.9,
+    "split": "test",
+    "task": "bleed detection (qualitative), 2D cropped 256x256 w/SIPP"
+   },
+   {
+    "metric": "qualitative true positive rate",
+    "family": "sensitivity_recall",
+    "value_raw": "0.997",
+    "value_0_100": 99.7,
+    "split": "test",
+    "task": "bleed detection (qualitative), 2D cropped 128x128 w/SIPP"
+   }
+  ],
+  "comparators": [
+   "models without SIPP (control)",
+   "2D vs 3D ResUNet++",
+   "cropped vs uncropped inputs",
+   "128x128 vs 256x256 resolution"
+  ],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": true,
+  "confidence_intervals": true,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": null,
+   "detail": null
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {
+   "status": "documents",
+   "quote": "the sample size was relatively small (26 patients), limiting statistical power and generalizability",
+   "section": "discussion"
+  },
+  "G2": {
+   "status": "documents",
+   "quote": "no external validation set from a separate institution was used, raising concerns about model robustness across different imaging protocols and vendors",
+   "section": "discussion"
+  },
+  "G3": {
+   "status": "addresses",
+   "quote": "evaluates a novel temporal consistency algorithm–superimposition post-processing (SIPP)–to determine whether incorporating temporal bleed memory improves segmentation performance across sequences",
+   "section": "methods"
+  },
+  "G4": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G5": {
+   "status": "documents",
+   "quote": "Although manual segmentation is labor-intensive, it remains the gold standard for validation",
+   "section": "discussion"
+  },
+  "G6": {
+   "status": "documents",
+   "quote": "Future studies should evaluate the impact of these tools on DSA images in real time.",
+   "section": "conclusion"
+  },
+  "G7": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G8": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G9": {
+   "status": "addresses",
+   "quote": "including all of their image sequences as negative controls would have created a heavily imbalanced dataset. Instead, non-bleeding frames from within the same DSA sequences of the 26 bleeding-positive patients were used.",
+   "section": "methods"
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [
+  "CPU-only training constrained image resolution, model complexity and inference speed",
+  "Manual cropping of bleeding regions introduces bias and is not feasible clinically",
+  "SIPP increases false positives and reduces Dice",
+  "Dataset included only bleeding-positive cases, limiting specificity assessment",
+  "Fewer images available for 3D models"
+ ],
+ "future_work": [
+  "GPU-accelerated training and inference on full-resolution uncropped images",
+  "Sliding window approach to avoid manual cropping",
+  "Expanded datasets and more 3D training data",
+  "External validation cohorts",
+  "Include negative control cases",
+  "Evaluate tools on DSA in real time"
+ ],
+ "claim2024": {
+  "items": "yyyyyyyyynnyyyynyyyyyynyyyyyynnynynnnnnyynnn"
+ }
+}

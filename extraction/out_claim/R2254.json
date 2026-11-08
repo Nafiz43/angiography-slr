@@ -1,0 +1,17 @@
+{"record_id": "R2254",
+ "items": {
+  "6":  {"answer": "yes", "quote": "The aim of this study is to develop and validate an effective deep learning model enabling to sample digital subtraction angiography (DSA) images at low frame rates.", "section": "introduction"},
+  "9":  {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "To create corresponding low-frame-rate IR sequences, every alternate frame was excluded, while always retaining the first frame, from each high-frame-rate IR sequence.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "We use the objective metrics of PSNR, SSIM, and RMSE to quantitatively compare the closeness of the predicted frames to the real (removed) frames.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "Each modality had 90% of its sequences randomly assigned to the training set, while the remaining 10% allocated to the test set.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Implemented in PyTorch [18], SepConv + + was executed on an NVIDIA RTX 3060 GPU.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The average PSNR values for angiographic, subtraction, and fluoroscopic modes were 44.94 dB, 34.84 dB, and 33.82 dB, respectively, while the corresponding SSIM values were 0.9840, 0.9194, and 0.7752.", "section": "abstract"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

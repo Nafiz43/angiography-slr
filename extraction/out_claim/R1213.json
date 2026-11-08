@@ -1,0 +1,17 @@
+{"record_id": "R1213",
+ "items": {
+  "6": {"answer": "yes", "quote": "To develop and evaluate a novel multitask deep learning framework for automated detection and localization of endoleaks at aortic digital subtraction angiography (DSA) performed during real-world endovascular aneurysm repair (EVAR) procedures", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "Each sequence was processed into three input channels: peak density, time to peak, and area under the time-density curve, generating three two-dimensional perfusion maps per patient.", "section": "abstract"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "Fivefold cross-validation was performed, with patients split 80:20 into training and testing datasets for each fold.", "section": "abstract"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The model identified and localized endoleaks with an area under the receiver operating characteristic curve of 0.85 ± 0.0031 (SD), F1 score of 0.78 ± 0.21, 95% precision, and 73% recall.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "area under the receiver operating characteristic curve of 0.85 ± 0.0031 (SD), F1 score of 0.78 ± 0.21", "section": "abstract"}
+ }}

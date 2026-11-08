@@ -1,0 +1,100 @@
+{
+ "record_id": "R1725",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Flow layer heterogeneity leading plaque eccentricity in coronary arteries: dynamic angiography with IVUS and deep learning analysis",
+  "year": 2025,
+  "venue": "Journal of the American College of Cardiology",
+  "publication_type": "conference_abstract",
+  "text_is_full_paper": false,
+  "country_of_data": "Viet Nam"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "dynamic coronary angiography (contrast washout) with IVUS support",
+  "territory": "cardiac",
+  "territory_detail": "coronary arteries",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": null,
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 36,
+  "n_sequences": 225,
+  "n_images_or_frames": null,
+  "n_centers": null,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": null, "detail": "DL models built on independent datasets (225 angiogram videos); source not stated"},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "not_reported",
+  "annotation": {"type": "not_reported", "n_annotators": null, "annotator_expertise": null, "inter_rater_reported": false, "inter_rater_value": null}
+ },
+ "task": {
+  "primary_task": "contrast_flow_analysis",
+  "other_label": null,
+  "secondary_tasks": ["catheter_device_tracking", "vessel_segmentation", "temporal_sequence_modeling"],
+  "task_description": "Measure coronary arterial phase (time from full-contrast frame to washed-out frame) using DL catheter/vessel segmentation and a CNN to detect start and end frames, related to IVUS plaque eccentricity.",
+  "clinical_application": "Understanding flow heterogeneity and plaque eccentricity in coronary artery disease / PCI"
+ },
+ "method": {
+  "architecture_names": ["U-Net", "DenseNet-121"],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "not_determinable",
+  "temporal_evidence": null,
+  "input_dimensionality": "not_reported",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": ["IVUS"],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "not_reported",
+  "external_validation_detail": null,
+  "metrics": [],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": true,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "none", "quote": null, "section": null},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "addresses", "quote": "This research aims to decipher the underlying mechanisms by dynamic angiography, deep learning, and IVUS", "section": "abstract"},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [],
+ "future_work": [],
+ "claim2024": {"items": "yyyynnynyynnnnnnnnnnnnnnnnnnnnnnnnnnynnnnnnn"}
+}

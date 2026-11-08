@@ -1,0 +1,126 @@
+{
+  "record_id": "R4699",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Fully Automatic Dual-Guidewire Segmentation for Coronary Bifurcation Lesion",
+    "year": 2019,
+    "venue": "IEEE International Joint Conference on Neural Networks (IJCNN 2019)",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "2D X-ray fluoroscopy image sequences during PCI (GE Innova 3100-IQ flat-panel angiography system)",
+    "territory": "cardiac",
+    "territory_detail": "Coronary bifurcation lesions during percutaneous coronary intervention",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["GE Healthcare"]
+  },
+  "dataset": {
+    "n_patients": 30,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": "New private dataset from Shanghai Huadong Hospital; authors state no public guidewire datasets exist"},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "catheter_device_tracking",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Pixel-level binary segmentation of dual guidewires in 2D X-ray fluoroscopy frames using an improved U-Net (ResNet-50 encoder, LinkNet-like decoder) trained with a modified focal loss.",
+    "clinical_application": "Assisting PCI of coronary bifurcation lesions and robot-assisted interventional systems"
+  },
+  "method": {
+    "architecture_names": ["Improved U-Net", "ResNet-50 encoder", "LinkNet-style decoder"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "none",
+    "temporal_evidence": {"quote": "the average time to segment an image is about 130 ms", "section": "results"},
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "ResNet-50 encoder pre-trained on ImageNet",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Modified focal loss with weighting factor alpha and modulating factor gamma (foreground:background about 1:1000)",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.932", "value_0_100": 93.2, "split": "test", "task": "dual-guidewire segmentation"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.919", "value_0_100": 91.9, "split": "test", "task": "dual-guidewire segmentation"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.946", "value_0_100": 94.6, "split": "test", "task": "dual-guidewire segmentation"},
+      {"metric": "Average segmentation time per image", "family": "time", "value_raw": "about 130 ms", "value_0_100": null, "split": "test", "task": "dual-guidewire segmentation"},
+      {"metric": "Running speed", "family": "time", "value_raw": "about 8 FPS", "value_0_100": null, "split": "test", "task": "dual-guidewire segmentation"}
+    ],
+    "comparators": [
+      "Regular U-Net",
+      "Improved U-Net without pre-trained ResNet-50",
+      "ITT [8]",
+      "DT [21]",
+      "GE [22]",
+      "alpha-balanced BCE loss"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "There are no public datasets for the guidewire currently.", "section": "methods"},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "Adequate data plays a key role in network generalization performance, but pixel-level annotation is tedious and tough.", "section": "methods"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "addresses", "quote": "we utilize the modified focal loss as a more effective way to solve class imbalance and misclassified examples", "section": "methods"},
+    "G10": {"status": "documents", "quote": "Since the guidewire data relates to patient privacy, the hospital only provides a limited dataset", "section": "methods"},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Cannot distinguish the two guidewires individually (semantic, not instance segmentation)",
+    "Edge pixels misclassified when guidewire overlaps vessel contour"
+  ],
+  "future_work": [
+    "Instance segmentation of dual guidewires"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnyynnyyyyyyyyyyynnynynnyynnnyynnn"
+  }
+}

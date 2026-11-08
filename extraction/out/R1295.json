@@ -1,0 +1,131 @@
+{
+  "record_id": "R1295",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Intraoperative stenosis detection in X-ray coronary angiography via temporal fusion and attention-based CNN",
+    "year": 2025,
+    "venue": "Computerized Medical Imaging and Graphics",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive X-ray coronary angiography (XCA) videos, 512x512, nine common viewing angles; public dataset of XCA images",
+    "territory": "cardiac",
+    "territory_detail": "Left and right coronary arteries (LAD, LCx, proximal-mid RCA, left main)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": null,
+    "vendors": ["Siemens", "GE Healthcare"]
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 1110,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": 2,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": true, "detail": "Danilov et al. (2021) public dataset of 8325 XCA images"},
+    "data_released": {"value": false, "detail": "The authors do not have permission to share data."},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "Several physicians selected keyframe and labeled stenoses with bounding boxes using angiography sequence and surgical report",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Bounding-box detection of coronary artery stenosis on the keyframe of XCA sequences using three consecutive frames with feature-level temporal fusion (deformable convolution + correlation module) and channel/spatial attention in a Faster R-CNN framework.",
+    "clinical_application": "Intraoperative stenosis localization during percutaneous coronary intervention"
+  },
+  "method": {
+    "architecture_names": ["ResNet50", "Faster R-CNN", "feature pyramid network", "RPN", "R-CNN head", "deformable convolution", "correlation-based module", "global context block", "dilated convolution spatial attention"],
+    "architecture_family": "detector",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "the correlation-based module mixes keyframe features with the explicit temporal correspondence determined by supporting frames",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Feature map visualization",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Recall at FPPI 0.5 (private)", "family": "sensitivity_recall", "value_raw": "0.555", "value_0_100": 55.5, "split": "cross_validation", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 1.0 (private)", "family": "sensitivity_recall", "value_raw": "0.673", "value_0_100": 67.3, "split": "cross_validation", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 2.0 (private)", "family": "sensitivity_recall", "value_raw": "0.788", "value_0_100": 78.8, "split": "cross_validation", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 4.0 (private)", "family": "sensitivity_recall", "value_raw": "0.894", "value_0_100": 89.4, "split": "cross_validation", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 8.0 (private)", "family": "sensitivity_recall", "value_raw": "0.903", "value_0_100": 90.3, "split": "cross_validation", "task": "stenosis detection"},
+      {"metric": "Average recall over FPPI (private)", "family": "sensitivity_recall", "value_raw": "0.763", "value_0_100": 76.3, "split": "cross_validation", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 0.5 (public)", "family": "sensitivity_recall", "value_raw": "0.970", "value_0_100": 97.0, "split": "test", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 1.0 (public)", "family": "sensitivity_recall", "value_raw": "0.970", "value_0_100": 97.0, "split": "test", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 2.0 (public)", "family": "sensitivity_recall", "value_raw": "0.970", "value_0_100": 97.0, "split": "test", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 4.0 (public)", "family": "sensitivity_recall", "value_raw": "0.970", "value_0_100": 97.0, "split": "test", "task": "stenosis detection"},
+      {"metric": "Recall at FPPI 8.0 (public)", "family": "sensitivity_recall", "value_raw": "0.970", "value_0_100": 97.0, "split": "test", "task": "stenosis detection"},
+      {"metric": "Average recall over FPPI (public)", "family": "sensitivity_recall", "value_raw": "0.970", "value_0_100": 97.0, "split": "test", "task": "stenosis detection"}
+    ],
+    "comparators": ["Faster R-CNN", "Cascade R-CNN", "SSD", "CenterNet", "FOVEA", "RetinaNet", "Deformable DETR", "CO DETR", "CBAM", "SE", "ECA", "BAM", "DM", "LRSE-Net", "DSSD"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the characteristics of the public dataset do not align with real-world clinical scenarios", "section": "discussion"},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "Existing image-based approaches detect stenosis from an individual XCA image (Pokhrel et al., 2023; Popov et al., 2024), which overlooks the temporal variations in vessel", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "both", "quote": "integrate temporal features across consecutive frames without the need for exhaustive frame-wise annotations", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "documents", "quote": "Incorporating other imaging modalities (e.g., CT angiography and intravascular ultrasound) could help detect such stenosis.", "section": "discussion"},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Limited performance on complex stenosis such as occlusion and diffuse lesions",
+    "Relies on physicians manually selecting and labeling the keyframe"
+  ],
+  "future_work": [
+    "Improve detection of occlusion and diffuse lesions",
+    "Incorporate other imaging modalities such as CT angiography and IVUS",
+    "Replace manual keyframe selection/labeling with an automatic method"
+  ],
+  "claim2024": {
+    "items": "yyyyynynnnnynynnyyynnynyynynnnyynnnynnnyynyy"
+  }
+}

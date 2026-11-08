@@ -1,0 +1,372 @@
+{
+ "record_id": "R2466",
+ "schema_version": "2.0",
+ "study": {
+  "title": "4DRGS: 4D Radiative Gaussian Splatting for Efficient 3D Vessel Reconstruction from Sparse-View Dynamic DSA Images",
+  "year": 2024,
+  "venue": "Information Processing in Medical Imaging",
+  "publication_type": "conference_full_paper",
+  "text_is_full_paper": true,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Rotational cone-beam DSA (mask and fill runs, 198 degree rotation), Siemens AXIOM-Artis",
+  "territory": "neurologic",
+  "territory_detail": "Cerebral vessels (multi-view cerebral DSA scans)",
+  "acquisition_geometry": "rotational_3D",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "133 mask-fill X-ray image pairs per case; 30/40/50/60 views subsampled for training",
+  "vendors": [
+   "Siemens"
+  ]
+ },
+ "dataset": {
+  "n_patients": 15,
+  "n_sequences": null,
+  "n_images_or_frames": null,
+  "n_centers": null,
+  "n_vendors": 1,
+  "data_origin": "clinical",
+  "public_dataset_used": {
+   "value": false,
+   "detail": "Small private set of multi-view cerebral DSA scans"
+  },
+  "data_released": {
+   "value": false,
+   "detail": "Dataset described as a small private set"
+  },
+  "split_level": "frame",
+  "annotation": {
+   "type": "automatic",
+   "n_annotators": null,
+   "annotator_expertise": "Reference vessel volumes reconstructed by the scanner's inbuilt FDK algorithm from all views",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "motion_correction_registration",
+  "other_label": null,
+  "secondary_tasks": [
+   "image_enhancement_denoising"
+  ],
+  "task_description": "3D vessel reconstruction from sparse-view dynamic rotational DSA images using 4D radiative Gaussian splatting with time-dependent attenuation; also evaluates 2D DSA image (novel view) synthesis on held-out views.",
+  "clinical_application": "3D vessel visualization for cerebrovascular disease diagnosis with reduced radiation exposure"
+ },
+ "method": {
+  "architecture_names": [
+   "4DRGS (4D radiative Gaussian splatting)",
+   "dynamic neural attenuation field (DNAF)",
+   "3D/4D hash encoding",
+   "MLP",
+   "R2-Gaussian X-ray rasterization"
+  ],
+  "architecture_family": "other",
+  "temporal_category": "cnn3d_video",
+  "temporal_evidence": {
+   "quote": "The time-dependent central attenuation of each kernel is predicted from a compact neural network to capture the temporal varying response of contrast agent flow.",
+   "section": "abstract"
+  },
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "self_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": true,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "Chamfer distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "1.72±0.29",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 30 views"
+   },
+   {
+    "metric": "Hausdorff distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "3.44±0.85",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 30 views"
+   },
+   {
+    "metric": "PSNR (dB), 4DRGS 30k",
+    "family": "psnr",
+    "value_raw": "35.07±1.65",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 30 views"
+   },
+   {
+    "metric": "SSIM, 4DRGS 30k",
+    "family": "ssim",
+    "value_raw": "0.869±0.052",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 30 views"
+   },
+   {
+    "metric": "Chamfer distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "1.67±0.27",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 40 views"
+   },
+   {
+    "metric": "Hausdorff distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "3.15±0.80",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 40 views"
+   },
+   {
+    "metric": "PSNR (dB), 4DRGS 30k",
+    "family": "psnr",
+    "value_raw": "35.69±1.77",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 40 views"
+   },
+   {
+    "metric": "SSIM, 4DRGS 30k",
+    "family": "ssim",
+    "value_raw": "0.874±0.051",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 40 views"
+   },
+   {
+    "metric": "Chamfer distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "1.67±0.29",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 50 views"
+   },
+   {
+    "metric": "Hausdorff distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "3.20±0.82",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 50 views"
+   },
+   {
+    "metric": "PSNR (dB), 4DRGS 30k",
+    "family": "psnr",
+    "value_raw": "36.13±1.86",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 50 views"
+   },
+   {
+    "metric": "SSIM, 4DRGS 30k",
+    "family": "ssim",
+    "value_raw": "0.879±0.050",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 50 views"
+   },
+   {
+    "metric": "Chamfer distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "1.63±0.26",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 60 views"
+   },
+   {
+    "metric": "Hausdorff distance (mm), 4DRGS 30k",
+    "family": "error_distance",
+    "value_raw": "3.27±0.83",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 60 views"
+   },
+   {
+    "metric": "PSNR (dB), 4DRGS 30k",
+    "family": "psnr",
+    "value_raw": "36.33±1.87",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 60 views"
+   },
+   {
+    "metric": "SSIM, 4DRGS 30k",
+    "family": "ssim",
+    "value_raw": "0.880±0.051",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 60 views"
+   },
+   {
+    "metric": "Chamfer distance (mm), 4DRGS fast 10k",
+    "family": "error_distance",
+    "value_raw": "1.88±0.36",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 30 views"
+   },
+   {
+    "metric": "Hausdorff distance (mm), 4DRGS fast 10k",
+    "family": "error_distance",
+    "value_raw": "4.05±1.22",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D vessel reconstruction, 30 views"
+   },
+   {
+    "metric": "PSNR (dB), 4DRGS fast 10k",
+    "family": "psnr",
+    "value_raw": "34.96±1.73",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 30 views"
+   },
+   {
+    "metric": "SSIM, 4DRGS fast 10k",
+    "family": "ssim",
+    "value_raw": "0.867±0.053",
+    "value_0_100": null,
+    "split": "test",
+    "task": "2D DSA image synthesis, 30 views"
+   },
+   {
+    "metric": "Training time, 4DRGS 30k",
+    "family": "time",
+    "value_raw": "12m38s±37s",
+    "value_0_100": null,
+    "split": "other",
+    "task": "3D vessel reconstruction, 30 views"
+   },
+   {
+    "metric": "Training time, 4DRGS fast 10k",
+    "family": "time",
+    "value_raw": "4m31s±9s",
+    "value_0_100": null,
+    "split": "other",
+    "task": "3D vessel reconstruction, 30 views"
+   }
+  ],
+  "comparators": [
+   "FDK",
+   "R2-Gaussian",
+   "TOGS",
+   "VPAL"
+  ],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": null,
+   "detail": null
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {
+   "status": "documents",
+   "quote": "our dataset is a small private set of multi-view cerebral DSA scans",
+   "section": "discussion"
+  },
+  "G2": {
+   "status": "documents",
+   "quote": "Our method would fail on such data due to limited views or unmodeled cardiac motion.",
+   "section": "discussion"
+  },
+  "G3": {
+   "status": "addresses",
+   "quote": "highlighting the necessity of dynamic flow modeling",
+   "section": "results"
+  },
+  "G4": {
+   "status": "both",
+   "quote": "significant vessel overlap in DSA images hinders accurate anatomical assessment",
+   "section": "introduction"
+  },
+  "G5": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G6": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G7": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G8": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G9": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [
+  "Assumes no patient movement during scanning",
+  "Scanner geometry calibration errors not considered",
+  "DSA imaging noise not modeled",
+  "Reference volumes from scanner FDK are not entirely accurate"
+ ],
+ "future_work": [
+  "Handle patient motion during scanning",
+  "Account for calibration errors and imaging noise",
+  "Extend to single- or bi-plane DSA and other body parts such as coronary arteries"
+ ],
+ "claim2024": {
+  "items": "ynyyynynnnnnyyaayynanynyyyynnynynnnynnnyynny"
+ }
+}

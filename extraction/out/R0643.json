@@ -1,0 +1,196 @@
+{
+  "record_id": "R0643",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Multimodal machine learning for 5-year mortality prediction after percutaneous coronary intervention",
+    "year": 2026,
+    "venue": "Scientific Reports",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "South Korea"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Coronary angiography videos (DICOM, 512x512 px, 15 fps) acquired during PCI; key frames selected by an internal vessel-visibility model",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (post-PCI patients)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": "75.3 ± 40.6 total frames (median 67.0); 15.8 ± 7.9 selected key frames",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 10353,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Not publicly available due to sensitive health information and IRB requirements; available from corresponding author on reasonable request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Prediction of 5-year all-cause mortality after PCI by early fusion of CLIP visual embeddings from coronary angiography key frames, BioBERT embeddings of procedural text reports and 71 structured clinical variables, classified with LightGBM.",
+    "clinical_application": "Long-term post-PCI risk stratification to guide secondary prevention and follow-up intensity"
+  },
+  "method": {
+    "architecture_names": ["CLIP ViT-B/32", "BioBERT", "LightGBM", "XGBoost", "CatBoost", "Random Forest"],
+    "architecture_family": "classical_ml",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "Each representative angiographic frame was fed through CLIP’s image encoder to obtain a corresponding 512-dimensional feature vector.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Frozen CLIP ViT-B/32 (image-text pairs) for visual embeddings; frozen BioBERT base for text embeddings",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": ["procedural free-text reports", "structured clinical data (71 variables)"],
+    "class_imbalance_handling": "Cost-sensitive learning via LightGBM scale_pos_weight; outcome-stratified folds",
+    "uncertainty_quantification": false,
+    "explainability_method": "SHAP (modality-level group aggregation and feature-level ranking)",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": true,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUC-ROC (LightGBM, 5-fold CV)", "family": "auc", "value_raw": "0.790 ± 0.021", "value_0_100": 79.0, "split": "cross_validation", "task": "5-year mortality prediction"},
+      {"metric": "PR-AUC (LightGBM, 5-fold CV)", "family": "auc", "value_raw": "0.462 ± 0.013", "value_0_100": 46.2, "split": "cross_validation", "task": "5-year mortality prediction"},
+      {"metric": "F1-macro (LightGBM, 5-fold CV)", "family": "f1", "value_raw": "0.674 ± 0.019", "value_0_100": 67.4, "split": "cross_validation", "task": "5-year mortality prediction"},
+      {"metric": "AUC-ROC (trimodal, held-out fold-1)", "family": "auc", "value_raw": "0.814 (0.79–0.84)", "value_0_100": 81.4, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "PR-AUC (trimodal, held-out fold-1)", "family": "auc", "value_raw": "0.472 (0.42–0.52)", "value_0_100": 47.2, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "F1-macro (trimodal, held-out fold-1)", "family": "f1", "value_raw": "0.682 (0.65–0.71)", "value_0_100": 68.2, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "Macro F1-score (class-wise analysis)", "family": "f1", "value_raw": "0.649", "value_0_100": 64.9, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "Death class F1", "family": "f1", "value_raw": "0.385", "value_0_100": 38.5, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "Death class precision", "family": "precision_ppv", "value_raw": "0.410", "value_0_100": 41.0, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.920", "value_0_100": 92.0, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "Death class recall", "family": "sensitivity_recall", "value_raw": "36.3%", "value_0_100": 36.3, "split": "test", "task": "5-year mortality prediction"},
+      {"metric": "Brier score (after Platt scaling)", "family": "other", "value_raw": "0.078", "value_0_100": null, "split": "test", "task": "5-year mortality prediction (calibration)"},
+      {"metric": "ECE(10) (after Platt scaling)", "family": "other", "value_raw": "0.041", "value_0_100": null, "split": "test", "task": "5-year mortality prediction (calibration)"},
+      {"metric": "Calibration slope (after Platt scaling)", "family": "other", "value_raw": "0.93", "value_0_100": null, "split": "test", "task": "5-year mortality prediction (calibration)"},
+      {"metric": "Calibration intercept (after Platt scaling)", "family": "other", "value_raw": "–0.60", "value_0_100": null, "split": "test", "task": "5-year mortality prediction (calibration)"},
+      {"metric": "Net benefit at 10% threshold (Platt-scaled)", "family": "other", "value_raw": "0.055", "value_0_100": null, "split": "test", "task": "5-year mortality prediction (decision curve)"},
+      {"metric": "AUC-ROC, No complex history subgroup", "family": "auc", "value_raw": "0.738", "value_0_100": 73.8, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "Precision, No complex history subgroup", "family": "precision_ppv", "value_raw": "0.397", "value_0_100": 39.7, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "Recall, No complex history subgroup", "family": "sensitivity_recall", "value_raw": "0.364", "value_0_100": 36.4, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "F1-score, No complex history subgroup", "family": "f1", "value_raw": "0.380", "value_0_100": 38.0, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "AUC-ROC, History of PCI subgroup", "family": "auc", "value_raw": "0.750", "value_0_100": 75.0, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "AUC-ROC, History of CABG subgroup", "family": "auc", "value_raw": "0.710", "value_0_100": 71.0, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "Precision, History of CABG subgroup", "family": "precision_ppv", "value_raw": "0.654", "value_0_100": 65.4, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "AUC-ROC, History of Stroke subgroup", "family": "auc", "value_raw": "0.707", "value_0_100": 70.7, "split": "other", "task": "5-year mortality prediction (subgroup)"},
+      {"metric": "Precision, History of Stroke subgroup", "family": "precision_ppv", "value_raw": "0.504", "value_0_100": 50.4, "split": "other", "task": "5-year mortality prediction (subgroup)"}
+    ],
+    "comparators": [
+      "ACEF score logistic regression",
+      "XGBoost",
+      "CatBoost",
+      "Random Forest",
+      "LightGBM tabular only",
+      "LightGBM visual only",
+      "LightGBM text only",
+      "LightGBM tabular + visual",
+      "LightGBM tabular + text",
+      "LightGBM visual + text",
+      "Stratified random baseline"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {
+      "status": "documents",
+      "quote": "the study was conducted at a single tertiary center, which may limit generalizability due to center-specific practices and patient characteristics",
+      "section": "discussion"
+    },
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {
+      "status": "both",
+      "quote": "although we report group level feature importance, case level interpretability remains limited",
+      "section": "discussion"
+    },
+    "G8": {
+      "status": "both",
+      "quote": "Existing prognostic models rely predominantly on structured clinical data, overlooking the rich, nuanced information embedded in diagnostic imaging and procedural narratives.",
+      "section": "abstract"
+    },
+    "G9": {
+      "status": "addresses",
+      "quote": "To effectively address the inherent class imbalance in our mortality prediction task, we utilized cost-sensitive learning within LightGBM",
+      "section": "methods"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {
+      "status": "addresses",
+      "quote": "integrates coronary angiography video, unstructured procedural text, and structured clinical variables to predict 5-year all-cause mortality",
+      "section": "abstract"
+    },
+    "G12": {
+      "status": "addresses",
+      "quote": "Cleaned reports were encoded into a fixed-length numerical representation using BioBERT",
+      "section": "methods"
+    }
+  },
+  "other_limitations": [
+    "Binary classification simplifies the underlying time-to-event problem",
+    "SHAP group attribution is correlational, not causal",
+    "Early concatenation fusion may not capture cross-modal interactions"
+  ],
+  "future_work": [
+    "External multi-center validation",
+    "Apply the multimodal framework to survival models",
+    "Transformer or attention-driven fusion architectures",
+    "Counterfactual or perturbation-based attribution to complement SHAP",
+    "Patient-specific clinically interpretable explanations",
+    "Integration into routine post-PCI care pathways"
+  ],
+  "claim2024": {
+    "items": "ynyyynyyyyyynnnnyynynyynyyyyyyyynynyyynyyyyy"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "record_id": "R1362",
+  "schema_version": "2.0",
+  "study": {
+    "title": "World's First Real-Time Artificial Intelligence-Assisted Mechanical Thrombectomy for Acute Ischemic Stroke",
+    "year": 2025,
+    "venue": "AJNR. American journal of neuroradiology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Japan"
+  },
+  "imaging": {
+    "modality": "DSA_and_fluoroscopy",
+    "modality_detail": "Intraprocedural biplane fluoroscopic images; the system can analyze either subtracted or unsubtracted images",
+    "territory": "neurologic",
+    "territory_detail": "Mechanical thrombectomy for acute ischemic stroke with large vessel occlusion (MCA M1/M2, ICA, ACA A2, basilar)",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["Philips Healthcare"]
+  },
+  "dataset": {
+    "n_patients": 16,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": null},
+    "split_level": "na",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "catheter_device_tracking",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Real-time tracking of guiding catheter, aspiration catheter and guidewire tips on biplane fluoroscopy with notifications when the guiding catheter moves out of view; notification precision, recall and clinical usefulness evaluated from procedure video recordings.",
+    "clinical_application": "Intraprocedural assistance during mechanical thrombectomy for acute ischemic stroke to prevent overlooking unintended guiding catheter movement"
+  },
+  "method": {
+    "architecture_names": ["Neuro-Vascular Assist (iMed Technologies)"],
+    "architecture_family": "other",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "triggering notifications only when the GC disappears from its previous visible position without associated field adjustments",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "not_applicable",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "not_reported",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Precision of GC out of view notifications", "family": "precision_ppv", "value_raw": "96.9%", "value_0_100": 96.9, "split": "other", "task": "GC out of view notification"},
+      {"metric": "Recall of GC out of view notifications", "family": "sensitivity_recall", "value_raw": "99.2%", "value_0_100": 99.2, "split": "other", "task": "GC out of view notification"},
+      {"metric": "Clinically useful notifications among TP notifications", "family": "other", "value_raw": "25 (20%)", "value_0_100": null, "split": "other", "task": "GC out of view notification"},
+      {"metric": "Mean notifications per procedure", "family": "other", "value_raw": "8.1", "value_0_100": null, "split": "other", "task": "GC out of view notification"},
+      {"metric": "Mean TP notifications per procedure", "family": "other", "value_raw": "7.9", "value_0_100": null, "split": "other", "task": "GC out of view notification"},
+      {"metric": "Mean FP notifications per procedure", "family": "other", "value_raw": "0.3", "value_0_100": null, "split": "other", "task": "GC out of view notification"},
+      {"metric": "Mean FN notifications per procedure", "family": "other", "value_raw": "0.1", "value_0_100": null, "split": "other", "task": "GC out of view notification"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": true,
+    "regulatory_mentioned": true
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "this study included a small number of cases performed at a single institution", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "Because AI tends to be vulnerable to atypical conditions, more studies on various situations are required.", "section": "discussion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "documents", "quote": "Large prospective studies evaluating the system's effectiveness are warranted.", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "documents", "quote": "Largescale studies are warranted to validate its impact on procedural workflow and clinical outcomes.", "section": "abstract"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Indirect verification of effectiveness; unclear whether operator noticed movement before notification",
+    "Only local anesthesia cases with balloon-mounted guiding catheters",
+    "Relatively low AIS case volume may have influenced notification numbers",
+    "Effect of AI on puncture-to-recanalization time not investigated"
+  ],
+  "future_work": [
+    "Larger comparative studies of P2R times with and without AI assistance",
+    "Assess impact by operator experience level",
+    "Operator timestamping of noticed events to compare with AI notifications",
+    "Evaluation under general anesthesia and with nonballoon guiding catheters",
+    "Large prospective studies of system effectiveness"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyynyyynnaaaaanaaaaynnnnanyyyynnyynnn"
+  }
+}

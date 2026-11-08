@@ -1,0 +1,141 @@
+{
+  "record_id": "R4557",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automatic detection on intracranial aneurysm from digital subtraction angiography with cascade convolutional neural networks",
+    "year": 2019,
+    "venue": "Biomedical engineering online",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D-DSA, matched frontal and lateral sequences acquired simultaneously; 1024 x 1024 DICOM",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial aneurysms in the posterior communicating artery (PCoA) region of the internal carotid artery",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "6-12 frames selected per patient by radiologists",
+    "vendors": ["Philips (FD20 Angio System)"]
+  },
+  "dataset": {
+    "n_patients": 281,
+    "n_sequences": null,
+    "n_images_or_frames": 4976,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": "Available from the corresponding author on reasonable request"},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Experienced radiologists; labels double confirmed by 3D-DSA",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Two-stage CNN cascade: region localization stage locates the PCoA region, then a dual-input (frontal + lateral view) FPN detector identifies intracranial aneurysms vs. vessel overlaps, with a regional average grayscale suppression (RAGS) false-positive filter; patient-level aneurysm diagnosis derived from frame detections.",
+    "clinical_application": "Computer-aided detection of intracranial aneurysms on 2D-DSA to assist physicians"
+  },
+  "method": {
+    "architecture_names": ["Feature Pyramid Networks (FPN)", "ResNet50", "Regional average grayscale suppression (RAGS)"],
+    "architecture_family": "detector",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "the relationship and information of each frame in an entire DSA sequence were not utilized",
+      "section": "discussion"
+    },
+    "input_dimensionality": "multi_view",
+    "supervision": "fully_supervised",
+    "pretraining": "ImageNet (ILSVRC) weights",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "prospective",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Region localization precision (PCoA region found)", "family": "precision_ppv", "value_raw": "96%", "value_0_100": 96.0, "split": "test", "task": "PCoA region localization (RLS)"},
+      {"metric": "IoU", "family": "iou", "value_raw": "0.7441", "value_0_100": 74.41, "split": "test", "task": "PCoA region localization (RLS)"},
+      {"metric": "Regularized x-axis centroid offset", "family": "error_distance", "value_raw": "7.11%", "value_0_100": null, "split": "test", "task": "PCoA region localization (RLS)"},
+      {"metric": "Regularized y-axis centroid offset", "family": "error_distance", "value_raw": "6.08%", "value_0_100": null, "split": "test", "task": "PCoA region localization (RLS)"},
+      {"metric": "mAP (dual-input model, after convergence)", "family": "other", "value_raw": "0.6-0.7", "value_0_100": null, "split": "cross_validation", "task": "Aneurysm/overlap detection (ADS)"},
+      {"metric": "Sensitivity (dual-input + RAGS)", "family": "sensitivity_recall", "value_raw": "0.960 (0.751, 0.999)", "value_0_100": 96.0, "split": "test", "task": "Patient-level aneurysm diagnosis (prospective clinical test)"},
+      {"metric": "Specificity (dual-input + RAGS)", "family": "specificity", "value_raw": "0.910 (0.683, 0.988)", "value_0_100": 91.0, "split": "test", "task": "Patient-level aneurysm diagnosis (prospective clinical test)"},
+      {"metric": "Accuracy (dual-input + RAGS)", "family": "accuracy", "value_raw": "0.935 (0.796, 0.984)", "value_0_100": 93.5, "split": "test", "task": "Patient-level aneurysm diagnosis (prospective clinical test)"},
+      {"metric": "AUC (dual-input + RAGS)", "family": "auc", "value_raw": "0.942", "value_0_100": 94.2, "split": "test", "task": "Patient-level aneurysm diagnosis (prospective clinical test)"},
+      {"metric": "Time cost per patient (dual-input + RAGS)", "family": "time", "value_raw": "0.0569 ± 0.0013 s", "value_0_100": null, "split": "test", "task": "Patient-level aneurysm diagnosis (prospective clinical test)"}
+    ],
+    "comparators": [
+      "Rahmany et al. classical DIP method (MSER, SURF, SIFT)",
+      "YOLOv3",
+      "RetinaNet",
+      "Single-input model",
+      "Dual-input model without RAGS",
+      "Physician with 20 years' clinical experience"
+    ],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "prospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the data set is limited that it only contained 261 patients with aneurysms in PCoA region", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "Transfer learning method [32] can be applied if we can obtain data of other ICA regions in the future", "section": "discussion"},
+    "G3": {"status": "documents", "quote": "the relationship and information of each frame in an entire DSA sequence were not utilized", "section": "discussion"},
+    "G4": {"status": "both", "quote": "dual-input model can relatively remedy the information loss of single 2D-DSA image", "section": "discussion"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "addresses", "quote": "40 prospectively collected subjects for testing", "section": "abstract"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "more special patients should be employed for model training to improve the robustness of RLS", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Strict any-frame patient-level evaluation indicator inflates false positives",
+    "RAGS heuristic not completely reasonable; causes some false negatives",
+    "Two-stage architecture is complicated and limited to a specific region",
+    "DSA is invasive; patients may not be willing to undergo it"
+  ],
+  "future_work": [
+    "Transfer learning to other ICA regions",
+    "Apply RNN on CNN features to combine DSA sequence context",
+    "End-to-end detector beyond a specific region",
+    "Consider widely accessible modalities such as MRA and CTA",
+    "Extend to other regions such as ACoA with more labeled data",
+    "Include more special patients in training to improve robustness"
+  ],
+  "claim2024": {
+    "items": "yyyyyyynnynyyyynyynnnyyyyyynyynynnyyynnyynyy"
+  }
+}

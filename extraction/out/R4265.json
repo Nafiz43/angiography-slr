@@ -1,0 +1,129 @@
+{
+  "record_id": "R4265",
+  "schema_version": "2.0",
+  "study": {
+    "title": "End-to-End Deep Learning Model for Cardiac Cycle Synchronization from Multi-View Angiographic Sequences",
+    "year": 2020,
+    "venue": "Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "Canada"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Raw coronary X-ray angiography videos (free breathing), 1024x1024, 15 or 30 fps",
+    "territory": "cardiac",
+    "territory_detail": "Left or right coronary artery, pediatric patients",
+    "acquisition_geometry": "mixed",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "117.8 frames on average (53.6 after contrast-based frame selection); 15 or 30 fps",
+    "vendors": ["Toshiba"]
+  },
+  "dataset": {
+    "n_patients": 39,
+    "n_sequences": 271,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "temporal_sequence_modeling",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Cardiac cycle synchronization of two angiographic sequences from different views: a finetuned CNN extracts per-frame cardiac-phase features from 3-frame stacks, a cosine similarity matrix between videos is built, and Dijkstra pathfinding finds temporally coherent frame correspondences; evaluated against ECG R-wave derived ground truth.",
+    "clinical_application": "ECG-free temporal matching of multi-view coronary angiograms as a prerequisite for dynamic 3D+T coronary reconstruction"
+  },
+  "method": {
+    "architecture_names": ["ResNet-50", "MobileNet-v2", "EfficientNet-b0", "EfficientNet-b1", "soft pair loss", "Dijkstra pathfinding"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "stacked in groups of 3 consecutive images to create small sequences that are used as inputs to the model",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "weakly_supervised",
+    "pretraining": "ImageNet-pretrained CNN finetuned on angiographic data",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Normalized synchronization path score (accuracy vs ECG), mean", "family": "accuracy", "value_raw": "0.9604 (96.04%)", "value_0_100": 96.04, "split": "test", "task": "cardiac cycle synchronization (EfficientNet-b1)"},
+      {"metric": "Normalized synchronization path score, median", "family": "accuracy", "value_raw": "0.979", "value_0_100": 97.9, "split": "test", "task": "cardiac cycle synchronization (EfficientNet-b1)"},
+      {"metric": "Normalized path score, simultaneous biplane pairs", "family": "accuracy", "value_raw": "0.9857", "value_0_100": 98.57, "split": "test", "task": "cardiac cycle synchronization, biplane subgroup (8 pairs)"},
+      {"metric": "Normalized path score, non-simultaneous pairs", "family": "accuracy", "value_raw": "0.9586", "value_0_100": 95.86, "split": "test", "task": "cardiac cycle synchronization, non-simultaneous subgroup"},
+      {"metric": "Normalized path score after trimming first and last points", "family": "accuracy", "value_raw": "0.9607", "value_0_100": 96.07, "split": "test", "task": "cardiac cycle synchronization (trimmed paths)"},
+      {"metric": "Normalized path score, ResNet-50 backbone", "family": "accuracy", "value_raw": "0.9549", "value_0_100": 95.49, "split": "other", "task": "cardiac cycle synchronization (ResNet-50)"},
+      {"metric": "Normalized path score, MobileNet backbone", "family": "accuracy", "value_raw": "0.9558", "value_0_100": 95.58, "split": "other", "task": "cardiac cycle synchronization (MobileNet)"},
+      {"metric": "Normalized path score, EfficientNet-b0 backbone", "family": "accuracy", "value_raw": "0.9581", "value_0_100": 95.81, "split": "other", "task": "cardiac cycle synchronization (EfficientNet-b0)"},
+      {"metric": "Finetuning time (20 epochs, GeForce RTX 2070)", "family": "time", "value_raw": "2 hours", "value_0_100": null, "split": "other", "task": "training"}
+    ],
+    "comparators": ["ResNet-50", "MobileNet-v2", "EfficientNet-b0", "ECG R-wave gating (qualitative)"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "this method removes the temporal dimension of the angiographic sequences, which prevent the extraction of functional information", "section": "introduction"},
+    "G4": {"status": "both", "quote": "Since a single view of CA cannot show every detail of the whole coronary tree, multiple sequences are recorded from different angles", "section": "introduction"},
+    "G5": {"status": "addresses", "quote": "A novel loss function, called the soft pair loss, is proposed for training a neural network from weakly-annotated data", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "About 5% of synchronization paths score under 0.85",
+    "Pathfinding deviates from ground truth at sequence boundaries",
+    "Lower path scores between R-wave peaks (end of systole)",
+    "ECG-derived ground truth imprecise at end of systole; uncorrected R-peak detection errors"
+  ],
+  "future_work": [
+    "Trim first and last frames of synchronized pairs",
+    "Use synchronization as basis for 3D reconstruction of the coronary tree"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnyynnyynaynyynyynnnnynnynnynyynny"
+  }
+}

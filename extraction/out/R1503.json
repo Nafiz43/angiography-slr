@@ -1,0 +1,122 @@
+{
+  "record_id": "R1503",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Rupture risk assessment in cerebral arteriovenous malformations: an ensemble model using hemodynamic and morphological features",
+    "year": 2025,
+    "venue": "Journal of NeuroInterventional Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D DSA sequences (typically 4 fps) for time-density-curve hemodynamic features; 3D rotational angiography (3DRA) for nidus morphological features",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral arteriovenous malformation nidus; injections into internal carotid or vertebral artery",
+    "acquisition_geometry": "mixed",
+    "frame_rate_fps": 4,
+    "frames_per_sequence": null,
+    "vendors": ["Siemens (Artis Station)", "GGE (Terra Station)"]
+  },
+  "dataset": {
+    "n_patients": 844,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 2,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": "Data available from the corresponding author upon reasonable request"},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "Neuroradiologists blinded to hemorrhage status delineated nidus ROIs; hemorrhage confirmed by CT",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": ["contrast_flow_analysis"],
+    "task_description": "Predict AVM rupture/hemorrhage risk using clinical features, nidus hemodynamic features from pixel-wise FFT-fitted DSA time-density curves (MIP, TTP, CBV, MTT, CBF) and 3DRA radiomic morphological features, with five ML models combined by weighted soft-voting ensemble; validated on a separate cohort for subsequent hemorrhage during conservative follow-up.",
+    "clinical_application": "Rupture risk stratification of untreated cerebral AVMs to guide treatment decisions"
+  },
+  "method": {
+    "architecture_names": ["logistic regression", "support vector machine", "LightGBM", "random forest", "XGBoost", "weighted soft-voting ensemble"],
+    "architecture_family": "classical_ml",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "Time- density curves (TDCs) were fitted pixel- by- pixel, such that each pixel within the ROI generated a TDC",
+      "section": "methods"
+    },
+    "input_dimensionality": "mixed",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": ["clinical/demographic features", "3D rotational angiography morphological (PyRadiomics) features", "DSA-derived hemodynamic features"],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Feature importance (online supplemental figure 3)",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": "Temporally separate same-center validation cohort (2008-2014, n=98, conservatively treated unruptured AVMs) for subsequent hemorrhage; authors state no external validation from independent cohorts",
+    "metrics": [
+      {"metric": "AUC (ensemble)", "family": "auc", "value_raw": "0.880 (0.824–0.937)", "value_0_100": 88.0, "split": "test", "task": "AVM rupture status prediction"},
+      {"metric": "AUC (ensemble)", "family": "auc", "value_raw": "0.864 (0.769–0.959)", "value_0_100": 86.4, "split": "validation", "task": "Subsequent hemorrhage prediction (conservative follow-up cohort)"},
+      {"metric": "Accuracy (ensemble)", "family": "accuracy", "value_raw": "0.724", "value_0_100": 72.4, "split": "validation", "task": "Subsequent hemorrhage prediction (conservative follow-up cohort)"},
+      {"metric": "Sensitivity (ensemble)", "family": "sensitivity_recall", "value_raw": "0.875", "value_0_100": 87.5, "split": "validation", "task": "Subsequent hemorrhage prediction (conservative follow-up cohort)"},
+      {"metric": "Specificity (ensemble)", "family": "specificity", "value_raw": "0.676", "value_0_100": 67.6, "split": "validation", "task": "Subsequent hemorrhage prediction (conservative follow-up cohort)"}
+    ],
+    "comparators": ["logistic regression", "support vector machine", "LightGBM", "random forest", "XGBoost", "R2eD AVM score", "VALE scoring system"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the construction of machine learning models requires a large number of cases to ensure stability", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "the single- center nature of this study limits its generalizability, as it lacks external validation from independent cohorts", "section": "discussion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "both", "quote": "the inherent two- dimensional nature of DSA sequences can lead to vessel overlap, making it challenging to provide the three- dimensional morphological features of the nidus accurately", "section": "introduction"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "documents", "quote": "Future research should include sufficiently large multicenter prospective studies to address these limitations.", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "addresses", "quote": "The ensemble model effectively integrated multidimensional features", "section": "abstract"},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "both", "quote": "We addressed this limitation by including an additional validation dataset to evaluate the performance of the model in predicting subsequent ruptures in conservatively treated unruptured AVMs.", "section": "discussion"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Validation cohort limited to conservatively treated unruptured AVMs (selection bias)",
+    "Small AVMs may present first with hemorrhage, potentially biasing size-rupture association"
+  ],
+  "future_work": [
+    "Sufficiently large multicenter prospective studies"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynyyynnyyannyaannyyynyynynyynnyyyyy"
+  }
+}

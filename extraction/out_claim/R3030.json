@@ -1,0 +1,75 @@
+{
+ "record_id": "R3030",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "we propose a new detection framework based on a hybrid CNNTransformer architecture for automatic stenosis detection from XRA sequences.",
+   "section": "introduction"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "In the preprocessing, all XRA images are normalized with a mean value of 103.53 and a standard deviation of 57.12.",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "we selected 9 consecutive contrast-filled angiography images as the input sequence in each video.",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "Three experienced interventional radiologists were invited to manually annotate the bounding boxes of coronary artery stenoses in the images and their average annotations were taken as the ground truth.",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "The sequences were divided in the ratio as follows: 75% sequences for training and 25% for testing.",
+   "section": "methods"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "Compared with the ablation methods, the proposed method achieves the best performance in all metrics.",
+   "section": "results"
+  },
+  "38": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  }
+ }
+}

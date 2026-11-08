@@ -1,0 +1,135 @@
+{
+ "record_id": "R2845",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Application of Pseudo-Three-Dimensional Residual Network to Classify the Stages of Moyamoya Disease",
+  "year": 2023,
+  "venue": "Brain sciences",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "China"
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Cerebral DSA sequences, anterior posterior views of the ICA; 10-frame clips starting at contrast arrival at ICA terminus",
+  "territory": "neurologic",
+  "territory_detail": "Terminal ICA, ACA and MCA in moyamoya disease",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "10",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 406,
+  "n_sequences": null,
+  "n_images_or_frames": null,
+  "n_centers": 1,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": false, "detail": "Available upon request from the corresponding author; not publicly available due to ethical constraints"},
+  "split_level": "sequence",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 2,
+   "annotator_expertise": "Senior neurosurgeons; disagreements resolved by treatment team consensus",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "disease_classification_grading",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Three-class staging (mild, moderate, severe; merged Suzuki stages) of moyamoya disease hemispheres from 10-frame DSA sequences using a pseudo-3D residual network with dilated decoupled spatial and temporal convolutions",
+  "clinical_application": "Automatic staging of moyamoya disease to support prognosis"
+ },
+ "method": {
+  "architecture_names": ["P3D ResNet", "P3D-A", "P3D-B", "P3D-C", "ResNet"],
+  "architecture_family": "cnn_classifier",
+  "temporal_category": "cnn3d_video",
+  "temporal_evidence": {
+   "quote": "The spatial information and temporal information of DSA sequences are processed independently using the two convolution kernels through decomposition.",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": "Pretraining used (source not reported)",
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": "Data augmentation (rotation, flipping) to balance classes",
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "accuracy", "family": "accuracy", "value_raw": "0.9578", "value_0_100": 95.78, "split": "test", "task": "MMD staging (3-class)"},
+   {"metric": "macro-average AUC", "family": "auc", "value_raw": "0.97", "value_0_100": 97.0, "split": "test", "task": "MMD staging (3-class)"},
+   {"metric": "precision", "family": "precision_ppv", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "MMD staging - mild"},
+   {"metric": "recall", "family": "sensitivity_recall", "value_raw": "0.932", "value_0_100": 93.2, "split": "test", "task": "MMD staging - mild"},
+   {"metric": "specificity", "family": "specificity", "value_raw": "0.976", "value_0_100": 97.6, "split": "test", "task": "MMD staging - mild"},
+   {"metric": "F1 score", "family": "f1", "value_raw": "0.941", "value_0_100": 94.1, "split": "test", "task": "MMD staging - mild"},
+   {"metric": "AUC", "family": "auc", "value_raw": "0.96", "value_0_100": 96.0, "split": "test", "task": "MMD staging - mild"},
+   {"metric": "precision", "family": "precision_ppv", "value_raw": "0.951", "value_0_100": 95.1, "split": "test", "task": "MMD staging - moderate"},
+   {"metric": "recall", "family": "sensitivity_recall", "value_raw": "0.951", "value_0_100": 95.1, "split": "test", "task": "MMD staging - moderate"},
+   {"metric": "specificity", "family": "specificity", "value_raw": "0.976", "value_0_100": 97.6, "split": "test", "task": "MMD staging - moderate"},
+   {"metric": "F1 score", "family": "f1", "value_raw": "0.951", "value_0_100": 95.1, "split": "test", "task": "MMD staging - moderate"},
+   {"metric": "AUC", "family": "auc", "value_raw": "0.96", "value_0_100": 96.0, "split": "test", "task": "MMD staging - moderate"},
+   {"metric": "precision", "family": "precision_ppv", "value_raw": "0.971", "value_0_100": 97.1, "split": "test", "task": "MMD staging - severe"},
+   {"metric": "recall", "family": "sensitivity_recall", "value_raw": "0.99", "value_0_100": 99.0, "split": "test", "task": "MMD staging - severe"},
+   {"metric": "specificity", "family": "specificity", "value_raw": "0.985", "value_0_100": 98.5, "split": "test", "task": "MMD staging - severe"},
+   {"metric": "F1 score", "family": "f1", "value_raw": "0.98", "value_0_100": 98.0, "split": "test", "task": "MMD staging - severe"},
+   {"metric": "AUC", "family": "auc", "value_raw": "0.99", "value_0_100": 99.0, "split": "test", "task": "MMD staging - severe"}
+  ],
+  "comparators": ["C3D", "R3D", "R2Plus1D", "P3D-A ResNet", "P3D-B ResNet", "P3D-C ResNet"],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "The prevailing consensus is that medical data sets typically consist of tiny sample sizes.", "section": "methods"},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "both", "quote": "MMD identification frequently employs Convolutional Neural Networks (CNN), although it is unable to concurrently account for the spatio-temporal information in the sequence.", "section": "introduction"},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "documents", "quote": "multimodal images should also be included in the data set to make the diagnosis more comprehensive and reliable.", "section": "conclusion"},
+  "G9": {"status": "addresses", "quote": "We used the augmentation technique to address the issue of imbalance in the experimental data caused by the majority of the samples being moderate MMD.", "section": "methods"},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Images with artifacts and unclear development were excluded, unlike real clinical data",
+  "Only anterior posterior DSA views of the ICA used"
+ ],
+ "future_work": [
+  "Include other intracranial vessels (external carotid, vertebrobasilar)",
+  "Add multimodal images to the dataset",
+  "Develop preprocessing algorithms for artifacts and noise",
+  "Increase MMD sample size"
+ ],
+ "claim2024": {"items": "ynyyynyyynnynyynynyynynnnnynnnnynnyynynyynyy"}
+}

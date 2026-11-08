@@ -1,0 +1,151 @@
+{
+  "record_id": "R4148",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Stent enhancement using marker response network and focus conversion learning in x-ray fluoroscopy sequences",
+    "year": 2021,
+    "venue": "Medical Imaging 2021: Physics of Medical Imaging, Proceedings of SPIE Vol. 11595",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Coronary X-ray fluoroscopy sequences with implanted stents (clinical and phantom)",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries, stent placement during PCI",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "27-188 frames per test sequence",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 49,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical_plus_phantom",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "image_enhancement_denoising",
+    "other_label": null,
+    "secondary_tasks": [
+      "catheter_device_tracking"
+    ],
+    "task_description": "Stent enhancement in fluoroscopy: a fully convolutional response-map network detects stent marker pairs per frame, markers are tracked and frames registered and stacked to raise SNR, then an RDN focus-conversion (deblurring) network converts large-focus images to micro-focus-like images.",
+    "clinical_application": "Improved stent visualization to evaluate stent deployment during percutaneous coronary intervention"
+  },
+  "method": {
+    "architecture_names": [
+      "Marker response map generation network (fully convolutional, dilated and residual convolutions)",
+      "RDN (Residual Dense Network)"
+    ],
+    "architecture_family": "other",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "the previous frame will search for the nearest marker as the marker sequence when the next frame is obtained. Finally, the original stent sequence is registered by the location information of the marker pair sequence.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Weighted MSE loss with 10 times weight on marker area versus background",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Correct detection rate (CR), all test sequences", "family": "accuracy", "value_raw": "84.04%", "value_0_100": 84.04, "split": "test", "task": "marker pair detection (clinical + phantom)"},
+      {"metric": "Wrong detection rate (WR), all test sequences", "family": "other", "value_raw": "15.96%", "value_0_100": null, "split": "test", "task": "marker pair detection (clinical + phantom)"},
+      {"metric": "Average CR, clinical sequences", "family": "accuracy", "value_raw": "74.44%", "value_0_100": 74.44, "split": "test", "task": "marker pair detection (clinical)"},
+      {"metric": "Average CR, phantom sequences", "family": "accuracy", "value_raw": "89.25%", "value_0_100": 89.25, "split": "test", "task": "marker pair detection (phantom)"},
+      {"metric": "CR clinical_1", "family": "accuracy", "value_raw": "85.00%", "value_0_100": 85.0, "split": "test", "task": "marker pair detection (clinical_1)"},
+      {"metric": "CR clinical_2", "family": "accuracy", "value_raw": "92.11%", "value_0_100": 92.11, "split": "test", "task": "marker pair detection (clinical_2)"},
+      {"metric": "CR clinical_3", "family": "accuracy", "value_raw": "67.02%", "value_0_100": 67.02, "split": "test", "task": "marker pair detection (clinical_3)"},
+      {"metric": "CR clinical_4", "family": "accuracy", "value_raw": "77.78%", "value_0_100": 77.78, "split": "test", "task": "marker pair detection (clinical_4)"},
+      {"metric": "CR phantom_1", "family": "accuracy", "value_raw": "97.53%", "value_0_100": 97.53, "split": "test", "task": "marker pair detection (phantom_1)"},
+      {"metric": "CR phantom_2", "family": "accuracy", "value_raw": "98.53%", "value_0_100": 98.53, "split": "test", "task": "marker pair detection (phantom_2)"},
+      {"metric": "CR phantom_3", "family": "accuracy", "value_raw": "90.67%", "value_0_100": 90.67, "split": "test", "task": "marker pair detection (phantom_3)"},
+      {"metric": "CR phantom_4", "family": "accuracy", "value_raw": "59.15%", "value_0_100": 59.15, "split": "test", "task": "marker pair detection (phantom_4)"},
+      {"metric": "CR phantom_5", "family": "accuracy", "value_raw": "85.61%", "value_0_100": 85.61, "split": "test", "task": "marker pair detection (phantom_5)"},
+      {"metric": "CR phantom_6", "family": "accuracy", "value_raw": "97.90%", "value_0_100": 97.9, "split": "test", "task": "marker pair detection (phantom_6)"},
+      {"metric": "Average PSNR", "family": "psnr", "value_raw": "36.04", "value_0_100": null, "split": "test", "task": "focus conversion (phantom)"},
+      {"metric": "Average SSIM", "family": "ssim", "value_raw": "99.91%", "value_0_100": null, "split": "test", "task": "focus conversion (phantom)"},
+      {"metric": "Average RMSE", "family": "other", "value_raw": "38.79", "value_0_100": null, "split": "test", "task": "focus conversion (phantom)"}
+    ],
+    "comparators": [
+      "Original large-focus image without conversion"
+    ],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "addresses", "quote": "Our aim is to develop an effective approach for stent enhancement in fluoroscopy sequences by the combination of spatial and temporal information.", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Lower marker detection rate on clinical data due to contrast agent interference and noise",
+    "Focus conversion network trained and tested only on phantom data"
+  ],
+  "future_work": [],
+  "claim2024": {
+    "items": "ynyyynynnnnnnynnynnynynynnynnnnynnnynynnynnn"
+  }
+}

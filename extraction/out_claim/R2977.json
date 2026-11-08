@@ -1,0 +1,17 @@
+{"record_id": "R2977",
+ "items": {
+  "6": {"answer": "yes", "quote": "Potential clinical utility lies in providing decision support via rapid interpretation (pre thrombectomy) and automated objective gradation of thrombectomy outcomes (post thrombectomy).", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "DICOM files of DSAs were collated in OsirixMD (version 11) and converted to mp4 format.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For the cases where thrombectomy was performed, four videos were created per patient (PA and lateral views, pre and post thrombectomy) while two videos of the normal controls (PA and lateral) were recorded.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Five cases were excluded as the requisite views were not obtained. Three cases were excluded due to file corruption.", "section": "results"},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "Scores were verified by a separate radiologist for this study. When no score was available, the text of the structured report and the images were reviewed to assign a mTICI score retrospectively.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "1024 videos comprising 287 patients were included for analysis, 225 with occlusion and 62 normal, 237 for training, and 50 for testing.", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Occlusion identification was achieved with 100% sensitivity and 91.67% specificity (EV 91.30% and 81.82%).", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "occlusion identification was achieved with 100% sensitivity (CI 90.75 to 100.00%)", "section": "results"}
+ }}

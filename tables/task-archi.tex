@@ -1,0 +1,49 @@
+\begin{table*}[pos=t]
+\centering
+\small
+\begin{tabularx}{\textwidth}
+{>{\raggedright\arraybackslash}p{4.4cm}
+ >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Task} & \textbf{Representative Architectures} \\
+\midrule
+
+Disease Classification \& Grading (\edit{$n=29$})\newline{\footnotesize\itshape disease label or severity grade} &
+CNN classifiers \edit{(16),} recurrent (LSTM/GRU) (5), hybrid CNN--Transformer (3). Examples: DeepRV~\cite{ref198}, ResNet101~\cite{R0099}, X3D~\cite{ref102}, SeqCon~\cite{ref91}, YOLOv8~\cite{R0521}, ResNet-50~\cite{ref161} \\[6pt]
+
+Object Detection \& Localization (\edit{$n=16$})\newline{\footnotesize\itshape locating lesions, stenoses or landmarks} &
+object detectors \edit{(9),} hybrid CNN--Transformer \edit{(3), U-Net/encoder--decoder (2).} Examples: YOLOv10x~\cite{R0058}, YOLO Attention~\cite{R0570}, UOA Detector~\cite{ref190}, 2D ResUNet++~\cite{ref20}, 2D convolutional neural network~\cite{R1213}, LT-YOLO~\cite{R1222} \\[6pt]
+
+Vessel Segmentation ($n=15$)\newline{\footnotesize\itshape pixel-wise delineation of vessels} &
+U-Net/encoder--decoder (14), hybrid CNN--Transformer (1). Examples: DOSTA-Net~\cite{ref64}, TCA-Net~\cite{ref2}, nnU-Net~\cite{ref15}, TVS-Net~\cite{ref34}, U-Net++~\cite{ref211}, ATFNet~\cite{R1674} \\[6pt]
+
+Catheter \& Device Tracking ($n=9$)\newline{\footnotesize\itshape following devices across frames} &
+U-Net/encoder--decoder (5), other learned models (2), hybrid CNN--Transformer (2). Examples: Stent-RD-UNet~\cite{ref178}, Neuro-Vascular Assist~\cite{R1362}, TAG-DL~\cite{ref56}, ConTrack~\cite{R3149}, U-Net~\cite{ref79}, Improved U-Net~\cite{ref162} \\[6pt]
+
+Contrast Flow Analysis (\edit{$n=8$})\newline{\footnotesize\itshape perfusion or flow from contrast} &
+CNN classifiers \edit{(3), U-Net/encoder--decoder} (3), other learned models (2). Examples: custom convolutional neural network~\cite{R0100}, perfDSA~\cite{ref28}, YOLOv8m~\cite{R1680}, ResNet~\cite{ref43}, Physics-informed neural network~\cite{R2786} \\[6pt]
+
+Image Enhancement \& Denoising ($n=9$)\newline{\footnotesize\itshape improving image quality or reducing dose} &
+other learned models (4), U-Net/encoder--decoder (3), hybrid CNN--Transformer (2). Examples: SAVE-Net~\cite{ref152}, GenDSA~\cite{ref39}, SepConv++~\cite{ref51}, GaraMoSt~\cite{R2490}, MoSt-DSA~\cite{ref104}, ASRNet~\cite{R3126} \\[6pt]
+
+Motion Correction \& Registration ($n=9$)\newline{\footnotesize\itshape aligning frames, views or modalities} &
+U-Net/encoder--decoder (4), other learned models (4), non-learning (1). Examples: VGG encoders~\cite{R2400}, Residual U-Net~\cite{ref227}, 4DRGS~\cite{R2466}, TiAVox~\cite{R3164}, SSDR network~\cite{R3338}, RAFT~\cite{ref74} \\[6pt]
+
+Outcome Prediction ($n=9$)\newline{\footnotesize\itshape predicting a clinical outcome or event} &
+classical ML (5), other learned models (2), hybrid CNN--Transformer (1). Examples: hybrid transformer-UNet~\cite{ref42}, XGBoost~\cite{ref127}, CLIP ViT-B/32~\cite{R0643}, Deep neural network~\cite{R1263}, logistic regression~\cite{R1503}, gradient boosting classifier~\cite{R1609} \\[6pt]
+
+Temporal Sequence Modeling ($n=6$)\newline{\footnotesize\itshape sequence itself is the output, e.g., phase detection} &
+recurrent (LSTM/GRU) (2), CNN classifiers (2), generative (GAN/diffusion) (1). Examples: CDKD-w+~\cite{ref36}, STA-IPCon~\cite{ref57}, Auxiliary Input in Training~\cite{R2411}, ResNet-50~\cite{ref148}, U-Net-like vesselness network~\cite{ref95}, MGR-Net~\cite{ref96} \\[6pt]
+
+Background Subtraction ($n=4$)\newline{\footnotesize\itshape producing DSA-like subtracted images} &
+other learned models (1), U-Net/encoder--decoder (1), generative (GAN/diffusion) (1). Examples: HyperMorph~\cite{ref40}, 3D U-Net~\cite{ref52}, pix2pix~\cite{ref93}, rigid registration with mutual information~\cite{R4804} \\[6pt]
+
+Other ($n=1$)\newline{\footnotesize\itshape none of the above} &
+other learned models (1). Examples: AngioPlus Core~\cite{R3052} \\[6pt]
+
+\bottomrule
+\end{tabularx}
+\caption{Architecture families by primary task. Each task is shown with a short definition and $n$, the number of studies; the three most frequent families are listed with study counts, followed by up to six named architectures with the studies that use them.}
+\label{tab:task_architecture_clean}
+\end{table*}
+

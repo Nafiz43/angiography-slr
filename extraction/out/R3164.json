@@ -1,0 +1,383 @@
+{
+ "record_id": "R3164",
+ "schema_version": "2.0",
+ "study": {
+  "title": "TiAVox: Time-aware Attenuation Voxels for Sparse-view 4D DSA Reconstruction",
+  "year": 2023,
+  "venue": "arXiv.org",
+  "publication_type": "preprint",
+  "text_is_full_paper": true,
+  "country_of_data": "China"
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Sparse-view 2D DSA projections from rotational acquisition (133 projections per patient) for 4D/3D DSA reconstruction; plus simulated projections rendered from 133-view FDK 3D result",
+  "territory": "not_reported",
+  "territory_detail": "Data territory not stated; 4D DSA motivated by interventional neuroradiology (AVM, AVF, intracranial aneurysms)",
+  "acquisition_geometry": "rotational_3D",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "133 2D projection images per patient",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 8,
+  "n_sequences": null,
+  "n_images_or_frames": null,
+  "n_centers": 1,
+  "n_vendors": null,
+  "data_origin": "clinical_plus_synthetic",
+  "public_dataset_used": {
+   "value": false,
+   "detail": null
+  },
+  "data_released": {
+   "value": null,
+   "detail": null
+  },
+  "split_level": "frame",
+  "annotation": {
+   "type": "none",
+   "n_annotators": null,
+   "annotator_expertise": null,
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "motion_correction_registration",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Sparse-view 4D DSA reconstruction from few 2D DSA projections with radiocontrast flow modeling; evaluated by 2D novel view synthesis and 3D reconstruction on clinical and simulated projections",
+  "clinical_application": "Reducing radiation dose of 4D DSA imaging (e.g., AVM, AVF evaluation)"
+ },
+ "method": {
+  "architecture_names": [
+   "TiAVox (Time-aware Attenuation Voxels)",
+   "U-Net (denoising preprocessing)"
+  ],
+  "architecture_family": "other",
+  "temporal_category": "cnn3d_video",
+  "temporal_evidence": {
+   "quote": "A 4D grid is constructed with both the 3D spatial dimension and the 1D temporal dimension, the latter of which allows for modeling the radiocontrast flow.",
+   "section": "introduction"
+  },
+  "input_dimensionality": "multi_view",
+  "supervision": "self_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": true,
+  "physics_informed": true,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": "Inherently interpretable explicit voxel grid whose parameters are attenuation coefficients",
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "24.99",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 4 views"
+   },
+   {
+    "metric": "2D SSIM",
+    "family": "ssim",
+    "value_raw": "0.90",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 4 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "28.57",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 10 views"
+   },
+   {
+    "metric": "2D SSIM",
+    "family": "ssim",
+    "value_raw": "0.94",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 10 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "30.46",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 20 views"
+   },
+   {
+    "metric": "2D SSIM",
+    "family": "ssim",
+    "value_raw": "0.95",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 20 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "31.23",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 30 views"
+   },
+   {
+    "metric": "2D SSIM",
+    "family": "ssim",
+    "value_raw": "0.96",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 30 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "31.51",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 40 views"
+   },
+   {
+    "metric": "2D SSIM",
+    "family": "ssim",
+    "value_raw": "0.96",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 40 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "31.94",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 50 views"
+   },
+   {
+    "metric": "2D SSIM",
+    "family": "ssim",
+    "value_raw": "0.96",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 50 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "27.47",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, simulated, 4 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "34.32",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, simulated, 10 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "34.98",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, simulated, 30 views"
+   },
+   {
+    "metric": "2D PSNR",
+    "family": "psnr",
+    "value_raw": "35.06",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, simulated, 50 views"
+   },
+   {
+    "metric": "2D SSIM",
+    "family": "ssim",
+    "value_raw": "0.93",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, simulated, 10 views"
+   },
+   {
+    "metric": "3D PSNR",
+    "family": "psnr",
+    "value_raw": "38.58",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D reconstruction, simulated, 4 views"
+   },
+   {
+    "metric": "3D PSNR",
+    "family": "psnr",
+    "value_raw": "41.40",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D reconstruction, simulated, 10 views"
+   },
+   {
+    "metric": "3D PSNR",
+    "family": "psnr",
+    "value_raw": "42.13",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D reconstruction, simulated, 30 views"
+   },
+   {
+    "metric": "3D PSNR",
+    "family": "psnr",
+    "value_raw": "42.19",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D reconstruction, simulated, 50 views"
+   },
+   {
+    "metric": "3D SSIM",
+    "family": "ssim",
+    "value_raw": "1.00",
+    "value_0_100": null,
+    "split": "test",
+    "task": "3D reconstruction, simulated, 10 views"
+   },
+   {
+    "metric": "Training time",
+    "family": "time",
+    "value_raw": "4.9 min",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, clinical, 30 views"
+   },
+   {
+    "metric": "Training time",
+    "family": "time",
+    "value_raw": "2.8 min",
+    "value_0_100": null,
+    "split": "test",
+    "task": "novel view synthesis, simulated, 30 views"
+   }
+  ],
+  "comparators": [
+   "NAF",
+   "DirectVoxGo",
+   "133-view FDK"
+  ],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": null,
+   "detail": "The code will be publicly available (future release stated)"
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G2": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G3": {
+   "status": "both",
+   "quote": "these studies commonly neglect the radiocontrast flow, resulting in frequent reconstruction failures in such scenarios",
+   "section": "introduction"
+  },
+  "G4": {
+   "status": "both",
+   "quote": "The 3D visualization results reconstructed from clinically collected projections can be improved, for example, to make the blood vessel boundaries clearer.",
+   "section": "conclusion"
+  },
+  "G5": {
+   "status": "addresses",
+   "quote": "TiAVox works under a self-supervised paradigm, solely supervised by sparse-view 2D DSA images, eliminating the need for 3D supervision.",
+   "section": "introduction"
+  },
+  "G6": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G7": {
+   "status": "both",
+   "quote": "the nature of CNNs as non-interpretable black box models, with an unclear feature extraction process, presents obstacles for practical applications.",
+   "section": "introduction"
+  },
+  "G8": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G9": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [
+  "Segmentation/denoising errors introduce reconstruction noise",
+  "Inaccurate camera pose information degrades results",
+  "No 4D DSA ground truth available",
+  "Clinical 3D reconstructions cannot be quantitatively evaluated due to misalignment with FDK gold standard",
+  "Simulated data lacks noise and radiocontrast flow"
+ ],
+ "future_work": [
+  "Temporal result fusion, post-processing and prior knowledge to sharpen vessel boundaries",
+  "Minimize view count required for DSA reconstruction",
+  "Apply to other modalities",
+  "Interface with hardware",
+  "Refine pose parameter accuracy"
+ ],
+ "claim2024": {
+  "items": "ynyyyyynnnnynyaayynanyayyyynnyyynnnynnnyynnn"
+ }
+}

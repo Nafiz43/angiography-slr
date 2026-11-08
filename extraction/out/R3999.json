@@ -1,0 +1,142 @@
+{
+  "record_id": "R3999",
+  "schema_version": "2.0",
+  "study": {
+    "title": "autoTICI: Automatic Brain Tissue Reperfusion Scoring on 2D DSA Images of Acute Ischemic Stroke Patients",
+    "year": 2021,
+    "venue": "IEEE Transactions on Medical Imaging",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Netherlands"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D cerebral DSA sequences, pre- and post-EVT, AP and lateral views; frame rates 0.5-4 fps; mostly only subtracted images stored",
+    "territory": "neurologic",
+    "territory_detail": "Anterior circulation acute ischemic stroke (intracranial ICA or M1 occlusion) before/after endovascular treatment",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "variable; acquisitions with fewer than six frames excluded",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 680,
+    "n_sequences": 1857,
+    "n_images_or_frames": 30297,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "MR CLEAN Registry (multi-center Dutch registry; not described as publicly downloadable)"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "Phase labels: one experienced clinician, one colleague researcher and the first author; eTICI reference scored by independent core-lab neuroradiologists",
+      "inter_rater_reported": true,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "contrast_flow_analysis",
+    "other_label": null,
+    "secondary_tasks": ["temporal_sequence_modeling", "disease_classification_grading", "outcome_prediction"],
+    "task_description": "Fully automatic quantitative TICI (reperfusion) scoring: CNN-based DSA phase classification (non-contrast/arterial/parenchymal/venous) with a handcrafted state-transition constraint, affine motion correction, MINIP computation, Frangi/Otsu vessel and perfusion segmentation, atlas-based brain masking, and ratio of reperfused pixels post- vs pre-EVT; evaluated against eTICI and for mRS/NIHSS outcome prediction.",
+    "clinical_application": "Peri-procedural assessment of reperfusion after endovascular treatment of acute ischemic stroke"
+  },
+  "method": {
+    "architecture_names": ["ResNet-18", "customized CRF / handcrafted state-transition matrix", "affine registration (SimpleElastix, Mattes mutual information, ASGD)", "multi-scale Frangi filter", "Otsu thresholding", "atlas-based brain masking", "logistic regression"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "the input is set to three consecutive 2D sequence frames, each for one input channel. In such a way, local features of three consecutive frames are fused.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Described as a 'retrained ResNet18'; source of pretrained weights not stated",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Step-by-step pipeline with intermediate visualizable outputs (phase labels, MINIP, segmentation colormap); no saliency method",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "First arterial border frame match accuracy", "family": "accuracy", "value_raw": "92%", "value_0_100": 92.0, "split": "cross_validation", "task": "phase classification"},
+      {"metric": "Last arterial (arterial/parenchymal) border frame match accuracy", "family": "accuracy", "value_raw": "51%", "value_0_100": 51.0, "split": "cross_validation", "task": "phase classification"},
+      {"metric": "Spearman rho autoTICI (AP view) vs eTICI", "family": "correlation", "value_raw": "0.54 (P < 0.001)", "value_0_100": null, "split": "test", "task": "autoTICI vs eTICI"},
+      {"metric": "Spearman rho autoTICI (lateral view) vs eTICI", "family": "correlation", "value_raw": "0.65 (P < 0.001)", "value_0_100": null, "split": "test", "task": "autoTICI vs eTICI"},
+      {"metric": "Micro-average AUC, AP autoTICI predicting eTICI (LOOCV multinomial logistic regression)", "family": "auc", "value_raw": "0.76", "value_0_100": 76.0, "split": "test", "task": "autoTICI vs eTICI"},
+      {"metric": "Micro-average AUC, lateral autoTICI predicting eTICI (LOOCV multinomial logistic regression)", "family": "auc", "value_raw": "0.78", "value_0_100": 78.0, "split": "test", "task": "autoTICI vs eTICI"},
+      {"metric": "Micro-average AUC, AP+lateral autoTICI predicting eTICI", "family": "auc", "value_raw": "0.81", "value_0_100": 81.0, "split": "test", "task": "autoTICI vs eTICI"},
+      {"metric": "AUC for dichotomized eTICI (<=2A vs >=2B)", "family": "auc", "value_raw": "0.90", "value_0_100": 90.0, "split": "test", "task": "autoTICI vs dichotomized eTICI"},
+      {"metric": "AUC for dichotomized mRS (cross-validated logistic regression)", "family": "auc", "value_raw": "0.63", "value_0_100": 63.0, "split": "test", "task": "functional outcome (mRS) prediction"},
+      {"metric": "Accuracy for dichotomized mRS", "family": "accuracy", "value_raw": "0.66", "value_0_100": 66.0, "split": "test", "task": "functional outcome (mRS) prediction"},
+      {"metric": "Spearman rho autoTICI vs NIHSS shift", "family": "correlation", "value_raw": "0.29 (P < 0.01)", "value_0_100": null, "split": "test", "task": "NIHSS shift correlation"}
+    ],
+    "comparators": ["eTICI (core-lab visual scoring)", "three human annotators (inter-observer agreement)", "ablated variants (no augmentation, no temporal neighbors, no transition matrix)", "Schuldhaus et al. perceptron-based phase classification (literature numbers)"],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": "Only the elastix registration parameter file is linked (https://elastix.lumc.nl/modelzoo/par0063/)"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "A pure numerical comparison seems to show comparable performance, but our study has different characteristics.", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "Due to the large variety in acquisition systems and imaging protocols in different centers as well as differences in patient condition, the acquired DSA images possess great variability in image appearance and quality.", "section": "methods"},
+    "G3": {"status": "both", "quote": "Although 2D CNNs have been shown powerful in extracting representative features from images, temporal information is discarded when handling videos.", "section": "methods"},
+    "G4": {"status": "documents", "quote": "As our DSA images are 2D projections of the brain, affine transformations are unable to fix 3D rotation artifacts in its 2D projects.", "section": "methods"},
+    "G5": {"status": "documents", "quote": "deep learning based segmentation methods, such as U-Net [47], which is not studied in this work due to the massive amount of annotations required.", "section": "discussion"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "both", "quote": "end-to-end training approaches generally sacrifices causal interpretability. The proposed method, by contrast, provides intermediate visualizable outputs per step, offering enriched clinical insights", "section": "discussion"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "Whereas the distribution of patients with respect to eTICI and mRS is imbalanced, we did not attempt to balance the distribution during data selection", "section": "results"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "both", "quote": "automatic periprocedural imaging biomarker extraction from DSA is yet to be further explored.", "section": "introduction"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Original unsubtracted images mostly discarded in registry; motion correction cannot handle subtraction artefacts",
+    "Heavy data exclusion: only 141 of 1488 patients suitable for autoTICI quantification",
+    "autoTICI and eTICI definitions not fully identical, so perfect correlation is unattainable",
+    "Inter-acquisition variation in contrast dilution and injection volume",
+    "Atlas-to-patient registration relies on skull outline and vasculature due to lacking background texture"
+  ],
+  "future_work": [
+    "Deep learning based perfusion segmentation (e.g., U-Net)",
+    "Use original non-subtracted images to improve registration robustness",
+    "Contrast-profile-independent DSA perfusion parameters",
+    "Fixed injection protocols with mechanical pumps to reduce inter-acquisition variation",
+    "Apply phase classification to key frame selection, temporal synchronization and slow arterial flow detection",
+    "End-to-end deep learning alternatives for TICI scoring"
+  ],
+  "claim2024": {
+    "items": "ynyyynyyyynynyyyyyynyynyyyyynynynyyynynyyyny"
+  }
+}

@@ -1,0 +1,17 @@
+{"record_id": "R2845",
+ "items": {
+  "6":  {"answer": "yes", "quote": "an automatic staging technique for MMD based on a Pseudo-3D (P3D) Residual Network was provided", "section": "introduction"},
+  "9":  {"answer": "yes", "quote": "we extracted the region of interest (ROI), that is, the terminal part of the ICA, the MCA and the ACA, from the DSA sequence, and processed them as 224 × 224 pixels", "section": "methods"},
+  "10": {"answer": "yes", "quote": "the starting frame was chosen to be the instant when the contrast medium had just passed through the end of the ICA, and the beginning of the ACA and MCA", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Instead of using the precise Suzuki stage, Stages 1–2, stages 3–4, and stages 5–6 of MMD were combined into three grades: mild, moderate, and severe.", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "All patients in our database were diagnosed independently by two senior neurosurgeons via routine procedures. If a consensus was not reached, the whole treatment team discussed the case together and came to a final consensus.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "It was put into practice using the PyTorch DL framework", "section": "methods"},
+  "26": {"answer": "yes", "quote": "We chose the best dilation rate for training by comparing the accuracy at various dilation rates.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The precision, recall, specificity, F1 score, and AUC of mild, moderate, and severe MMD are all shown in Table 1", "section": "results"},
+  "38": {"answer": "yes", "quote": "ROC curves for various MMD stages are displayed in Figure 7", "section": "results"}
+ }}

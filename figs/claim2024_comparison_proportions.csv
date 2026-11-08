@@ -1,0 +1,13 @@
+cluster_id,cluster_label,section,items_covered,pre_n,pre_yes,pre_pct,pre_ci_lo,pre_ci_hi,post_n,post_yes,post_pct,post_ci_lo,post_ci_hi
+C01,AI identification & abstract completeness,Title/Abstract,1–2,127,90,70.9,62.4,78.1,56,42,75.0,62.3,84.5
+C02,Background & study objectives,Introduction,3–5,127,125,98.4,94.4,99.6,56,55,98.2,90.6,99.7
+C03,Study design & data sources,Methods,6–9,127,53,41.7,33.5,50.4,56,34,60.7,47.6,72.4
+C04,Participants & image acquisition,Methods,10–13,126,36,28.6,21.4,37.0,56,21,37.5,26.0,50.6
+C05,Ground truth & annotation,Methods,14–16,127,40,31.5,24.1,40.0,56,26,46.4,34.0,59.3
+C06,Data partitioning & class handling,Methods,17–21,127,56,44.1,35.8,52.8,55,24,43.6,31.4,56.7
+C07,Model architecture & training,Methods,22–26,127,82,64.6,55.9,72.3,55,35,63.6,50.4,75.1
+C08,Evaluation design & fairness,Methods,27–31,127,30,23.6,17.1,31.7,56,29,51.8,39.0,64.3
+C09,Performance & external validation,Results,32–36,126,44,34.9,27.2,43.6,55,24,43.6,31.4,56.7
+C10,Demographic & subgroup reporting,Results,37–39,125,10,8.0,4.4,14.1,56,9,16.1,8.7,27.8
+C11,"Limitations, implications & future work",Discussion,40–42,127,107,84.3,76.9,89.6,56,50,89.3,78.5,95.0
+C12,Reproducibility & funding disclosure,Reproducibility & Transparency,43–44,127,27,21.3,15.0,29.2,56,13,23.2,14.1,35.8

@@ -1,0 +1,144 @@
+{
+  "record_id": "R1740",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Reducing motion artifacts in craniocervical background subtraction angiography with deformable registration and unsupervised deep learning",
+    "year": 2024,
+    "venue": "Radiology Advances",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "United States"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Craniocervical (cervico-cerebral) digital subtraction angiography series; 12-bit DICOM downsampled from 1024x1024 to 512x512",
+    "territory": "neurologic",
+    "territory_detail": "Cervico-cerebral neuroangiograms; spinal angiograms excluded",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 404,
+    "n_sequences": 5240,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "Institutional dataset from Northwestern Medicine (2019)"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "IRB does not allow public dissemination; sample data available on request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "none",
+      "n_annotators": 3,
+      "annotator_expertise": "Board-certified interventional neuroradiologists (2, 4 and 14 years post-fellowship) acting as blinded raters for evaluation",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Average deviation of individual Likert score from group consensus 0.13"
+    }
+  },
+  "task": {
+    "primary_task": "background_subtraction",
+    "other_label": null,
+    "secondary_tasks": ["motion_correction_registration"],
+    "task_description": "Unsupervised deep learning deformable registration (HyperMorph-based) of the precontrast background mask to each postcontrast frame, followed by subtraction to produce motion-artifact-reduced background subtraction angiography; novel vessel layer estimate (VLE) image similarity loss.",
+    "clinical_application": "Reducing misregistration/motion artifacts in craniocervical DSA to improve image quality and reduce repeat acquisitions"
+  },
+  "method": {
+    "architecture_names": ["HyperMorph", "Reg-MSE", "Reg-MinMax", "Reg-VLE"],
+    "architecture_family": "other",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "learns the nonrigid morph field for the background frame (moving image) relative to the contrast frame (fixed image)",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "unsupervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Likert score vascular fidelity (pooled, 3 reviewers)", "family": "other", "value_raw": "3.6 ± 0.5", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Likert score subtraction artifacts (pooled, 3 reviewers)", "family": "other", "value_raw": "3.9 ± 0.3", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Likert score overall quality (pooled, 3 reviewers)", "family": "other", "value_raw": "3.9 ± 0.4", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Percentage of samples ranked best (Reg-VLE)", "family": "other", "value_raw": "64.0 ± 5.3%", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Average inference time per frame", "family": "time", "value_raw": "30 milliseconds per frame", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Percentage repeat acquisitions recommended (reviewer 1)", "family": "other", "value_raw": "4%", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Percentage repeat acquisitions recommended (reviewer 2)", "family": "other", "value_raw": "10%", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Percentage repeat acquisitions recommended (reviewer 3)", "family": "other", "value_raw": "4%", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Percentage reduction in repeat acquisitions vs DSA (reviewer 1)", "family": "other", "value_raw": "86%", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Percentage reduction in repeat acquisitions vs DSA (reviewer 2)", "family": "other", "value_raw": "54%", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Percentage reduction in repeat acquisitions vs DSA (reviewer 3)", "family": "other", "value_raw": "87%", "value_0_100": null, "split": "test", "task": "background_subtraction"}
+    ],
+    "comparators": ["Traditional DSA", "Reg-MSE BSA", "Reg-MinMax BSA", "Feature-based affine registration BSA"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/zcc861007/HyperMorphBSA"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "documents", "quote": "we have not established the generalizability of our deep learning model on datasets outside of our home institution", "section": "discussion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "documents", "quote": "2D deformable registration cannot fully capture the complex 3-dimensional/2D projective motion present in fluoroscopic images", "section": "discussion"},
+    "G5": {"status": "both", "quote": "Because of the absence of ground truth data for quantitative assessment, all hyperparameter tuning must rely on expert review", "section": "discussion"},
+    "G6": {"status": "documents", "quote": "accurate assessment of the true clinical impact of deep learning BSA will require edge implementation and integration into the procedural workflow", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Images evaluated deidentified without clinical context",
+    "Biplane/oblique complementary views not considered when judging repeat acquisitions",
+    "Formal Likert review performed at only one hyperparameter value (lambda = 0.7)",
+    "Misregistration artifacts not completely eliminated under significant motion"
+  ],
+  "future_work": [
+    "Edge implementation and integration into the procedural workflow",
+    "Assess true clinical impact on decision-making",
+    "Address generalizability and hyperparameter-review limitations"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyynyynayyyynaynnyyyyynynynyyynnnyyyyy"
+  }
+}

@@ -1,0 +1,126 @@
+{
+ "record_id": "R2675",
+ "schema_version": "2.0",
+ "study": {
+  "title": "A framework of myocardial bridge detection with x-ray angiography sequence",
+  "year": 2023,
+  "venue": "BioMedical Engineering OnLine",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "China"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Conventional (invasive) coronary angiography sequences, 15 fps, 512x512",
+  "territory": "cardiac",
+  "territory_detail": "Coronary arteries (myocardial bridge, stenosis)",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": 15,
+  "frames_per_sequence": null,
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 80,
+  "n_sequences": null,
+  "n_images_or_frames": 2661,
+  "n_centers": 1,
+  "n_vendors": null,
+  "data_origin": "clinical_plus_synthetic",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": false, "detail": "Data obtainable from authors on request"},
+  "split_level": "frame",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": null,
+   "annotator_expertise": "Experienced experts / physicians with rich clinical experience",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "object_detection_localization",
+  "other_label": null,
+  "secondary_tasks": ["vessel_segmentation", "disease_classification_grading"],
+  "task_description": "Framework that segments coronary vessels with a hybrid CNN-transformer (UTNet backbone), extracts skeletons and vessel-segment descriptors, builds a vessel tree, matches vessels across frames, detects and grades stenoses from diameter curves, and detects myocardial bridges as periodic stenosis/diameter change across the sequence.",
+  "clinical_application": "Automatic detection of myocardial bridge and coronary stenosis on coronary angiography"
+ },
+ "method": {
+  "architecture_names": ["UTNet-based CNN-transformer segmentation network", "ZhangSuen skeletonization", "multi-way vessel tree", "vessel matching"],
+  "architecture_family": "hybrid_cnn_transformer",
+  "temporal_category": "optical_flow_registration",
+  "temporal_evidence": {"quote": "match and correlate vessels in the images of the previous and subsequent frames", "section": "methods"},
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "cross_validation",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "Dice", "family": "dice", "value_raw": "0.917", "value_0_100": 91.7, "split": "cross_validation", "task": "vessel segmentation"},
+   {"metric": "ASD", "family": "error_distance", "value_raw": "1.39", "value_0_100": null, "split": "cross_validation", "task": "vessel segmentation"},
+   {"metric": "Average accuracy", "family": "accuracy", "value_raw": "92.7%", "value_0_100": 92.7, "split": "test", "task": "stenosis detection (262 stenoses)"},
+   {"metric": "Accuracy (mild)", "family": "accuracy", "value_raw": "93.1%", "value_0_100": 93.1, "split": "test", "task": "stenosis detection/grading - mild"},
+   {"metric": "Accuracy (moderate)", "family": "accuracy", "value_raw": "90.0%", "value_0_100": 90.0, "split": "test", "task": "stenosis detection/grading - moderate"},
+   {"metric": "Accuracy (severe)", "family": "accuracy", "value_raw": "95.4%", "value_0_100": 95.4, "split": "test", "task": "stenosis detection/grading - severe"},
+   {"metric": "Recall (mild)", "family": "sensitivity_recall", "value_raw": "83.3%", "value_0_100": 83.3, "split": "test", "task": "stenosis detection/grading - mild"},
+   {"metric": "Recall (moderate)", "family": "sensitivity_recall", "value_raw": "83.5%", "value_0_100": 83.5, "split": "test", "task": "stenosis detection/grading - moderate"},
+   {"metric": "Recall (severe)", "family": "sensitivity_recall", "value_raw": "97.8%", "value_0_100": 97.8, "split": "test", "task": "stenosis detection/grading - severe"},
+   {"metric": "Accuracy", "family": "accuracy", "value_raw": "75%", "value_0_100": 75.0, "split": "test", "task": "myocardial bridge detection (20 cases)"}
+  ],
+  "comparators": ["Wan's method", "MSRG (Kerkeni multiscale region growing)", "Unet", "SwinNet"],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": false, "detail": "Code obtainable from authors on request"},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "both", "quote": "all current methods were aimed at the detection of stenosis in a single image", "section": "introduction"},
+  "G4": {"status": "documents", "quote": "coronary angiography is a projection of vessels from 3 to 2 dimensions, resulting in vessel overlap, which is indistinguishable", "section": "introduction"},
+  "G5": {"status": "documents", "quote": "coronary angiography data are stored in video form, making data annotation more challenging", "section": "discussion"},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "documents", "quote": "Since myocardial bridges are not a common coronary disease, case data are more difficult to obtain", "section": "discussion"},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Vessel-like structures such as ribs cause incorrect segmentation",
+  "Downstream results depend heavily on segmentation, which is poor for complex backgrounds",
+  "Vessel fork locations neglected in myocardial bridge detection",
+  "Low myocardial bridge detection accuracy (75%) partly due to individual coronary variation"
+ ],
+ "future_work": [
+  "Intelligent auxiliary diagnosis of CAD based on coronary angiography video",
+  "Multi-body vessel matching to overcome overlapping crossed vessels",
+  "Integrate more image information to detect more diseases"
+ ],
+ "claim2024": {"items": "yyyyynyynnyyyynnyynnnynnyyynnnnynnyynynyynyy"}
+}

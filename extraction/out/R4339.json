@@ -1,0 +1,160 @@
+{
+  "record_id": "R4339",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Sequential vessel segmentation via deep channel attention network",
+    "year": 2020,
+    "venue": "Neural Networks",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray coronary angiography (XCA) image sequences",
+    "territory": "cardiac",
+    "territory_detail": "coronary arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "30 to 140",
+    "vendors": ["Siemens", "Philips"]
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 120,
+    "n_images_or_frames": 332,
+    "n_centers": 1,
+    "n_vendors": 2,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "Private data from Renji Hospital; authors state no public XCA sequence segmentation dataset exists"
+    },
+    "data_released": {
+      "value": true,
+      "detail": "Dataset released at https://github.com/Binjie-Qin/SVS-net"
+    },
+    "split_level": "frame",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "experts (clinical experts)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Segmentation of 2D vessel masks of the current frame in XCA sequences using a 4-frame sliding window with a 3D-encoder/2D-decoder U-net with channel attention blocks; downstream vessel distribution (GVE) estimation and gray-intensity recovery shown.",
+    "clinical_application": "Diagnosis and therapy of coronary artery disease / percutaneous coronary intervention"
+  },
+  "method": {
+    "architecture_names": ["SVS-net", "U-net", "channel attention block (CAB)", "3D residual convolutional block", "feature fusion operation (FFO)"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "In the encoder stage, a series of 3D convolutional layers are employed to hierarchically extract temporal–spatial features.",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Dice loss",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Detection rate (DR)", "family": "sensitivity_recall", "value_raw": "0.8424 ± 0.0813", "value_0_100": 84.24, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Precision (P)", "family": "precision_ppv", "value_raw": "0.8492 ± 0.0605", "value_0_100": 84.92, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "F measure", "family": "f1", "value_raw": "0.8428 ± 0.0531", "value_0_100": 84.28, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Relative GVE difference (%)", "family": "other", "value_raw": "9.74 ± 7.52", "value_0_100": null, "split": "test", "task": "vessel distribution estimation"},
+      {"metric": "Inference time per test image", "family": "time", "value_raw": "0.178s", "value_0_100": null, "split": "test", "task": "vessel_segmentation"}
+    ],
+    "comparators": ["Coye's filter", "Jin's spatially adaptive filtering", "Kerkeni's multi-scale region growing", "Retinal-net", "SU-Net (S-UNet)", "X-ray net", "BTS-DSN", "2D naive", "2D+CAB", "3D naive", "CE loss variant"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/Binjie-Qin/SVS-net"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "both",
+      "quote": "Unfortunately, there is no readily available public dataset for vessel segmentation from XCA sequence.",
+      "section": "introduction"
+    },
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {
+      "status": "both",
+      "quote": "Most of XCA segmentation algorithms are dependent on the pixels of local windows in a single frame of XCA sequences, so that they waste lots of temporal–spatial contextual information",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "The projection onto 2D plane causes overlap of adjacent tissues.",
+      "section": "introduction"
+    },
+    "G5": {
+      "status": "documents",
+      "quote": "As there are limited manually annotated datasets, data augmentation is necessary",
+      "section": "methods"
+    },
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {
+      "status": "both",
+      "quote": "We employ Dice loss function in deep network to alleviate the severe class unbalance problem in sequential vessel segmentation",
+      "section": "introduction"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Some thin vessel branches not recognized",
+    "High standard deviation due to hard-segmented samples",
+    "Relatively long inference time from feature fusion and channel attention"
+  ],
+  "future_work": [
+    "Novel loss function weighting thin vessels",
+    "Enlarge dataset with more hard-segmented samples",
+    "More efficient architectures to reduce inference time",
+    "Integrate channel attention with saliency-aware matching for key frame selection",
+    "Deep feature matching to transfer priors from key frame to neighboring frames",
+    "Unsupervised vessel extraction via background completion/inpainting and subtraction"
+  ],
+  "claim2024": {
+    "items": "ynyyynynynnyyyynyyyynynyynynnynynnyynnnyynyy"
+  }
+}

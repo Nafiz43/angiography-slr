@@ -1,0 +1,228 @@
+\section{Results}
+\label{sec:analysis}
+\label{sec:results}
+This section contains the methodological results and the analyses of the selected articles. We first report study selection and the validation of screening and extraction, then the characteristics of the \edit{115} included studies: publication trends, modalities and territories, tasks and architectures, temporal modeling, venues, reported performance and reporting quality.
+
+\subsection{Study Selection and Review Corpus}
+The screening search identified 5,829 records (PubMed/\allowbreak MEDLINE 4,071; Semantic Scholar 1,758). After removing 765 duplicates, 5,064 records remained. The LLM \edit{labeled} 134 as eligible and excluded 4,930. 4,831 failed at least one inclusion criterion and 99 met an exclusion criterion (E1: 3, E2: 95, E3: 1). The PRISMA diagram of this eligibility analysis is shown in Figure~\ref{fig:prisma}.
+
+Applying Cochran's \cite{cochran1977sampling} formula, we set the validation sample at 357 of the 4,930 exclusions; we also included all the LLM-eligible articles, which resulted in 491 records for manual review.
+
+The two reviewers agreed on 487 of the 491 records (99.2\%; Cohen's $\kappa=0.978$, 95\% CI 0.957--0.999). The four cases with disagreements were resolved through discussion by the annotators. The resultant data, after resolution of the disagreements, served as the manually validated dataset.
+
+The manually validated dataset contained 122 eligible reports (14 LLM-eligible records were excluded, while 2 LLM-non-eligible records were added) for review. Full text could not be retrieved for 2 of \edit{these, so 120 reports were assessed at full text. During full text analysis, we found that two of them were published meeting abstracts without a full methods section, so they were excluded under E1. Of} the \edit{remaining} \edit{118 reports, three were earlier versions (two preprints and one conference paper) of an included journal article; we counted each study once, using} the \edit{journal version. The} final review corpus \edit{therefore} comprises \edit{115} studies. 
+
+% All 491 screening decisions are listed in Supplementary Table~S1.
+
+
+The full-text LLM extraction audit covered 6 of the \edit{115} studies (5\%) and 444 values. Each study contained 74 fields: 18 study-level fields, the status of the 12 research gaps, and 44 CLAIM-informed reporting criteria. Disagreements were resolved through discussion to obtain the final validated set. Inter-annotator agreement was \(\kappa = 0.967\). Compared with the validated set, 431 of 444 extracted values were correct (97.1\%).
+
+
+
+
+\input{figs/prisma}
+
+\subsection{Publication Trends}
+\label{subsec:trends}
+\begin{figure}[pos=!htbp]
+\centering
+\includegraphics[width=1\linewidth]{figs/temporal_trends.pdf}
+\caption{Included studies by publication year. The 2026 bar covers a partial year.}
+\label{fig:temporal_trends}
+\end{figure}
+
+The trend of the selected articles,  Figure~\ref{fig:temporal_trends}, shows that no included study predates 2018, and only five appeared in 2018--2019. Output rose sharply after 2020 and stayed high through the study inclusion end date. The partial year 2026 already exceeds several earlier full years. 
+
+
+% Transformer-based temporal models appeared later; all ten such studies were published from 2023 onward.
+
+\vspace{0.25cm}
+\begin{mdframed}[linewidth=0.5pt, linecolor=black, backgroundcolor=blue!10]
+\textbf{Finding 1.} The field is still growing: 78\% of studies \edit{(90/115)} were published from 2022 to 2026.
+\end{mdframed}
+\vspace{0.25cm}
+
+\subsection{Imaging Modalities and Anatomical Coverage}
+This subsection summarizes the imaging modalities used by the included studies and the anatomical territories they address. The anatomical distribution is shown in Figure~\ref{fig:anatomy_distribution}.
+
+
+X-ray/fluoroscopy \edit{(55} studies, 48\%) and DSA \edit{(54,} 47\%) are almost equally common, but they are rarely studied jointly: only 5 studies (4\%) use both. Cardiac \edit{(46\%)} and neurologic (41\%) applications, which include cerebral and spinal vascular territories, make up nearly 90\% of the corpus, while abdominopelvic, peripheral, and other thoracic territories are rare (Figure~\ref{fig:anatomy_distribution}). \edit{Most studies develop and test their models within a single territory, so whether} models trained on coronary or cerebral angiography transfer to other vascular regions \edit{remains} \edit{largely} \edit{untested.}
+
+\vspace{0.25cm}
+\begin{mdframed}[linewidth=0.5pt, linecolor=black, backgroundcolor=blue!10]
+\textbf{Finding 2.} Studies use DSA or X-ray/\allowbreak fluoroscopy in nearly equal numbers but almost never both, and nearly 90\% address cardiac or neurologic territories.
+\end{mdframed}
+\vspace{0.25cm}
+
+
+
+
+
+
+\label{subsec:modality_anatomy}
+\begin{figure}[pos=!htbp]
+\centering
+\includegraphics[width=1\linewidth]{figs/anatomy_distribution.pdf}
+\caption{Anatomical distribution across included studies. The Neurologic category includes cerebral and spinal vascular territories.}
+\label{fig:anatomy_distribution}
+\end{figure}
+
+
+% -----------------
+
+\subsection{Computational Tasks and Model Architectures}
+Here, we examined the computational tasks addressed by the included studies and the model architectures used to perform them. We categorized studies by their primary task and summarized the architectures used within each category to characterize the methodological focus of the literature. Figure~\ref{fig:task_distribution} presents the distribution of primary tasks across the \edit{115} studies, while Table~\ref{tab:task_architecture_clean} summarizes the corresponding architectures.
+\input{tables/temporal_taxonomy}
+\input{tables/temporal_crosstab}
+\input{tables/task-archi}
+
+Figure~\ref{fig:task_distribution} shows that disease classification and grading is the most common primary task \edit{(29} of \edit{115} studies), followed by object detection \& localization \edit{(16)} and vessel segmentation (15). Regarding the model architectures (Table~\ref{tab:task_architecture_clean}) involved in those tasks, 14 of the 15 segmentation studies use encoder--decoder models, mostly U-Net variants; detection studies use YOLO, DETR and R-CNN detectors on ResNet backbones; classification relies on ResNet-style CNNs, with Transformers increasingly added. The majority of architectures are adapted from natural-image computer vision rather than designed specifically for angiography.
+
+Tasks that produce a temporal output remain uncommon. These included temporal sequence modeling, such as cardiac cycle detection and key-frame identification (6 studies), and contrast flow analysis \edit{(8} studies). Many spatial tasks, such as segmentation, detection, and classification, use several frames only to stabilize a per-frame prediction (discussed in detail in Section~\ref{subsec:temporal_taxonomy}).
+
+
+\label{subsec:tasks_architectures}
+\begin{figure*}[pos=!tp]
+\centering
+\includegraphics[width=1\linewidth]{figs/task_distribution.pdf}
+\caption{Distribution of primary computational tasks across included studies. Task definitions are given in Table~\ref{tab:task_architecture_clean}.}
+\label{fig:task_distribution}
+\end{figure*}
+
+
+
+
+\subsubsection{Task Category Overlap}
+\label{subsec:task_dendrogram}
+
+This subsection examines how often computational task categories occur together within the same study and whether their overlap supports broader task groupings. We compared the sets of studies assigned to each category, considering both primary and secondary tasks, and applied average-linkage clustering to their pairwise Tanimoto \cite{rogers1960tanimoto} distances. Figure~\ref{fig:task_dendrogram} presents the resulting dendrogram, with lower merge distances indicating greater overlap in study membership.
+
+Figure~\ref{fig:task_dendrogram} shows that most task categories merge near the maximum Tanimoto distance, which indicates limited overlap across the literature. \edit{Two} pairs merge at relatively lower distances: contrast flow analysis with outcome \edit{prediction (0.74), and} classification \edit{with} \edit{detection (0.80), which vessel segmentation} and \edit{then} temporal sequence modeling \edit{join} \edit{at 0.90 and 0.92.} These pairings are consistent with workflows in which flow measurements inform outcome \edit{prediction and} detected lesions are subsequently \edit{graded.} They suggest possible groupings for a coarser taxonomy, although the high merge distances overall indicate that even these associations are limited. Image enhancement \& device tracking, as well as motion correction \& background subtraction, connect to the remaining categories only at the highest merge distances.
+
+\begin{figure*}[pos=!tp]
+\centering
+\includegraphics[width=1\linewidth, height=10cm]{figs/task_dendrogram.pdf}
+\caption{Average-linkage clustering of ten computational task categories using Tanimoto distances between their study-membership sets, including primary and secondary task assignments. Merges further left indicate greater overlap. All merge distances fall between \edit{0.74} and 1.00; the axis is restricted to this range, and the two sub-clusters with the lowest merge distances are highlighted in color.}
+\label{fig:task_dendrogram}
+\end{figure*}
+
+
+
+
+\subsubsection{Temporal Modeling}
+\label{subsec:temporal_taxonomy}
+
+This subsection examines \edit{how studies use information across frames}. We categorized temporal modeling strategies and compared their use across tasks, imaging modalities, anatomical regions, and publication periods. Table~\ref{tab:temporal_taxonomy} summarizes these strategies and Table~\ref{tab:temporal_crosstab} shows their distribution across study characteristics.
+
+\edit{Ninety-five} of the \edit{115} studies \edit{(82.6\%)} explicitly consider sequential data (linked frames, where a particular visual data instance contains a set of image frames), \edit{and} \edit{20 (17.4\%)} process frames \edit{independently.} \edit{This high proportion partly reflects inclusion criterion I2. The most common} strategies are 3D/video convolution \edit{and} optical flow or registration \edit{(19} \edit{studies each), followed by} recurrent networks \edit{and} frame aggregation \edit{(16 each)} and hemodynamic or physics-based models \edit{(15).} Transformer or state-space models are least common (10 studies, \edit{8.7\%),} all published from 2023 onward. \edit{Frame aggregation is a boundary case: a 2D network trained on stacked frames can learn short-range relations between them, but the sequence has no dedicated temporal mechanism.}
+
+Temporal modeling varies by task, from 100\% for temporal sequence modeling \edit{and contrast flow analysis} to 67\% for catheter and device tracking, Table~\ref{tab:temporal_crosstab}. It is slightly more common in DSA studies \edit{(87\%)} than in X-ray/fluoroscopy studies \edit{(80\%),} and in neurologic studies \edit{(91\%)} than in cardiac \edit{(79\%)} or abdominopelvic studies (60\%). Its prevalence increased substantially over the study period from 40\% in 2018--2019 (2 of 5 studies) to 75--100\% in 2020--2025. In the partial year 2026, it fell to \edit{59\%} (10 of \edit{17} studies).
+
+Of the 95 studies that use sequential frame data, 50 use fixed operations, namely frame aggregation, optical flow or registration, and hemodynamic models. The remaining \edit{45} \edit{(39.1\%} of all studies) learn temporal representations through recurrent, 3D/video, or transformer/state-space models. Learned temporal models are concentrated in disease classification \edit{(20} of \edit{29} studies), absent from image enhancement and device tracking (0 of 9 each), and uncommon in flow analysis \edit{(1 of 8)} and outcome prediction (1 of \edit{9).} Their prevalence increased from \edit{28.2\%} in 2018--2022 \edit{(11} of \edit{39} studies) to \edit{44.7\%} in 2023--2026 \edit{(34} of \edit{76).} Nevertheless, 41 studies \edit{(35.7\%)} use short frame stacks rather than full sequences, and \edit{61 of all 115 studies} identify limited temporal modeling as a limitation.
+
+\vspace{0.25cm}
+\begin{mdframed}[linewidth=0.5pt, linecolor=black, backgroundcolor=blue!10]
+\textbf{Finding 3.} Although \edit{82.6\%} of studies used sequential frame data, roughly half use fixed temporal operations. Learned temporal representations remain concentrated in classification, while transformer or state-space models appear in only \edit{8.7\%} of studies.
+\end{mdframed}
+\vspace{0.25cm}
+
+
+
+
+
+\subsection{Publication Venues}
+\label{subsec:venues}
+
+This subsection examines the venues in which the included studies were published. Publication venues indicate which research communities contribute to the field and which journals and proceedings readers need to follow to keep up with it. Figure~\ref{fig:venue_stacked} shows the most frequent venues, while Figure~\ref{fig:venue_curve} shows the cumulative share of studies as venues are added in descending order of publication count.
+
+Of the \edit{115} included studies, \edit{86} \edit{(74.8\%)} were journal articles, \edit{22} \edit{(19.1\%)} were conference papers, and 7 \edit{(6.1\%)} were preprints. Figure~\ref{fig:venue_stacked} shows that the SPIE proceedings are the most frequent outlet, with \edit{10} \edit{studies.} IJCARS and IEEE TMI follow with 5 studies each, and Medical Image Analysis with 4. IEEE venues \edit{and SPIE proceedings each account for 10 studies,} while MICCAI accounts for 3.
+
+
+% None of the articles appeared in ACM venues; because ACM is a major computing publisher, this suggests that the work is published in imaging and medical venues rather than in general computer-science outlets.
+
+Figure~\ref{fig:venue_curve} \edit{shows how widely the studies are spread across venues.} The \edit{17} most frequent venues account for \edit{half} of the \edit{studies,} \edit{and 50} venues are required to reach 80\%. Of the \edit{72} venues, \edit{54} contribute only one study.
+
+\vspace{0.25cm}
+\begin{mdframed}[linewidth=0.5pt, linecolor=black, backgroundcolor=blue!10]
+\textbf{Finding 4.} The selected \edit{115} publications are dispersed across \edit{72} venues, \edit{54} of which contribute a single study. Because no venue concentrates this literature, researchers and practitioners seeking to understand the current state of the field must survey a broad range of journals and conference proceedings.
+\end{mdframed}
+\vspace{0.25cm}
+
+% Figures 7 and 8 share one full-width float so they do not leave half-empty column pages;
+% width= sets the cas-dc caption width for each side.
+\begin{figure*}[pos=!tp,width=\columnwidth]
+\begin{minipage}[t]{\columnwidth}
+\centering
+\includegraphics[width=\linewidth]{figs/venue_analysis_stacked.pdf}
+\caption{Top publication venues by study count, stratified by venue type. IJCARS: International Journal of Computer Assisted Radiology and Surgery; IEEE TMI: IEEE Transactions on Medical Imaging; MedIA: Medical Image Analysis; JIIM: Journal of Imaging Informatics in Medicine; Sci.\ Rep.: Scientific Reports; SPIE: Proceedings of SPIE; MICCAI: International Conference on Medical Image Computing and Computer-Assisted Intervention; SWITCH@MICCAI: SWITCH workshop at MICCAI; ICBME: Iranian Conference on Biomedical Engineering; \edit{ICIAP} \edit{Workshops: workshops} of the \edit{International} \edit{Conference} \edit{on} \edit{Image} \edit{Analysis} \edit{and} Processing.}
+\label{fig:venue_stacked}
+\end{minipage}\hfill
+\begin{minipage}[t]{\columnwidth}
+\centering
+\includegraphics[width=\linewidth]{figs/venue_cumulative_curve.pdf}
+\caption{Cumulative share of the \edit{115 studies (one without a stated venue)} across \edit{72} venues, ranked by study count. Dashed lines mark 50\% (yellow) and 80\% (green).}
+\label{fig:venue_curve}
+\end{minipage}
+\end{figure*}
+
+
+\subsection{Reported Performance}
+\label{subsec:performance}
+
+Reported performance metrics are the main basis on which studies compare methods, but each value is meaningful only together with the dataset, validation design, and metric definition that produced it. This subsection examines the reported performance values and their variation across metric families. The values are grouped by metric family and their distributions are shown as a histogram on a scale of 0--100 in Figure~\ref{fig:metric_histogram}. These summaries describe reported results rather than pooled estimates of model performance.
+
+Figure~\ref{fig:metric_histogram} \edit{shows that, within each metric family,} reported scores are concentrated near the upper end of the \edit{scale,} although several studies report substantially lower values. \edit{Taking each study's primary metric, accuracy is reported by 26 studies (mean 86.6, SD 12.0), AUC by 24 (mean 85.7, SD 8.6), Dice/F1 by 14 (mean 87.9, SD 7.5)} and detection precision/recall \edit{by} \edit{10} \edit{(mean} \edit{89.9,} \edit{SD} \edit{12.5);} \edit{IoU} is reported by a single study (75.4). \edit{These families measure different quantities, so we did not average across them.} 
+
+Nonetheless, heterogeneity in datasets, evaluation protocols, and metric definitions precluded direct comparison of performance across studies, and few studies shared a common dataset. A quantitative meta-analysis of reported results was therefore not conducted. Grouping metrics into families does not make them interchangeable, and accuracy alone can obscure poor performance on minority classes. The concentration of high values may reflect selective reporting or testing on data similar to the training data. However, this distribution analysis alone cannot establish either explanation.
+
+\vspace{0.25cm}
+\begin{mdframed}[linewidth=0.5pt, linecolor=black, backgroundcolor=blue!10]
+\textbf{Finding 5.} Reported performance is generally high, but differences in datasets, protocols, and metrics prevent reliable cross-study rankings in the absence of a shared benchmark.
+\end{mdframed}
+\vspace{0.25cm}
+
+
+
+
+\begin{figure*}[pos=!tp]
+\centering
+\includegraphics[width=1\linewidth]{figs/histogram_metrics.pdf}
+\caption{Distributions of reported performance values by metric family, expressed on a 0--100 scale. Values are descriptive and do not represent pooled performance estimates.}
+\label{fig:metric_histogram}
+\end{figure*}
+
+
+% Figure~\ref{fig:metric_kde} provides a smoothed view of these distributions, making their concentration and spread easier to distinguish.
+
+% \begin{figure}[!htbp]
+% \centering
+% \includegraphics[width=1\linewidth]{figs/kde_metrics.pdf}
+% \caption{Kernel density estimates showing smoothed distributions of reported performance values by metric family. Differences in study settings and metric definitions limit direct comparisons.}
+% \label{fig:metric_kde}
+% \end{figure}
+
+
+
+
+\subsection{Reporting Quality and Clinical Readiness}
+\label{subsec:reporting_quality}
+
+We assessed reporting completeness against the 44 items of the CLAIM 2024 checklist~\cite{Tejani2024}, using its official item numbers, and separately summarized evidence supporting clinical \edit{use.} Items are summarized within the 14 subsections of the checklist, from Title and abstract (items 1--2) to Other information (items 42--44), and we compared studies published up to 2024 with those published from 2025 onward as an early check of whether the most recent literature shows any shift toward the updated checklist.
+
+\input{tables/claim_2024_comaprison}
+
+Table~\ref{tab:claim2024_temporal} shows reporting completeness for each checklist subsection with 95\% Wilson confidence intervals and the comparisons between publication periods. The title, abstract, introduction and study design subsections are reported by every study, and the discussion by nearly all. Methods reporting is weaker and less consistent: training details (items 25--27) are reported by \edit{54\%} and \edit{44\%} of studies in the two periods, and the testing-data subsection (item 21, intended sample size) by only 4\% and 5\%. The largest differences between periods are in other information (items 42--44: \edit{51\%} to \edit{71\%,} unadjusted \edit{$p=0.03$}), model performance (items 37--39: \edit{92\%} to \edit{81\%,} $p=0.14$) and results data (items 35--36: \edit{54\%} to \edit{64\%,} $p=0.33$). No difference is statistically significant after Holm correction (smallest adjusted \edit{$p=0.46$}).
+
+\edit{At the item level, reporting rates were calculated across all 115 studies, with nonapplicable items counted as not reported. Test-set size justification was the least reported item (item 21: 5 studies, 4.3\%), followed by external testing (item 33: 19, 16.5\%) and inter-rater variability (item 18: 23, 20.0\%). Other infrequently reported items were explainability (item 31: 26, 22.6\%), de-identification (item 11: 27, 23.5\%), complete training details (item 25: 29, 25.2\%), statistical uncertainty (item 29: 30, 26.1\%) and handling of missing data (item 12: 31, 27.0\%). Demographic and clinical characteristics were reported by 48 studies (item 36: 41.7\%). Low reporting rates across all studies sometimes reflected limited applicability: ensembling (item 27) was reported by 10 of the 11 studies that used ensembles. Trial registration (item 34) did not apply to any study because none was a clinical trial.}
+
+
+
+
+Although 52 studies \edit{(45.2\%)} include a statement on the availability of software, models or data (item 43), only 25 studies \edit{(21.7\%)} publicly release code and 3 \edit{(2.6\%)} publicly release their own data. We counted a release only when the article gave a working repository or archive link; statements that data are available on reasonable request, made by \edit{26} further studies, were not counted. An availability statement does not necessarily indicate public release, because many such statements restrict access. Evidence supporting clinical use was also limited: 19 studies \edit{(16.5\%)} report external validation, including one that also reports prospective deployment; 3 \edit{(2.6\%)} use a prospective design; 4 \edit{(3.5\%)} report clinical deployment or live use; and 4 \edit{(3.5\%)} discuss regulatory requirements. These categories are not mutually exclusive.
+
+\vspace{0.25cm}
+\begin{mdframed}[linewidth=0.5pt, linecolor=black, backgroundcolor=blue!10]
+\textbf{Finding 6.} Against the CLAIM 2024 checklist, title, abstract, introduction and study design are well reported, but test-set size justification, external testing, inter-rater variability, training details, statistical uncertainty, demographic characteristics, code and data sharing, and evidence of clinical use remain limited. We found no statistically significant difference in reporting in studies published prior to, and after, the CLAIM-2024 publication.
+\end{mdframed}
+\vspace{0.25cm}
+

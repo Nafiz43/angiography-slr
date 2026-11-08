@@ -1,0 +1,386 @@
+{
+ "record_id": "R1541",
+ "schema_version": "2.0",
+ "study": {
+  "title": "OccluNet: Spatio-Temporal Deep Learning for Occlusion Detection on DSA",
+  "year": 2025,
+  "venue": "SWITCH@MICCAI",
+  "publication_type": "conference_full_paper",
+  "text_is_full_paper": true,
+  "country_of_data": "Netherlands"
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "pre-EVT cerebral DSA sequences, lateral and anteroposterior, 1024x1024",
+  "territory": "neurologic",
+  "territory_detail": "intracranial/extracranial ICA, M1, M2 large vessel occlusion in acute ischemic stroke",
+  "acquisition_geometry": "biplane",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "3-76 (1-4 fps)",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 809,
+  "n_sequences": 1061,
+  "n_images_or_frames": 19144,
+  "n_centers": null,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {
+   "value": false,
+   "detail": "MR CLEAN Registry (Dutch multi-center registry)"
+  },
+  "data_released": {
+   "value": null,
+   "detail": null
+  },
+  "split_level": "not_reported",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 3,
+   "annotator_expertise": "annotated by AK, reviewed by MvdS and FtN; challenging cases discussed with an experienced neurointerventionalist",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "object_detection_localization",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Bounding-box detection/localization of vessel occlusions in DSA sequences using a YOLOX detector with transformer temporal attention and trajectory-based temporal consistency.",
+  "clinical_application": "Occlusion detection during endovascular thrombectomy for acute ischemic stroke"
+ },
+ "method": {
+  "architecture_names": [
+   "OccluNet1",
+   "OccluNet2",
+   "YOLOX-S",
+   "CSPDarknet",
+   "PAFPN",
+   "TimeSFormer divided space-time attention",
+   "YOLOv11 (baseline)"
+  ],
+  "architecture_family": "hybrid_cnn_transformer",
+  "temporal_category": "transformer_ssm",
+  "temporal_evidence": {
+   "quote": "OccluNet1 uses Temporal Attention, a Transformer-based attention across frames at each spatial location, using learned positional encoding.",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "fully_supervised",
+  "pretraining": "pretrained CSPDarknet backbone (YOLOX-S)",
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "89.02%",
+    "value_0_100": 89.02,
+    "split": "test",
+    "task": "occlusion detection (all) - OccluNet1"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "74.87%",
+    "value_0_100": 74.87,
+    "split": "test",
+    "task": "occlusion detection (all) - OccluNet1"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "84.81%",
+    "value_0_100": 84.81,
+    "split": "test",
+    "task": "occlusion detection (M1) - OccluNet1"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "77.01%",
+    "value_0_100": 77.01,
+    "split": "test",
+    "task": "occlusion detection (M1) - OccluNet1"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "52.38%",
+    "value_0_100": 52.38,
+    "split": "test",
+    "task": "occlusion detection (M2) - OccluNet1"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "44.0%",
+    "value_0_100": 44.0,
+    "split": "test",
+    "task": "occlusion detection (M2) - OccluNet1"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "93.75%",
+    "value_0_100": 93.75,
+    "split": "test",
+    "task": "occlusion detection (Intracranial ICA) - OccluNet1"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "78.94%",
+    "value_0_100": 78.94,
+    "split": "test",
+    "task": "occlusion detection (Intracranial ICA) - OccluNet1"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "100.0%",
+    "value_0_100": 100.0,
+    "split": "test",
+    "task": "occlusion detection (Extracranial ICA) - OccluNet1"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "100.0%",
+    "value_0_100": 100.0,
+    "split": "test",
+    "task": "occlusion detection (Extracranial ICA) - OccluNet1"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "45.45%",
+    "value_0_100": 45.45,
+    "split": "test",
+    "task": "occlusion detection (Unknown) - OccluNet1"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "31.25%",
+    "value_0_100": 31.25,
+    "split": "test",
+    "task": "occlusion detection (Unknown) - OccluNet1"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "87.97%",
+    "value_0_100": 87.97,
+    "split": "test",
+    "task": "occlusion detection (all) - OccluNet2"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "71.28%",
+    "value_0_100": 71.28,
+    "split": "test",
+    "task": "occlusion detection (all) - OccluNet2"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "84.61%",
+    "value_0_100": 84.61,
+    "split": "test",
+    "task": "occlusion detection (M1) - OccluNet2"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "75.86%",
+    "value_0_100": 75.86,
+    "split": "test",
+    "task": "occlusion detection (M1) - OccluNet2"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "53.65%",
+    "value_0_100": 53.65,
+    "split": "test",
+    "task": "occlusion detection (M2) - OccluNet2"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "44.0%",
+    "value_0_100": 44.0,
+    "split": "test",
+    "task": "occlusion detection (M2) - OccluNet2"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "90.0%",
+    "value_0_100": 90.0,
+    "split": "test",
+    "task": "occlusion detection (Intracranial ICA) - OccluNet2"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "71.05%",
+    "value_0_100": 71.05,
+    "split": "test",
+    "task": "occlusion detection (Intracranial ICA) - OccluNet2"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "100.0%",
+    "value_0_100": 100.0,
+    "split": "test",
+    "task": "occlusion detection (Extracranial ICA) - OccluNet2"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "75.0%",
+    "value_0_100": 75.0,
+    "split": "test",
+    "task": "occlusion detection (Extracranial ICA) - OccluNet2"
+   },
+   {
+    "metric": "precision",
+    "family": "precision_ppv",
+    "value_raw": "33.33%",
+    "value_0_100": 33.33,
+    "split": "test",
+    "task": "occlusion detection (Unknown) - OccluNet2"
+   },
+   {
+    "metric": "recall",
+    "family": "sensitivity_recall",
+    "value_raw": "18.75%",
+    "value_0_100": 18.75,
+    "split": "test",
+    "task": "occlusion detection (Unknown) - OccluNet2"
+   }
+  ],
+  "comparators": [
+   "YOLOv11 on MinIPs multi-class (MinIPM)",
+   "YOLOv11 on MinIPs single-class (MinIPS)"
+  ],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": true,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": true,
+   "detail": "Source code is available (link in abstract)"
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G2": {
+   "status": "documents",
+   "quote": "more diverse datasets with standardized annotations for distal, rare occlusion types and multi-occlusion cases will be important for improving generalization",
+   "section": "discussion"
+  },
+  "G3": {
+   "status": "both",
+   "quote": "These approaches, however, treat DSA as a collection of independent images or collapse them into a single view using MinIP, ignoring the temporal information contained in the images.",
+   "section": "introduction"
+  },
+  "G4": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G5": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G6": {
+   "status": "documents",
+   "quote": "Future work should assess the applicability of OccluNet in a clinical setting.",
+   "section": "discussion"
+  },
+  "G7": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G8": {
+   "status": "documents",
+   "quote": "Integrating anatomical priors (e.g., vessel segmentation masks) or multimodal inputs (e.g., adding CTA) may reduce false positives",
+   "section": "discussion"
+  },
+  "G9": {
+   "status": "documents",
+   "quote": "The relatively low prevalence of these distal occlusion types in DSA datasets presents a challenge.",
+   "section": "discussion"
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [
+  "Computational constraints limited OccluNet training to 20 epochs",
+  "Relatively simple YOLOX-S backbone; larger variants not evaluated",
+  "Images resized to 640x640 due to computational constraints"
+ ],
+ "future_work": [
+  "Replace backbone with larger variants such as YOLOX-L",
+  "Integrate anatomical priors such as vessel segmentation masks",
+  "Add multimodal inputs such as CTA",
+  "More diverse datasets with standardized annotations for distal, rare and multi-occlusion cases",
+  "Clinical evaluation focused on distal (M3, M4) occlusion detection in pre-EVT DSA",
+  "Detection of fragmented thrombi in post-EVT assessment"
+ ],
+ "claim2024": {
+  "items": "ynyyynyyynnnnyynnnynnyynyyyynnnynnnynynyynyy"
+ }
+}

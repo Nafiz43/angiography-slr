@@ -1,0 +1,210 @@
+{
+  "record_id": "R2400",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Unsupervised deep learning for the matching of vascular anatomy in multiple digital subtraction angiograms",
+    "year": 2024,
+    "venue": "Medical Imaging 2024: Image Perception, Observer Performance, and Technology Assessment (Proc. SPIE Vol. 12929)",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "United States"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Digital subtraction angiography image sequences; individual diagnostic frames (plus d=2 neighbouring frames) used",
+    "territory": "abdominopelvic",
+    "territory_detail": "Abdominopelvic arteries: celiac trunk / common, proper, left and right hepatic arteries; lower abdominal aorta and common, internal and external iliac arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 408,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical_plus_synthetic",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 1,
+      "annotator_expertise": "Interventional radiologist with four years of attending experience (labeled series anatomic location and diagnostic frames)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "motion_correction_registration",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Unsupervised matching of DSA frames from different sequences showing anatomically neighbouring vessels using two parallel VGG encoders trained with NCE contrastive loss on synthetic mother-daughter crops, then localizing/aligning the daughter image within the mother image via convolution of encodings into a response map with rotation search.",
+    "clinical_application": "Aiding interventional proceduralists in localizing DSA image sequences relative to prior sequences during endovascular procedures"
+  },
+  "method": {
+    "architecture_names": [
+      "VGG encoders (two parallel)",
+      "Matching network",
+      "Localization network"
+    ],
+    "architecture_family": "other",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "synthetic matches, which were made by taking a single frame of an image sequence, duplicating that frame, and cropping it at a random location",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "unsupervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Top-1 matching accuracy",
+        "family": "accuracy",
+        "value_raw": "84.0%",
+        "value_0_100": 84.0,
+        "split": "validation",
+        "task": "image matching (synthetic dataset)"
+      },
+      {
+        "metric": "Top-1 matching accuracy",
+        "family": "accuracy",
+        "value_raw": "21.1%",
+        "value_0_100": 21.1,
+        "split": "test",
+        "task": "image matching (real-world dataset)"
+      },
+      {
+        "metric": "Top-3 matching accuracy",
+        "family": "accuracy",
+        "value_raw": "49.8%",
+        "value_0_100": 49.8,
+        "split": "test",
+        "task": "image matching (real-world dataset)"
+      },
+      {
+        "metric": "Top-5 matching accuracy",
+        "family": "accuracy",
+        "value_raw": "70.2%",
+        "value_0_100": 70.2,
+        "split": "test",
+        "task": "image matching (real-world dataset)"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.98",
+        "value_0_100": 98.0,
+        "split": "validation",
+        "task": "image matching (synthetic dataset)"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.69",
+        "value_0_100": 69.0,
+        "split": "test",
+        "task": "image matching (real-world dataset)"
+      },
+      {
+        "metric": "Average IoU",
+        "family": "iou",
+        "value_raw": "0.65",
+        "value_0_100": 65.0,
+        "split": "validation",
+        "task": "localization/registration (synthetic dataset)"
+      }
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/rooskraaijveld/DSA_localization.git"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "There was a limited number of 42 patients that had series of images taken of blood vessels that were anatomically matching",
+      "section": "methods"
+    },
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {
+      "status": "documents",
+      "quote": "Future research may focus on extending this method from matching image frames to matching image sequences",
+      "section": "discussion"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {
+      "status": "addresses",
+      "quote": "Given that this method is unsupervised, it could be used to pre-train a network using a synthetic dataset, followed by training on labeled data",
+      "section": "discussion"
+    },
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {
+      "status": "documents",
+      "quote": "the implementation of explainable artificial intelligence could enhance the interpretation of image localization",
+      "section": "discussion"
+    },
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Real-world localization only qualitatively assessed because acquisition coordinates were lost during anonymization",
+    "Localization fails when prominent artifacts appear in both images",
+    "Small real-world batch size due to few unique patients"
+  ],
+  "future_work": [
+    "Extend matching from image frames to image sequences",
+    "Fine-tune for real-time application",
+    "Reduce matching sensitivity to image artifacts",
+    "Use unsupervised synthetic pre-training followed by training on labeled data",
+    "Add explainable AI (visual and textual/conceptual explanations)"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnynnyynyyynynnyyyynnnnynnynnnnnynyn"
+  }
+}

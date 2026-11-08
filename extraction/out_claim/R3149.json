@@ -1,0 +1,17 @@
+{"record_id": "R3149",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose ConTrack, a transformer-based network that uses both spatial and temporal contextual information for accurate device detection and tracking in both X-ray fluoroscopy and angiography.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "All frames undergo a preprocessing pipeline with resampling and padding to size of 512", "section": "results"},
+  "10": {"answer": "yes", "quote": "in order to reduce annotation effort, a nonadjacent subset of frames in each sequence is annotated.", "section": "results"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Overall, ConTrack outperforms all other methods, with a median tracking error of less than 1.08mm.", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

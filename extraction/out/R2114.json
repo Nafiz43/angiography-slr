@@ -1,0 +1,161 @@
+{
+  "record_id": "R2114",
+  "schema_version": "2.0",
+  "study": {
+    "title": "CAVE: Cerebral artery-vein segmentation in digital subtraction angiography",
+    "year": 2024,
+    "venue": "Computerized Medical Imaging and Graphics",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Netherlands"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Cerebral 2D X-ray DSA series (AP or lateral views), 1024x1024 frames, 0.5-4 fps, resampled to 1 fps",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral arteries and veins in acute ischemic stroke patients",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "10 to 50 frames",
+    "vendors": ["Philips", "GE", "Siemens"]
+  },
+  "dataset": {
+    "n_patients": 97,
+    "n_sequences": 97,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "MR CLEAN Registry (multi-center Dutch stroke registry, not a public download)"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "For data sharing policies, refer to Jansen et al. (2018) (MR CLEAN Registry)"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 5,
+      "annotator_expertise": "Four trained clinical students annotated, refined by another trained student; experienced radiologist available for consultation",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Vessel and artery-vein segmentation from full 2D+time cerebral DSA series of variable length, producing 2D artery and vein masks",
+    "clinical_application": "Quantitative vascular analysis in stroke/neurovascular disease, e.g. thrombectomy evaluation, emboli detection, venous roadmapping for endovascular navigation"
+  },
+  "method": {
+    "architecture_names": ["CAVE", "U-Net", "ConvGRU", "ConvLSTM", "Temporal Transformer"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "GRU and LSTM models are employed to process sequential frame data, capturing temporal dependencies.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Vessel Dice (CAVE ConvGRU)", "family": "dice", "value_raw": "0.84 ± 0.039", "value_0_100": 84.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Vessel accuracy (CAVE ConvGRU)", "family": "accuracy", "value_raw": "0.91 ± 0.027", "value_0_100": 91.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Vessel sensitivity (CAVE ConvGRU)", "family": "sensitivity_recall", "value_raw": "0.84 ± 0.062", "value_0_100": 84.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Vessel specificity (CAVE ConvGRU)", "family": "specificity", "value_raw": "0.94 ± 0.022", "value_0_100": 94.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Artery-vein accuracy (CAVE ConvGRU)", "family": "accuracy", "value_raw": "0.90 ± 0.035", "value_0_100": 90.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Artery-vein sensitivity (CAVE ConvGRU)", "family": "sensitivity_recall", "value_raw": "0.79 ± 0.078", "value_0_100": 79.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Artery-vein specificity (CAVE ConvGRU)", "family": "specificity", "value_raw": "0.95 ± 0.024", "value_0_100": 95.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Artery Dice (CAVE ConvGRU)", "family": "dice", "value_raw": "0.82 ± 0.077", "value_0_100": 82.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Vein Dice (CAVE ConvGRU)", "family": "dice", "value_raw": "0.76 ± 0.054", "value_0_100": 76.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Multi-class Dice (CAVE ConvGRU)", "family": "dice", "value_raw": "0.79 ± 0.057", "value_0_100": 79.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Vessel Dice (CAVE ConvLSTM)", "family": "dice", "value_raw": "0.83 ± 0.048", "value_0_100": 83.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Multi-class Dice (CAVE ConvLSTM)", "family": "dice", "value_raw": "0.79 ± 0.052", "value_0_100": 79.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Vessel Dice (CAVE Temporal Transformer)", "family": "dice", "value_raw": "0.84 ± 0.041", "value_0_100": 84.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Multi-class Dice (CAVE Temporal Transformer)", "family": "dice", "value_raw": "0.78 ± 0.048", "value_0_100": 78.0, "split": "test", "task": "artery-vein segmentation"},
+      {"metric": "Multi-class Dice at 0.5 fps test input", "family": "dice", "value_raw": "0.76 ± 0.060", "value_0_100": 76.0, "split": "other", "task": "artery-vein segmentation (temporally down-sampled)"},
+      {"metric": "Multi-class Dice at 0.25 fps test input", "family": "dice", "value_raw": "0.64 ± 0.12", "value_0_100": 64.0, "split": "other", "task": "artery-vein segmentation (temporally down-sampled)"},
+      {"metric": "Inference time per DSA series", "family": "time", "value_raw": "0.57 ± 0.2 s", "value_0_100": null, "split": "test", "task": "artery-vein segmentation"}
+    ],
+    "comparators": ["Frangi + k-means", "U-Net (MinIP input)", "U-Net + k-means"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/RuishengSu/CAVE_DSA"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {
+      "status": "documents",
+      "quote": "there is significant value in conducting thorough validations to assess the clinical generalizability of CAVE",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "existing methods mainly rely on spatial vasculature features learned from static 2D DSA frames without considering the complete series",
+      "section": "introduction"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {
+      "status": "documents",
+      "quote": "the quality of vein annotations may also be comparatively lower due to increased annotation difficulties",
+      "section": "discussion"
+    },
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Hold-out evaluation rather than K-fold cross-validation",
+    "Lower vein segmentation accuracy due to faint, ambiguous venous boundaries",
+    "Scarcity of venous phase frames in incomplete DSA series",
+    "U-Net baseline not among the most recent state-of-the-art architectures"
+  ],
+  "future_work": [
+    "Investigate influence of patient motion on spatio-temporal artery-vein segmentation",
+    "Thorough validation of clinical generalizability of CAVE"
+  ],
+  "claim2024": {
+    "items": "ynyyynyynnnnyyynyyynyynyyyyynynynnyynnnyynyy"
+  }
+}

@@ -1,0 +1,17 @@
+{"record_id": "R1725",
+ "items": {
+  "6": {"answer": "yes", "quote": "The catheter guide segmentation model and a convolutional neural network were used to detect the starting frame of AP with a complete contrast index, while the vessel segmentation model detected the ending frame of AP.", "section": "methods"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "no", "quote": null, "section": null},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

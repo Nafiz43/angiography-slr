@@ -1,0 +1,17 @@
+{"record_id": "R0529",
+ "items": {
+  "6": {"answer": "yes", "quote": "The purpose of this study is to propose _TCA-Net_ , a deep learning model that improves segmentation consistency by leveraging local and global contextual information in angiography videos.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "Before training, all images were resized to 512 × 512 pixels.", "section": "methods"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "in order to prevent the effect of high similarity between different frames in a video, 195 videos are randomly divided into training, validation datasets", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "TCA-NetwasimplementedusingPyTorch 1.12", "section": "methods"},
+  "26": {"answer": "yes", "quote": "which were determined through empirical tuning on the validation set", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 6 shows the test results for two independent validation datasets from the two centers, with an average F1-score of 85.53%, IOU of 75.42%, and SeqDice of 84.46%.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

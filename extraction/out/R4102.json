@@ -1,0 +1,145 @@
+{
+  "record_id": "R4102",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automatic stenosis recognition from coronary angiography using convolutional neural networks",
+    "year": 2021,
+    "venue": "Computer Methods and Programs in Biomedicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "South Korea"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray coronary angiography (CAG) cine clips, DICOM, 512x512 grayscale",
+    "territory": "cardiac",
+    "territory_detail": "Right coronary artery only",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": "5 consecutive key frames extracted per clip; average clip duration 3.42 s",
+    "vendors": ["Philips (Allura Xper FD20)", "Siemens (AXIOM-Artis)", "Toshiba"]
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 452,
+    "n_images_or_frames": 2260,
+    "n_centers": 4,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "Two imaging specialists (<10 years' experience) and one cardiologist (>10 years' experience); binary clip-level labels (<50% vs >=50% stenosis) after QCA, majority vote",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": ["temporal_sequence_modeling"],
+    "task_description": "Automatic key frame detection from RCA angiography clips (top-hat enhancement, Frangi filter, Otsu thresholding), followed by frame-wise and clip-wise binary classification of significant stenosis (>=50%) with Inception-v3 plus a parallel channel/spatial attention module, and weakly supervised Grad-CAM localization of stenosis.",
+    "clinical_application": "Screening and assistant tool for interpretation of coronary angiography for coronary artery stenosis"
+  },
+  "method": {
+    "architecture_names": ["GoogleNet Inception-v3", "CBAM-style multi-phase self-attention module", "Grad-CAM", "multi-scale top-hat transform + Frangi filter key frame detection"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "Then each image was fed into the CNN models, to classify the stenosis.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "weakly_supervised",
+    "pretraining": "ImageNet pre-trained Inception-v3",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Grad-CAM heatmaps on last convolutional layer",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Three external hospitals (A, B, C), 76 RCA clips (29 normal, 47 stenotic), 380 frames, acquired on Philips, Toshiba and Siemens scanners; single best model and 5-model ensemble evaluated",
+    "metrics": [
+      {"metric": "Key frame distance to clinician-selected frame (frames per clip)", "family": "error_distance", "value_raw": "1.70 ± 0.12", "value_0_100": null, "split": "other", "task": "key frame detection"},
+      {"metric": "Frame-wise AUC", "family": "auc", "value_raw": "0.971 (± 0.009)", "value_0_100": 97.1, "split": "cross_validation", "task": "stenosis classification"},
+      {"metric": "Frame-wise accuracy", "family": "accuracy", "value_raw": "0.934 (± 0.012)", "value_0_100": 93.4, "split": "cross_validation", "task": "stenosis classification"},
+      {"metric": "Clip-wise accuracy", "family": "accuracy", "value_raw": "0.965 (± 0.015)", "value_0_100": 96.5, "split": "cross_validation", "task": "stenosis classification"},
+      {"metric": "Frame-wise AUC (single model, external average)", "family": "auc", "value_raw": "0.925", "value_0_100": 92.5, "split": "external", "task": "stenosis classification"},
+      {"metric": "Frame-wise accuracy (single model, external average)", "family": "accuracy", "value_raw": "0.887", "value_0_100": 88.7, "split": "external", "task": "stenosis classification"},
+      {"metric": "Clip-wise accuracy (single model, external average)", "family": "accuracy", "value_raw": "0.916", "value_0_100": 91.6, "split": "external", "task": "stenosis classification"},
+      {"metric": "Frame-wise AUC (ensemble, external average)", "family": "auc", "value_raw": "0.956", "value_0_100": 95.6, "split": "external", "task": "stenosis classification"},
+      {"metric": "Frame-wise accuracy (ensemble, external average)", "family": "accuracy", "value_raw": "0.917", "value_0_100": 91.7, "split": "external", "task": "stenosis classification"},
+      {"metric": "Clip-wise accuracy (ensemble, external average)", "family": "accuracy", "value_raw": "0.943", "value_0_100": 94.3, "split": "external", "task": "stenosis classification"},
+      {"metric": "Frame-wise AUC (ensemble)", "family": "auc", "value_raw": "0.980", "value_0_100": 98.0, "split": "external", "task": "stenosis classification (External Hospital A)"},
+      {"metric": "Frame-wise accuracy (ensemble)", "family": "accuracy", "value_raw": "0.913", "value_0_100": 91.3, "split": "external", "task": "stenosis classification (External Hospital A)"},
+      {"metric": "Clip-wise accuracy (ensemble)", "family": "accuracy", "value_raw": "0.954", "value_0_100": 95.4, "split": "external", "task": "stenosis classification (External Hospital A)"},
+      {"metric": "Frame-wise AUC (ensemble)", "family": "auc", "value_raw": "0.926", "value_0_100": 92.6, "split": "external", "task": "stenosis classification (External Hospital B)"},
+      {"metric": "Frame-wise accuracy (ensemble)", "family": "accuracy", "value_raw": "0.885", "value_0_100": 88.5, "split": "external", "task": "stenosis classification (External Hospital B)"},
+      {"metric": "Clip-wise accuracy (ensemble)", "family": "accuracy", "value_raw": "0.923", "value_0_100": 92.3, "split": "external", "task": "stenosis classification (External Hospital B)"},
+      {"metric": "Frame-wise AUC (ensemble)", "family": "auc", "value_raw": "0.962", "value_0_100": 96.2, "split": "external", "task": "stenosis classification (External Hospital C)"},
+      {"metric": "Frame-wise accuracy (ensemble)", "family": "accuracy", "value_raw": "0.952", "value_0_100": 95.2, "split": "external", "task": "stenosis classification (External Hospital C)"},
+      {"metric": "Clip-wise accuracy (ensemble)", "family": "accuracy", "value_raw": "0.952", "value_0_100": 95.2, "split": "external", "task": "stenosis classification (External Hospital C)"},
+      {"metric": "Key frame detection time per clip", "family": "time", "value_raw": "0.12 s", "value_0_100": null, "split": "other", "task": "key frame detection"},
+      {"metric": "Classification time per frame (GTX 1080 Ti)", "family": "time", "value_raw": "0.04 s", "value_0_100": null, "split": "other", "task": "stenosis classification"}
+    ],
+    "comparators": ["Frangi filter-based key frame detection", "Manual key frame selection by clinicians", "Inception-v3 without attention", "Training without data augmentation", "Alternative attention module configurations", "ResNet50 (results not shown)", "VGG19 (results not shown)"],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "Thus, it was difficult to compare our approach to existing research, since our dataset only includes image level weak annotation.", "section": "discussion"},
+    "G2": {"status": "addresses", "quote": "We also validated the performance of our novel algorithm with external datasets.", "section": "introduction"},
+    "G3": {"status": "both", "quote": "Hence, the key frame detection is a limitation of our study, and there is still room for improvement with further key frame detection studies.", "section": "discussion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "both", "quote": "The weakly-supervised learning method reduces the workload of annotation, and enables the processing of large data.", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "addresses", "quote": "we also visualized the normal cases, to confirm that our model has a good understanding of coronary arteries", "section": "results"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Only right coronary artery angiograms included",
+    "Inference must wait until clip acquisition is complete (not real-time during the shot)",
+    "Attention module gave no substantial overall classification improvement",
+    "Weak localization of diffuse and focal stenosis without attention; text artifacts sometimes highlighted"
+  ],
+  "future_work": [
+    "Improved key frame detection methods",
+    "Real-time frame detection during the shot",
+    "Transfer learning to other coronary arteries/angiogram images",
+    "Advanced network architectures",
+    "Semi-supervised approach combining lesion-wise and image-wise annotations",
+    "Larger datasets for improved stenosis recognition"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyynyyyyynyyynnyyyyyynnyyyynyynynyynny"
+  }
+}

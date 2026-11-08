@@ -1,0 +1,206 @@
+{
+ "record_id": "R2430",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Artificial Intelligence for Extracting Non-COronary Data from Angiography: The AI-ENCODE Study",
+  "year": 2024,
+  "venue": "Journal of the Society for Cardiovascular Angiography & Interventions",
+  "publication_type": "conference_abstract",
+  "text_is_full_paper": false,
+  "country_of_data": "USA"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "conventional coronary angiograms (angiographic videos)",
+  "territory": "cardiac",
+  "territory_detail": "coronary angiography used to infer left/right ventricular function and cardiac index",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": null,
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": null,
+  "n_sequences": null,
+  "n_images_or_frames": null,
+  "n_centers": 1,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {
+   "value": false,
+   "detail": null
+  },
+  "data_released": {
+   "value": null,
+   "detail": null
+  },
+  "split_level": "not_reported",
+  "annotation": {
+   "type": "weak_or_derived",
+   "n_annotators": null,
+   "annotator_expertise": null,
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "disease_classification_grading",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "AI models predict LVEF, LV diastolic dysfunction, RV dysfunction and cardiac index from 1-2 coronary angiographic videos, with echocardiography (within 30 days) or simultaneous right heart catheterization as reference.",
+  "clinical_application": "Extracting non-coronary functional and physiological cardiac data from routine coronary angiograms in the cath lab"
+ },
+ "method": {
+  "architecture_names": [],
+  "architecture_family": "other",
+  "temporal_category": "not_determinable",
+  "temporal_evidence": null,
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [
+   "electrocardiographic data",
+   "invasive hemodynamic data"
+  ],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "not_reported",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "AUC",
+    "family": "auc",
+    "value_raw": "0.87",
+    "value_0_100": 87.0,
+    "split": "other",
+    "task": "LVEF prediction"
+   },
+   {
+    "metric": "AUC",
+    "family": "auc",
+    "value_raw": "0.87",
+    "value_0_100": 87.0,
+    "split": "other",
+    "task": "LV diastolic dysfunction prediction"
+   },
+   {
+    "metric": "AUC",
+    "family": "auc",
+    "value_raw": "0.78",
+    "value_0_100": 78.0,
+    "split": "other",
+    "task": "RV function prediction"
+   },
+   {
+    "metric": "AUC",
+    "family": "auc",
+    "value_raw": "0.74",
+    "value_0_100": 74.0,
+    "split": "other",
+    "task": "cardiac index prediction"
+   }
+  ],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": null,
+   "detail": null
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G2": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G3": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G4": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G5": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G6": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G7": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G8": {
+   "status": "addresses",
+   "quote": "adding routinely collected electrocardiographic and invasive hemodynamic data further enhanced the AI models' performance",
+   "section": "results"
+  },
+  "G9": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [],
+ "future_work": [
+  "Real-time access to AI-ENCODE data in the cath lab to support clinical decision-making"
+ ],
+ "claim2024": {
+  "items": "yyynynyynnnnnynnnnnnnnnnnnnnnnnnnnnnnnnnynnn"
+ }
+}

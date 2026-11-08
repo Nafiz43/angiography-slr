@@ -1,0 +1,17 @@
+{"record_id": "R2411",
+ "items": {
+  "6": {"answer": "yes", "quote": "This paper focuses on developing deep learning models for the cardiac phase matching and catheter tip tracking functions.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "after normalizing pixel spacing to isotropic 0.2 mm", "section": "methods"},
+  "10": {"answer": "yes", "quote": "It takes a template obtained by cropping the reference image around the tip and a search image", "section": "methods"},
+  "12": {"answer": "yes", "quote": "zero matrices were used as placeholders for the missing catheter masks", "section": "methods"},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "https://docs.monai.io/en/stable/networks.html, v1.2.0", "section": "other"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Using this criterion, we calculated the precision (P) and recall (R) for tracking. We also calculated the distance mean and standard deviation for true positives (TPs) and all cases.", "section": "methods"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

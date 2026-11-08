@@ -1,0 +1,17 @@
+{"record_id": "R4102",
+ "items": {
+  "6": {"answer": "yes", "quote": "We aimed to develop a fully automated stenosis recognition model based on a weakly-supervised deep learning approach. The proposed algorithm automatically finds the key frames, classifies each frame based on the presence of stenosis", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "Mean image subtraction was also used to normalize the entire dataset.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "The five consecutive frames near the key frame in each original clip were extracted to be compared each other", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "three experts (two imaging specialists with less than 10 years’ experience and one cardiologist with more than 10 years’ experience) were individually asked to label each case.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "For single model evaluation, the best performing model among five single models was selected.", "section": "methods"},
+  "27": {"answer": "yes", "quote": "The ensemble model was performed by a majority voting of the decisions from the five different models for each test sample.", "section": "results"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The average frame-wise AUC for all three datasets was (0.925 and 0.956) for the single models and the ensemble model, respectively.", "section": "results"},
+  "38": {"answer": "yes", "quote": "Frame-wise AUC ( ± SD)", "section": "results"}
+ }}

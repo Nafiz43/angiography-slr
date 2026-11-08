@@ -1,0 +1,267 @@
+{
+  "record_id": "R2415",
+  "schema_version": "2.0",
+  "study": {
+    "title": "A Patient-Specific Registration of Coronary Angiogram-Fluoroscopy by Similarity-Based Transfer Learning",
+    "year": 2024,
+    "venue": "IEEE Access",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Republic of Korea"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Diagnostic coronary X-ray angiography cine loop registered to live X-ray fluoroscopy during PCI (dynamic coronary roadmapping)",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries during percutaneous coronary intervention",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "15 (standardized; sequences of approximately 15 to 30 frames covering at least one cardiac cycle)",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 85,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "frame",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "experts (virtual guidewires along manually labeled vessel centerlines)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "motion_correction_registration",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Patient-specific deep-learning registration of a diagnostic coronary angiogram sequence to live fluoroscopy (guidewire overlay) without ECG gating, using a Res-U-Net image generator and fast transfer learning from the most similar pre-trained model selected via PCA and cosine similarity within the same C-arm configuration class.",
+    "clinical_application": "Dynamic coronary roadmapping for guidewire navigation during percutaneous coronary intervention, including patients with arrhythmia"
+  },
+  "method": {
+    "architecture_names": [
+      "Residual U-Net (Res-U-Net)",
+      "U-Net",
+      "PCA + cosine similarity",
+      "ICP (Iterative Closest Point)"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "optimized to generate **predicted** registered images by taking m-step **virtual** guidewire images stacked with an angiographic sequence from the new patient’s angiogram",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Transfer learning from patient-specific Res-U-Net models pre-trained offline on previous patients; the most similar model is selected by PCA/cosine similarity within the same C-arm configuration class",
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Registration error (point-to-point, mean ± SD)",
+        "family": "error_distance",
+        "value_raw": "1.04±0.19 mm",
+        "value_0_100": null,
+        "split": "test",
+        "task": "angiogram-fluoroscopy registration"
+      },
+      {
+        "metric": "t-PSNR of registered images",
+        "family": "psnr",
+        "value_raw": "over 30 dB",
+        "value_0_100": null,
+        "split": "test",
+        "task": "angiogram-fluoroscopy registration"
+      },
+      {
+        "metric": "Inference time",
+        "family": "time",
+        "value_raw": "within 45 ms",
+        "value_0_100": null,
+        "split": "test",
+        "task": "angiogram-fluoroscopy registration"
+      },
+      {
+        "metric": "Transfer learning time with most similar pre-trained model to reach t-PSNR 30 dB",
+        "family": "time",
+        "value_raw": "284.6 ± 63.3 s",
+        "value_0_100": null,
+        "split": "other",
+        "task": "similarity-based transfer learning"
+      },
+      {
+        "metric": "Transfer learning epochs with most similar pre-trained model",
+        "family": "other",
+        "value_raw": "4.91 ± 1.05 epochs",
+        "value_0_100": null,
+        "split": "other",
+        "task": "similarity-based transfer learning"
+      },
+      {
+        "metric": "Res-U-Net scratch training time to reach v-PSNR > 33 dB",
+        "family": "time",
+        "value_raw": "approximately 31 min (20.8 s x 89 epochs)",
+        "value_0_100": null,
+        "split": "validation",
+        "task": "scratch training of registration model"
+      },
+      {
+        "metric": "Training time reduction vs U-Net (scratch)",
+        "family": "other",
+        "value_raw": "45.6 %",
+        "value_0_100": null,
+        "split": "validation",
+        "task": "scratch training of registration model"
+      },
+      {
+        "metric": "Transfer learning time reduction vs all other pre-trained models",
+        "family": "other",
+        "value_raw": "32.4 %",
+        "value_0_100": null,
+        "split": "other",
+        "task": "similarity-based transfer learning"
+      },
+      {
+        "metric": "Similarity computation time (PCA + cosine similarity)",
+        "family": "time",
+        "value_raw": "0.9 ms",
+        "value_0_100": null,
+        "split": "other",
+        "task": "pre-trained model selection"
+      }
+    ],
+    "comparators": [
+      "U-Net (Jeong et al. [15])",
+      "Learning from scratch",
+      "Transfer learning with all other pre-trained models",
+      "Generalized transfer learning (single model pre-trained on 51 datasets)",
+      "NCC similarity",
+      "SSIM similarity",
+      "Ma et al. [4]"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "The number of datasets for certain C-arm angles was small.",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "more diverse and comprehensive clinical dataset is necessary in future to validate the proposed approach",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "The use of two-dimensional data may not capture the full complexity that three-dimensional data offer for clinical scenarios.",
+      "section": "conclusion"
+    },
+    "G5": {
+      "status": "both",
+      "quote": "they generally require many patient datasets, which is a major problem. Therefore, a data-efficient approach is required for both practical and economic reasons.",
+      "section": "introduction"
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "Future clinical trials are essential to comprehensively validate the effectiveness and safety of the model in real-world conditions.",
+      "section": "conclusion"
+    },
+    "G7": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "documents",
+      "quote": "even in rare conditions, such as anomalies occurring in less than 1 % of cases",
+      "section": "discussion"
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Suboptimal angiogram quality (blur, patient movement) hinders learning",
+    "Severely blocked vessels give partial angiographic views, hampering alignment",
+    "Guidewire tip bending/deformation not specifically addressed",
+    "Most similar pre-trained model does not always give the fastest transfer learning"
+  ],
+  "future_work": [
+    "Collect more diverse and comprehensive clinical datasets including rare anatomical anomalies",
+    "Clinical trials to validate effectiveness and safety in real-world conditions",
+    "More datasets per C-arm angle to improve pre-trained model selection",
+    "Refine model for robustness and reliability in clinical settings"
+  ],
+  "claim2024": {
+    "items": "ynyyynynyynynynnynnayyyyyyynnnnynyyyynnyyynn"
+  }
+}

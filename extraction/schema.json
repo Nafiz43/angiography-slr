@@ -1,0 +1,1238 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "AngioVision SLR stage-2 extraction v2",
+ "type": "object",
+ "additionalProperties": false,
+ "properties": {
+  "record_id": {
+   "type": "string",
+   "pattern": "^R[0-9]{4}$"
+  },
+  "schema_version": {
+   "const": "2.0"
+  },
+  "study": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "title": {
+     "type": "string"
+    },
+    "year": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "venue": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "publication_type": {
+     "enum": [
+      "journal",
+      "conference_full_paper",
+      "conference_abstract",
+      "preprint",
+      "book_chapter",
+      "other"
+     ]
+    },
+    "text_is_full_paper": {
+     "type": "boolean"
+    },
+    "country_of_data": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "required": [
+    "title",
+    "year",
+    "venue",
+    "publication_type",
+    "text_is_full_paper",
+    "country_of_data"
+   ]
+  },
+  "imaging": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "modality": {
+     "enum": [
+      "DSA",
+      "xray_fluoroscopy",
+      "DSA_and_fluoroscopy",
+      "other"
+     ]
+    },
+    "modality_detail": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "territory": {
+     "enum": [
+      "neurologic",
+      "cardiac",
+      "aortic_thoracic",
+      "abdominopelvic",
+      "peripheral",
+      "multi",
+      "other",
+      "not_reported"
+     ]
+    },
+    "territory_detail": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "acquisition_geometry": {
+     "enum": [
+      "monoplane",
+      "biplane",
+      "rotational_3D",
+      "mixed",
+      "not_reported"
+     ]
+    },
+    "frame_rate_fps": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "frames_per_sequence": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "vendors": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   },
+   "required": [
+    "modality",
+    "modality_detail",
+    "territory",
+    "territory_detail",
+    "acquisition_geometry",
+    "frame_rate_fps",
+    "frames_per_sequence",
+    "vendors"
+   ]
+  },
+  "dataset": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "n_patients": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "n_sequences": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "n_images_or_frames": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "n_centers": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "n_vendors": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "data_origin": {
+     "enum": [
+      "clinical",
+      "phantom",
+      "synthetic",
+      "clinical_plus_synthetic",
+      "clinical_plus_phantom",
+      "mixed",
+      "not_reported"
+     ]
+    },
+    "public_dataset_used": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "value": {
+       "type": [
+        "boolean",
+        "null"
+       ]
+      },
+      "detail": {
+       "type": [
+        "string",
+        "null"
+       ]
+      }
+     },
+     "required": [
+      "value",
+      "detail"
+     ]
+    },
+    "data_released": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "value": {
+       "type": [
+        "boolean",
+        "null"
+       ]
+      },
+      "detail": {
+       "type": [
+        "string",
+        "null"
+       ]
+      }
+     },
+     "required": [
+      "value",
+      "detail"
+     ]
+    },
+    "split_level": {
+     "enum": [
+      "patient",
+      "sequence",
+      "frame",
+      "site",
+      "not_reported",
+      "na"
+     ]
+    },
+    "annotation": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "type": {
+       "enum": [
+        "manual",
+        "semi_automatic",
+        "automatic",
+        "weak_or_derived",
+        "none",
+        "not_reported"
+       ]
+      },
+      "n_annotators": {
+       "type": [
+        "integer",
+        "null"
+       ],
+       "minimum": 0
+      },
+      "annotator_expertise": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "inter_rater_reported": {
+       "type": "boolean"
+      },
+      "inter_rater_value": {
+       "type": [
+        "string",
+        "null"
+       ]
+      }
+     },
+     "required": [
+      "type",
+      "n_annotators",
+      "annotator_expertise",
+      "inter_rater_reported",
+      "inter_rater_value"
+     ]
+    }
+   },
+   "required": [
+    "n_patients",
+    "n_sequences",
+    "n_images_or_frames",
+    "n_centers",
+    "n_vendors",
+    "data_origin",
+    "public_dataset_used",
+    "data_released",
+    "split_level",
+    "annotation"
+   ]
+  },
+  "task": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "primary_task": {
+     "enum": [
+      "vessel_segmentation",
+      "object_detection_localization",
+      "catheter_device_tracking",
+      "disease_classification_grading",
+      "background_subtraction",
+      "image_enhancement_denoising",
+      "temporal_sequence_modeling",
+      "contrast_flow_analysis",
+      "motion_correction_registration",
+      "outcome_prediction",
+      "other"
+     ]
+    },
+    "other_label": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "secondary_tasks": {
+     "type": "array",
+     "items": {
+      "enum": [
+       "vessel_segmentation",
+       "object_detection_localization",
+       "catheter_device_tracking",
+       "disease_classification_grading",
+       "background_subtraction",
+       "image_enhancement_denoising",
+       "temporal_sequence_modeling",
+       "contrast_flow_analysis",
+       "motion_correction_registration",
+       "outcome_prediction"
+      ]
+     },
+     "uniqueItems": true
+    },
+    "task_description": {
+     "type": "string"
+    },
+    "clinical_application": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "required": [
+    "primary_task",
+    "other_label",
+    "secondary_tasks",
+    "task_description",
+    "clinical_application"
+   ]
+  },
+  "method": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "architecture_names": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "architecture_family": {
+     "enum": [
+      "unet_encoder_decoder",
+      "cnn_classifier",
+      "detector",
+      "transformer",
+      "hybrid_cnn_transformer",
+      "recurrent",
+      "generative_gan_diffusion",
+      "foundation_or_vlm",
+      "classical_ml",
+      "non_learning",
+      "other"
+     ]
+    },
+    "temporal_category": {
+     "enum": [
+      "none",
+      "frame_aggregation",
+      "optical_flow_registration",
+      "recurrent",
+      "cnn3d_video",
+      "transformer_ssm",
+      "hemodynamic_physics",
+      "not_determinable"
+     ]
+    },
+    "temporal_evidence": {
+     "oneOf": [
+      {
+       "type": "object",
+       "additionalProperties": false,
+       "properties": {
+        "quote": {
+         "type": "string",
+         "minLength": 3
+        },
+        "section": {
+         "enum": [
+          "abstract",
+          "introduction",
+          "methods",
+          "results",
+          "discussion",
+          "conclusion",
+          "other"
+         ]
+        }
+       },
+       "required": [
+        "quote",
+        "section"
+       ]
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "input_dimensionality": {
+     "enum": [
+      "2D_single_frame",
+      "2D_multi_frame",
+      "2D_plus_time_video",
+      "multi_view",
+      "3D_volume",
+      "mixed",
+      "not_reported"
+     ]
+    },
+    "supervision": {
+     "enum": [
+      "fully_supervised",
+      "semi_supervised",
+      "self_supervised",
+      "weakly_supervised",
+      "unsupervised",
+      "mixed",
+      "not_applicable"
+     ]
+    },
+    "pretraining": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "uses_synthetic_training_data": {
+     "type": "boolean"
+    },
+    "physics_informed": {
+     "type": "boolean"
+    },
+    "multimodal_inputs": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "class_imbalance_handling": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "uncertainty_quantification": {
+     "type": "boolean"
+    },
+    "explainability_method": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "federated_or_privacy_preserving": {
+     "type": "boolean"
+    },
+    "uses_llm_or_vlm": {
+     "type": "boolean"
+    },
+    "real_time_or_inference_time_reported": {
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "architecture_names",
+    "architecture_family",
+    "temporal_category",
+    "temporal_evidence",
+    "input_dimensionality",
+    "supervision",
+    "pretraining",
+    "uses_synthetic_training_data",
+    "physics_informed",
+    "multimodal_inputs",
+    "class_imbalance_handling",
+    "uncertainty_quantification",
+    "explainability_method",
+    "federated_or_privacy_preserving",
+    "uses_llm_or_vlm",
+    "real_time_or_inference_time_reported"
+   ]
+  },
+  "evaluation": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "validation_design": {
+     "enum": [
+      "internal_split",
+      "cross_validation",
+      "external_validation",
+      "prospective",
+      "none",
+      "not_reported"
+     ]
+    },
+    "external_validation_detail": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "metrics": {
+     "type": "array",
+     "maxItems": 25,
+     "items": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+       "metric": {
+        "type": "string"
+       },
+       "family": {
+        "enum": [
+         "dice",
+         "iou",
+         "accuracy",
+         "auc",
+         "sensitivity_recall",
+         "specificity",
+         "precision_ppv",
+         "f1",
+         "kappa",
+         "psnr",
+         "ssim",
+         "error_distance",
+         "correlation",
+         "time",
+         "other"
+        ]
+       },
+       "value_raw": {
+        "type": "string"
+       },
+       "value_0_100": {
+        "type": [
+         "number",
+         "null"
+        ]
+       },
+       "split": {
+        "enum": [
+         "test",
+         "validation",
+         "cross_validation",
+         "external",
+         "other"
+        ]
+       },
+       "task": {
+        "type": [
+         "string",
+         "null"
+        ]
+       }
+      },
+      "required": [
+       "metric",
+       "family",
+       "value_raw",
+       "value_0_100",
+       "split",
+       "task"
+      ]
+     }
+    },
+    "comparators": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "maxItems": 15
+    },
+    "compared_with_humans": {
+     "type": "boolean"
+    },
+    "ablation": {
+     "type": "boolean"
+    },
+    "statistical_testing": {
+     "type": "boolean"
+    },
+    "confidence_intervals": {
+     "type": "boolean"
+    },
+    "subgroup_or_per_class_reporting": {
+     "type": "boolean"
+    },
+    "failure_analysis": {
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "validation_design",
+    "external_validation_detail",
+    "metrics",
+    "comparators",
+    "compared_with_humans",
+    "ablation",
+    "statistical_testing",
+    "confidence_intervals",
+    "subgroup_or_per_class_reporting",
+    "failure_analysis"
+   ]
+  },
+  "clinical": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "study_design": {
+     "enum": [
+      "retrospective",
+      "prospective",
+      "rct",
+      "mixed",
+      "not_reported"
+     ]
+    },
+    "reader_study": {
+     "type": "boolean"
+    },
+    "patient_outcome_measured": {
+     "type": "boolean"
+    },
+    "clinical_deployment_or_live_use": {
+     "type": "boolean"
+    },
+    "regulatory_mentioned": {
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "study_design",
+    "reader_study",
+    "patient_outcome_measured",
+    "clinical_deployment_or_live_use",
+    "regulatory_mentioned"
+   ]
+  },
+  "reproducibility": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "code_available": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "value": {
+       "type": [
+        "boolean",
+        "null"
+       ]
+      },
+      "detail": {
+       "type": [
+        "string",
+        "null"
+       ]
+      }
+     },
+     "required": [
+      "value",
+      "detail"
+     ]
+    },
+    "model_weights_available": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "value": {
+       "type": [
+        "boolean",
+        "null"
+       ]
+      },
+      "detail": {
+       "type": [
+        "string",
+        "null"
+       ]
+      }
+     },
+     "required": [
+      "value",
+      "detail"
+     ]
+    },
+    "hyperparameters_reported": {
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "code_available",
+    "model_weights_available",
+    "hyperparameters_reported"
+   ]
+  },
+  "gaps": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "G1": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G2": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G3": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G4": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G5": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G6": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G7": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G8": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G9": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G10": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G11": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    },
+    "G12": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "status": {
+       "enum": [
+        "documents",
+        "addresses",
+        "both",
+        "none"
+       ]
+      },
+      "quote": {
+       "type": [
+        "string",
+        "null"
+       ]
+      },
+      "section": {
+       "enum": [
+        "abstract",
+        "introduction",
+        "methods",
+        "results",
+        "discussion",
+        "conclusion",
+        "other",
+        null
+       ]
+      }
+     },
+     "required": [
+      "status",
+      "quote",
+      "section"
+     ]
+    }
+   },
+   "required": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G10",
+    "G11",
+    "G12"
+   ]
+  },
+  "other_limitations": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "maxItems": 5
+  },
+  "future_work": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "maxItems": 6
+  },
+  "claim2024": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "items": {
+     "type": "string",
+     "pattern": "^[yna]{44}$"
+    }
+   },
+   "required": [
+    "items"
+   ]
+  }
+ },
+ "required": [
+  "record_id",
+  "schema_version",
+  "study",
+  "imaging",
+  "dataset",
+  "task",
+  "method",
+  "evaluation",
+  "clinical",
+  "reproducibility",
+  "gaps",
+  "other_limitations",
+  "future_work",
+  "claim2024"
+ ]
+}

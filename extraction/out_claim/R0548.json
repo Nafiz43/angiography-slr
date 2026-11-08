@@ -1,0 +1,17 @@
+{"record_id": "R0548",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose a multi-task deep learning framework with a ResNet50 backbone, leveraging auxiliary learning to improve anatomical classification across a broader vascular domain.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "During preprocessing, all images were down sampled to 224 × 224 pixels, and pixel intensities were normalized to a range of 0 to 1 and saved in jpeg format with 8-bit depth.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Only manually identified key frames—defined as images showing a clearly visible parent vessel and its first bifurcation—were selected for inclusion.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The anatomic location of the angiographic catheter is used as ground truth labels obtained though manual annotations by expert radiologists.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "with nonoverlapping patients in each partition to prevent data leakage", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The code was written in Python 3.9.21, using PyTorch 2.5.1 and the MONAI 1.2.0 deep learning framework.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "The best-performing checkpoint was selected based on validation accuracy.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Overall, the proposed model when all the classes combined resulted in a precision of 0.89, recall of 0.87, and F1-score of 0.87.", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

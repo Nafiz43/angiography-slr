@@ -1,0 +1,154 @@
+{
+  "record_id": "R0529",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Temporal consistency-aware network for renal artery segmentation in X-ray angiography",
+    "year": 2026,
+    "venue": "International Journal of Computer Assisted Radiology and Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China; Italy; Ireland"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Renal artery X-ray angiography (XA) videos",
+    "territory": "abdominopelvic",
+    "territory_detail": "Renal arteries (renal sympathetic denervation procedures); human and pig",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "20-130",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 195,
+    "n_images_or_frames": 2429,
+    "n_centers": 3,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "Experienced analysts in the core laboratory using AngioPlus Core software",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Temporally consistent renal artery segmentation in X-ray angiography videos using local temporal-window feature fusion, global video-level query refinement and a temporal perception consistency loss.",
+    "clinical_application": "Quantifying renal artery blood flow to evaluate renal sympathetic denervation (RDN) procedures"
+  },
+  "method": {
+    "architecture_names": [
+      "TCA-Net",
+      "LTVE (local temporal-window vessel enhancement)",
+      "GVR (global vessel refinement)",
+      "masked-attention transformer",
+      "TPC loss"
+    ],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "transformer_ssm",
+    "temporal_evidence": {
+      "quote": "each employing decoupled self-attention, including video-level self-attention (VSA) and object-level self-attention (OSA)",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Independent set of 44 patients from University of Verona (Italy) and University of Galway (Ireland)",
+    "metrics": [
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "88.89%", "value_0_100": 88.89, "split": "validation", "task": "renal artery segmentation"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "85.98%", "value_0_100": 85.98, "split": "validation", "task": "renal artery segmentation"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "86.78%", "value_0_100": 86.78, "split": "validation", "task": "renal artery segmentation"},
+      {"metric": "IOU", "family": "iou", "value_raw": "77.58%", "value_0_100": 77.58, "split": "validation", "task": "renal artery segmentation"},
+      {"metric": "AUC", "family": "auc", "value_raw": "95.12%", "value_0_100": 95.12, "split": "validation", "task": "renal artery segmentation"},
+      {"metric": "SeqDice", "family": "dice", "value_raw": "86.59%", "value_0_100": 86.59, "split": "validation", "task": "renal artery segmentation"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "86.14%", "value_0_100": 86.14, "split": "external", "task": "renal artery segmentation (Italy)"},
+      {"metric": "IOU", "family": "iou", "value_raw": "76.40%", "value_0_100": 76.4, "split": "external", "task": "renal artery segmentation (Italy)"},
+      {"metric": "SeqDice", "family": "dice", "value_raw": "83.62%", "value_0_100": 83.62, "split": "external", "task": "renal artery segmentation (Italy)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "84.91%", "value_0_100": 84.91, "split": "external", "task": "renal artery segmentation (Galway)"},
+      {"metric": "IOU", "family": "iou", "value_raw": "74.44%", "value_0_100": 74.44, "split": "external", "task": "renal artery segmentation (Galway)"},
+      {"metric": "SeqDice", "family": "dice", "value_raw": "85.29%", "value_0_100": 85.29, "split": "external", "task": "renal artery segmentation (Galway)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "85.63%", "value_0_100": 85.63, "split": "external", "task": "renal artery segmentation (all external)"},
+      {"metric": "IOU", "family": "iou", "value_raw": "75.58%", "value_0_100": 75.58, "split": "external", "task": "renal artery segmentation (all external)"},
+      {"metric": "SeqDice", "family": "dice", "value_raw": "85.62%", "value_0_100": 85.62, "split": "external", "task": "renal artery segmentation (all external)"}
+    ],
+    "comparators": [
+      "DeepLabV3+",
+      "nnUNet",
+      "Swin UNETR",
+      "Mask2former video",
+      "SVSNet",
+      "Baseline UNet"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "addresses", "quote": "To independently validate the accuracy of the TCA-Net, an additional set of 44 patients from University of Verona", "section": "methods"},
+    "G3": {"status": "both", "quote": "Traditional video medical image segmentation methods have focused primarily on information from single frames or short video clips [28], lacking refinement at the video level", "section": "methods"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "the current supervised learning approach requires annotated data, which are scarce in medical fields, so semi-supervised learning, transfer learning, or active learning may be necessary", "section": "conclusion"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Suboptimal segmentation of small vascular branches",
+    "Vessel discontinuities in segmentation"
+  ],
+  "future_work": [
+    "Specialized modules for vascular structures",
+    "Real-time online methods for clinical testing",
+    "Semi-supervised, transfer or active learning to reduce annotation needs",
+    "Downstream quantitative renal artery assessment applications"
+  ],
+  "claim2024": {
+    "items": "yyyyynynnnnynynnyynnyynyyyynnynyynnynynyyyny"
+  }
+}

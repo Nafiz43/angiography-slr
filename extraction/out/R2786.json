@@ -1,0 +1,121 @@
+{
+  "record_id": "R2786",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Use of high-speed angiography (HSA)-derived boundary conditions and physics informed neural networks (PINNs) for comprehensive estimation of neurovascular hemodynamics",
+    "year": 2023,
+    "venue": "Proceedings of SPIE (Medical Imaging 2023: Physics of Medical Imaging, Vol. 12463)",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "1000 fps high-speed angiography (HSA) in vitro in 3D-printed phantoms, plus CFD-simulated (in silico, passive scalar) 1000 fps angiograms",
+    "territory": "neurologic",
+    "territory_detail": "Carotid artery bifurcation phantom, basilar tip saccular aneurysm (in silico), simple carotid artery bend (in silico)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 1000,
+    "frames_per_sequence": "1500 frames (in vitro carotid bifurcation); 650 frames for the next longest acquisition",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 3,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "mixed",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "na",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "contrast_flow_analysis",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Physics-informed neural network constrained by Navier-Stokes, convection and conservation equations plus HSA-derived contrast boundary conditions to estimate velocity, pressure and contrast fields over (x, y, t) from angiographic sequences.",
+    "clinical_application": "Patient-specific neurovascular hemodynamics (velocimetry and pressure) for aneurysms and carotid vessels without assumed inlet boundary conditions"
+  },
+  "method": {
+    "architecture_names": ["Physics-informed neural network (PINN)", "fully connected DNN (10 hidden layers x 250 nodes)"],
+    "architecture_family": "other",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "A PINN based on an objective function comprised of the NavierStokes equation, the convection equation, and angiography-based BCs was used for estimation of velocity, pressure and contrast flow at every point in the lattice.",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "unsupervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": true,
+    "physics_informed": true,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "none",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "average minimum convergence time (incl. pre-processing and PINN training)", "family": "time", "value_raw": "23 minutes", "value_0_100": null, "split": "other", "task": "contrast_flow_analysis"},
+      {"metric": "minimum convergence time (less consistent convergence, 350 epochs)", "family": "time", "value_raw": "11 minutes", "value_0_100": null, "split": "other", "task": "contrast_flow_analysis"}
+    ],
+    "comparators": ["CFD velocimetry (qualitative time comparison)"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "addresses", "quote": "Calculations were performed on a 3D lattice comprised of 2D projections temporally stacked over the angiographic sequence.", "section": "abstract"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "addresses", "quote": "This means that no ground truth labels are required", "section": "methods"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "PINN must be retrained for each input acquisition",
+    "Pressure is unconstrained; velocities distal to the contrast leading edge are underapproximated and pressure was erroneous in the healthy carotid model",
+    "Velocity predictions restricted to contrast-filled regions",
+    "Minimum collocation points and convergence criteria not rigorously assessed",
+    "Quantum mottle in in vitro HSA increases training time"
+  ],
+  "future_work": [
+    "Use contrast dilution gradient (CDG) velocity estimates as initial condition to speed PINN training",
+    "Replace fixed epoch limit with an error tolerance threshold as convergence criterion"
+  ],
+  "claim2024": {"items": "yyyyynynnaaanaaaaaaaaynyyynnnnnnnaynanayynny"}
+}

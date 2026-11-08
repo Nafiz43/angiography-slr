@@ -1,0 +1,17 @@
+{"record_id": "R3707",
+ "items": {
+  "6":  {"answer": "yes", "quote": "From a clinical perspective , we demonstrate the feasibility of deep learning-based artery-vein segmentation, via simultaneously leveraging vasculature and flow dynamics.", "section": "introduction"},
+  "9":  {"answer": "yes", "quote": "As pre-processing, we resized all frames to 512 × 512 pixels, resampled the temporal resolution to 1 fps, and normalized the intensity values to [0, 255].", "section": "methods"},
+  "10": {"answer": "yes", "quote": "we randomly selected a subset of 110 DSA series from 90 patients for annotation", "section": "methods"},
+  "12": {"answer": "yes", "quote": "13 DSA series were excluded according to the following criteria: 1) arterial and venous phase being present", "section": "methods"},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "Artery-vein annotation in DSA was performed using an in-house developed tool in MeVisLab [6]. All images were first annotated by four trained students working in pairs", "section": "methods"},
+  "20": {"answer": "yes", "quote": "we randomly split the entire dataset into training, validation, and testing set with a ratio of 50%-20%-30% on the patient level", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The proposed methods were implemented in PyTorch [9]", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "In Table 1, we show the performance of the proposed method and existing methods in terms of vessel segmentation and artery-vein segmentation on the test set.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

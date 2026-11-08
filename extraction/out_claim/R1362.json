@@ -1,0 +1,17 @@
+{"record_id": "R1362",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study was a retrospective analysis of recorded procedural videos from MT cases.", "section": "methods"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "all “GC out of view” notifications were reviewed by analyzing video recordings of the procedures. Each notification was classified as true-positive (TP), false-positive (FP), or falsenegative (FN).", "section": "methods"},
+  "20": {"answer": "na", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "na", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The overall precision and recall were 96.9% and 99.2%, respectively (Table).", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

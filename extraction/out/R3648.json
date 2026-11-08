@@ -1,0 +1,160 @@
+{
+  "record_id": "R3648",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep Learning-Based Approach to Automatically Assess Coronary Distensibility Following Kawasaki Disease",
+    "year": 2022,
+    "venue": "Pediatric Cardiology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive X-ray coronary angiography (pediatric X-ray angiograms) acquired during cardiac catheterization",
+    "territory": "cardiac",
+    "territory_detail": "Left and right coronary arteries in Kawasaki disease patients and controls",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "1-2 QRS-QRS intervals/cardiac cycles analyzed",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 100,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": null,
+      "detail": "Segmentation ground truth database of 100 pediatric X-ray angiograms; availability not stated"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "semi_automatic",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "U-Net-like encoder-decoder segments the coronary artery tree on each angiographic frame across 1-2 cardiac cycles; centerlines and calibers are extracted to compute distensibility metrics (CSD, MCV, MEV) and elastic moduli, which are correlated with OCT damage scores and tracked longitudinally in Kawasaki disease patients.",
+    "clinical_application": "Assessment of coronary artery distensibility/stiffness after Kawasaki disease (regressed vs persistent aneurysms)"
+  },
+  "method": {
+    "architecture_names": ["U-Net (encoder-decoder, 5 encoding and 5 decoding layers)"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "The coronary artery tree for each subject was automatically segmented (see Fig. 1) for each image/time point",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Dice score",
+        "family": "dice",
+        "value_raw": "94% ± 2.4%",
+        "value_0_100": 94.0,
+        "split": "test",
+        "task": "coronary vessel segmentation"
+      }
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "due to the retrospective design of the study and small patient size",
+      "section": "discussion"
+    },
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {
+      "status": "addresses",
+      "quote": "To reduce annotation time, we used segmentation maps from a neural network trained to segment retina vessels.",
+      "section": "methods"
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "The prognostic value of microvascular changes on OCT and vascular stiffness could not be assessed due to the retrospective design of the study",
+      "section": "discussion"
+    },
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {
+      "status": "addresses",
+      "quote": "Two elastic moduli were calculated for each subject from the above metrics of coronary artery distensibility and the subject's trans-myocardial blood pressure gradients",
+      "section": "methods"
+    },
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {
+      "status": "documents",
+      "quote": "Future studies should evaluate the impact of distensibility on cardiac outcome following KD",
+      "section": "discussion"
+    },
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "OCT performed only in the left coronary artery while longitudinal analysis included both left and right branches",
+    "Evolution of distensibility in healthy controls could not be studied longitudinally"
+  ],
+  "future_work": [
+    "Evaluate the impact of distensibility on cardiac outcome following KD",
+    "Validate the method on coronary angiography obtained with cardiac CT",
+    "Apply automated distensibility analysis to prospectively stratified KD patients at risk of major adverse cardiac events",
+    "Extend to other types of vascular disease"
+  ],
+  "claim2024": {
+    "items": "ynyynyynyynynynnynynyyynnnyyynnynnnnynnyyyny"
+  }
+}

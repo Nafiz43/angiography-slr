@@ -1,0 +1,142 @@
+{
+ "record_id": "R2992",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Deep learning-based end-to-end automated stenosis classification and localization on catheter coronary angiography",
+  "year": 2023,
+  "venue": "Frontiers in Cardiovascular Medicine",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Invasive catheter X-ray coronary angiography (CAG) videos, DICOM 512 x 512",
+  "territory": "cardiac",
+  "territory_detail": "Coronary arteries (LCA in 4 angle views, RCA in 3 angle views)",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": 15,
+  "frames_per_sequence": "typically 60-200 frames per view",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 230,
+  "n_sequences": null,
+  "n_images_or_frames": 13744,
+  "n_centers": null,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": "Retrospective use of CORE320 multicenter study cohort (NCT00934037)"},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "not_reported",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 2,
+   "annotator_expertise": "Independent expert cardiologists (bounding boxes); QCA reference from CORE320 for stenosis severity",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "disease_classification_grading",
+  "other_label": null,
+  "secondary_tasks": ["object_detection_localization", "temporal_sequence_modeling"],
+  "task_description": "End-to-end workflow: CNN+LSTM candidate frame selection from CAG videos, Inception-v3 stenosis severity classification (2 or 3 categories) at image, artery and patient level with redundancy training, and stenosis localization via CAM and anchor-based FPN.",
+  "clinical_application": "Safety screening of large volumes of coronary angiograms to separate normal/mild stenosis from higher severity"
+ },
+ "method": {
+  "architecture_names": ["Inception-v3", "CNN + bi-directional LSTM", "anchor-based FPN (RetinaNet-based)", "CAM"],
+  "architecture_family": "cnn_classifier",
+  "temporal_category": "recurrent",
+  "temporal_evidence": {"quote": "the fully connection layer of inception-v3 was output to a bi-directional LSTM with 32 timesteps (units)", "section": "methods"},
+  "input_dimensionality": "mixed",
+  "supervision": "mixed",
+  "pretraining": "ImageNet weights",
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": "Class activation map (CAM) heatmaps",
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "cross_validation",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "accuracy (per-patient, 2-CAT)", "family": "accuracy", "value_raw": "0.85", "value_0_100": 85.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "sensitivity (per-patient, 2-CAT)", "family": "sensitivity_recall", "value_raw": "0.96", "value_0_100": 96.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "AUC (per-patient, 2-CAT)", "family": "auc", "value_raw": "0.86", "value_0_100": 86.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "accuracy (artery-level LCA)", "family": "accuracy", "value_raw": "0.83", "value_0_100": 83.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "sensitivity (artery-level LCA)", "family": "sensitivity_recall", "value_raw": "0.94", "value_0_100": 94.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "AUC (artery-level LCA)", "family": "auc", "value_raw": "0.87", "value_0_100": 87.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "accuracy (artery-level RCA)", "family": "accuracy", "value_raw": "0.81", "value_0_100": 81.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "sensitivity (artery-level RCA)", "family": "sensitivity_recall", "value_raw": "0.90", "value_0_100": 90.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "AUC (artery-level RCA)", "family": "auc", "value_raw": "0.88", "value_0_100": 88.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "AUC (image-level LCA w/R 2-CAT)", "family": "auc", "value_raw": "0.84", "value_0_100": 84.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "AUC (image-level RCA w/R 2-CAT)", "family": "auc", "value_raw": "0.89", "value_0_100": 89.0, "split": "cross_validation", "task": "stenosis classification"},
+   {"metric": "global-sensitivity LCA (anchor-based FPN)", "family": "sensitivity_recall", "value_raw": "0.68", "value_0_100": 68.0, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "global-sensitivity RCA (anchor-based FPN)", "family": "sensitivity_recall", "value_raw": "0.70", "value_0_100": 70.0, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "per-stenosis sensitivity LCA (anchor-based FPN)", "family": "sensitivity_recall", "value_raw": "0.44", "value_0_100": 44.0, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "per-stenosis sensitivity RCA (anchor-based FPN)", "family": "sensitivity_recall", "value_raw": "0.51", "value_0_100": 51.0, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "per-stenosis specificity LCA (anchor-based FPN)", "family": "specificity", "value_raw": "0.68", "value_0_100": 68.0, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "per-stenosis specificity RCA (anchor-based FPN)", "family": "specificity", "value_raw": "0.77", "value_0_100": 77.0, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "MSE LCA (anchor-based FPN)", "family": "error_distance", "value_raw": "39.3 (40.00)", "value_0_100": null, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "MSE RCA (anchor-based FPN)", "family": "error_distance", "value_raw": "37.6 (51.63)", "value_0_100": null, "split": "cross_validation", "task": "stenosis localization"},
+   {"metric": "mean error BCF (frames)", "family": "error_distance", "value_raw": "2.05", "value_0_100": null, "split": "test", "task": "candidate frame selection"},
+   {"metric": "mean error ECF (frames)", "family": "error_distance", "value_raw": "2.27", "value_0_100": null, "split": "test", "task": "candidate frame selection"},
+   {"metric": "acceptance rate (error <=3 frames)", "family": "other", "value_raw": "83%", "value_0_100": null, "split": "test", "task": "candidate frame selection"},
+   {"metric": "error rate (error >=10 frames)", "family": "other", "value_raw": "5.0%", "value_0_100": null, "split": "test", "task": "candidate frame selection"},
+   {"metric": "inference time (Inception-v3)", "family": "time", "value_raw": "13.93 ms", "value_0_100": null, "split": "other", "task": "stenosis classification"}
+  ],
+  "comparators": ["ResNet-50", "ResNet-101", "InceptionResNet-v2", "CAM-based localization", "training without redundancy frames", "previously published methods"],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "has led to algorithms that are commonly evaluated on small datasets prone to overfitting", "section": "introduction"},
+  "G2": {"status": "documents", "quote": "Training and evaluation were performed in the same cohort.", "section": "discussion"},
+  "G3": {"status": "addresses", "quote": "the CNN + LSTM structure is designed for automatic detection of candidate frames from CAG sequences", "section": "introduction"},
+  "G4": {"status": "documents", "quote": "two main arteries (LAD and LCX) may interlap on the 2-dimensional CAG image and twist with each other, raising difficulties in stenosis visualization", "section": "discussion"},
+  "G5": {"status": "both", "quote": "The need for extensive human interaction during image data and training label preparation", "section": "introduction"},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "documents", "quote": "the training dataset had very few instances of short-duration contrasting frames", "section": "results"},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Coarse stenosis categories (<25%, 25-99%, total occlusion)",
+  "Low localization sensitivity for small lesions with ambiguous features",
+  "Poor localization with multiple distal or branch stenoses",
+  "Low-quality studies excluded from training"
+ ],
+ "future_work": [
+  "External validation in different studies",
+  "Adapt pre-processing to different imaging parameters",
+  "Transfer learning on a small subset of new data",
+  "Application beyond safety screening, e.g. fine-grained stenosis assessment",
+  "More granular categories, e.g. hemodynamically significant stenosis detection"
+ ],
+ "claim2024": {"items": "yyyyyyynyynyyyynynnnnyyyyyyynnyynnyyyynyyynn"}
+}

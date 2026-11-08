@@ -1,0 +1,17 @@
+{"record_id": "R0376",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aims to construct a predictive model for post-thrombectomy hemorrhagic transformation (HT) by integrating hemodynamic features derived from quantitative DSA (qDSA) with machine learning models.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "The TDC was then fitted using a gamma variate function, which was implemented through a custom-developed program written in Python.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Five circular regions of interest (ROIs) were strategically positioned along the target vessels.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Incomplete or technically inadequate DSA series, poor image quality", "section": "methods"},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "The entire dataset was divided into training and testing datasets at a ratio of 9:1 based on a per-patient basis.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "learning library named scikit-learn (version 20.0)", "section": "methods"},
+  "26": {"answer": "yes", "quote": "During model training, a 5-fold cross-validation and the grid search approach was employed to optimize and determine the hyperparameters.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "achieved an AUC of 0.86 and an ACC of 0.72 on the test dataset (mean sensitivity 0.88, mean specificity 0.62, mean PPV 0.60, mean NPV 0.92, mean F1-score 0.71)", "section": "results"},
+  "38": {"answer": "yes", "quote": "The ROC curves in different random states for the data split are presented in Figure 3.", "section": "results"}
+ }}

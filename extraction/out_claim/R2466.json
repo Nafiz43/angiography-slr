@@ -1,0 +1,17 @@
+{"record_id": "R2466",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this work, we aim to achieve high-quality reconstruction efficiently with dozens of images to reduce radiation exposure.", "section": "introduction"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "We subsampled 30, 40, 50, and 60 views from the complete set as four training scenarios, and left the remaining views for evaluating 2D image synthesis.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "although the provided volumes are not entirely accurate, we treat them as references for evaluating 3D reconstruction.", "section": "methods"},
+  "17": {"answer": "yes", "quote": "Additionally, the system provided vessel volumes reconstructed by its inbuilt FDK algorithm [6].", "section": "methods"},
+  "20": {"answer": "yes", "quote": "We subsampled 30, 40, 50, and 60 views from the complete set as four training scenarios, and left the remaining views for evaluating 2D image synthesis.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 2 presents a quantitative comparison of different methods. Our method achieves SOTA 2D and 3D performance in most scenarios", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

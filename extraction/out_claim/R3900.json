@@ -1,0 +1,17 @@
+{"record_id": "R3900",
+ "items": {
+  "6": {"answer": "yes", "quote": "the present study aimed to develop a deep learning (DL) solution to automated and, therefore, objective TICI scoring, to evaluate the agreement of DL- and expert-based scoring", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "yes", "quote": "(2) availability of bi-plane projection data (lateral and frontal, following mTICI scoring recommendations[14] ), (3) a minimum DSA series length of 5 frames", "section": "methods"},
+  "15": {"answer": "yes", "quote": "the medical expert-based scoring for cases close to mTICI-inherent reperfusion thresholds is not as reliable as ideally desired for training of neural networks", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "the DSA series were rescored by 2 in-house neuroradiologists (>5 years experience; blinded to each other). If the raters disagreed, they reviewed the case and jointly selected a final score.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "randomly split into 401 DSA series used for training purposes and 90 DSA series used as validation dataset", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "To select the best performing model parameters and to avoid overfitting during network training, an early stopping strategy was employed.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "correspond to the in-house testing set (experiment I), the entire external dataset (experiment II), and the accumulated results of the cross validation performed on the external dataset (experiment III;", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

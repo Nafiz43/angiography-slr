@@ -1,0 +1,17 @@
+{"record_id": "R3392",
+ "items": {
+  "6": {"answer": "yes", "quote": "A supervised machine learning algorithm was trained to provide a six-month post procedure binary outcome (occluded/not occluded).", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "In order to account for x-ray foreshortening artifacts between pre- and post-treatment DSAs, we divided each parameter from before device placement (pre-treatment DSA) to parameters acquired from the same location after device placement (post-treatment DSA).", "section": "methods"},
+  "10": {"answer": "yes", "quote": "From the intra-operative DSAs, for each patient, one pre- and one post-device placement DSA was found and extracted.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Thus, DSA is the gold-standard in the detection and treatment of IAs.", "section": "methods"},
+  "17": {"answer": "yes", "quote": "We used a binary outcome where a Raymond Roy’s score of 3 (no occlusion) was labelled as unsuccessful treatment and Raymond Roy of 1 (full occlusion) or 2 (>50% occlusion) was considered to be successful treatment.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "We used Keras [22], to develop a deep neural network (DNN)", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Use of API parameters with data driven methods yielded an area under the ROC curve of 0.77 ±0.11 and accuracy of 78.6%.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "Use of API parameters with data driven methods yielded an area under the ROC curve of 0.77 ±0.11 and accuracy of 78.6%.", "section": "abstract"}
+ }}

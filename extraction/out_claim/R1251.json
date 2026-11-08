@@ -1,0 +1,17 @@
+{"record_id": "R1251",
+ "items": {
+  "6": {"answer": "yes", "quote": "Our proposed model indicate SYNTAX ≥ 23 which could play a crucial role in the decision-making process for CABG and PCI.", "section": "results"},
+  "9": {"answer": "yes", "quote": "We screen from the whole dataset of points with optical flow magnitude value larger than 98 percentile and first get a restricted zone of 5243 points.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Then we randomly select 5000 points (95%) from the restricted zone as the effective zone concerning the GPU usage limitation.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "SYNTAX score is a scoring system used to evaluate the complexity of coronary artery lesions and is widely applied in clinical decision-making.", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "the final SYNTAX score is determined by averaging the scores provided by three attending physicians.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "we randomly divide the 353 patients into 5 groups. We alternatively assign 1 group as the test set and the other 4 groups as the training set.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Group 1 shows an AUC-median of 82.13% (95% CI: 70.31–91.22), with perfect sensitivity (100%) and NPV (100%).", "section": "results"},
+  "38": {"answer": "yes", "quote": "Bootstrapping is used to estimate 95% confidence intervals (CI) for the performance metrics of our classification results (i.e., AUC, sensitivity, specificity).", "section": "results"}
+ }}

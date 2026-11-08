@@ -1,0 +1,17 @@
+{"record_id": "R2430",
+ "items": {
+  "6": {"answer": "yes", "quote": "we developed and validated multiple AI algorithms to extract left ventricular ejection fraction (LVEF), diastolic dysfunction (LVDD), right ventricular (RV) dysfunction, and cardiac index (CI) from 1-2 angiographic videos.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The gold standard was echocardiograms performed within 30 days for the first 3 models, and simultaneous right heart Cath for the CI models.", "section": "abstract"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "with an area under a receiver operating curve (AUC) of 0.87, 0.87, 0.78, and 0.74, respectively.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "with an area under a receiver operating curve (AUC) of 0.87, 0.87, 0.78, and 0.74, respectively.", "section": "abstract"}
+ }}

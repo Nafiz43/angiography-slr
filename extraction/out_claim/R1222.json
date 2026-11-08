@@ -1,0 +1,17 @@
+{"record_id": "R1222",
+ "items": {
+  "6": {"answer": "yes", "quote": "This paper describes an automatic tool for stenosis detection and assessment in invasive coronary angiography to assist the workflow of the computer-aided diagnosis", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "During the experiment, each frame is resized into 512 × 512.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Each video is composed of 10 consecutive contrastfilled frames.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The final results reported in the manuscript represent the average performance across all folds.", "section": "methods"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

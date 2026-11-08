@@ -1,0 +1,17 @@
+{"record_id": "R2114",
+ "items": {
+  "6": {"answer": "yes", "quote": "The primary objective of this work is to develop an automated method for segmenting arteries and veins from a given DSA series, obtaining 2D artery–vein label masks", "section": "methods"},
+  "9": {"answer": "yes", "quote": "As pre-processing, we resized all frames to 512 × 512 pixels, linearly resampled the temporal resolution to 1 fps, and normalized the intensity values to [0", "section": "methods"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "the quality of vein annotations may also be comparatively lower due to increased annotation difficulties", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "The artery–vein annotations were created using an in-house developed tool in MeVisLab (Heckel et al., 2009) by four trained clinical students.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "We randomly split the dataset into training, validation, and testing set with a ratio of 50%-20%–30% on the patient level.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The proposed methods were implemented in PyTorch (Paszke et al., 2019)", "section": "methods"},
+  "26": {"answer": "yes", "quote": "An early stopping strategy was applied with a patience of 50 epochs and a maximum of 1000 epochs.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "In Table 1, we present the results of CAVE and other representative solutions on the test set in terms of vessel segmentation and artery– vein segmentation.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

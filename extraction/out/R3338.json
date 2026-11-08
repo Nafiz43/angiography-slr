@@ -1,0 +1,156 @@
+{
+  "record_id": "R3338",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Self-supervised learning enables 3D digital subtraction angiography reconstruction from ultra-sparse 2D projection views: A multicenter study",
+    "year": 2022,
+    "venue": "Cell Reports Medicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Rotational 2D projection X-ray angiography (2D-DSA projections) used for 3D-DSA reconstruction",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral vasculature in patients suspected of intracranial aneurysms",
+    "acquisition_geometry": "rotational_3D",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "~133 projections over ~199.5 degrees in ~5 s (gold standard); 4, 6, 8, 10 or 12 projections used as model input",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 202,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 3,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": true,
+      "inter_rater_value": "Reader scoring agreement (quadratic weighted kappa): 0.792-0.902 for image scoring; 0.75-0.93 for diagnostic confidence"
+    }
+  },
+  "task": {
+    "primary_task": "motion_correction_registration",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Self-supervised 3D-DSA reconstruction of cerebral vasculature from ultra-sparse (4-12) 2D rotational projection views, supervised by differentiable re-projection to the input 2D views.",
+    "clinical_application": "Radiation dose reduction for 3D-DSA in diagnosis and treatment of intracranial aneurysms"
+  },
+  "method": {
+    "architecture_names": [
+      "SSDR network (self-supervised 3D-DSA reconstruction)",
+      "3D U-Net"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "each input 2D image was back-projected according to the corresponding viewing angle to obtain the 3D data. These 3D data were further input to the next module as different channels.",
+      "section": "results"
+    },
+    "input_dimensionality": "multi_view",
+    "supervision": "self_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "102 cases from two other hospitals (institution II: 54, institution III: 48) never used in training",
+    "metrics": [
+      {"metric": "SSIM (8 projections)", "family": "ssim", "value_raw": "0.987", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction, institution I"},
+      {"metric": "PSNR (8 projections)", "family": "psnr", "value_raw": "38.69", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction, institution I"},
+      {"metric": "MSE (8 projections)", "family": "error_distance", "value_raw": "1.58 x 10^-4", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction, institution I"},
+      {"metric": "MAE (8 projections)", "family": "error_distance", "value_raw": "1.05 x 10^-3", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction, institution I"},
+      {"metric": "SSIM (8 projections)", "family": "ssim", "value_raw": "0.989", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution II"},
+      {"metric": "PSNR (8 projections)", "family": "psnr", "value_raw": "40.06", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution II"},
+      {"metric": "MSE (8 projections)", "family": "error_distance", "value_raw": "1.06 x 10^-4", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution II"},
+      {"metric": "MAE (8 projections)", "family": "error_distance", "value_raw": "8.6 x 10^-4", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution II"},
+      {"metric": "SSIM (8 projections)", "family": "ssim", "value_raw": "0.981", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution III"},
+      {"metric": "PSNR (8 projections)", "family": "psnr", "value_raw": "39.58", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution III"},
+      {"metric": "MSE (8 projections)", "family": "error_distance", "value_raw": "1.32 x 10^-4", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution III"},
+      {"metric": "MAE (8 projections)", "family": "error_distance", "value_raw": "1.23 x 10^-3", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction, institution III"},
+      {"metric": "Radiologist total score (max 16), 4 projections", "family": "other", "value_raw": "7.28 ± 5.15", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction image quality, institution I"},
+      {"metric": "Radiologist total score (max 16), 6 projections", "family": "other", "value_raw": "11.5 ± 4.6", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction image quality, institution I"},
+      {"metric": "Radiologist total score (max 16), 8 projections", "family": "other", "value_raw": "14.71 ± 2.29", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction image quality, institution I"},
+      {"metric": "Radiologist total score (max 16), 10 projections", "family": "other", "value_raw": "15.59 ± 0.88", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction image quality, institution I"},
+      {"metric": "Radiologist total score (max 16), 12 projections", "family": "other", "value_raw": "15.88 ± 0.52", "value_0_100": null, "split": "test", "task": "3D-DSA reconstruction image quality, institution I"},
+      {"metric": "Radiologist total score (max 16), 8 projections", "family": "other", "value_raw": "14.92 ± 1.19", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction image quality, institution II"},
+      {"metric": "Radiologist total score (max 16), 8 projections", "family": "other", "value_raw": "15.27 ± 0.84", "value_0_100": null, "split": "external", "task": "3D-DSA reconstruction image quality, institution III"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "both", "quote": "it may not have enough generalization ability to perfectly analyze thousands of data centers", "section": "discussion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "addresses", "quote": "We propose a self-supervised learning method to realize 3D-DSA reconstruction using ultra-sparse 2D projections.", "section": "abstract"},
+    "G5": {"status": "both", "quote": "this method does not require the use of a 3D label. This is advantageous as it is difficult to obtain real 3D labels", "section": "discussion"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Performance deteriorates when vessel borders are indistinct or images are very noisy",
+    "Generalization to different contrast agents not evaluated",
+    "Reconstructions from 4 or 6 projections need further improvement",
+    "Higher radiation and computational cost with 10-12 projections"
+  ],
+  "future_work": [
+    "Add a denoising module",
+    "Validate with more scanner makers",
+    "Massive validation with more data before clinical use",
+    "Animal experiments to test different contrast agents"
+  ],
+  "claim2024": {
+    "items": "ynyyynyyynnnyyyyynnnnnnnnnyynynyyyynnynyyynn"
+  }
+}

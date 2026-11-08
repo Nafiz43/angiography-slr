@@ -1,0 +1,143 @@
+{
+  "record_id": "R4762",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Real-Time Medical Video Denoising with Deep Learning: Application to Angiography",
+    "year": 2018,
+    "venue": "International journal of applied information systems",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Coronary angiogram / fluoroscopy videos acquired from a stock footage vendor; grayscale, 320x240 to 512x512 pixels",
+    "territory": "cardiac",
+    "territory_detail": "Coronary angiography",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 20,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical_plus_synthetic",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "Videos acquired from a stock footage vendor"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "image_enhancement_denoising",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Convolutional autoencoder trained on patches from clear angiography frames corrupted with synthetic Gaussian noise to denoise fluoroscopy frames; evaluated on Gaussian, speckle and salt-and-pepper noise against BM3D, with run-time comparison for real-time use.",
+    "clinical_application": "Real-time denoising of fluoroscopy video during catheter-based procedures such as percutaneous coronary intervention"
+  },
+  "method": {
+    "architecture_names": [
+      "convolutional autoencoding neural network"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "they process video data as a bag of unrelated still image video frames. Any relationships between video frames that are temporally close are ignored.",
+      "section": "conclusion"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "MSE (Gaussian noise)", "family": "other", "value_raw": "0.014 ± 0.021", "value_0_100": null, "split": "test", "task": "denoising Gaussian noise"},
+      {"metric": "SSIM (Gaussian noise)", "family": "ssim", "value_raw": "0.99 ± 0.0024", "value_0_100": null, "split": "test", "task": "denoising Gaussian noise"},
+      {"metric": "MSE (speckle noise)", "family": "other", "value_raw": "0.022 ± 0.014", "value_0_100": null, "split": "test", "task": "denoising speckle noise"},
+      {"metric": "SSIM (speckle noise)", "family": "ssim", "value_raw": "0.99 ± 0.0016", "value_0_100": null, "split": "test", "task": "denoising speckle noise"},
+      {"metric": "MSE (salt and pepper noise)", "family": "other", "value_raw": "0.19 ± 0.062", "value_0_100": null, "split": "test", "task": "denoising salt and pepper noise"},
+      {"metric": "SSIM (salt and pepper noise)", "family": "ssim", "value_raw": "0.97 ± 0.0087", "value_0_100": null, "split": "test", "task": "denoising salt and pepper noise"},
+      {"metric": "Time per image on CPU (s)", "family": "time", "value_raw": "0.44", "value_0_100": null, "split": "test", "task": "denoising speed"},
+      {"metric": "Time per image on GPU (s)", "family": "time", "value_raw": "0.021", "value_0_100": null, "split": "test", "task": "denoising speed"}
+    ],
+    "comparators": [
+      "BM3D"
+    ],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {
+      "status": "documents",
+      "quote": "As the neural network presented in this article was trained exclusively on fluoroscopic x-ray images, it has no knowledge of the specific features found within other types of images",
+      "section": "conclusion"
+    },
+    "G3": {
+      "status": "documents",
+      "quote": "they process video data as a bag of unrelated still image video frames. Any relationships between video frames that are temporally close are ignored.",
+      "section": "conclusion"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Trained exclusively on images corrupted with Gaussian noise",
+    "No GPU reference implementation of BM3D available; GPU BM3D speed only estimated"
+  ],
+  "future_work": [
+    "Incorporate recurrent neural networks into the convolutional autoencoder to exploit temporal information in video denoising"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnnyaayynanynyyyynnynynnnynnnyynny"
+  }
+}

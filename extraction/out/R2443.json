@@ -1,0 +1,136 @@
+{
+  "record_id": "R2443",
+  "schema_version": "2.0",
+  "study": {
+    "title": "FeDETR: A Federated Approach for Stenosis Detection in Coronary Angiography",
+    "year": 2024,
+    "venue": "ICIAP Workshops",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Coronary angiography videos; key frames extracted",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (stenosis severity assessed against FFR/iFR)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 1001,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 5,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "Private dataset of 1001 coronary angiographies from five hospitals"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Described as a private dataset; no release stated"
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "experienced cardiologists",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": ["disease_classification_grading"],
+    "task_description": "Federated DETR detects the major stenosis (bounding box) in angiographic key frames and classifies it as low-severity vs mild/high-severity (hemodynamically significant by FFR<0.80 or iFR<0.89); only the backbone is federated across five hospital nodes.",
+    "clinical_application": "Assessment of hemodynamically significant coronary stenosis to support revascularization decisions"
+  },
+  "method": {
+    "architecture_names": ["FeDETR", "DETR", "ResNet-50", "FedAvg"],
+    "architecture_family": "detector",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "Given a key frame, the CNN backbone learns a 2D representation, which is then flattened by the model.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "COCO 2017 pre-trained DETR (ResNet-50 backbone)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": true,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "not_reported",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Accuracy (ACC)", "family": "accuracy", "value_raw": "73.6 ± 3.8", "value_0_100": 73.6, "split": "other", "task": "stenosis severity classification, 50 rounds x 10 epochs"},
+      {"metric": "Precision (PPV), low severity", "family": "precision_ppv", "value_raw": "66.9", "value_0_100": 66.9, "split": "other", "task": "stenosis detection, low severity, 50 rounds x 10 epochs"},
+      {"metric": "Precision (PPV), mild/high severity", "family": "precision_ppv", "value_raw": "66.8", "value_0_100": 66.8, "split": "other", "task": "stenosis detection, mild/high severity, 50 rounds x 10 epochs"},
+      {"metric": "Recall (TPR), low severity", "family": "sensitivity_recall", "value_raw": "81.1", "value_0_100": 81.1, "split": "other", "task": "stenosis detection, low severity, 50 rounds x 10 epochs"},
+      {"metric": "Recall (TPR), mild/high severity", "family": "sensitivity_recall", "value_raw": "46.5", "value_0_100": 46.5, "split": "other", "task": "stenosis detection, mild/high severity, 50 rounds x 10 epochs"},
+      {"metric": "IoU, low severity", "family": "iou", "value_raw": "51.2 ± 2.9", "value_0_100": 51.2, "split": "other", "task": "stenosis detection, low severity, 50 rounds x 10 epochs"},
+      {"metric": "IoU, mild/high severity", "family": "iou", "value_raw": "46.9 ± 6.9", "value_0_100": 46.9, "split": "other", "task": "stenosis detection, mild/high severity, 50 rounds x 10 epochs"},
+      {"metric": "Accuracy (ACC)", "family": "accuracy", "value_raw": "70.9 ± 3.5", "value_0_100": 70.9, "split": "other", "task": "stenosis severity classification, 25 rounds x 5 epochs"},
+      {"metric": "Accuracy (ACC)", "family": "accuracy", "value_raw": "70.2 ± 3.0", "value_0_100": 70.2, "split": "other", "task": "stenosis severity classification, 25 rounds x 10 epochs"},
+      {"metric": "Accuracy (ACC)", "family": "accuracy", "value_raw": "71.0 ± 3.4", "value_0_100": 71.0, "split": "other", "task": "stenosis severity classification, 25 rounds x 20 epochs"},
+      {"metric": "Accuracy (ACC)", "family": "accuracy", "value_raw": "69.4 ± 1.6", "value_0_100": 69.4, "split": "other", "task": "stenosis severity classification, 50 rounds x 5 epochs"},
+      {"metric": "Accuracy (ACC)", "family": "accuracy", "value_raw": "70.4 ± 3.7", "value_0_100": 70.4, "split": "other", "task": "stenosis severity classification, 50 rounds x 20 epochs"}
+    ],
+    "comparators": ["FedAvg", "FedBN", "DETR joint training", "DETR standalone training"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "addresses", "quote": "Federated learning addresses this challenge by aggregating knowledge from multiple nodes to improve model generalization", "section": "abstract"},
+    "G3": {"status": "documents", "quote": "we aim at improving our method by automating the procedure for the selection of the key frames from angiography videos", "section": "conclusion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "the 40.5% of patients has been labeled as positive, resulting in a significant class imbalance", "section": "methods"},
+    "G10": {"status": "both", "quote": "collecting and sharing large amounts of patient data distributed across multiple healthcare institutions and research centers is challenging", "section": "introduction"},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Worse bounding box localization (IoU) than baseline federated methods",
+    "Key frames selected manually by physicians"
+  ],
+  "future_work": [
+    "Automate key frame selection from angiography videos",
+    "Apply the approach to other contrast-agent medical examinations"
+  ],
+  "claim2024": {
+    "items": "ynyyynyynynnnyynnnynnyyyyyynynnnnnnyyynnynnn"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "record_id": "R4143",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep-Learning-Based Registration of Diagnostic Angiogram and Live Fluoroscopy for Percutaneous Coronary Intervention",
+    "year": 2021,
+    "venue": "IEEE Access",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Republic of Korea"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Diagnostic coronary angiography cine loops and live fluoroscopy during PCI (512x512, 8-bit grayscale)",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries during percutaneous coronary intervention (guidewire navigation)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "Angiographic sequence mean ~15.8 frames; live fluoroscopy mean 146.5 frames per patient",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 34,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical_plus_synthetic",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "frame",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 1,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "motion_correction_registration",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Patient-specific U-Net generative model registers diagnostic angiographic frames to segmented guidewire images from live fluoroscopy (dynamic coronary roadmapping) without ECG, implicitly compensating cardiac and respiratory motion; trained on virtual guidewires synthesized from angiographic centerlines, with ICP post-processing and transfer learning to shorten training.",
+    "clinical_application": "Dynamic coronary roadmapping for guidewire navigation during PCI, including arrhythmia patients"
+  },
+  "method": {
+    "architecture_names": [
+      "U-Net"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "used as training input to a deep generative model along with stacked images of the angiographic sequence",
+      "section": "introduction"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Transfer learning (fine-tuning) from a patient-specific model pre-trained on another patient's data with the same C-arm configuration",
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Registration (ICP) error, mean +/- SD (from scratch)", "family": "error_distance", "value_raw": "1.06 ± 0.18 mm", "value_0_100": null, "split": "test", "task": "registration"},
+      {"metric": "Registration (ICP) error, median (from scratch)", "family": "error_distance", "value_raw": "1.05 mm", "value_0_100": null, "split": "test", "task": "registration"},
+      {"metric": "vPSNR at 400 epochs (from scratch)", "family": "psnr", "value_raw": "38.36 ± 3.13 dB", "value_0_100": null, "split": "validation", "task": "registered image generation"},
+      {"metric": "tPSNR with live fluoroscopy (from scratch)", "family": "psnr", "value_raw": "34.09 ± 2.28 dB", "value_0_100": null, "split": "test", "task": "registered image generation"},
+      {"metric": "Overlay quality rated Good by cardiologists", "family": "other", "value_raw": "70.6%", "value_0_100": null, "split": "test", "task": "registration"},
+      {"metric": "Overlay quality rated Acceptable by cardiologists", "family": "other", "value_raw": "29.4%", "value_0_100": null, "split": "test", "task": "registration"},
+      {"metric": "Registration error, mean +/- SD (transfer learning)", "family": "error_distance", "value_raw": "1.13 ± 0.18 mm", "value_0_100": null, "split": "test", "task": "registration (transfer learning)"},
+      {"metric": "Registration error, median (transfer learning)", "family": "error_distance", "value_raw": "1.11 mm", "value_0_100": null, "split": "test", "task": "registration (transfer learning)"},
+      {"metric": "vPSNR at 30 epochs (transfer learning)", "family": "psnr", "value_raw": "34.26 ± 2.17 dB", "value_0_100": null, "split": "validation", "task": "registered image generation (transfer learning)"},
+      {"metric": "Mean processing time per live fluoroscopic frame", "family": "time", "value_raw": "111 ms (9.0 Hz)", "value_0_100": null, "split": "test", "task": "registration"},
+      {"metric": "Average training time from scratch", "family": "time", "value_raw": "111 min", "value_0_100": null, "split": "other", "task": "model training"}
+    ],
+    "comparators": [
+      "Ma et al. catheter tip tracking DCR with deep-learning-based Bayesian filtering",
+      "Learning from scratch vs transfer learning",
+      "U-Net variants with different depth and filters"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "The proposed deep generative model is trained patientspecifically because only a small amount of PCI data is available.", "section": "methods"},
+    "G2": {"status": "documents", "quote": "the average mean tPSNR (34.09 dB) was lower than the average mean vPSNR (38.36 dB) because the segmented real guidewire images were slightly different from the virtual guidewire images", "section": "results"},
+    "G3": {"status": "documents", "quote": "This is because the generative model does not use temporal information during image generation. This problem may be solved by incorporating temporal information into the generative model.", "section": "discussion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "both", "quote": "To address the lack of labeled data (ground-truth registered images) for training the deep generative model, we used the centerline of the coronary artery in the angiographic sequence as an approximated real guidewire", "section": "methods"},
+    "G6": {"status": "documents", "quote": "for practical usage, further reducing training time and automatic centerline labeling of blood vessels and clinical evaluation remain.", "section": "conclusion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "Only three arrhythmia cases were used in this study, requiring more evaluation for robustness.", "section": "conclusion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Long patient-specific training time (about 2 h) not feasible online without transfer learning",
+    "Manual centerline labeling of angiographic sequence required",
+    "Assumes identical C-arm configuration between diagnostic and interventional phases",
+    "ICP/centerline-based registration error may not properly indicate registration quality",
+    "No ground-truth registered images available for direct evaluation"
+  ],
+  "future_work": [
+    "Automatic centerline labeling of angiographic sequences",
+    "Automatic real-time guidewire segmentation from live fluoroscopy",
+    "GAN-based image-to-image translation to make virtual guidewire images more realistic",
+    "Select pre-trained model with most similar vessel structure to shorten training",
+    "Optimize data augmentation and hardware acceleration (multi-GPU, FPGA, ASIC)",
+    "Incorporate temporal information into the generative model and further clinical evaluation"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnynynyyyyayyyyyyynnynynnyynynyyyny"
+  }
+}

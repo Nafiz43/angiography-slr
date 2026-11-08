@@ -1,0 +1,17 @@
+{"record_id": "R4148",
+ "items": {
+  "6": {"answer": "yes", "quote": "Our aim is to develop an effective approach for stent enhancement in fluoroscopy sequences by the combination of spatial and temporal information.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "In order to reduce the interference of noise in training, time-domain average is used to reduce the noise of the collected image in phantom.", "section": "methods"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The central position of markers are manually annotated as the center point with the covered kernel.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "4 clinical sequences and 6 phantom sequences were used for verification.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Totally, it can reach 84.04% for an average of both clinical and phantom data.", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

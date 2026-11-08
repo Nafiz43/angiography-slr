@@ -1,0 +1,113 @@
+{
+  "record_id": "R4804",
+  "schema_version": "2.0",
+  "study": {
+    "title": "A Motion Artifact Reduction Method in Cerebrovascular DSA Sequence Images",
+    "year": 2018,
+    "venue": "International Journal of Pattern Recognition and Artificial Intelligence",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Cerebrovascular DSA sequences (mask image plus surplus/live slices), GE INNOVA3100DSA",
+    "territory": "neurologic",
+    "territory_detail": "cerebrovascular / brain angiography",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["GE (INNOVA3100DSA)"]
+  },
+  "dataset": {
+    "n_patients": 10,
+    "n_sequences": 40,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": "Clinical data from the interventional department of the Affiliated Hospital of Hebei University"},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "na",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "background_subtraction",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Fully automatic removal of mismatching (motion) artifacts in cerebrovascular DSA sequences by mutual-information-based rigid registration of each surplus slice to the mask image before subtraction, followed by guided-filter fusion with the original DSA image (as guide) to restore vessel contrast and detail.",
+    "clinical_application": "Improving cerebrovascular DSA image quality for diagnosis and interventional procedures"
+  },
+  "method": {
+    "architecture_names": ["rigid registration with mutual information", "guided filter"],
+    "architecture_family": "non_learning",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "obtain the registered sequence of surplus slices and subtract them with the mask image to realize the output DSA image with the removal of artifacts",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "not_applicable",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "none",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Contrast index C (mean)", "family": "other", "value_raw": "0.557", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Contrast index C (maximum)", "family": "other", "value_raw": "0.84", "value_0_100": null, "split": "test", "task": "background_subtraction"},
+      {"metric": "Increase in contrast index vs other enhancement methods", "family": "other", "value_raw": "24.1%", "value_0_100": null, "split": "test", "task": "background_subtraction"}
+    ],
+    "comparators": ["Hessian matrix-based DSA enhancement (Ref. 24, dynamic-parameter Frangi)", "rigid registration alone", "original DSA image"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "documents", "quote": "so that it can be applied to other DSA images", "section": "conclusion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": ["unspecified shortcomings acknowledged; registration process efficiency needs improvement"],
+  "future_work": ["optimize the rigid registration process", "improve efficiency of the method", "optimize guided filter parameter selection to apply to other DSA images"],
+  "claim2024": {"items": "ynyyynynnnnnyaaaaaaanyaayyynnyaynnnynnnnynnn"}
+}

@@ -1,0 +1,172 @@
+{
+  "record_id": "R0640",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Texture-Based Preprocessing Framework with nnU-Net Model for Accurate Intracranial Artery Segmentation",
+    "year": 2025,
+    "venue": "Journal of Imaging",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Time-sequential cerebral DSA (DIAS dataset), arterial-phase frames, anteroposterior or lateral views, 800x800 pixels",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial arteries (intracranial atherosclerotic stenosis, middle cerebral artery occlusion cases)",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": 4,
+    "frames_per_sequence": "4 to 14",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 120,
+    "n_images_or_frames": 762,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "DIAS (Digital Subtraction Angiography Intracranial Artery Segmentation dataset)"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Raw data available upon request from the authors"
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "semi_automatic",
+      "n_annotators": 4,
+      "annotator_expertise": "Two medical students annotated key frames; reviewed and verified by two board-certified neurosurgeons; label propagation to intermediate frames",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Texture-based preprocessing (fused local contrast, local entropy and brightness threshold maps) combined with MinIP as input to nnU-Net for intracranial artery segmentation in DSA, compared with no preprocessing and CLAHE.",
+    "clinical_application": "Neurovascular diagnosis and intervention planning"
+  },
+  "method": {
+    "architecture_names": ["nnU-Net"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "our framework operates at the single-frame level to generate texture-enhanced feature maps that can be directly fed into a segmentation network",
+      "section": "discussion"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "DICE", "family": "dice", "value_raw": "0.83 ± 0.20", "value_0_100": 83.0, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "IoU", "family": "iou", "value_raw": "0.72 ± 0.14", "value_0_100": 72.0, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.95 ± 0.15", "value_0_100": 95.0, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.88 ± 0.20", "value_0_100": 88.0, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.90 ± 0.08", "value_0_100": 90.0, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.88 ± 0.15", "value_0_100": 88.0, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.93 ± 0.12", "value_0_100": 93.0, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "Vessel connectivity", "family": "other", "value_raw": "40.50 ± 5.75", "value_0_100": null, "split": "test", "task": "vessel segmentation (Table 1)"},
+      {"metric": "DICE", "family": "dice", "value_raw": "0.82 ± 0.26", "value_0_100": 82.0, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "IoU", "family": "iou", "value_raw": "0.75 ± 0.18", "value_0_100": 75.0, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.97 ± 0.15", "value_0_100": 97.0, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.95 ± 0.18", "value_0_100": 95.0, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.95 ± 0.18", "value_0_100": 95.0, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.96 ± 0.20", "value_0_100": 96.0, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.96 ± 0.20", "value_0_100": 96.0, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "Vessel connectivity", "family": "other", "value_raw": "24.40 ± 3.38", "value_0_100": null, "split": "test", "task": "vessel segmentation (Table 2)"},
+      {"metric": "Preprocessing time (ms/frame)", "family": "time", "value_raw": "18.2 ± 3.1", "value_0_100": null, "split": "test", "task": "runtime"},
+      {"metric": "nnU-Net inference time (ms/frame)", "family": "time", "value_raw": "42.5 ± 5.2", "value_0_100": null, "split": "test", "task": "runtime"}
+    ],
+    "comparators": ["No preprocessing (baseline nnU-Net)", "CLAHE preprocessing + nnU-Net"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "The scarcity of sequence-based DSA data compounds this issue.",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "the method’s performance might drop when applied to images from other hospitals, different angiography systems, or alternative procedural setups.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "documents",
+      "quote": "their reliance on single-frame input limited their effectiveness.",
+      "section": "introduction"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {
+      "status": "documents",
+      "quote": "A key challenge is the need for large, high-quality annotated datasets to train these models.",
+      "section": "introduction"
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "Future work will evaluate the method using multi-center datasets and prospective clinical data to assess robustness under real-world imaging variability.",
+      "section": "discussion"
+    },
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {
+      "status": "documents",
+      "quote": "Many rare conditions, such as subtle vascular malformations or atypical collateral vessel patterns, may be underrepresented or entirely absent.",
+      "section": "discussion"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Dependence on DSA image quality (noise, motion blur, poor contrast)",
+    "Sensitivity to preprocessing parameters (window size, entropy threshold, brightness cut-off)",
+    "Computational overhead hindering real-time use",
+    "No stratified evaluation by vessel size"
+  ],
+  "future_work": [
+    "Evaluate on multi-center, external and prospective datasets",
+    "Integrate denoising and motion correction before segmentation",
+    "Adaptive or learned preprocessing parameter tuning",
+    "Computational optimization with GPU acceleration and lightweight nnU-Net variants",
+    "Hybrid approaches integrating DVA-derived variance maps",
+    "Vessel-size stratified analysis"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyyyyyyynyyynyynyyyyyynnynynynnnyynyy"
+  }
+}

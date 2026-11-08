@@ -1,0 +1,216 @@
+{
+  "record_id": "R1680",
+  "schema_version": "2.0",
+  "study": {
+    "title": "An Integrated Pipeline for Coronary Angiography With Automated Lesion Profiling, Virtual Stenting, and 100-Vessel FFR Validation",
+    "year": 2025,
+    "venue": "arXiv.org",
+    "publication_type": "preprint",
+    "text_is_full_paper": true,
+    "country_of_data": "Russia"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Routine cine coronary angiograms (invasive coronary angiography)",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (LAD 52%, RCA 28%, LCx 20%)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 92,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "Unnamed public benchmark dataset combined with proprietary frames for the 9,000-frame stenosis detection dataset"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "frame",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "At least two experienced interventional cardiologists (bounding boxes, consensus); 250 pixel-level annotated segmentation frames",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Inter-observer concordance for lesion localization 96% (kappa = 0.91)"
+    }
+  },
+  "task": {
+    "primary_task": "contrast_flow_analysis",
+    "other_label": null,
+    "secondary_tasks": [
+      "object_detection_localization",
+      "vessel_segmentation",
+      "disease_classification_grading"
+    ],
+    "task_description": "End-to-end angiography-only pipeline (AngioAI-QFR): YOLOv8m stenosis detection, DeepLabV3+ lumen segmentation, centreline/diameter extraction, per-millimetre Relative Flow Capacity profiling, contrast-transit flow estimation with a 1D haemodynamic model to compute angiography-derived QFR, and virtual stenting with QFR recomputation; validated against invasive FFR in 100 vessels.",
+    "clinical_application": "Wire-free coronary physiology assessment (FFR <= 0.80 ischaemia detection) and virtual PCI planning/stent sizing in the catheterisation laboratory"
+  },
+  "method": {
+    "architecture_names": [
+      "YOLOv8m",
+      "DeepLabV3+ (ResNet-50 backbone)",
+      "AngioAI-QFR one-dimensional haemodynamic model"
+    ],
+    "architecture_family": "other",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "Resting flow is estimated from contrast transit along the same centreline. For each angiographic sequence, we identify the frame at which contrast first appears in the proximal segment",
+      "section": "methods"
+    },
+    "input_dimensionality": "mixed",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": [
+      "mean aortic pressure at time of FFR measurement (when available)"
+    ],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Detection precision", "family": "precision_ppv", "value_raw": "0.966", "value_0_100": 96.6, "split": "test", "task": "stenosis detection"},
+      {"metric": "mAP@50", "family": "other", "value_raw": "0.973", "value_0_100": null, "split": "test", "task": "stenosis detection"},
+      {"metric": "mAP@50-95", "family": "other", "value_raw": "0.712", "value_0_100": null, "split": "test", "task": "stenosis detection"},
+      {"metric": "Segmentation IoU", "family": "iou", "value_raw": "0.643", "value_0_100": 64.3, "split": "test", "task": "lumen segmentation"},
+      {"metric": "Segmentation Dice", "family": "dice", "value_raw": "0.781", "value_0_100": 78.1, "split": "test", "task": "lumen segmentation"},
+      {"metric": "Pearson r vs invasive FFR", "family": "correlation", "value_raw": "0.89 (95% CI 0.84-0.93)", "value_0_100": null, "split": "test", "task": "QFR estimation (100 vessels)"},
+      {"metric": "MAE vs FFR", "family": "error_distance", "value_raw": "0.045", "value_0_100": null, "split": "test", "task": "QFR estimation (100 vessels)"},
+      {"metric": "RMSE vs FFR", "family": "error_distance", "value_raw": "0.069", "value_0_100": null, "split": "test", "task": "QFR estimation (100 vessels)"},
+      {"metric": "Bland-Altman bias (LoA)", "family": "other", "value_raw": "-0.008 (limits -0.142 to 0.125)", "value_0_100": null, "split": "test", "task": "QFR estimation (100 vessels)"},
+      {"metric": "Linear calibration slope, intercept", "family": "other", "value_raw": "0.96, 0.03", "value_0_100": null, "split": "test", "task": "QFR estimation (100 vessels)"},
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.93 (95% CI 0.88-0.97)", "value_0_100": 93.0, "split": "test", "task": "ischaemia detection FFR <= 0.80"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.88 (0.76-0.96)", "value_0_100": 88.0, "split": "test", "task": "ischaemia detection FFR <= 0.80"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.86 (0.76-0.92)", "value_0_100": 86.0, "split": "test", "task": "ischaemia detection FFR <= 0.80"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.80 (0.68-0.90)", "value_0_100": 80.0, "split": "test", "task": "ischaemia detection FFR <= 0.80"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.91 (0.83-0.96)", "value_0_100": null, "split": "test", "task": "ischaemia detection FFR <= 0.80"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.87", "value_0_100": 87.0, "split": "test", "task": "ischaemia detection FFR <= 0.80"},
+      {"metric": "AUROC (LAD subgroup)", "family": "auc", "value_raw": "0.94", "value_0_100": 94.0, "split": "test", "task": "ischaemia detection, LAD (n=52)"},
+      {"metric": "AUROC (RCA subgroup)", "family": "auc", "value_raw": "0.92", "value_0_100": 92.0, "split": "test", "task": "ischaemia detection, RCA (n=28)"},
+      {"metric": "AUROC (LCx subgroup)", "family": "auc", "value_raw": "0.90", "value_0_100": 90.0, "split": "test", "task": "ischaemia detection, LCx (n=20)"},
+      {"metric": "Pearson r (good/excellent image quality)", "family": "correlation", "value_raw": "0.92", "value_0_100": null, "split": "test", "task": "QFR estimation, good/excellent quality (n=68)"},
+      {"metric": "Pearson r (suboptimal/overlap image quality)", "family": "correlation", "value_raw": "0.83", "value_0_100": null, "split": "test", "task": "QFR estimation, suboptimal/overlap (n=32)"},
+      {"metric": "Fully automatic completion rate", "family": "other", "value_raw": "93/100 (93%)", "value_0_100": null, "split": "test", "task": "pipeline feasibility"},
+      {"metric": "Median time-to-result", "family": "time", "value_raw": "41 s [31-58]", "value_0_100": null, "split": "test", "task": "pipeline feasibility"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "This is a single-center, retrospective analysis with a modest sample size (n = 100 vessels), which limits precision of estimates",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "limits precision of estimates and generalizability across cameras, vendors, and acquisition protocols",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "documents",
+      "quote": "they highlight the need for optimized projection selection, explicit branch-aware modeling, and motion-robust tracking",
+      "section": "results"
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "severe overlap/foreshortening and bifurcations within the treated span remain challenging and explain a disproportionate share of large errors",
+      "section": "discussion"
+    },
+    "G5": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "head-to-head prospective comparisons with approved angio-physiology platforms and multi-center external validation are warranted",
+      "section": "discussion"
+    },
+    "G7": {
+      "status": "documents",
+      "quote": "we did not yet implement formal uncertainty quantification",
+      "section": "discussion"
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "both",
+      "quote": "most AI systems stop at anatomy: they detect and segment lesions, but do not close the loop from anatomy through physiology to virtual PCI",
+      "section": "introduction"
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Post-PCI FFR unavailable; virtual stenting results are in silico predictions only",
+    "Bernoulli-type physiology and contrast-transit surrogate cause calibration shrinkage at extremes",
+    "Reduced accuracy when stent span includes a large side-branch take-off"
+  ],
+  "future_work": [
+    "Prospective multicentre validation",
+    "Post-PCI outcome studies",
+    "Head-to-head comparison with approved angio-physiology platforms",
+    "Projection-quality scoring and automated image-quality prompts",
+    "Automated bifurcation detection with side-branch protection",
+    "Motion-robust tracking and temporal regularization"
+  ],
+  "claim2024": {
+    "items": "yyyyyyynyyyynyyyynynyynynyyyynnynyynnynyynnn"
+  }
+}

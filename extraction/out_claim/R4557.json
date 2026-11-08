@@ -1,0 +1,75 @@
+{
+ "record_id": "R4557",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "the clinical purpose of our detection system is to give physicians an accurate hint that whether the patient has an aneurysm or not",
+   "section": "methods"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "we resized the image to 288 × 288 to unify the interface",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "The experienced radiologists identified 6–12 frames for each patient when the radiocontrast agent flew through the intracranial arteries for sufficient visualization.",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "yes",
+   "quote": "labeled by two experienced radiologists manually, which were double confirmed by 3D-DSA to ensure that the annotation procedure was correct",
+   "section": "methods"
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "The aneurysms and overlaps of vessels were labeled by two experienced radiologists manually, which were double confirmed by 3D-DSA",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "There were up to 100 images from 5 randomly selected patients that were used for testing, and others for training.",
+   "section": "methods"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "yes",
+   "quote": "the neural network was implemented using Keras [39], a deep learning framework using backend of Tensorflow [40]",
+   "section": "methods"
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "the proposed architecture could achieve accuracy of 93.5% and the AUC of 0.942",
+   "section": "abstract"
+  },
+  "38": {
+   "answer": "yes",
+   "quote": "Data in parentheses are 95% CI",
+   "section": "results"
+  }
+ }
+}

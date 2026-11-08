@@ -1,0 +1,114 @@
+{
+ "record_id": "R1213",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Multitask Deep Learning for Automated Detection of Endoleak at Digital Subtraction Angiography during Endovascular Aneurysm Repair",
+  "year": 2025,
+  "venue": "Radiology: Artificial Intelligence",
+  "publication_type": "journal",
+  "text_is_full_paper": false,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Intraoperative aortic DSA (2D plus time) during EVAR in interventional suite / hybrid operating room",
+  "territory": "aortic_thoracic",
+  "territory_detail": "Abdominal aorta; endoleaks after endovascular repair of abdominal aortic aneurysm",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "13-48 frames (4-61 seconds)",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 220,
+  "n_sequences": null,
+  "n_images_or_frames": null,
+  "n_centers": null,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": null,
+   "annotator_expertise": "Expert panel (vascular surgeons and interventional radiologists named as human observers)",
+   "inter_rater_reported": true,
+   "inter_rater_value": "Fleiss kappa = 0.404 (moderate)"
+  }
+ },
+ "task": {
+  "primary_task": "object_detection_localization",
+  "other_label": null,
+  "secondary_tasks": ["disease_classification_grading"],
+  "task_description": "Multitask CNN on three DSA-derived perfusion maps (peak density, time to peak, area under time-density curve) for binary endoleak detection (classification) and localization (heatmap regression).",
+  "clinical_application": "Intraoperative endoleak detection during EVAR for abdominal aortic aneurysm"
+ },
+ "method": {
+  "architecture_names": ["2D convolutional neural network (multitask classification + regression)"],
+  "architecture_family": "cnn_classifier",
+  "temporal_category": "hemodynamic_physics",
+  "temporal_evidence": {
+   "quote": "every pixel of the DSA imaging (two dimensional [2D] plus time) was converted to time-density curves. From this time-density curve, the peak density, time to peak, and area under the time-density curve were computed.",
+   "section": "other"
+  },
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "cross_validation",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "AUC (endoleak detection)", "family": "auc", "value_raw": "0.85 ± 0.0031 (SD)", "value_0_100": 85.0, "split": "cross_validation", "task": "endoleak detection and localization"},
+   {"metric": "F1 score", "family": "f1", "value_raw": "0.78 ± 0.21", "value_0_100": 78.0, "split": "cross_validation", "task": "endoleak detection and localization"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "95%", "value_0_100": 95.0, "split": "cross_validation", "task": "endoleak detection and localization"},
+   {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "73%", "value_0_100": 73.0, "split": "cross_validation", "task": "endoleak detection and localization"}
+  ],
+  "comparators": ["Procedural team", "Vascular surgeons", "Interventional radiologists", "Single-task variants (classification or regression only)"],
+  "compared_with_humans": true,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": true,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "none", "quote": null, "section": null},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "documents", "quote": "The interobserver agreement among human experts was moderate (Fleiss κ = 0.404).", "section": "abstract"},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": ["Small endoleaks are subtle and more difficult to detect and localize"],
+ "future_work": [],
+ "claim2024": {"items": "yynynyyynynnnynyyyynynnnnnynynnynynyynnnnynn"}
+}

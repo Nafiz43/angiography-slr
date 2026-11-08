@@ -1,0 +1,17 @@
+{"record_id": "R1238",
+ "items": {
+  "6": {"answer": "yes", "quote": "To develop an efficient and automated method for selecting appropriate coronary angiography videos for training deep learning models", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "The variability in model performance across datasets is considerably influenced by the diverse and complex nature of these datasets, complicating the establishment of a universal standard for classifying images as unsatisfactory.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Two board-certified cardiologists reviewed the clips independently. The following criteria were utilized to classify video clips as unsatisfactory", "section": "methods"},
+  "20": {"answer": "yes", "quote": "we divided the angiogram images into training, validation, and test sets on the basis of unique patient IDs", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "the X3D-L model maintained relatively better performance, with an AUC of 0.95, accuracy of 0.92, precision of 0.63, and F1 score of 0.71.", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

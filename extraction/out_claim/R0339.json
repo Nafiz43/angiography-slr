@@ -1,0 +1,17 @@
+{"record_id": "R0339",
+ "items": {
+  "6":  {"answer": "yes", "quote": "The study aimed to develop and validate the first AI-guided decision support system for the intraoperative management of lower extremity DVT.", "section": "methods"},
+  "9":  {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "yes", "quote": "Completion of full dynamic DSA imaging protocol meeting the following parameters", "section": "methods"},
+  "15": {"answer": "yes", "quote": "PE ascertainment was based on clinical presentation followed by CTPA, rather than systematic screening at protocoldefined intervals.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Two blinded radiologists annotated radiomic features (inter-reader agreement κ = 0.85); discordances (7.3%) were resolved by a third senior radiologist.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "yes", "quote": "A base sample of 118 patients was calculated to detect this difference (α = 0.05, 80% power, DeLong’s test).", "section": "methods"},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "used a heldout validation set to enforce early stopping (patience = 20 epochs), halting training when performance plateaued.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "ROC curves are based on the independent test set (n = 60). The shaded area represents the 95% CI obtained from 1000 bootstrap resamples.", "section": "results"},
+  "38": {"answer": "yes", "quote": "area under the curve, 0.88; 95% confidence interval [CI], 0.85-0.92 vs 0.76; 95% CI, 0.70-0.83; P = .026", "section": "abstract"}
+ }}

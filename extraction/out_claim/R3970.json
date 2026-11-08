@@ -1,0 +1,17 @@
+{"record_id": "R3970",
+ "items": {
+  "6": {"answer": "yes", "quote": "This paper firstly proposed a deep learning network to extract vascular time-domain features from DSA videos. Then, the temporal features were combined with spatial radiomics features to build an AVM-assisted diagnosis model.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "To reduce the subjectivity of data selection, we selected five frames in equal proportion from the beginning to the end of a video.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "Two specialists, who have been engaged in clinical cerebrovascular disease for more than 5 years, annotated the vascular structures in different phases", "section": "methods"},
+  "20": {"answer": "yes", "quote": "For AVM diagnosis, 305 cases were randomly divided into two groups: an independent testing cohort and a cross-validation cohort at a ratio of 3–7.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "The corresponding model was firstly determined in an LOO cross-validation experiment based on AUC.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 4 illustrates the classification results by LOO cross-validation and independent validation cohorts in three different feature sets.", "section": "results"},
+  "38": {"answer": "yes", "quote": "the AUC of combined features [0.942, (0.875–0.979)] was the highest one", "section": "results"}
+ }}

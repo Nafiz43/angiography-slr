@@ -1,0 +1,155 @@
+{
+  "record_id": "R2087",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Evaluation of stenoses using AI video models applied to coronary angiography",
+    "year": 2024,
+    "venue": "NPJ digital medicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Canada"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Coronary angiography (CAG) X-ray videos in DICOM format, 512x512 pixels",
+    "territory": "cardiac",
+    "territory_detail": "Left and right coronary arteries (11 epicardial coronary artery segments)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": "24 frames centered around the reference area used as model input",
+    "vendors": ["Philips", "Siemens", "Toshiba"]
+  },
+  "dataset": {
+    "n_patients": 8057,
+    "n_sequences": 44139,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "ARCADE public dataset (1200 X-ray CAG images) used as Dataset C for segmentation training/testing"
+    },
+    "data_released": {
+      "value": null,
+      "detail": "Model weights released; release of own data not reported"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": 2,
+      "annotator_expertise": "Interventional cardiologists with over 10 years of experience (Dataset B); main labels from clinical reports; QCA by trained technicians supervised by an expert physician (Dataset D)",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Clinical reports vs expert consensus: MAE 21.00% (95% CI 20.20-21.76), r 0.5000"
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": ["vessel_segmentation", "motion_correction_registration", "object_detection_localization"],
+    "task_description": "End-to-end video pipeline (DeepCoro) that registers stenosis regions across frames, segments 11 coronary artery segments, assigns stenoses to segments, and predicts continuous stenosis percentage and severe stenosis (>=70%) classification with a Swin3D video transformer.",
+    "clinical_application": "Automated, standardized assessment of coronary artery disease stenosis severity from coronary angiography videos"
+  },
+  "method": {
+    "architecture_names": ["DeepCoro", "Swin3D", "Xception", "RetinaNet", "Discriminative Correlation Filter", "UNet", "UNet++", "MANet", "LinkNet", "FPN", "PSPNet", "DeepLabV3", "DeepLabV3+", "PAN"],
+    "architecture_family": "transformer",
+    "temporal_category": "transformer_ssm",
+    "temporal_evidence": {
+      "quote": "uses a modified version of the Swin3D[27] architecture, a state-of-the-art video classification transformer model",
+      "section": "introduction"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "Swin3D pretrained on Kinetics400 and ImageNetV1",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": ["normalized patient age", "one-hot coronary artery identifier"],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": "Authors call Dataset D (MHI QCA Core Lab, RCT angiograms) 'external validation', but the model was fine-tuned on its training split at the same institution",
+    "metrics": [
+      {"metric": "AUROC (LCA+RCA, artery-level)", "family": "auc", "value_raw": "0.8294 (0.8215-0.8373)", "value_0_100": 82.94, "split": "test", "task": "severe stenosis classification, Dataset A"},
+      {"metric": "AUPRC (LCA+RCA, artery-level)", "family": "auc", "value_raw": "0.5239 (0.5041-0.5421)", "value_0_100": 52.39, "split": "test", "task": "severe stenosis classification, Dataset A"},
+      {"metric": "Sensitivity (LCA+RCA)", "family": "sensitivity_recall", "value_raw": "72.86 (71.24-74.47)", "value_0_100": 72.86, "split": "test", "task": "severe stenosis classification, Dataset A"},
+      {"metric": "Specificity (LCA+RCA)", "family": "specificity", "value_raw": "76.71 (76.05-77.36)", "value_0_100": 76.71, "split": "test", "task": "severe stenosis classification, Dataset A"},
+      {"metric": "PPV (LCA+RCA)", "family": "precision_ppv", "value_raw": "39.42 (38.15-40.68)", "value_0_100": 39.42, "split": "test", "task": "severe stenosis classification, Dataset A"},
+      {"metric": "F1-score (LCA+RCA)", "family": "f1", "value_raw": "51.15 (49.81-52.39)", "value_0_100": 51.15, "split": "test", "task": "severe stenosis classification, Dataset A"},
+      {"metric": "MAE (LCA+RCA)", "family": "error_distance", "value_raw": "20.15% (19.88-20.40)", "value_0_100": null, "split": "test", "task": "stenosis percentage regression, Dataset A"},
+      {"metric": "Pearson r (LCA+RCA)", "family": "correlation", "value_raw": "0.5497 (0.5360-0.5630)", "value_0_100": null, "split": "test", "task": "stenosis percentage regression, Dataset A"},
+      {"metric": "AUROC (LCA+RCA, video-level)", "family": "auc", "value_raw": "0.8699 (0.8564-0.8853)", "value_0_100": 86.99, "split": "test", "task": "severe stenosis classification vs expert annotations, Dataset B"},
+      {"metric": "AUPRC (LCA+RCA, video-level)", "family": "auc", "value_raw": "0.7042 (0.6717-0.7339)", "value_0_100": 70.42, "split": "test", "task": "severe stenosis classification vs expert annotations, Dataset B"},
+      {"metric": "Sensitivity (LCA+RCA, video-level)", "family": "sensitivity_recall", "value_raw": "78.74 (76.05-81.70)", "value_0_100": 78.74, "split": "test", "task": "severe stenosis classification vs expert annotations, Dataset B"},
+      {"metric": "Specificity (LCA+RCA, video-level)", "family": "specificity", "value_raw": "77.20 (75.78-78.60)", "value_0_100": 77.2, "split": "test", "task": "severe stenosis classification vs expert annotations, Dataset B"},
+      {"metric": "MAE (LCA+RCA, video-level)", "family": "error_distance", "value_raw": "19.09% (18.55-19.58)", "value_0_100": null, "split": "test", "task": "stenosis percentage regression vs expert annotations, Dataset B"},
+      {"metric": "Pearson r (LCA+RCA, video-level)", "family": "correlation", "value_raw": "0.6792 (0.6598-0.7004)", "value_0_100": null, "split": "test", "task": "stenosis percentage regression vs expert annotations, Dataset B"},
+      {"metric": "MAE vs QCA (fine-tuned)", "family": "error_distance", "value_raw": "7.75% (7.37-8.07)", "value_0_100": null, "split": "test", "task": "stenosis percentage regression vs QCA, Dataset D"},
+      {"metric": "Dice (weighted average across segments)", "family": "dice", "value_raw": "73.93%", "value_0_100": 73.93, "split": "test", "task": "multi-class coronary segment segmentation, Dataset C (ARCADE)"},
+      {"metric": "PPV (segmentation)", "family": "precision_ppv", "value_raw": "75.96%", "value_0_100": 75.96, "split": "test", "task": "multi-class coronary segment segmentation, Dataset C (ARCADE)"},
+      {"metric": "Sensitivity (segmentation)", "family": "sensitivity_recall", "value_raw": "70.12%", "value_0_100": 70.12, "split": "test", "task": "multi-class coronary segment segmentation, Dataset C (ARCADE)"},
+      {"metric": "PPV (segment assignment)", "family": "precision_ppv", "value_raw": "71.89%", "value_0_100": 71.89, "split": "test", "task": "stenosis-to-coronary-segment assignment, Dataset B"},
+      {"metric": "Sensitivity (segment assignment)", "family": "sensitivity_recall", "value_raw": "70.72%", "value_0_100": 70.72, "split": "test", "task": "stenosis-to-coronary-segment assignment, Dataset B"},
+      {"metric": "F1-score (segment assignment)", "family": "f1", "value_raw": "70.71%", "value_0_100": 70.71, "split": "test", "task": "stenosis-to-coronary-segment assignment, Dataset B"},
+      {"metric": "Proportion of correctly registered videos", "family": "accuracy", "value_raw": "96.63%", "value_0_100": 96.63, "split": "test", "task": "video registration, Dataset B"},
+      {"metric": "Sensitivity (combined PCI removal methods)", "family": "sensitivity_recall", "value_raw": "95.27%", "value_0_100": 95.27, "split": "test", "task": "PCI video identification, Dataset B hold-out"},
+      {"metric": "End-to-end processing time per DICOM video (RTX3090)", "family": "time", "value_raw": "62.60 seconds", "value_0_100": null, "split": "other", "task": "end-to-end pipeline inference"}
+    ],
+    "comparators": ["CathAI (image-based Xception, re-trained)", "Clinical reports (cardiologist visual assessment)", "X3D", "MViT", "R(2+1)D", "UNet", "UNet++", "MANet", "LinkNet", "FPN", "PSPNet", "DeepLabV3", "DeepLabV3+", "PAN"],
+    "compared_with_humans": true,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": true, "detail": "Authors state model weights were made publicly available"},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "Direct comparisons between DeepCoro and other models in existing literature present challenges, primarily due to the unique and extensive dataset that our approach used", "section": "discussion"},
+    "G2": {"status": "addresses", "quote": "This dataset provided an ideal setting to evaluate DeepCoro adaptability to different clinical contexts", "section": "methods"},
+    "G3": {"status": "both", "quote": "rely on static images instead of dynamic videos, potentially missing critical information that clinicians frequently derive from video analysis", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "these performances can be improved by annotating more data", "section": "discussion"},
+    "G6": {"status": "documents", "quote": "conducting a randomized controlled trial (RCT) to compare revascularization decisions based on AI-assisted CAG interpretations versus traditional methods will be key in understanding DeepCoro", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "DeepCoro tends to underestimate stenosis severity reflecting the underlying stenosis distribution, likely due to the high prevalence of non-severe stenoses in the training dataset", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Training/testing labels based on clinician visual interpretation that may not match true stenosis",
+    "Side branches and CABG patients excluded",
+    "Processing time of 62.60 s per video may hinder clinical use",
+    "Compounding error across multiple sequential algorithms",
+    "Registration imperfect (96.63% correctly registered)"
+  ],
+  "future_work": [
+    "RCT comparing AI-assisted versus traditional revascularization decisions with FFR testing",
+    "Fine-tune for calcium estimation, vulnerable plaque identification or physiological impact of stenoses",
+    "Detect stenoses in complex coronary segments and side branches",
+    "Automated SYNTAX score estimation",
+    "Speed up processing via larger batch sizes and parallel computing",
+    "Large-scale datasets with objective QCA measures"
+  ],
+  "claim2024": {
+    "items": "ynyyynyyyynyyyyyyynnyyyyyyyyyynynyyyyyyyyyyn"
+  }
+}

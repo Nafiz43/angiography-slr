@@ -1,0 +1,17 @@
+{"record_id": "R3063",
+ "items": {
+  "6":  {"answer": "yes", "quote": "This paper aims to solve the task of single and dual guidewire segmentation in X-ray fluoroscopy sequences.", "section": "abstract"},
+  "9":  {"answer": "yes", "quote": "The size of our inputs is set to 512 × 512", "section": "methods"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "We use the Medical Imaging Interaction Toolkit and Adobe Photoshop to generate pixel-level labels for our guidewire dataset.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "We divide our dataset into the training dataset with 53 sequences, the validation dataset with 11 sequences, and the testing dataset with 11 sequences.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "All networks are implemented using PyTorch", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The testing results of all single guidewire sequences are presented and 10 dual guidewire sequences are randomly selected.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

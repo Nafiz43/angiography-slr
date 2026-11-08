@@ -1,0 +1,16 @@
+screening/screening_validation_table.tex
+results/
+analysis-results/
+__pycache__/
+
+# Local manuscript build products
+output/
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+.DS_Store
+*.parts
+supplementary/*.pdf

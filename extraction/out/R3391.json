@@ -1,0 +1,375 @@
+{
+ "record_id": "R3391",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Initial investigation of the use of angiographic parametric imaging for early prognosis of delayed cerebral ischemia in patients with subarachnoid hemorrhage",
+  "year": 2022,
+  "venue": "Proceedings of SPIE--the International Society for Optical Engineering",
+  "publication_type": "conference_full_paper",
+  "text_is_full_paper": true,
+  "country_of_data": "USA"
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Intra-operative DSA with internal carotid injection, AP and lateral views, parametrized by angiographic parametric imaging (API)",
+  "territory": "neurologic",
+  "territory_detail": "Cerebral hemisphere (anterior circulation) in subarachnoid hemorrhage patients",
+  "acquisition_geometry": "biplane",
+  "frame_rate_fps": 3,
+  "frames_per_sequence": null,
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 125,
+  "n_sequences": null,
+  "n_images_or_frames": null,
+  "n_centers": 1,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {
+   "value": false,
+   "detail": null
+  },
+  "data_released": {
+   "value": null,
+   "detail": null
+  },
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": null,
+   "annotator_expertise": "Endovascular research fellows (DCI labels from follow-up imaging and doctors' notes); ROIs manually drawn in ImageJ",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "outcome_prediction",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Prediction of delayed cerebral ischemia (DCI) occurrence in SAH patients using logistic regression on ROI-averaged, arterial-input-normalized API parameters (TTA, TTP, PH, MTT, AUC) from AP and lateral DSA.",
+  "clinical_application": "Intraprocedural early prognosis of DCI after aneurysmal subarachnoid hemorrhage"
+ },
+ "method": {
+  "architecture_names": [
+   "multivariate logistic regression"
+  ],
+  "architecture_family": "classical_ml",
+  "temporal_category": "hemodynamic_physics",
+  "temporal_evidence": {
+   "quote": "API works by tracking the flow of contrast across the DSA sequence at every single pixel where a time density curve is synthesized.",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "cross_validation",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.60 ± 0.11 (0.55,0.65)",
+    "value_0_100": 60.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP PH, AP AUC)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.67 ± 0.12 (0.61,0.72)",
+    "value_0_100": 67.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP PH, AP AUC)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.46 ± 0.09 (0.42,0.50)",
+    "value_0_100": 46.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral TTP)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.44 ± 0.13 (0.39,0.50)",
+    "value_0_100": 44.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral TTP)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.54 ± 0.11 (0.49,0.58)",
+    "value_0_100": 54.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral MTT)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.42 ± 0.16 (0.35,0.49)",
+    "value_0_100": 42.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral MTT)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.53 ± 0.01 (0.52,0.54)",
+    "value_0_100": 53.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral PH)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.40 ± 0.12 (0.35,0.45)",
+    "value_0_100": 40.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral PH)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.46 ± 0.12 (0.41,0.51)",
+    "value_0_100": 46.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral AUC)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.39 ± 0.13 (0.34,0.45)",
+    "value_0_100": 39.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral AUC)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.52 ± 0.12 (0.47,0.57)",
+    "value_0_100": 52.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP TTP)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.51 ± 0.13 (0.45,0.57)",
+    "value_0_100": 51.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP TTP)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.53 ± 0.11 (0.48,0.58)",
+    "value_0_100": 53.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP MTT)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.49 ± 0.18 (0.41,0.57)",
+    "value_0_100": 49.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP MTT)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.51 ± 0.04 (0.49,0.53)",
+    "value_0_100": 51.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP PH)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.54 ± 0.11 (0.49,0.59)",
+    "value_0_100": 54.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP PH)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.61 ± 0.11 (0.56,0.66)",
+    "value_0_100": 61.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP AUC)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.66 ± 0.12 (0.61,0.72)",
+    "value_0_100": 66.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP AUC)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.57 ± 0.10 (0.53,0.62)",
+    "value_0_100": 57.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP PH, AP AUC, AP TTP)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.57 ± 0.12 (0.52,0.62)",
+    "value_0_100": 57.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP PH, AP AUC, AP TTP)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.54 ± 0.12 (0.48,0.59)",
+    "value_0_100": 54.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP All Parameters)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.52 ± 0.12 (0.47,0.58)",
+    "value_0_100": 52.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (AP All Parameters)"
+   },
+   {
+    "metric": "Accuracy",
+    "family": "accuracy",
+    "value_raw": "0.43 ± 0.15 (0.37,0.50)",
+    "value_0_100": 43.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral All Parameters)"
+   },
+   {
+    "metric": "AUROC",
+    "family": "auc",
+    "value_raw": "0.33 ± 0.16 (0.25,0.40)",
+    "value_0_100": 33.0,
+    "split": "cross_validation",
+    "task": "DCI prediction (Lateral All Parameters)"
+   }
+  ],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": true,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": true,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": null,
+   "detail": null
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {
+   "status": "documents",
+   "quote": "we are only using 125 cases which is not optimal for convergence of any model.",
+   "section": "discussion"
+  },
+  "G2": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G3": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G4": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G5": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G6": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G7": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G8": {
+   "status": "documents",
+   "quote": "In future studies we also plan to attempt to improve results by considering variables such as severity of hemorrhage using Glasgow Coma Scale (GCS) scores.",
+   "section": "discussion"
+  },
+  "G9": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "addresses",
+   "quote": "We propose to investigate whether a data driven approach using angiographic parametric imaging (API) may predict occurrence of the DCI.",
+   "section": "abstract"
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [
+  "Inconsistent ROI placement",
+  "Only ROI-averaged API parameters used rather than image data",
+  "Only a logistic regression model was tested"
+ ],
+ "future_work": [
+  "Expand the dataset",
+  "Use actual image data with deeper machine learning models",
+  "Use deeper neural networks with more trainable parameters",
+  "Incorporate hemorrhage severity variables such as Glasgow Coma Scale scores"
+ ],
+ "claim2024": {
+  "items": "yyyyyyynynnynynnyyannyaannynyynynnnnnnnyyyny"
+ }
+}

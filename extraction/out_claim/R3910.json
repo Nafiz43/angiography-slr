@@ -1,0 +1,17 @@
+{"record_id": "R3910",
+ "items": {
+  "6": {"answer": "yes", "quote": "The purpose of this work was to develop a dynamic respiratory motion compensated device guidance system and evaluate the accuracy and real-time performance in an in vivo porcine liver model.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "each image frame is assumed to be log-transformed and is defined on a regular 2D grid", "section": "methods"},
+  "10": {"answer": "yes", "quote": "This is determined by averaging all subtracted image frames whose respiratory state is smaller than the fifth-percentile (approximately end expiration) of all respiratory states.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "An example case showing the worst-case scenario is shown in Figure 6,where the reference measurement is degraded due to the stiffness of the catheter.", "section": "results"},
+  "17": {"answer": "yes", "quote": "The marker position was manually annotated in each image frame and the displacement of the marker position served as reference of the true motion of the current vessel branch.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The training of the network was performed using the MATLAB 2019a Deep Learning Toolbox (MathWorks, Natick, MA, USA).", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The odds of the device being shown inside the vessel roadmap were significantly higher for both CRD (odds ratio [OR]) = 3.12, 95% CI = (2.96, 3.30)", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

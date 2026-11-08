@@ -1,0 +1,17 @@
+{"record_id": "R2675",
+ "items": {
+  "6": {"answer": "yes", "quote": "A novel framework of myocardial bridge detection with x-ray angiography sequence is proposed, which can realize automatic detection of vessel stenosis and myocardial bridge.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "In all datasets, 2661 images had segmentation labels, which all were annotated manually by physicians.", "section": "results"},
+  "20": {"answer": "yes", "quote": "dividing all the images into 80%, 2129 images, for the training set and 20%, 532 images, for the test set.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The software environment contains python 3.8.12, pytorch 1.7 and CUDA 11.0.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "we evaluate the segmentation results using two metrics, Dice and ASD, and achieve scores of 0.917 and 1.39, respectively.", "section": "abstract"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

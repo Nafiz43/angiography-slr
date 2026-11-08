@@ -1,0 +1,380 @@
+{
+  "record_id": "R0774",
+  "schema_version": "2.0",
+  "study": {
+    "title": "End-to-end deep learning approach for uterine artery-ovarian artery anastomosis detection from digital subtraction angiography sequences",
+    "year": 2025,
+    "venue": "Medical physics",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Uterine artery DSA angiography sequences acquired during uterine artery embolization",
+    "territory": "abdominopelvic",
+    "territory_detail": "Uterine artery and uterine artery-ovarian artery anastomosis (pelvic)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 610,
+    "n_sequences": 990,
+    "n_images_or_frames": 15934,
+    "n_centers": 2,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data available from the corresponding author on reasonable request"
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Interventional radiologists with over a decade of clinical experience; primary annotator plus a more seasoned radiologist for refinement",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Bounding-box detection of the uterine artery (UA) and uterine artery-ovarian artery anastomosis (UOA) in DSA frames with YOLOv8-based UOA-D; sequence-level UOA positivity when UOA detected in at least one frame; reader study with/without AI assistance.",
+    "clinical_application": "Intraoperative detection of UOA during uterine artery embolization to avoid non-target embolization of the ovarian artery"
+  },
+  "method": {
+    "architecture_names": [
+      "UOA Detector (UOA-D)",
+      "YOLOv8"
+    ],
+    "architecture_family": "detector",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "For each DSA sequence, as long as a UOA is accurately detected in at least one frame, it can be considered as true positive.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "External testing set of 200 UA angiography sequences (2705 images, 112 patients) from a separate hospital",
+    "metrics": [
+      {
+        "metric": "AUC (UOA detection, image level)",
+        "family": "auc",
+        "value_raw": "0.831",
+        "value_0_100": 83.1,
+        "split": "test",
+        "task": "UOA detection"
+      },
+      {
+        "metric": "AUC (UOA detection, image level)",
+        "family": "auc",
+        "value_raw": "0.829",
+        "value_0_100": 82.9,
+        "split": "external",
+        "task": "UOA detection"
+      },
+      {
+        "metric": "AP (IoU 0.5:0.95)",
+        "family": "other",
+        "value_raw": "0.541",
+        "value_0_100": null,
+        "split": "test",
+        "task": "UOA detection"
+      },
+      {
+        "metric": "AP (IoU 0.5:0.95)",
+        "family": "other",
+        "value_raw": "0.509",
+        "value_0_100": null,
+        "split": "external",
+        "task": "UOA detection"
+      },
+      {
+        "metric": "AP_0.5",
+        "family": "other",
+        "value_raw": "0.773",
+        "value_0_100": null,
+        "split": "test",
+        "task": "UOA detection"
+      },
+      {
+        "metric": "AP_0.5",
+        "family": "other",
+        "value_raw": "0.768",
+        "value_0_100": null,
+        "split": "external",
+        "task": "UOA detection"
+      },
+      {
+        "metric": "Area under PR curve",
+        "family": "auc",
+        "value_raw": "0.7485",
+        "value_0_100": 74.85,
+        "split": "test",
+        "task": "UOA detection"
+      },
+      {
+        "metric": "AUC (UA detection, image level)",
+        "family": "auc",
+        "value_raw": "0.981",
+        "value_0_100": 98.1,
+        "split": "test",
+        "task": "UA detection"
+      },
+      {
+        "metric": "AUC (UA detection, image level)",
+        "family": "auc",
+        "value_raw": "0.971",
+        "value_0_100": 97.1,
+        "split": "external",
+        "task": "UA detection"
+      },
+      {
+        "metric": "AP (IoU 0.5:0.95)",
+        "family": "other",
+        "value_raw": "0.743",
+        "value_0_100": null,
+        "split": "test",
+        "task": "UA detection"
+      },
+      {
+        "metric": "AP (IoU 0.5:0.95)",
+        "family": "other",
+        "value_raw": "0.736",
+        "value_0_100": null,
+        "split": "external",
+        "task": "UA detection"
+      },
+      {
+        "metric": "AP_0.5",
+        "family": "other",
+        "value_raw": "0.982",
+        "value_0_100": null,
+        "split": "test",
+        "task": "UA detection"
+      },
+      {
+        "metric": "AP_0.5",
+        "family": "other",
+        "value_raw": "0.980",
+        "value_0_100": null,
+        "split": "external",
+        "task": "UA detection"
+      },
+      {
+        "metric": "Area under PR curve",
+        "family": "auc",
+        "value_raw": "0.9833",
+        "value_0_100": 98.33,
+        "split": "test",
+        "task": "UA detection"
+      },
+      {
+        "metric": "Sensitivity",
+        "family": "sensitivity_recall",
+        "value_raw": "0.978",
+        "value_0_100": 97.8,
+        "split": "test",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "Specificity",
+        "family": "specificity",
+        "value_raw": "0.951",
+        "value_0_100": 95.1,
+        "split": "test",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "Accuracy",
+        "family": "accuracy",
+        "value_raw": "0.961",
+        "value_0_100": 96.1,
+        "split": "test",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "F1 score",
+        "family": "f1",
+        "value_raw": "0.978",
+        "value_0_100": 97.8,
+        "split": "test",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "Sensitivity",
+        "family": "sensitivity_recall",
+        "value_raw": "0.969",
+        "value_0_100": 96.9,
+        "split": "external",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "Specificity",
+        "family": "specificity",
+        "value_raw": "0.945",
+        "value_0_100": 94.5,
+        "split": "external",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "Accuracy",
+        "family": "accuracy",
+        "value_raw": "0.959",
+        "value_0_100": 95.9,
+        "split": "external",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "F1 score",
+        "family": "f1",
+        "value_raw": "0.962",
+        "value_0_100": 96.2,
+        "split": "external",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "Detection time per sequence",
+        "family": "time",
+        "value_raw": "3.0 s",
+        "value_0_100": null,
+        "split": "test",
+        "task": "UOA-positive sequence detection"
+      },
+      {
+        "metric": "Detection time per sequence",
+        "family": "time",
+        "value_raw": "2.9 s",
+        "value_0_100": null,
+        "split": "external",
+        "task": "UOA-positive sequence detection"
+      }
+    ],
+    "comparators": [
+      "Faster-RCNN",
+      "DETR",
+      "Junior interventional radiologists",
+      "Senior interventional radiologists"
+    ],
+    "compared_with_humans": true,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G2": {
+      "status": "both",
+      "quote": "Although the research incorporated external testing, the data were limited in terms of variability in imaging equipment, procedural differences in UAE, and diversity of patient vascular anatomy",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "It may also misjudge the presence of UOA when image quality is poor or when surrounding vessels cause occlusion.",
+      "section": "discussion"
+    },
+    "G5": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G6": {
+      "status": "both",
+      "quote": "This underscores the necessity for validation through large-scale prospective clinical trials.",
+      "section": "discussion"
+    },
+    "G7": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "False positives and false negatives in some special cases",
+    "Misses small UOA when vessels are small or contrast filling is inadequate",
+    "Misjudgment with poor image quality"
+  ],
+  "future_work": [
+    "Introduce attention mechanisms to improve detection of small targets and low-contrast areas",
+    "Optimize contrast injection parameters to improve UOA visualization",
+    "Large-scale prospective multicenter real-world clinical trials"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynynyynynynnynnnnyyynnyyyyyyynyyyyy"
+  }
+}

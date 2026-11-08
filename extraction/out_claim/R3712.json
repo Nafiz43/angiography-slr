@@ -1,0 +1,17 @@
+{"record_id": "R3712",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this paper, we propose an end-to-end deep learning framework for single stent tracking", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "We excluded irrelevant landmarks resulting the final TAVI dataset contains 2,652 frames from 26 videos.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "There are 114,352 marker pairs in the dataset, which were manually annotated by trained experts.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The TAVI dataset was randomly divided into a training set with 2,027 images from 18 videos and a test set with 625 images from 8 videos.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "All deep learning models were implemented with PyTorch and run on NVIDIA V100.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 1 and Table 2 list the results of proposed model and baseline models on the in-house dataset and the public TAVI dataset", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

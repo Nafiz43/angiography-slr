@@ -1,0 +1,17 @@
+{"record_id": "R2263",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this work, we introduce improved 2D + t deep learning models that leverage the rich temporal information in angiographic timeseries.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "The 12-bit DICOM images were then converted into NIFTI file format, de-identified, and downsampled from 1024 × 1024 to 512 × 512 pixels with bicubic interpolation.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For each “motionless” angiogram in the test set, a random subset of 16 contiguous frames was selected and the DSA was computed on these stationary frames.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Angiographic series with fewer than 16 frames were discarded, leaving 5798 series in the training/validation group and 1638 series in the test group.", "section": "methods"},
+  "15": {"answer": "yes", "quote": "mild misregistration artifacts can be visualized even in our “motionless” DSA data that is used to generate the synthetic “ground truth,” and this represents an important limitation of this work.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "For each “motionless” angiogram in the test set, a random subset of 16 contiguous frames was selected and the DSA was computed on these stationary frames.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "These studies were then divided into training/validation and test sets, ensuring that no patients were present in both groups to prevent the leakage of anatomic information across sets.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Neural network architectures and data pre-processing pipelines were developed in both Tensorflow and Pytorch/ MONAI.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "we terminated training when the performance on the validation set did not improve for 30 epochs.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "In comparison to single-frame 2D U-Net, the 3D U-Net utilizing 16 input frames achieves a reduced RMSE (35.77 ± 15.02 vs 23.14 ± 9.56, _p_ < 0.0001; mean ± std dev)", "section": "abstract"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

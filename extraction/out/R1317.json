@@ -1,0 +1,145 @@
+{
+  "record_id": "R1317",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep learning based coronary vessels segmentation in X-ray angiography using temporal information",
+    "year": 2025,
+    "venue": "Medical Image Analysis",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China; United Kingdom"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive coronary angiography (ICA) X-ray sequences; 4-frame short sequences per annotated frame",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (LCx, RCA and others)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "4 (two before and one after each annotated frame)",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 383,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "Public 323-sample ICA dataset from Hao et al. (2020), Renji Hospital, Shanghai Jiao Tong University (D1)"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data will be made available on request (private D2: 60 sequences from 39 patients, John Radcliffe Hospital, Oxford)"
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "expert (D2 annotation and fine-grained re-segmentation of 10 test samples)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Segmentation of the coronary vessel tree in a target ICA frame using 4 consecutive frames via a 3D encoder-2D decoder (TVS-Net) with elastic-interaction energy loss and deep supervision; skeleton completeness/correctness also evaluated.",
+    "clinical_application": "Aiding diagnosis of coronary artery disease/stenosis and treatment planning; vessel skeletons for 3D reconstruction"
+  },
+  "method": {
+    "architecture_names": ["TVS-Net", "TVS-Net+", "UNet++ (backbone)"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "the 3D encoder captures both spatial and temporal features from ICA sequences, treating time as a third dimension to enhance vessel segmentation",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Model trained on D1 (SJTU) applied without retraining to D2: 60 ICA sequences from 39 patients at John Radcliffe Hospital, Oxford",
+    "metrics": [
+      {"metric": "AUPRC", "family": "auc", "value_raw": "0.8899", "value_0_100": 88.99, "split": "test", "task": "vessel segmentation, D1 test"},
+      {"metric": "Dice", "family": "dice", "value_raw": "83.41 ± 2.45%", "value_0_100": 83.41, "split": "test", "task": "vessel segmentation, D1 test"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "84.31 ± 4.62%", "value_0_100": 84.31, "split": "test", "task": "vessel segmentation, D1 test"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "82.52 ± 6.04%", "value_0_100": 82.52, "split": "test", "task": "vessel segmentation, D1 test"},
+      {"metric": "Completeness (Cr)", "family": "other", "value_raw": "84.83 ± 5.74%", "value_0_100": null, "split": "test", "task": "vessel skeleton, D1 test"},
+      {"metric": "Correctness (Cp)", "family": "other", "value_raw": "76.55 ± 7.29%", "value_0_100": null, "split": "test", "task": "vessel skeleton, D1 test"},
+      {"metric": "AUPRC", "family": "auc", "value_raw": "0.8437", "value_0_100": 84.37, "split": "external", "task": "vessel segmentation, D2 external"},
+      {"metric": "Dice", "family": "dice", "value_raw": "78.49 ± 9.74%", "value_0_100": 78.49, "split": "external", "task": "vessel segmentation, D2 external"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "82.41 ± 11.8%", "value_0_100": 82.41, "split": "external", "task": "vessel segmentation, D2 external"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "75.79 ± 9.86%", "value_0_100": 75.79, "split": "external", "task": "vessel segmentation, D2 external"},
+      {"metric": "Completeness (Cr)", "family": "other", "value_raw": "86.53 ± 13.5%", "value_0_100": null, "split": "external", "task": "vessel skeleton, D2 external"},
+      {"metric": "Correctness (Cp)", "family": "other", "value_raw": "77.78 ± 11.7%", "value_0_100": null, "split": "external", "task": "vessel skeleton, D2 external"},
+      {"metric": "AUPRC", "family": "auc", "value_raw": "0.9018", "value_0_100": 90.18, "split": "test", "task": "vessel segmentation, fine-grained re-segmented subset (10 samples)"},
+      {"metric": "Dice", "family": "dice", "value_raw": "86.20 ± 1.96%", "value_0_100": 86.2, "split": "test", "task": "vessel segmentation, fine-grained re-segmented subset (10 samples)"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "86.26 ± 5.24%", "value_0_100": 86.26, "split": "test", "task": "vessel segmentation, fine-grained re-segmented subset (10 samples)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "86.16 ± 3.27%", "value_0_100": 86.16, "split": "test", "task": "vessel segmentation, fine-grained re-segmented subset (10 samples)"},
+      {"metric": "Completeness (Cr)", "family": "other", "value_raw": "84.00 ± 5.25%", "value_0_100": null, "split": "test", "task": "vessel skeleton, fine-grained re-segmented subset (10 samples)"},
+      {"metric": "Correctness (Cp)", "family": "other", "value_raw": "87.55 ± 6.17%", "value_0_100": null, "split": "test", "task": "vessel skeleton, fine-grained re-segmented subset (10 samples)"}
+    ],
+    "comparators": ["UNet", "RA-UNet", "UNet++", "nnUNet", "VMUNet", "SVS-Net"],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the size of available annotated ICA datasets often constrains the coronary vessels segmentation performance", "section": "introduction"},
+    "G2": {"status": "addresses", "quote": "We additionally perform an external evaluation over 60 images from a local hospital", "section": "abstract"},
+    "G3": {"status": "both", "quote": "we hypothesize that introducing temporal information is fundamental for solving motion-related challenges without complex motion modeling", "section": "introduction"},
+    "G4": {"status": "documents", "quote": "In ICA, the acquired vascular structures always overlap with background structures.", "section": "introduction"},
+    "G5": {"status": "both", "quote": "manual annotation of the entire vascular tree, especially the thin vessels, is time-consuming and difficult due to human errors", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "primarily because dataset D 1 comprises only about 25% of RCA images", "section": "results"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Datasets built from selected high-quality frames; performance on low-quality frames not demonstrated",
+    "Small private external dataset with random case selection increases variance",
+    "Hyperparameters optimized on the public dataset only",
+    "TVS-Net+ batch size limited by GPU resources"
+  ],
+  "future_work": [
+    "Combine with vascular post-processing techniques to further enhance segmentation quality",
+    "Explore time-performance trade-off between manual and automatic segmentation in annotation protocols",
+    "Elucidate impact of partially segmented ground truth on trained segmentation quality"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnnyynyyynnynyyyyynnnyynnynnnyyyyy"
+  }
+}

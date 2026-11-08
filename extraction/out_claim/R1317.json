@@ -1,0 +1,17 @@
+{"record_id": "R1317",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this work, we address these challenges and develop a completely automated approach to accurately and effectively delineate coronary vessels from sequences of consecutive ICA images.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "These sequences were resized to 512 × 512, along with Poisson denoising (Cerciello et al., 2012).", "section": "methods"},
+  "10": {"answer": "yes", "quote": "323 frames were selected from the sequences for annotation. This publicly available dataset contained 323 short sequences, each containing two frames before and one after each annotated frame.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Performing a thorough manual annotation of all vessels in an ICA image is very demanding; thus, gold standard annotations are typically coarse-grained (incomplete).", "section": "results"},
+  "17": {"answer": "yes", "quote": "perform a more comprehensive manual re-segmentation by an expert, aiming at accurately delineating all the vessels in the images regardless of their sizes.", "section": "results"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "yes", "quote": "For direct comparison, we divide the 323 samples into train, validation, and test sets as _Ntrain_ = 173, _Nval_ = 82, and _Ntest_ = 68, respectively, as in Hao et al. (2020).", "section": "methods"},
+  "23": {"answer": "yes", "quote": "all other hyper-parameters set to the default in Pytorch.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "achieve 83.4% Dice and 84.3% recall on the test dataset. We additionally perform an external evaluation over 60 images from a local hospital, achieving 78.5% Dice and 82.4% recall", "section": "abstract"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

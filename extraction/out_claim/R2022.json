@@ -1,0 +1,17 @@
+{"record_id": "R2022",
+ "items": {
+  "6": {"answer": "yes", "quote": "To support decision making for cardiac intervention, we propose a hybrid CNN-Transformer model for the assessment of angiography-based non-invasive fractional flow-reserve (FFR) and instantaneous wave-free ratio (iFR) of intermediate coronary stenosis.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "all samples were resized to 256 × 256 pixel ( _H_ × _W_ from Sect. III-B) and 15 fps (downsampling when needed).", "section": "results"},
+  "10": {"answer": "yes", "quote": "All collected videos were cut to a length of 60 frames by selecting the 4 central seconds of the videos.", "section": "results"},
+  "12": {"answer": "yes", "quote": "_L_ 1 loss terms _L_ FFR and _L_ iFR are occasionally ignored when the corresponding target is not present.", "section": "results"},
+  "15": {"answer": "yes", "quote": "an established guideline method to grade coronary lesions or multi-vessel diseases consists in invasive coronary physiology assessment either using fractional flow reserve (FFR) or, more recently, instantaneous wave-free ratio (iFR)", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "For each exam, the major stenosis was identified by radiologists and labelled as hemodynamically significant if FFR is lower than 0.80 [1], [4], [5], [6] or if iFR is lower than 0.89", "section": "results"},
+  "20": {"answer": "yes", "quote": "the split of the dataset into training, validation, and test sets was performed on a per-patient basis", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The proposed approach was implemented in PyTorch and MONAI", "section": "results"},
+  "26": {"answer": "yes", "quote": "Validation accuracy is used to select the training epoch at which test performance is evaluated", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "reaching an accuracy of about 90%, a sensitivity of 80% and a specificity over 95%.", "section": "discussion"},
+  "38": {"answer": "yes", "quote": "Fig. 4 reports the comparison in terms of ROC and precision-recall curves between our approach and the state-of-the-art methods", "section": "results"}
+ }}

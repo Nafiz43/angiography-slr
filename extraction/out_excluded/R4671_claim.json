@@ -1,0 +1,17 @@
+{"record_id": "R4671",
+ "items": {
+  "6":  {"answer": "yes", "quote": "To develop a new fully automated detection and segmentation deep neural network based framework to assist neurologists in evaluating and contouring intracranial aneurysms", "section": "abstract"},
+  "9":  {"answer": "yes", "quote": "All the frames were rescaled to 512×512 with pixel spacing 0.391 mm", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Only 16 frames around the central frame were", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "two experienced neurologists outlined its boundary on the DSA frame where it was most visible", "section": "methods"},
+  "20": {"answer": "yes", "quote": "347 patients with 2269 DSA sequences were used to train and validate the proposed network and the accuracy test was performed on the remaining 146 patients with 947 DSA sequences", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The network architecture was created by Keras-2.2.0 with TensorFlow-1.4.0 backend.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "the network with the best performance on the validation set that was used for testing", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The system achieved 89.3% sensitivity with bootstrapped 95% confidence intervals (CI) from 83.2% to 95.4%", "section": "results"},
+  "38": {"answer": "yes", "quote": "The patient level sensitivity was 97.7% (95% CI 94.7% to 100.0%)", "section": "results"}
+ }}

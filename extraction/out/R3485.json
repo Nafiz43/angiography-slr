@@ -1,0 +1,205 @@
+{
+  "record_id": "R3485",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Real-time automatic prediction of treatment response to transcatheter arterial chemoembolization in patients with hepatocellular carcinoma using deep learning based on digital subtraction angiography videos",
+    "year": 2022,
+    "venue": "Cancer Imaging",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Pre-TACE DSA videos of the proper or branch hepatic artery (PNG/AVI from PACS), 1021 x 788 resolution",
+    "territory": "abdominopelvic",
+    "territory_detail": "Hepatic artery angiography in hepatocellular carcinoma before TACE",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "20-30",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 605,
+    "n_sequences": 610,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data not publicly available due to patient privacy; available from corresponding author on reasonable request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Two experienced radiologists delineated tumor and liver with Labelme, checked by one experienced interventional radiologist; response assessed by two radiologists (>5 years) checked by an interventional radiologist (8 years)",
+      "inter_rater_reported": true,
+      "inter_rater_value": "ICC 0.930-0.944 for treatment response evaluation between two observers"
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": [
+      "object_detection_localization"
+    ],
+    "task_description": "DSA-Net: a U-Net-based model with temporal difference learning and liver region segmentation segments HCC tumors on DSA video key frames (Model 1); a ResNet18 + MLP model combines key frames, segmentation results and clinical variables to predict response (mRECIST CR/PR vs SD/PD) to the first TACE session (Model 2).",
+    "clinical_application": "Pre-procedural prediction of TACE treatment response and real-time tumor localization in intermediate-stage hepatocellular carcinoma"
+  },
+  "method": {
+    "architecture_names": [
+      "DSA-Net",
+      "U-Net",
+      "temporal difference learning (TDL) module",
+      "liver region segmentation (LRS) sub-network",
+      "final fusion segmentation (FFS) sub-network",
+      "ResNet18",
+      "multi-layer perceptron"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "the learned temporal difference (256 × 256 × 1) by TDL and the predicted liver region masks (256 × 256 × 1) by LRS, were concatenated and fed into this network",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [
+      "clinical variables (demographics, HBV, AFP, liver function and laboratory parameters)"
+    ],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Independent external validation cohort of 121 patients (122 DSA videos) from a second hospital, diagnosed 2016-2020",
+    "metrics": [
+      {"metric": "AUC (treatment response)", "family": "auc", "value_raw": "78.2% (95% CI: 73.8-82.6)", "value_0_100": 78.2, "split": "test", "task": "TACE response prediction (Model 2), internal validation"},
+      {"metric": "Accuracy (treatment response)", "family": "accuracy", "value_raw": "78.2% (95% CI: 74.2-82.3)", "value_0_100": 78.2, "split": "test", "task": "TACE response prediction (Model 2), internal validation"},
+      {"metric": "Sensitivity (treatment response)", "family": "sensitivity_recall", "value_raw": "77.6% (95% CI: 70.7-84.0)", "value_0_100": 77.6, "split": "test", "task": "TACE response prediction (Model 2), internal validation"},
+      {"metric": "Specificity (treatment response)", "family": "specificity", "value_raw": "78.7% (95% CI: 72.9-84.1)", "value_0_100": 78.7, "split": "test", "task": "TACE response prediction (Model 2), internal validation"},
+      {"metric": "PPV (treatment response)", "family": "precision_ppv", "value_raw": "74.4% (95% CI: 67.2-81.4)", "value_0_100": 74.4, "split": "test", "task": "TACE response prediction (Model 2), internal validation"},
+      {"metric": "NPV (treatment response)", "family": "other", "value_raw": "81.5% (95% CI: 75.9-86.8)", "value_0_100": null, "split": "test", "task": "TACE response prediction (Model 2), internal validation"},
+      {"metric": "AUC (treatment response)", "family": "auc", "value_raw": "67.0% (95% CI: 61.2-72.6)", "value_0_100": 67.0, "split": "external", "task": "TACE response prediction (Model 2), external validation"},
+      {"metric": "Accuracy (treatment response)", "family": "accuracy", "value_raw": "75.1% (95% CI: 70.2-79.5)", "value_0_100": 75.1, "split": "external", "task": "TACE response prediction (Model 2), external validation"},
+      {"metric": "Sensitivity (treatment response)", "family": "sensitivity_recall", "value_raw": "50.5% (95% CI: 40.0-61.5)", "value_0_100": 50.5, "split": "external", "task": "TACE response prediction (Model 2), external validation"},
+      {"metric": "Specificity (treatment response)", "family": "specificity", "value_raw": "83.5% (95% CI: 79.2-87.7)", "value_0_100": 83.5, "split": "external", "task": "TACE response prediction (Model 2), external validation"},
+      {"metric": "PPV (treatment response)", "family": "precision_ppv", "value_raw": "51.1% (95% CI: 40.6-61.4)", "value_0_100": 51.1, "split": "external", "task": "TACE response prediction (Model 2), external validation"},
+      {"metric": "NPV (treatment response)", "family": "other", "value_raw": "83.2% (95% CI: 78.9-87.5)", "value_0_100": null, "split": "external", "task": "TACE response prediction (Model 2), external validation"},
+      {"metric": "Dice coefficient", "family": "dice", "value_raw": "0.75 (95% CI: 0.73-0.78)", "value_0_100": 75.0, "split": "test", "task": "HCC tumor segmentation (Model 1, FFS), internal validation"},
+      {"metric": "Dice coefficient", "family": "dice", "value_raw": "0.73 (95% CI: 0.71-0.75)", "value_0_100": 73.0, "split": "external", "task": "HCC tumor segmentation (Model 1, FFS), external validation"},
+      {"metric": "Accuracy (segmentation)", "family": "accuracy", "value_raw": "97.1% (95% CI: 96.8-97.5)", "value_0_100": 97.1, "split": "test", "task": "HCC tumor segmentation (Model 1, FFS), internal validation"},
+      {"metric": "Accuracy (segmentation)", "family": "accuracy", "value_raw": "97.1% (95% CI: 96.7-97.4)", "value_0_100": 97.1, "split": "external", "task": "HCC tumor segmentation (Model 1, FFS), external validation"},
+      {"metric": "Patient-level sensitivity", "family": "sensitivity_recall", "value_raw": "82.3% (95% CI: 79.8-84.8)", "value_0_100": 82.3, "split": "test", "task": "HCC tumor segmentation/detection (Model 1, FFS), internal validation"},
+      {"metric": "Patient-level sensitivity", "family": "sensitivity_recall", "value_raw": "79.0% (95% CI: 76.4-81.1)", "value_0_100": 79.0, "split": "external", "task": "HCC tumor segmentation/detection (Model 1, FFS), external validation"},
+      {"metric": "Specificity (segmentation)", "family": "specificity", "value_raw": "98.4% (95% CI: 98.1-98.6)", "value_0_100": 98.4, "split": "test", "task": "HCC tumor segmentation (Model 1, FFS), internal validation"},
+      {"metric": "Specificity (segmentation)", "family": "specificity", "value_raw": "98.7% (95% CI: 98.5-98.9)", "value_0_100": 98.7, "split": "external", "task": "HCC tumor segmentation (Model 1, FFS), external validation"},
+      {"metric": "Lesion-level sensitivity", "family": "sensitivity_recall", "value_raw": "87.2% (95% CI: 84.4-89.9)", "value_0_100": 87.2, "split": "test", "task": "HCC lesion detection (Model 1, FFS), internal validation"},
+      {"metric": "Lesion-level sensitivity", "family": "sensitivity_recall", "value_raw": "94.3% (95% CI: 92.4-96.2)", "value_0_100": 94.3, "split": "external", "task": "HCC lesion detection (Model 1, FFS), external validation"},
+      {"metric": "False-positive ratio", "family": "other", "value_raw": "23.8% (95% CI: 20.4-27.3)", "value_0_100": null, "split": "test", "task": "HCC lesion detection (Model 1, FFS), internal validation"},
+      {"metric": "False-positive ratio", "family": "other", "value_raw": "30.8% (95% CI: 27.9-33.7)", "value_0_100": null, "split": "external", "task": "HCC lesion detection (Model 1, FFS), external validation"},
+      {"metric": "Video processing time", "family": "time", "value_raw": "10 ms", "value_0_100": null, "split": "external", "task": "HCC tumor segmentation (Model 1)"}
+    ],
+    "comparators": [
+      "U-Net",
+      "U-Net++",
+      "nnU-Net",
+      "Attention U-Net",
+      "U2-Net",
+      "U-Net + TDL",
+      "U-Net + LRS",
+      "ResNet on key frames only",
+      "MLP on clinical data only",
+      "ResNet on key frames + segmentation without clinical data",
+      "Model with ground-truth masks (upper bound)"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/jjjyc/Prediction-of-TACE-response-in-HCC.git"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {
+      "status": "both",
+      "quote": "Thus, large-scale external validations in HBV endemic and non-endemic areas are necessary.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "addresses",
+      "quote": "Considering the specificity of DSA videos, we proposed the novel Model 1 for HCC segmentation, which included a temporal difference learning (TDL) module",
+      "section": "methods"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {
+      "status": "documents",
+      "quote": "First, this was a retrospective study; thus, some bias between the medical record system and real practice is inevitable. Thus, further prospective multicenter studies are needed",
+      "section": "discussion"
+    },
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {
+      "status": "addresses",
+      "quote": "Model 2 integrated the DSA videos, segmentation results, and clinical variables to predict treatment response to the first TACE session",
+      "section": "discussion"
+    },
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {
+      "status": "addresses",
+      "quote": "Kaplan-Meier curves showed a significant difference in progression-free survival between the responders and nonresponders divided by Model 2",
+      "section": "abstract"
+    },
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Small and multiple lesions frequently missed by segmentation",
+    "Motion artifacts and surrounding bowel/stomach interference cause false segmentation",
+    "Different fields of view across operators increase segmentation difficulty",
+    "Patients treated with drug-eluting beads excluded",
+    "Cohort predominantly HBV-related HCC"
+  ],
+  "future_work": [
+    "Prospective multicenter studies to optimize DSA-Net",
+    "Large-scale external validation in HBV endemic and non-endemic areas",
+    "Multitherapy trial to determine real-world clinical benefit",
+    "Integrate pathological results and tumor microenvironment information",
+    "Standardize technical operation procedures for real-world application"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynynyyyyyynnnnynnyyynnyyyyyyynyyyyy"
+  }
+}

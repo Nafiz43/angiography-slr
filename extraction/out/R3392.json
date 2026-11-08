@@ -1,0 +1,112 @@
+{
+  "record_id": "R3392",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Quantitative angiography prognosis of intracranial aneurysm treatment failure using parametric imaging and distal vessel analysis",
+    "year": 2022,
+    "venue": "Proceedings of SPIE--the International Society for Optical Engineering",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Intra-operative DSA, one pre- and one post-coil placement sequence per patient; angiographic parametric imaging (API) maps derived",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial aneurysms treated with endovascular coils; ROI in parent artery distal to aneurysm neck",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 3,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 80,
+    "n_sequences": 80,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Predict six-month occlusion outcome (occluded/not occluded, Raymond-Roy based) of coil-embolized intracranial aneurysms from pre/post-treatment normalized API parameters (TTP, TTA, MTT, PH, AUC) measured in the parent artery distal to the aneurysm, using a dense neural network.",
+    "clinical_application": "Intra-procedural prognosis of coil embolization treatment failure to guide coil placement"
+  },
+  "method": {
+    "architecture_names": ["deep neural network (DNN), 3 dense layers (Keras)"],
+    "architecture_family": "other",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "It does so by tracking the progression of contrast across the DSA sequence at every single pixel and extracting API parameters for every pixel.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.77 ±0.11", "value_0_100": 77.0, "split": "cross_validation", "task": "six-month occlusion outcome prediction (20-fold Monte Carlo CV, 70/30 split)"},
+      {"metric": "accuracy", "family": "accuracy", "value_raw": "78.6%", "value_0_100": 78.6, "split": "cross_validation", "task": "six-month occlusion outcome prediction (20-fold Monte Carlo CV, 70/30 split)"}
+    ],
+    "comparators": ["single-parameter ROC analysis (MTT, TTP, TTA, PH, AUC)"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "we only use 80 cases, this is not an optimal sample size to achieve proper fitting of any model.", "section": "discussion"},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "addresses", "quote": "In order to account for x-ray foreshortening artifacts between pre- and post-treatment DSAs, we divided each parameter", "section": "methods"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "addresses", "quote": "A supervised machine learning algorithm was trained to provide a six-month post procedure binary outcome (occluded/not occluded).", "section": "abstract"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": ["Additional ML algorithm types not explored"],
+  "future_work": ["Expand dataset to at least 500 cases", "Employ data augmentation", "Explore additional ML algorithm types"],
+  "claim2024": {"items": "yyyyyyynnnnynynnyynnnynyynyyynnynnnynnnyynny"}
+}

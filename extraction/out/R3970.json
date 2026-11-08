@@ -1,0 +1,138 @@
+{
+  "record_id": "R3970",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Temporal-Spatial Feature Extraction of DSA Video and Its Application in AVM Diagnosis",
+    "year": 2021,
+    "venue": "Frontiers in Neurology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Anteroposterior position 2D-DSA videos acquired on a Philips UNIQ FD20 biplane system; 6-s acquisition, 166-333 ms/frame",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral angiography (ICA or VA injection) for brain arteriovenous malformation",
+    "acquisition_geometry": "monoplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "usually between 20 and 50 frames",
+    "vendors": ["Philips"]
+  },
+  "dataset": {
+    "n_patients": 305,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Two specialists with >5 years in clinical cerebrovascular disease; a third senior doctor reviewed ambiguous cases",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": ["object_detection_localization"],
+    "task_description": "Faster-RCNN detects key vascular structures (ICA, circle of Willis, veins, venous vessels, venous sinuses) in each DSA frame; their order of appearance is encoded as five binary temporal features, fused with radiomics features from five equally spaced frames, and classified with sparse-representation feature selection plus SVM for AVM diagnosis and Spetzler-Martin high/low grading.",
+    "clinical_application": "Automated diagnosis and grading of brain arteriovenous malformation on DSA"
+  },
+  "method": {
+    "architecture_names": ["Faster-RCNN", "iterative sparse representation (ISR)", "support vector machine (SVM)"],
+    "architecture_family": "detector",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "the appearance order of important vascular structures was quantified as the temporal features",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Fine-tuned Faster-RCNN (pretraining source not stated)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Spetzler-Martin grades merged into high (IV-V) vs low (I-III) classes due to small numbers and imbalance",
+    "uncertainty_quantification": false,
+    "explainability_method": "Feature contribution from sparse representation coefficients",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AP internal carotid artery", "family": "other", "value_raw": "0.922", "value_0_100": null, "split": "test", "task": "vascular structure detection"},
+      {"metric": "AP circle of Willis", "family": "other", "value_raw": "0.991", "value_0_100": null, "split": "test", "task": "vascular structure detection"},
+      {"metric": "AP vein", "family": "other", "value_raw": "0.889", "value_0_100": null, "split": "test", "task": "vascular structure detection"},
+      {"metric": "AP venous sinus", "family": "other", "value_raw": "0.929", "value_0_100": null, "split": "test", "task": "vascular structure detection"},
+      {"metric": "AP venous blood vessel", "family": "other", "value_raw": "0.769", "value_0_100": null, "split": "test", "task": "vascular structure detection"},
+      {"metric": "mAP", "family": "other", "value_raw": "0.902", "value_0_100": null, "split": "test", "task": "vascular structure detection"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.971 (0.947~0.986)", "value_0_100": 97.1, "split": "cross_validation", "task": "AVM diagnosis (combined features, LOO)"},
+      {"metric": "ACC", "family": "accuracy", "value_raw": "0.937", "value_0_100": 93.7, "split": "cross_validation", "task": "AVM diagnosis (combined features, LOO)"},
+      {"metric": "SENS", "family": "sensitivity_recall", "value_raw": "0.911", "value_0_100": 91.1, "split": "cross_validation", "task": "AVM diagnosis (combined features, LOO)"},
+      {"metric": "SPEC", "family": "specificity", "value_raw": "0.967", "value_0_100": 96.7, "split": "cross_validation", "task": "AVM diagnosis (combined features, LOO)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.942 (0.875~0.979)", "value_0_100": 94.2, "split": "test", "task": "AVM diagnosis (combined features, independent testing cohort)"},
+      {"metric": "ACC", "family": "accuracy", "value_raw": "0.889", "value_0_100": 88.9, "split": "test", "task": "AVM diagnosis (combined features, independent testing cohort)"},
+      {"metric": "SENS", "family": "sensitivity_recall", "value_raw": "0.943", "value_0_100": 94.3, "split": "test", "task": "AVM diagnosis (combined features, independent testing cohort)"},
+      {"metric": "SPEC", "family": "specificity", "value_raw": "0.823", "value_0_100": 82.3, "split": "test", "task": "AVM diagnosis (combined features, independent testing cohort)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.871 (0.813~0.916)", "value_0_100": 87.1, "split": "cross_validation", "task": "AVM grading high vs low (combined features)"},
+      {"metric": "ACC", "family": "accuracy", "value_raw": "0.840", "value_0_100": 84.0, "split": "cross_validation", "task": "AVM grading high vs low (combined features)"},
+      {"metric": "SPEC", "family": "specificity", "value_raw": "0.866", "value_0_100": 86.6, "split": "cross_validation", "task": "AVM grading high vs low (combined features)"},
+      {"metric": "SENS", "family": "sensitivity_recall", "value_raw": "0.797", "value_0_100": 79.7, "split": "cross_validation", "task": "AVM grading high vs low (combined features)"}
+    ],
+    "comparators": ["Radiomics features only model", "Temporal features only model"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the number of DSA data is limited in our research, which makes it hard to meet the conditions of deep learning", "section": "discussion"},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "most of the existing medical image diagnosis models are based on static images", "section": "introduction"},
+    "G4": {"status": "documents", "quote": "DSA is a two-dimensional image that cannot describe blood vessels", "section": "discussion"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "documents", "quote": "by combining CTA and DSA videos, more comprehensive modeling of cerebral blood vessels can be carried out", "section": "discussion"},
+    "G9": {"status": "documents", "quote": "Considering the small number of cases and the imbalance of data at all scores", "section": "results"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Cases with large nidus covering vascular structures must be excluded",
+    "Only anteroposterior view used; multiposition images not included",
+    "Faster-RCNN may occasionally misdetect structures in abnormal cases"
+  ],
+  "future_work": [
+    "Combine CTA and DSA videos for more comprehensive cerebrovascular modeling",
+    "Analyze influence of draining and feeding vessels on AVM size",
+    "Collect more samples"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynyyyynyynnnnnnnnynynyynynyyynyynnn"
+  }
+}

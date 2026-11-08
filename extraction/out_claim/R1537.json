@@ -1,0 +1,17 @@
+{"record_id": "R1537",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose a novel vessel-enhancing preprocessing technique using temporal differencing of DSA sequences to improve cerebrovascular segmentation accuracy", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "To emphasize the vascular characteristics, the absolute value of the summed differences between consecutive DSA images in the time series was calculated", "section": "methods"},
+  "10": {"answer": "yes", "quote": "The original 800 × 800-pixel images were cropped to 256 × 256-pixel patches for model input.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "each DSA frame was meticulously labeled by two medical students and subsequently verified by two experienced neurosurgeons. The annotations followed a semi-automatic protocol", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Training was performed using the PyTorch framework (version 2.5.1)", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 1 summarizes the quantitative segmentation performance of the evaluated models, including U-Net++ and DeepLabv3+.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

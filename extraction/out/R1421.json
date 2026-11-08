@@ -1,0 +1,146 @@
+{
+ "record_id": "R1421",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Automated stenosis estimation of coronary angiographies using end-to-end learning",
+  "year": 2025,
+  "venue": "The International Journal of Cardiovascular Imaging",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "Denmark"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Invasive X-ray coronary angiography cine loops (multi-frame)",
+  "territory": "cardiac",
+  "territory_detail": "Left and right coronary arteries, all 16 coronary segments",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": null,
+  "vendors": ["Philips Medical Systems", "GE HealthCare", "Siemens Healthineers"]
+ },
+ "dataset": {
+  "n_patients": 19414,
+  "n_sequences": 332582,
+  "n_images_or_frames": null,
+  "n_centers": 2,
+  "n_vendors": 3,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": false, "detail": "Data access only via application to the Danish Health Data Authority"},
+  "split_level": "patient",
+  "annotation": {
+   "type": "weak_or_derived",
+   "n_annotators": null,
+   "annotator_expertise": "Stenosis labels from clinical visual assessment registered by interventional cardiologists in the Eastern Denmark Heart Registry; LCA/RCA/other cine loop labels manually annotated (by first author) on a subset of 18,058 cine loops",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "disease_classification_grading",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "R(2+1)D video models classify cine loops as LCA/RCA/other for automated curation, then separate LCA and RCA multi-output regression models estimate diameter stenosis on all 16 coronary segments; evaluated against visual assessment, 3D QCA and FFR.",
+  "clinical_application": "Automated stenosis assessment during invasive coronary angiography as faster, more objective alternative to visual assessment/QCA"
+ },
+ "method": {
+  "architecture_names": ["R2D + 1 (R(2+1)D)", "MemVIT (supplemental alternative)"],
+  "architecture_family": "cnn_classifier",
+  "temporal_category": "cnn3d_video",
+  "temporal_evidence": {
+   "quote": "The R2D + 1 block can be interpreted as a combination of spatial and temporal filters, but with non-linearity between the two operations, extracting non-linear relations between spatial and temporal features.",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": "Grad-CAM saliency maps",
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "external_validation",
+  "external_validation_detail": "608 patients from Skejby Hospital (Central Denmark Region), CTA-prescreened, Philips and Siemens systems; evaluated against visual assessment, 3D QCA (Medis QAngio XA 3D) and FFR",
+  "metrics": [
+   {"metric": "Macro F1 (cine loop LCA/RCA/other classification)", "family": "f1", "value_raw": "0.972", "value_0_100": 97.2, "split": "test", "task": "cine loop classification"},
+   {"metric": "MAE vs visual assessment", "family": "error_distance", "value_raw": "0.178", "value_0_100": null, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Pearson r vs visual assessment", "family": "correlation", "value_raw": "0.661", "value_0_100": null, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "ROC AUC significant stenosis (>70%)", "family": "auc", "value_raw": "0.903", "value_0_100": 90.3, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "PR AUC significant stenosis", "family": "auc", "value_raw": "0.693", "value_0_100": 69.3, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "F1", "family": "f1", "value_raw": "0.637", "value_0_100": 63.7, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.681", "value_0_100": 68.1, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Specificity", "family": "specificity", "value_raw": "0.922", "value_0_100": 92.2, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.599", "value_0_100": 59.9, "split": "test", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "MAE vs visual assessment", "family": "error_distance", "value_raw": "0.186", "value_0_100": null, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Pearson r vs visual assessment", "family": "correlation", "value_raw": "0.345 (Table 2; text reports 0.386)", "value_0_100": null, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "ROC AUC significant stenosis (>70%)", "family": "auc", "value_raw": "0.833", "value_0_100": 83.3, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "PR AUC significant stenosis", "family": "auc", "value_raw": "0.219", "value_0_100": 21.9, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "F1", "family": "f1", "value_raw": "0.314", "value_0_100": 31.4, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.548", "value_0_100": 54.8, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Specificity", "family": "specificity", "value_raw": "0.901", "value_0_100": 90.1, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.220", "value_0_100": 22.0, "split": "external", "task": "stenosis estimation vs visual assessment"},
+   {"metric": "ROC AUC FFR <= 0.80", "family": "auc", "value_raw": "0.651", "value_0_100": 65.1, "split": "test", "task": "hemodynamically significant stenosis (FFR)"},
+   {"metric": "MAE vs FFR", "family": "error_distance", "value_raw": "0.157", "value_0_100": null, "split": "test", "task": "FFR prediction"},
+   {"metric": "ROC AUC FFR <= 0.80", "family": "auc", "value_raw": "0.780", "value_0_100": 78.0, "split": "external", "task": "hemodynamically significant stenosis (FFR)"},
+   {"metric": "MAE vs FFR", "family": "error_distance", "value_raw": "0.120", "value_0_100": null, "split": "external", "task": "FFR prediction"},
+   {"metric": "Pearson r vs FFR", "family": "correlation", "value_raw": "0.441", "value_0_100": null, "split": "external", "task": "FFR prediction"},
+   {"metric": "ROC AUC QCA diameter stenosis >70%", "family": "auc", "value_raw": "0.798", "value_0_100": 79.8, "split": "external", "task": "QCA stenosis prediction"},
+   {"metric": "MAE vs QCA", "family": "error_distance", "value_raw": "0.210", "value_0_100": null, "split": "external", "task": "QCA stenosis prediction"},
+   {"metric": "Pearson r vs QCA", "family": "correlation", "value_raw": "0.477", "value_0_100": null, "split": "external", "task": "QCA stenosis prediction"}
+  ],
+  "comparators": ["Visual assessment (cardiologists)", "FFR as predictor of QCA", "DeepCoro (reported results)", "CathAI (reported results)", "MemVIT backbone (supplemental)"],
+  "compared_with_humans": true,
+  "ablation": false,
+  "statistical_testing": true,
+  "confidence_intervals": true,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "many of these advancements have been based on small datasets only considering single CAG frames", "section": "discussion"},
+  "G2": {"status": "both", "quote": "the stenosis estimation models are not guaranteed to generalize to patient cohorts with other inclusion/exclusion criteria", "section": "discussion"},
+  "G3": {"status": "both", "quote": "many of these advancements have been based on small datasets only considering single CAG frames", "section": "discussion"},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "documents", "quote": "The visual assessment of a stenosis has a high observer variance", "section": "introduction"},
+  "G6": {"status": "documents", "quote": "Future research should focus on improving the models and investigating the effect of the estimated values on the treatment compared with traditional methods.", "section": "conclusion"},
+  "G7": {"status": "addresses", "quote": "Figure 4 presents saliency maps highlighting regions influencing the stenoses predictions.", "section": "results"},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Trained on visual assessment labels; no QCA available for training",
+  "FFR available only for borderline and technically feasible segments",
+  "Visual assessments not blinded to FFR, possibly biased",
+  "Poor performance predicting FFR-defined hemodynamic significance versus visual assessment",
+  "No demographics available for external test set"
+ ],
+ "future_work": [
+  "Train on QCA or FFR targets",
+  "Train on visual assessments from multiple observers",
+  "Improve prediction of hemodynamically significant stenosis (FFR)",
+  "Investigate effect of estimated stenosis on treatment versus traditional methods"
+ ],
+ "claim2024": {"items": "ynyyynyyyyyyyynnyynnyynnnnyyynyyyyyyyynyyyyy"}
+}

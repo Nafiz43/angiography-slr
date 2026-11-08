@@ -1,0 +1,17 @@
+=== VENUE DOMINANCE ANALYSIS ===
+
+Total papers: 188
+Total unique venues: 118
+
+--- Dominance (Top-k Share) ----
+Top 1 venue:  0.053
+Top 3 venues: 0.154
+Top 5 venues: 0.223
+Top 10 venues:0.309
+
+--- Concentration ----
+HHI: 0.0171
+
+--- Long Tail ----
+Singleton venues (1 paper): 90
+Singleton ratio: 0.763

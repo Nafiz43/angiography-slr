@@ -1,0 +1,17 @@
+{"record_id": "R2491",
+ "items": {
+  "6": {"answer": "yes", "quote": "We have proposed MoSt-DSA, the first work that uses deep learning for DSA frame interpolation, to reduce radiation dose in DSA imaging significantly.", "section": "conclusion"},
+  "9": {"answer": "yes", "quote": "We crop each frame to a resolution of 320 × 320 and apply random flip and rotation for augmentation.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For each sequence targeting n-frame interpolation, we arrange it into several groups, each with consecutive n + 2 frames. Adjacent groups start one frame apart.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "na", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "We collected 470 head DSA image sequences from 8 hospitals, each from a different patient, typically containing 152 images of 489x489 resolution. These were split into 329 for training and 141 for testing", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "the Mean indicates that the best r for interpolating frames 1 to 3 is 29, 29, and 21, respectively.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "MoSt-DSA demonstrates robust results across 470 DSA image sequences (each typically 152 images), with average SSIM over 0.93, average PSNR over 38 (standard deviations of less than 0.030 and 3.6, respectively)", "section": "abstract"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

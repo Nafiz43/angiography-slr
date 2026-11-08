@@ -1,0 +1,169 @@
+{
+  "record_id": "R0554",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automated Coronary Artery Disease Detection Using a CNN Model with Temporal Attention",
+    "year": 2026,
+    "venue": "medRxiv",
+    "publication_type": "preprint",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "other",
+    "modality_detail": "Cardiac MRI DICOM images from the public Sunnybrook dataset (paper frames the work as coronary angiogram analysis, but the data actually used is cardiac MRI)",
+    "territory": "cardiac",
+    "territory_detail": "Cardiac MRI; coronary artery disease detection",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 10,
+    "n_sequences": null,
+    "n_images_or_frames": 220,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "Sunnybrook cardiac MRI dataset"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary classification of coronary artery disease from cardiac MRI DICOM images using a pretrained ResNet18 with a temporal attention mechanism.",
+    "clinical_application": "Automated CAD detection to assist healthcare professionals in clinical workflows"
+  },
+  "method": {
+    "architecture_names": [
+      "ResNet18",
+      "temporal attention mechanism"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "transformer_ssm",
+    "temporal_evidence": {
+      "quote": "improved its ability to focus on relevant temporal features across cardiac MRI image sequences",
+      "section": "methods"
+    },
+    "input_dimensionality": "not_reported",
+    "supervision": "fully_supervised",
+    "pretraining": "Pre-trained ResNet18 (source of pretraining not stated)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "none",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Accuracy (final training cycle)",
+        "family": "accuracy",
+        "value_raw": "0.9787",
+        "value_0_100": 97.87,
+        "split": "other",
+        "task": "CAD detection (reported over training cycle)"
+      },
+      {
+        "metric": "Precision",
+        "family": "precision_ppv",
+        "value_raw": "100%",
+        "value_0_100": 100.0,
+        "split": "other",
+        "task": "CAD detection (reported over training cycle)"
+      },
+      {
+        "metric": "Recall",
+        "family": "sensitivity_recall",
+        "value_raw": "0.9565",
+        "value_0_100": 95.65,
+        "split": "other",
+        "task": "CAD detection (reported over training cycle)"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.9982",
+        "value_0_100": 99.82,
+        "split": "other",
+        "task": "CAD detection (reported over training cycle)"
+      }
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {
+      "status": "both",
+      "quote": "One of the key limitations of conventional CNNs is their inability to model temporal relationships in sequential medical imaging data.",
+      "section": "introduction"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Limited data augmentation (normalization only)",
+    "Computational efficiency not optimized"
+  ],
+  "future_work": [
+    "More advanced data augmentation (elastic deformations, intensity adjustments)",
+    "Model pruning and optimization for computational efficiency"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnnnnnnnnnnnyyynynnnnnnnnnnnnnynnn"
+  }
+}

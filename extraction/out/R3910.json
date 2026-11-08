@@ -1,0 +1,259 @@
+{
+  "record_id": "R3910",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Real-time respiratory motion compensated roadmaps for hepatic arterial interventions",
+    "year": 2021,
+    "venue": "Medical Physics",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Nonsubtracted noncontrast and contrast-enhanced prenavigational X-ray sequences plus live fluoroscopy (in vivo porcine); mask subtraction used to extract vasculature for roadmap",
+    "territory": "abdominopelvic",
+    "territory_detail": "Hepatic arteries (porcine liver)",
+    "acquisition_geometry": "monoplane",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": "Prenavigational: median 163 noncontrast and 266 contrast-enhanced frames; marker sequences approx. 12 s",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 7,
+    "n_sequences": 41,
+    "n_images_or_frames": 20413,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data available from the corresponding author upon reasonable request"
+    },
+    "split_level": "na",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "motion_correction_registration",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Respiratory motion compensated roadmapping: patient-specific affine vessel motion model built from prenavigational free-breathing mask/fill sequences, respiratory state tracked from live fluoroscopy via diaphragm intensity centroid, combined with deep-learning guidewire/catheter segmentation for real-time compensated roadmap (CRD) or inverse compensated device (ICDD) displays.",
+    "clinical_application": "Device navigation during hepatic arterial interventions (embolization, chemoembolization, radioembolization)"
+  },
+  "method": {
+    "architecture_names": [
+      "modified SegNet"
+    ],
+    "architecture_family": "non_learning",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "is selected and registered to all remaining frames using an affine transformation",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "prospective",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Average Euclidean distance VM estimate vs marker (LMM)",
+        "family": "error_distance",
+        "value_raw": "1.23 mm (95% CI = (0.95, 1.51))",
+        "value_0_100": null,
+        "split": "test",
+        "task": "vessel motion estimation"
+      },
+      {
+        "metric": "Median Euclidean distance across animals (min, max)",
+        "family": "error_distance",
+        "value_raw": "1.08 mm (0.92 mm, 1.87 mm)",
+        "value_0_100": null,
+        "split": "test",
+        "task": "vessel motion estimation"
+      },
+      {
+        "metric": "MSE x-coordinate per swine (min, median, max)",
+        "family": "error_distance",
+        "value_raw": "0.19, 0.53, 3.63 mm",
+        "value_0_100": null,
+        "split": "test",
+        "task": "vessel motion estimation"
+      },
+      {
+        "metric": "MSE y-coordinate per swine (min, median, max)",
+        "family": "error_distance",
+        "value_raw": "0.78, 1.24, 2.37 mm",
+        "value_0_100": null,
+        "split": "test",
+        "task": "vessel motion estimation"
+      },
+      {
+        "metric": "Median probability wire tip in vessel roadmap, CRD (min, max)",
+        "family": "accuracy",
+        "value_raw": "86% (46%, 96%)",
+        "value_0_100": 86.0,
+        "split": "test",
+        "task": "device display accuracy (CRD)"
+      },
+      {
+        "metric": "Median probability wire tip in vessel roadmap, ICDD (min, max)",
+        "family": "accuracy",
+        "value_raw": "86% (45%, 96%)",
+        "value_0_100": 86.0,
+        "split": "test",
+        "task": "device display accuracy (ICDD)"
+      },
+      {
+        "metric": "Odds ratio wire tip in vessel vs noncompensated, CRD",
+        "family": "other",
+        "value_raw": "OR = 3.12, 95% CI = (2.96, 3.30), p < 0.0001",
+        "value_0_100": null,
+        "split": "test",
+        "task": "device display accuracy (CRD)"
+      },
+      {
+        "metric": "Odds ratio wire tip in vessel vs noncompensated, ICDD",
+        "family": "other",
+        "value_raw": "OR = 3.12, 95% CI = (2.96, 3.29), p < 0.0001",
+        "value_0_100": null,
+        "split": "test",
+        "task": "device display accuracy (ICDD)"
+      },
+      {
+        "metric": "Processing time per frame during navigation",
+        "family": "time",
+        "value_raw": "17.23 ± 1.70 ms",
+        "value_0_100": null,
+        "split": "test",
+        "task": "real-time performance"
+      },
+      {
+        "metric": "Average processing time per frame for prenavigational model",
+        "family": "time",
+        "value_raw": "0.76 ± 0.35 s",
+        "value_0_100": null,
+        "split": "test",
+        "task": "motion model generation"
+      },
+      {
+        "metric": "Prenavigational motion model generation time (range)",
+        "family": "time",
+        "value_raw": "7.71 s to 109.55 s",
+        "value_0_100": null,
+        "split": "test",
+        "task": "motion model generation"
+      },
+      {
+        "metric": "MAE respiratory state full FoV vs RoIs",
+        "family": "other",
+        "value_raw": "0.037 ± 0.022",
+        "value_0_100": null,
+        "split": "test",
+        "task": "respiratory state estimation robustness (FoV)"
+      },
+      {
+        "metric": "MAE respiratory state cine vs fluoroscopy quality",
+        "family": "other",
+        "value_raw": "0.049 ± 0.039",
+        "value_0_100": null,
+        "split": "test",
+        "task": "respiratory state estimation robustness (image quality)"
+      }
+    ],
+    "comparators": [
+      "noncompensated display (static roadmap)"
+    ],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "prospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": true,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {
+      "status": "documents",
+      "quote": "the study was performed using a normal porcine model with continuous ventilation, which does not perfectly replicate, but closely approximates, human hepatic arterial anatomy and respiratory motion",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "addresses",
+      "quote": "The purpose of the motion model is to establish a mapping function between respiratory state and vessel deformation.",
+      "section": "methods"
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "Changes in the C-arm angulation would require repeating the initial scans to create a new 2D roadmap and recalculate the motion model.",
+      "section": "discussion"
+    },
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {
+      "status": "both",
+      "quote": "most previous studies were evaluated through retrospective analysis of clinical or phantom images, while the proposed system was implemented in real-time and evaluated in prospective animal studies",
+      "section": "introduction"
+    },
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Stiff microcatheters/guidewires deform vessels, not accounted for in motion model",
+    "Affine transform may not fully describe motion of smaller vessels",
+    "Cone-beam divergence effects with table movement not evaluated",
+    "Large changes in breathing type (abdominal vs chest) may cause motion estimation errors"
+  ],
+  "future_work": [
+    "Substitute more flexible motion models such as motion vector fields",
+    "Apply alternative respiratory signal extraction approaches",
+    "Combine ICDD and moving roadmap in side-by-side display",
+    "Verbal coaching to reduce large breathing changes during procedures",
+    "Translation to clinical practice"
+  ],
+  "claim2024": {
+    "items": "yyyynyynnyayyynnaaaaaynnynyyyynynyyyyynyyyyy"
+  }
+}

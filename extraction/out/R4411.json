@@ -1,0 +1,154 @@
+{
+  "record_id": "R4411",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Dynamic coronary roadmapping via catheter tip tracking in X-ray fluoroscopy with deep learning based Bayesian filtering",
+    "year": 2020,
+    "venue": "Medical Image Analysis",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Netherlands"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Non-contrast X-ray fluoroscopic frames and contrast-enhanced X-ray angiography frames (for roadmaps) from clinical PCI sequences, with ECG",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries during percutaneous coronary intervention; guiding catheter tip tracking",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": null,
+    "vendors": ["Siemens"]
+  },
+  "dataset": {
+    "n_patients": 55,
+    "n_sequences": 388,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "catheter_device_tracking",
+    "other_label": null,
+    "secondary_tasks": ["motion_correction_registration"],
+    "task_description": "Online tracking of the guiding catheter tip in X-ray fluoroscopy with a CNN-based likelihood inside an optical-flow-driven particle filter, used to compensate respiratory motion in dynamic coronary roadmapping (cardiac motion compensated by ECG matching).",
+    "clinical_application": "Dynamic coronary roadmapping for image guidance during PCI with reduced contrast use"
+  },
+  "method": {
+    "architecture_names": [
+      "U-net-like encoder-decoder with residual blocks (joint catheter segmentation and tip detection)",
+      "Particle filter (sampling importance resampling)",
+      "Farneback optical flow"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "In this work, we estimated the motion from adjacent frames using an optical flow method",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": ["ECG"],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Mean tip tracking error of all images (mm)", "family": "error_distance", "value_raw": "1.29±1.76", "value_0_100": null, "split": "test", "task": "catheter tip tracking (manual initialization)"},
+      {"metric": "Median tip tracking error of all images (mm)", "family": "error_distance", "value_raw": "0.96", "value_0_100": null, "split": "test", "task": "catheter tip tracking (manual initialization)"},
+      {"metric": "Maximal tip tracking error of all images (mm)", "family": "error_distance", "value_raw": "17.72", "value_0_100": null, "split": "test", "task": "catheter tip tracking (manual initialization)"},
+      {"metric": "Average of sequence median error (mm)", "family": "error_distance", "value_raw": "1.03±0.49", "value_0_100": null, "split": "test", "task": "catheter tip tracking (manual initialization)"},
+      {"metric": "Average of sequence mean error (mm)", "family": "error_distance", "value_raw": "1.29±0.94", "value_0_100": null, "split": "test", "task": "catheter tip tracking (manual initialization)"},
+      {"metric": "Mean tip tracking error (mm)", "family": "error_distance", "value_raw": "5.16±13.91", "value_0_100": null, "split": "test", "task": "catheter tip tracking (automatic initialization)"},
+      {"metric": "Median tip tracking error (mm)", "family": "error_distance", "value_raw": "0.96", "value_0_100": null, "split": "test", "task": "catheter tip tracking (automatic initialization)"},
+      {"metric": "Maximal tip tracking error (mm)", "family": "error_distance", "value_raw": "98.58", "value_0_100": null, "split": "test", "task": "catheter tip tracking (automatic initialization)"},
+      {"metric": "Mean error of inliers (mm)", "family": "error_distance", "value_raw": "1.34±2.15", "value_0_100": null, "split": "test", "task": "catheter tip tracking (automatic initialization)"},
+      {"metric": "DCR mean distance, all point pairs (mm)", "family": "error_distance", "value_raw": "2.07±2.08", "value_0_100": null, "split": "test", "task": "dynamic coronary roadmapping"},
+      {"metric": "DCR median distance, all point pairs (mm)", "family": "error_distance", "value_raw": "1.43", "value_0_100": null, "split": "test", "task": "dynamic coronary roadmapping"},
+      {"metric": "DCR maximal distance, all point pairs (mm)", "family": "error_distance", "value_raw": "20.24", "value_0_100": null, "split": "test", "task": "dynamic coronary roadmapping"},
+      {"metric": "DCR frame mean distance, median (mm)", "family": "error_distance", "value_raw": "1.42", "value_0_100": null, "split": "test", "task": "dynamic coronary roadmapping"},
+      {"metric": "DCR frame mean distance, average (mm)", "family": "error_distance", "value_raw": "1.91±1.52", "value_0_100": null, "split": "test", "task": "dynamic coronary roadmapping"},
+      {"metric": "Total tracking time (ms/frame)", "family": "time", "value_raw": "54.5±12.3", "value_0_100": null, "split": "test", "task": "catheter tip tracking runtime"},
+      {"metric": "Deep learning likelihood time (ms/frame)", "family": "time", "value_raw": "31.5±10.3", "value_0_100": null, "split": "test", "task": "catheter tip tracking runtime"},
+      {"metric": "Particle filtering time (ms/frame)", "family": "time", "value_raw": "23.0±8.7", "value_0_100": null, "split": "test", "task": "catheter tip tracking runtime"},
+      {"metric": "Mean validation detection error (mm)", "family": "error_distance", "value_raw": "2.04", "value_0_100": null, "split": "validation", "task": "catheter tip detection network"}
+    ],
+    "comparators": [
+      "Optical Flow (previous)",
+      "Optical Flow (first)",
+      "Detection Net only",
+      "DCR without tracking (ECG matching only)",
+      "DCR with manual tip tracking",
+      "Tracking without catheter segmentation"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "documents", "quote": "As the data used in this study was acquired from one hospital using a machine from a single vendor, it would be interesting to evaluate the proposed approach on multi-center data acquired with machines from different vendors.", "section": "discussion"},
+    "G3": {"status": "both", "quote": "our approach takes into account of the information between frames; the Bayesian filtering framework allows interaction between temporal information and the detection of a convolutional neural network, making the tracking more robust.", "section": "discussion"},
+    "G4": {"status": "documents", "quote": "the whole DCR approach works only when the offline and online phase have the same view angle, i.e. it is a 2D roadmapping system.", "section": "discussion"},
+    "G5": {"status": "both", "quote": "As the segmentation labels are often more expensive to acquire than the detection label in practice, we also investigated the performance of catheter tip detection, tracking and dynamic coronary roadmapping without segmenting the catheter.", "section": "other"},
+    "G6": {"status": "documents", "quote": "it would be also interesting to validate our approach during PCI procedures in an environment simulating the real clinical settings.", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Only regular ECG signals in the data; irregular ECG not validated",
+    "Automatic initialization fails with residual contrast agent or multiple catheters",
+    "Discrete offline roadmaps and inter-cycle cardiac variation limit cardiac motion compensation",
+    "Uncertainty in manual offline tip annotation when contrast covers the catheter tip",
+    "Guidewire used as surrogate for vessel centerline in roadmapping evaluation"
+  ],
+  "future_work": [
+    "Evaluate on multi-center, multi-vendor data",
+    "Validate on data with irregular ECG",
+    "Validate during PCI in a simulated clinical environment",
+    "Develop a 3D DCR system working with various online view angles",
+    "Interpolate frames between stored roadmaps",
+    "Parallelize deep learning and particle filtering steps on multiple GPUs"
+  ],
+  "claim2024": {
+    "items": "ynyyynyyynynyynnyyynyynyyyyynynynyyynnnyyyny"
+  }
+}

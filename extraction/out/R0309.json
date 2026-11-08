@@ -1,0 +1,163 @@
+{
+  "record_id": "R0309",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep learning for estimating right ventricular function from routine coronary angiography",
+    "year": 2026,
+    "venue": "European Heart Journal - Digital Health",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Routine cine coronary angiography of the right coronary artery (LAO and RAO projections)",
+    "territory": "cardiac",
+    "territory_detail": "Right coronary artery angiograms used to estimate right ventricular systolic function",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "First 72 frames extracted, first 15 removed; 16 to 48 frames tested as model input",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 9849,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 3,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data cannot be shared publicly; de-identified data may be made available upon reasonable request subject to data use agreements"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": null,
+      "annotator_expertise": "Labels derived from RV systolic function documented on transthoracic echocardiogram within 30 days",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary classification of right ventricular systolic function (normal vs abnormal; any RV dysfunction >=mild and significant RV dysfunction >=mild-moderate) from two RCA cine angiograms (LAO and RAO) using two X3D 3D CNNs fused by an MLP; also an ensemble with an ECG-based model and survival analysis of model predictions.",
+    "clinical_application": "Opportunistic real-time screening for RV dysfunction in the cath lab during routine coronary angiography"
+  },
+  "method": {
+    "architecture_names": [
+      "X3D",
+      "MLP",
+      "DCNN (AI-ECG)",
+      "AI-ECG + AI-Cath ensemble"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "Our proposed approach includes two 3D CNNs (each of which accepts one cine image per patient as input), concatenates their outcome, passes through a multilayer perceptron (MLP)",
+      "section": "methods"
+    },
+    "input_dimensionality": "multi_view",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [
+      "12-lead ECG"
+    ],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Grad-CAM",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUC", "family": "auc", "value_raw": "0.82 (95% CI: 0.80-0.84)", "value_0_100": 82.0, "split": "test", "task": "any RV dysfunction (AI-Cath)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.75", "value_0_100": 75.0, "split": "test", "task": "any RV dysfunction (AI-Cath)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.74", "value_0_100": 74.0, "split": "test", "task": "any RV dysfunction (AI-Cath)"},
+      {"metric": "PR-AUC", "family": "auc", "value_raw": "0.67", "value_0_100": 67.0, "split": "test", "task": "any RV dysfunction (AI-Cath)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.83 (95% CI: 0.80-0.86)", "value_0_100": 83.0, "split": "test", "task": "significant RV dysfunction (AI-Cath)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.82", "value_0_100": 82.0, "split": "test", "task": "significant RV dysfunction (AI-Cath)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.70", "value_0_100": 70.0, "split": "test", "task": "significant RV dysfunction (AI-Cath)"},
+      {"metric": "PR-AUC", "family": "auc", "value_raw": "0.42", "value_0_100": 42.0, "split": "test", "task": "significant RV dysfunction (AI-Cath)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.83 (0.81, 0.85)", "value_0_100": 83.0, "split": "test", "task": "any RV dysfunction (AI-ECG + AI-Cath)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.75", "value_0_100": 75.0, "split": "test", "task": "any RV dysfunction (AI-ECG + AI-Cath)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.76", "value_0_100": 76.0, "split": "test", "task": "any RV dysfunction (AI-ECG + AI-Cath)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.87 (0.84-0.89)", "value_0_100": 87.0, "split": "test", "task": "significant RV dysfunction (AI-ECG + AI-Cath)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.81", "value_0_100": 81.0, "split": "test", "task": "significant RV dysfunction (AI-ECG + AI-Cath)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.76", "value_0_100": 76.0, "split": "test", "task": "significant RV dysfunction (AI-ECG + AI-Cath)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.80 (0.78, 0.83)", "value_0_100": 80.0, "split": "test", "task": "any RV dysfunction (RAO projection only)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.77 (0.75, 0.80)", "value_0_100": 77.0, "split": "test", "task": "any RV dysfunction (LAO projection only)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.82 (0.78, 0.85)", "value_0_100": 82.0, "split": "test", "task": "significant RV dysfunction (RAO projection only)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.79 (0.76, 0.83)", "value_0_100": 79.0, "split": "test", "task": "significant RV dysfunction (LAO projection only)"}
+    ],
+    "comparators": [
+      "AI-ECG model",
+      "Single-projection models (RAO only, LAO only)"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "documents", "quote": "we did not perform external validation of the algorithms for 2 reasons (a) the inability to identify a sufficiently large external dataset with angiography and RV function assessment", "section": "discussion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "documents", "quote": "The clinical usefulness of these data requires validation in prospective studies.", "section": "discussion"},
+    "G7": {"status": "addresses", "quote": "To investigate the model interpretability, Grad-CAM activation maps were generated for the two utilized projections", "section": "results"},
+    "G8": {"status": "addresses", "quote": "our study is the first to document that using multi-input data (ECG and angiography) readily available in the Cath lab during angiography is superior to a single input", "section": "discussion"},
+    "G9": {"status": "documents", "quote": "we were unable to evaluate model performance in patients with specific high-risk conditions such as acute STEMI or pulmonary embolism", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "addresses", "quote": "the presence of RV dysfunction identified by the AI tool was associated with higher allcause mortality", "section": "results"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Echocardiography as imperfect reference standard for RV function",
+    "30-day window between echocardiography and angiography may introduce bias",
+    "Variability in echo assessment of RV function across labs",
+    "Heart rate at angiography not consistently available"
+  ],
+  "future_work": [
+    "External validation via research consortia or recurring local validation",
+    "Prospective pragmatic study of clinical utility",
+    "Combining angiography with invasive haemodynamic parameters",
+    "Single procedural dashboard integrating RV, LV dysfunction and LV filling pressure models",
+    "Evaluation in high-risk subgroups such as STEMI and pulmonary embolism"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynynynnynnnnnnnnnyyyyyynynyyyyyyyyy"
+  }
+}

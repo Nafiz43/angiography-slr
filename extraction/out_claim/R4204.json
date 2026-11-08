@@ -1,0 +1,17 @@
+{"record_id": "R4204",
+ "items": {
+  "6": {"answer": "yes", "quote": "We report an automated analysis pipeline based on deep learning to rapidly and objectively assess coronary angiograms, highlight coronary vessels of interest, and quantify potential stenosis.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "the new model was trained on images resized to 128x128 pixels while reusing the weights of the previous phase", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Our algorithm then selected 5 frames with the highest scores from each video sequence.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Evaluation results are obtained from the only 48 videos with available clinical assessments of the percent stenosis.", "section": "results"},
+  "15": {"answer": "yes", "quote": "The model performance was partly hindered by “noisy” ground truth labels due to inter-observer variations among our human readers", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Key frames were labeled by student research assistants (C.Z., T.V.D., H.K.) trained and supervised by an interventional cardiologist (J.Y.) and postdoctoral researcher (K.L.).", "section": "methods"},
+  "20": {"answer": "yes", "quote": "With patient-level splitting, every nontest set patient appears exactly once in the validation set", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "key frame extraction top-5 precision of 98.4%, vessel segmentation F1-Score of 0.891 and stenosis measurement 20.7% Type I Error rate", "section": "abstract"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

@@ -1,0 +1,230 @@
+{
+  "record_id": "R1263",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Minimizing Human-Induced Variability in Quantitative Angiography for Robust and Explainable AI-Based Occlusion Prediction",
+    "year": 2025,
+    "venue": "arXiv",
+    "publication_type": "preprint",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Dynamic DSA sequences at pre-treatment, post-treatment and follow-up; 2D quantitative angiography from time density curves",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial aneurysms treated with flow diverters",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 458,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "Single-institution clinical data"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "Occlusion outcome by neurosurgeons from follow-up DSA; ROIs drawn by neurosurgeon fellows and residents with 2 years of neuro-intervention experience",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": [
+      "contrast_flow_analysis"
+    ],
+    "task_description": "SVD-based deconvolution of the aneurysm time density curve by the parent artery input and reconvolution with a standardized injection curve to remove injection bias from QA parameters, followed by a DNN predicting six-month occlusion of flow-diverter-treated intracranial aneurysms, with LIME explanations.",
+    "clinical_application": "Prognosis of six-month occlusion after flow diverter treatment of intracranial aneurysms; intraoperative decision support"
+  },
+  "method": {
+    "architecture_names": [
+      "Deep neural network (fully connected, Keras)",
+      "SVD-based deconvolution",
+      "LIME"
+    ],
+    "architecture_family": "other",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "we reconvolved the IRF with a standardized injection profile to obtain a clinically relevant and injection-invariant TDC (Qnew) of the IA dome",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "LIME",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "AUROC (relative SVD-corrected QA parameters)",
+        "family": "auc",
+        "value_raw": "0.79 ± 0.02",
+        "value_0_100": 79.0,
+        "split": "cross_validation",
+        "task": "six-month occlusion prediction"
+      },
+      {
+        "metric": "Accuracy (relative SVD-corrected QA parameters, all features incl. AUC-0.5 to AUC-2.0)",
+        "family": "accuracy",
+        "value_raw": "0.73 ± 0.01",
+        "value_0_100": 73.0,
+        "split": "cross_validation",
+        "task": "six-month occlusion prediction"
+      },
+      {
+        "metric": "Sensitivity",
+        "family": "sensitivity_recall",
+        "value_raw": "67.61 ± 1.93%",
+        "value_0_100": 67.61,
+        "split": "cross_validation",
+        "task": "six-month occlusion prediction"
+      },
+      {
+        "metric": "Specificity",
+        "family": "specificity",
+        "value_raw": "76.19 ± 1.12%",
+        "value_0_100": 76.19,
+        "split": "cross_validation",
+        "task": "six-month occlusion prediction"
+      },
+      {
+        "metric": "Accuracy (relative SVD-corrected QA parameters, six-feature set Cor, TTP, MTT, PH, AUC, Max-Gr)",
+        "family": "accuracy",
+        "value_raw": "0.71 ± 0.01",
+        "value_0_100": 71.0,
+        "split": "cross_validation",
+        "task": "six-month occlusion prediction"
+      }
+    ],
+    "comparators": [
+      "DNN trained on uncorrected (no-SVD) QA parameters",
+      "DNN trained on single QA parameters",
+      "Pre-treatment and post-treatment only feature sets"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "our study was limited by the relatively small sample size, single-center retrospective data collection and self-adjudicated outcomes",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "both",
+      "quote": "Further large-scale study across multiple institutions would enhance the robustness of the DNN",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "One of the limitations of this study is foreshortening due to the 2D nature of the imaging system",
+      "section": "discussion"
+    },
+    "G5": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "single-center retrospective data collection and self-adjudicated outcomes",
+      "section": "discussion"
+    },
+    "G7": {
+      "status": "addresses",
+      "quote": "Local Interpretable Model-Agnostic Explanations (LIME) identified the key imaging features influencing the model, ensuring transparency and clinical relevance.",
+      "section": "abstract"
+    },
+    "G8": {
+      "status": "documents",
+      "quote": "patient demographic and clinical characteristics that may influence treatment outcomes were not incorporated into our model",
+      "section": "discussion"
+    },
+    "G9": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "addresses",
+      "quote": "A deep neural network (DNN) trained on these QA-derived biomarkers predicted six-month occlusion.",
+      "section": "abstract"
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Self-adjudicated outcomes",
+    "Inference preprocessing inconsistent with training could make LIME explanations misleading"
+  ],
+  "future_work": [
+    "Multicenter validation",
+    "Integration with multimodal imaging",
+    "3D QA methods to eliminate foreshortening errors",
+    "Pre-procedural planning and device sizing by simulating device configurations"
+  ],
+  "claim2024": {
+    "items": "yyyyyyynynnynynnyynnnynyyyyynyyynynynnnyyyny"
+  }
+}

@@ -1,0 +1,6 @@
+metric_group,mean,std
+Accuracy,1.6326809185664067e-17,0.9999999999999999
+Detection-based (Precision/Recall),-4.625929269271486e-17,1.0
+Overlap-based (F1/Dice),4.3936485655378537e-16,1.0
+Overlap-based (IoU),1.7763568394002506e-16,1.0
+Ranking-based (AUC),4.973799150320702e-16,0.9999999999999999

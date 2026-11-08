@@ -1,0 +1,17 @@
+{"record_id": "R0774",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aimed to develop an artificial intelligence model to detect UOA during these procedures.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "resizing images to 1024*1024 pixels using the nearest neighbor interpolation method, with intensity normalization between 0 and 255.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Substandard or irrelevant images were eliminated to refine the dataset quality.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The open-source program “Labelme” (version 5.3.1) in Python was used to create a polygonal bounding box to outline UA and UOA borders", "section": "methods"},
+  "20": {"answer": "yes", "quote": "dividing the dataset into training, validation, internal testing, and external testing sets, with 262, 115, 121, and 112 patients, respectively", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The development and training of the model were conducted using the PyTorch[26] framework in Python", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "UOA-D manifested an AUC of 0.831 and 0.829 within the internal and external testing sets, with AP of 0.541 and 0.509, and AP_0.5 of 0.773 and 0.768, respectively.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "UOAD attained an AUC of 0.831 in the internal testing set (Figure 4d) and 0.829 in the external testing set (Figure 4e).", "section": "results"}
+ }}

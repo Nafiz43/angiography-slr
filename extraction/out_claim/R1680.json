@@ -1,0 +1,17 @@
+{"record_id": "R1680",
+ "items": {
+  "6": {"answer": "yes", "quote": "We conducted a single-centre retrospective observational study to evaluate AngioAI–QFR, an angiography-only pipeline for automated lesion profiling, virtual stenting, and angiography-derived physiology estimation.", "section": "methods"},
+  "9": {"answer": "yes", "quote": "This included intensity normalisation, contrast-limited adaptive histogram equalisation, and gamma correction, followed by uniform spatial rescaling to the input resolution required by the networks.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "When several projections were available, the first sequence providing adequate opacification, continuous visualisation from proximal reference to distal vessel, and acceptable overlap/foreshortening was selected for analysis", "section": "methods"},
+  "12": {"answer": "yes", "quote": "15 studies were excluded because of non-diagnostic image quality or severe vessel overlap (n = 9) or missing/invalid FFR records (n = 6).", "section": "results"},
+  "15": {"answer": "yes", "quote": "The reference standard was invasive FFR, but post-PCI FFR was not available; therefore, findings on virtual stenting are predictions rather than observed post-intervention physiology.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Each frame was annotated with bounding boxes for stenotic segments by at least two experienced interventional cardiologists, and discrepancies were resolved by consensus.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "These were partitioned into training, validation, and test subsets of 175, 50, and 25 images, respectively, with care taken to avoid leakage of near-duplicate frames between subsets.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "Training followed standard optimisation procedures with mini-batch stochastic gradient descent and early stopping based on validation loss.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "On the held-out test set, stenosis detection achieved a precision of 0.966, with mAP@50 of 0.973 and mAP@50–95 of 0.712.", "section": "results"},
+  "38": {"answer": "yes", "quote": "AUROC for identifying physiologically significant ischaemia was 0.93 (95% CI 0.88– 0.97)", "section": "results"}
+ }}

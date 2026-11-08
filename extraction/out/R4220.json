@@ -1,0 +1,273 @@
+{
+  "record_id": "R4220",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Analysis of Coronary Angiography Video Interpolation Methods to Reduce X-ray Exposure Frequency Based on Deep Learning",
+    "year": 2021,
+    "venue": "Cardiovascular Innovations and Applications",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Coronary angiography videos (X-ray) recorded from screen during cardiac intervention; acquisition frame rate 7-15 fps, recording 25 fps, resolution 480x360",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "30-45 continuous frames (test clips VC1-VC4)",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 31,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "image_enhancement_denoising",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Video frame interpolation for coronary angiography: six deep learning interpolation methods retrained on a new triplet dataset (95,039 triplets from 31 videos) to synthesize intermediate frames, evaluated with PSNR/SSIM on D1000 and four clips VC1-VC4.",
+    "clinical_application": "Reducing X-ray pulse/exposure frequency during coronary angiography and PCI while maintaining high frame rate video"
+  },
+  "method": {
+    "architecture_names": [
+      "SepConv",
+      "Super SloMo",
+      "DAIN",
+      "BMBC",
+      "AdaCoF",
+      "RRIN"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "The technique uses residual refinement technology in optical flow and image generation, and adaptive weight mapping",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "self_supervised",
+    "pretraining": "Pretrained model used as initial model before retraining on coronary angiography triplets",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "SSIM (RRIN)",
+        "family": "ssim",
+        "value_raw": "0.910",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC1"
+      },
+      {
+        "metric": "PSNR (RRIN)",
+        "family": "psnr",
+        "value_raw": "34.179",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC1"
+      },
+      {
+        "metric": "SSIM (RRIN)",
+        "family": "ssim",
+        "value_raw": "0.907",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC2"
+      },
+      {
+        "metric": "PSNR (RRIN)",
+        "family": "psnr",
+        "value_raw": "34.896",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC2"
+      },
+      {
+        "metric": "SSIM (RRIN)",
+        "family": "ssim",
+        "value_raw": "0.913",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC3"
+      },
+      {
+        "metric": "PSNR (RRIN)",
+        "family": "psnr",
+        "value_raw": "34.184",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC3"
+      },
+      {
+        "metric": "SSIM (RRIN)",
+        "family": "ssim",
+        "value_raw": "0.911",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC4"
+      },
+      {
+        "metric": "PSNR (RRIN)",
+        "family": "psnr",
+        "value_raw": "34.279",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation VC4"
+      },
+      {
+        "metric": "SSIM (RRIN)",
+        "family": "ssim",
+        "value_raw": "0.962",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation D1000"
+      },
+      {
+        "metric": "PSNR (RRIN)",
+        "family": "psnr",
+        "value_raw": "39.448",
+        "value_0_100": null,
+        "split": "test",
+        "task": "frame interpolation D1000"
+      }
+    ],
+    "comparators": [
+      "SepConv-l1",
+      "SepConv-lf",
+      "Super SloMo",
+      "DAIN (retrained)",
+      "DAIN (pretrained)",
+      "BMBC",
+      "AdaCoF-5",
+      "AdaCoF-11"
+    ],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G2": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G3": {
+      "status": "documents",
+      "quote": "When the systolic and diastolic phases of the cardiac cycle switch, a lower PSNR occurs.",
+      "section": "discussion"
+    },
+    "G4": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G5": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G6": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G7": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "PSNR decreases as contrast agent spreads and vessel motion area expands",
+    "Interpolation quality degraded by occlusion and large-object motion"
+  ],
+  "future_work": [
+    "Use trained coronary artery segmentation results for comparison experiments to improve interpolation"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnynnyaaynnannynyyynnnnynnyynynnynnn"
+  }
+}

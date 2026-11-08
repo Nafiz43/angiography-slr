@@ -1,0 +1,155 @@
+{
+  "record_id": "R3712",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Robust Landmark-based Stent Tracking in X-ray Fluoroscopy",
+    "year": 2022,
+    "venue": "European Conference on Computer Vision",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Intraoperative X-ray fluoroscopy videos during PCI (in-house); public TAVI intraoperative aortography X-ray dataset",
+    "territory": "cardiac",
+    "territory_detail": "Coronary PCI stent/balloon markers; TAVI aortography catheter landmarks for generalization",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "10-frame video clips used for end-to-end training",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 4480,
+    "n_images_or_frames": 128029,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "Public TAVI intraoperative aortography X-ray dataset (26 videos, 2,652 frames after exclusion)"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "trained experts",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "catheter_device_tracking",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "End-to-end detection and tracking of radiopaque balloon marker pairs (stent landmarks) across fluoroscopy frames for digital stent enhancement, using U-Net heatmap landmark detection, ResNet stent proposal/feature extraction and GCN node classification for temporal association.",
+    "clinical_application": "Digital stent enhancement during percutaneous coronary intervention (angioplasty)"
+  },
+  "method": {
+    "architecture_names": ["U-Net", "ResNet-18", "GCN (GCNConv + EdgeConv) with FC bypass"],
+    "architecture_family": "other",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "a stent tracking module, which is a graph convolutional neural network (GCN) to associate marker pairs across frames using the combination of extracted features and spatial information",
+      "section": "introduction"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "Marker detection U-Net pre-trained on 128x128 image patches before end-to-end training",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Weighted cross-entropy for unbalanced object/node labels; detector pretrained on positive landmark patches to increase foreground-to-background ratio; false-negative regularized heatmap loss",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.907", "value_0_100": 90.7, "split": "test", "task": "stent landmark detection (in-house)"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.908", "value_0_100": 90.8, "split": "test", "task": "stent landmark detection (in-house)"},
+      {"metric": "F1", "family": "f1", "value_raw": "0.908", "value_0_100": 90.8, "split": "test", "task": "stent landmark detection (in-house)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.831", "value_0_100": 83.1, "split": "test", "task": "stent landmark detection (in-house)"},
+      {"metric": "MAE (pixels)", "family": "error_distance", "value_raw": "0.597", "value_0_100": null, "split": "test", "task": "stent landmark localization (in-house)"},
+      {"metric": "RMSE (pixels)", "family": "error_distance", "value_raw": "0.963", "value_0_100": null, "split": "test", "task": "stent landmark localization (in-house)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.918", "value_0_100": 91.8, "split": "test", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.957", "value_0_100": 95.7, "split": "test", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "F1", "family": "f1", "value_raw": "0.938", "value_0_100": 93.8, "split": "test", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.882", "value_0_100": 88.2, "split": "test", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "MAE (pixels)", "family": "error_distance", "value_raw": "5.975", "value_0_100": null, "split": "test", "task": "catheter landmark localization (TAVI)"},
+      {"metric": "RMSE (pixels)", "family": "error_distance", "value_raw": "6.831", "value_0_100": null, "split": "test", "task": "catheter landmark localization (TAVI)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.913", "value_0_100": 91.3, "split": "cross_validation", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.902", "value_0_100": 90.2, "split": "cross_validation", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "F1", "family": "f1", "value_raw": "0.901", "value_0_100": 90.1, "split": "cross_validation", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.820", "value_0_100": 82.0, "split": "cross_validation", "task": "catheter landmark detection (TAVI)"},
+      {"metric": "MAE (pixels)", "family": "error_distance", "value_raw": "5.802", "value_0_100": null, "split": "cross_validation", "task": "catheter landmark localization (TAVI)"},
+      {"metric": "RMSE (pixels)", "family": "error_distance", "value_raw": "6.524", "value_0_100": null, "split": "cross_validation", "task": "catheter landmark localization (TAVI)"},
+      {"metric": "Inference speed (FPS)", "family": "time", "value_raw": "21.7 FPS", "value_0_100": null, "split": "test", "task": "stent landmark detection and tracking"},
+      {"metric": "Precision (top-2 selection)", "family": "precision_ppv", "value_raw": "0.979", "value_0_100": 97.9, "split": "test", "task": "stent landmark detection (in-house, top-2)"},
+      {"metric": "Recall (top-2 selection)", "family": "sensitivity_recall", "value_raw": "0.882", "value_0_100": 88.2, "split": "test", "task": "stent landmark detection (in-house, top-2)"},
+      {"metric": "F1 (top-2 selection)", "family": "f1", "value_raw": "0.928", "value_0_100": 92.8, "split": "test", "task": "stent landmark detection (in-house, top-2)"},
+      {"metric": "Accuracy (top-2 selection)", "family": "accuracy", "value_raw": "0.866", "value_0_100": 86.6, "split": "test", "task": "stent landmark detection (in-house, top-2)"},
+      {"metric": "MAE (pixels, top-2 selection)", "family": "error_distance", "value_raw": "0.502", "value_0_100": null, "split": "test", "task": "stent landmark localization (in-house, top-2)"},
+      {"metric": "RMSE (pixels, top-2 selection)", "family": "error_distance", "value_raw": "0.891", "value_0_100": null, "split": "test", "task": "stent landmark localization (in-house, top-2)"}
+    ],
+    "comparators": [
+      "Coordinate regression MobileNet V2",
+      "Coordinate regression ResNet V2",
+      "CenterTrack (DLA-34)",
+      "CenterTrack (MobileNet V2)",
+      "Ablation: detection only (U-Net)",
+      "Ablation: detection refinement (U-Net + ResNet)",
+      "Ablation: separate learning"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "overfitting issue on small dataset", "section": "introduction"},
+    "G2": {"status": "addresses", "quote": "to verify generalization of our method, we included a public dataset in our experiment", "section": "methods"},
+    "G3": {"status": "both", "quote": "the association of marker pairs in different frames requires long temporal dimension reasoning to tolerate inaccurate detections in certain frames with limited image quality", "section": "introduction"},
+    "G4": {"status": "documents", "quote": "3D organs and devices can be projected into different 2D images from different angles", "section": "introduction"},
+    "G5": {"status": "documents", "quote": "Fifth, data annotations are limited just like other medical imaging applications.", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "addresses", "quote": "We use weighted cross entropy as the cost function to handle the unbalanced labels (most object candidates are negative)", "section": "methods"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Localization accuracy (MAE/RMSE) worse than CenterTrack; no localization refinement added"
+  ],
+  "future_work": [
+    "Replace U-Net backbone with more accurate heatmap regression models for localization"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnynynnyynynynyyyynnnnynnnynnnyyynn"
+  }
+}

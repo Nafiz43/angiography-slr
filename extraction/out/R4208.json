@@ -1,0 +1,142 @@
+{
+  "record_id": "R4208",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automatic vessel segmentation in X-ray angiogram using spatio-temporal fully-convolutional neural network",
+    "year": 2021,
+    "venue": "Biomedical Signal Processing and Control",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray coronary angiogram (CAG) sequences, Innova3100 (GE Healthcare), 512x512, 8-bit",
+    "territory": "cardiac",
+    "territory_detail": "coronary arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": "30-50",
+    "vendors": ["GE Healthcare"]
+  },
+  "dataset": {
+    "n_patients": 186,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 1,
+      "annotator_expertise": "experienced cardiothoracic radiologist",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": ["disease_classification_grading"],
+    "task_description": "Segmentation of the coronary artery tree from high-contrast frames of X-ray coronary angiography sequences using a spatio-temporal FCN with influence layers and a spatio-temporal fully connected CRF post-processing; segmentations further used to grade stenoses as mild, moderate or severe.",
+    "clinical_application": "Computer-aided diagnosis of cardiovascular disease and quantification of coronary stenosis severity"
+  },
+  "method": {
+    "architecture_names": ["ST-FCN", "FCN (VGG-16)", "influence layers", "ST-CRF"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "The image frames are fed into FCN network in parallel. The influence layers are jointly trained with FCN as a unified deep network to exploit both spatial and temporal information appearing within the angiogram sequence.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "VGG-16 pretrained on ImageNet",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "class-balancing cross-entropy loss; coarse-to-fine training with vessel patch sampling",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "MAD", "family": "error_distance", "value_raw": "5.41±4.19", "value_0_100": null, "split": "test", "task": "vessel segmentation"},
+      {"metric": "DSC", "family": "dice", "value_raw": "0.90±0.05", "value_0_100": 90.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.89±0.08", "value_0_100": 89.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.92±0.04", "value_0_100": 92.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.92±0.06", "value_0_100": 92.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.87±0.08", "value_0_100": 87.0, "split": "test", "task": "vessel segmentation"},
+      {"metric": "Accuracy (average)", "family": "accuracy", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "stenosis grading (average)"},
+      {"metric": "Sensitivity (average)", "family": "sensitivity_recall", "value_raw": "0.92", "value_0_100": 92.0, "split": "test", "task": "stenosis grading (average)"},
+      {"metric": "Specificity (average)", "family": "specificity", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "stenosis grading (average)"},
+      {"metric": "F1-score (average)", "family": "f1", "value_raw": "0.90", "value_0_100": 90.0, "split": "test", "task": "stenosis grading (average)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "stenosis grading (mild)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.99", "value_0_100": 99.0, "split": "test", "task": "stenosis grading (mild)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.92", "value_0_100": 92.0, "split": "test", "task": "stenosis grading (mild)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "stenosis grading (mild)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.93", "value_0_100": 93.0, "split": "test", "task": "stenosis grading (moderate)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.86", "value_0_100": 86.0, "split": "test", "task": "stenosis grading (moderate)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "stenosis grading (moderate)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.85", "value_0_100": 85.0, "split": "test", "task": "stenosis grading (moderate)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.96", "value_0_100": 96.0, "split": "test", "task": "stenosis grading (severe)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.91", "value_0_100": 91.0, "split": "test", "task": "stenosis grading (severe)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.97", "value_0_100": 97.0, "split": "test", "task": "stenosis grading (severe)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.90", "value_0_100": 90.0, "split": "test", "task": "stenosis grading (severe)"},
+      {"metric": "Segmentation time per 512x512 image", "family": "time", "value_raw": "3.24 s", "value_0_100": null, "split": "test", "task": "vessel segmentation"}
+    ],
+    "comparators": ["VGN", "MS-FCN", "U-net", "SP-TVW", "FC-CRF", "SRM (Hessian + statistical region merging)", "MoM"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "we only considered the diffusion of the contrast agent by selecting the high-contrast angiogram, but neglected the movement of the coronary arteries caused by heartbeat", "section": "conclusion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "Manual delineation of CAs is an expensive procedure and suffering from high inter- and intra-reader variations.", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "addresses", "quote": "two training classes were heavily unbalanced. To solve this problem, we employed a class-balancing cross-entropy loss function", "section": "methods"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "thin vessel borders may be detected inaccurately or partially missed, causing false negatives",
+    "separation between mild and moderate stenoses is difficult"
+  ],
+  "future_work": [
+    "intelligent detection of fine vascular structures with good vessel border delineation",
+    "include both contrast changes and artery movement in the deep learning framework",
+    "extend the method to other modalities such as retinal images and CT angiography"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyynyyyynnnyynyyyynynnynynnnyyynyynny"
+  }
+}

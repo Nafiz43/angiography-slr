@@ -1,0 +1,17 @@
+{"record_id": "R0099",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose a deep learning framework primarily intended to demonstrate the applicability and clinical relevance of AngioCAD for video-based view classification and stenosis detection", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "For preprocessing, each frame was resized from 512 × 512 to 128 × 128 pixels.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "we selected the middle frame from each video as the key frame, along with the two preceding and two subsequent frames (a total of five frames) to form the complete key frames set", "section": "methods"},
+  "12": {"answer": "yes", "quote": "after removing incomplete entries with missing feature values, 377 valid samples remained", "section": "results"},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Our experiments were conducted using TensorFlow-Keras and python 3.9", "section": "results"},
+  "26": {"answer": "yes", "quote": "Early stopping was applied based on validation performance, with a patience of 5 epochs, meaning that training was terminated if no improvement in validation loss was observed over five consecutive epochs.", "section": "results"},
+  "27": {"answer": "yes", "quote": "then passing the result through an FC layer to generate a scalar attention weight α ∈[0,1], which controls the relative contribution of each stream", "section": "methods"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "All metrics are reported as the mean ± standard deviation across five-fold stratified cross-validation", "section": "results"},
+  "38": {"answer": "yes", "quote": "the proposed model achieved the highest mean F1-score of 80.50% (95% CI: 78.22– 82.77)", "section": "results"}
+ }}

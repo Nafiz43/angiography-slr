@@ -1,0 +1,6 @@
+metric_group,variance
+Accuracy,73.66968998529414
+Detection-based (Precision/Recall),97.83083333333339
+Overlap-based (F1/Dice),220.92694199814986
+Overlap-based (IoU),439.42207999999994
+Ranking-based (AUC),61.10903183999999

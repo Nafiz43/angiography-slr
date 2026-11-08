@@ -1,0 +1,17 @@
+{"record_id": "R2855",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aims to develop a deep-learning-based framework (defined as FSTIF-UNet) towards IAs segmentation in unreconstructed 3D Rotational Angiography (3D-RA) images.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "For every aneurysm, about 10 to 15 projections were annotated at fixed intervals to obtain the mask images.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "First, the training data and the radiologists who annotated the images are only from Beijing Tiantan Hospital, Capital Medical University.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "The aneurysms in those DSA images deemed positive for the presence of an IA are then segmented using ITK-SNAP’s paint tool.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Using PyTorch as the backend, we trained our model on Ubuntu 20.04.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "The best network parameters of the FSTIF-UNet and the comparison methods are find when the validation values of evaluation indexes achieve stably at the optimal value.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "FSTIF-UNet achieves DSC, IoU, Sens, Haus, and F1-Score of 0.9109, 0.8586, 0.9314, 1.358 and 0.8883, respectively", "section": "abstract"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

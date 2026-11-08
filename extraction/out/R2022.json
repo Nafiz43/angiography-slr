@@ -1,0 +1,123 @@
+{
+  "record_id": "R2022",
+  "schema_version": "2.0",
+  "study": {
+    "title": "A Convolutional-Transformer Model for FFR and iFR Assessment From Coronary Angiography",
+    "year": 2024,
+    "venue": "IEEE Transactions on Medical Imaging",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Italy"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray catheter coronary angiography videos; native 512x512 to 1024x1024 at 15-60 fps, resized to 256x256 and resampled to 15 fps",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries, intermediate single coronary stenoses (CCS and ACS patients)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": "60 frames (4 central seconds at 15 fps; padded by frame replication if shorter)",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 389,
+    "n_sequences": 778,
+    "n_images_or_frames": null,
+    "n_centers": 5,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": "Private dataset; only code released"},
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": 2,
+      "annotator_expertise": "Expert cardiologists (per hospital); labels derived from invasive FFR/iFR measurements thresholded at 0.80/0.89",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": ["contrast_flow_analysis"],
+    "task_description": "Single-view angiography video classification of hemodynamically significant coronary stenosis (FFR<0.80 / iFR<0.89) with direct FFR and iFR regression via multi-branch heads, without key frame selection",
+    "clinical_application": "Non-invasive angiography-based functional assessment of intermediate coronary stenosis to support revascularization decisions"
+  },
+  "method": {
+    "architecture_names": ["ResNet3D", "factorized spatio-temporal transformer", "multi-branch MLP prediction heads"],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "transformer_ssm",
+    "temporal_evidence": {
+      "quote": "attention is computed between concatenated frame-level feature vectors",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "ResNet3D pre-trained on Kinetics400 (fine-tuned)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Random oversampling of positive class; balanced binary cross-entropy",
+    "uncertainty_quantification": true,
+    "explainability_method": "M3D-CAM interpretability maps",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "accuracy", "family": "accuracy", "value_raw": "about 90%", "value_0_100": 90.0, "split": "cross_validation", "task": "hemodynamic stenosis significance classification"},
+      {"metric": "sensitivity", "family": "sensitivity_recall", "value_raw": "80%", "value_0_100": 80.0, "split": "cross_validation", "task": "hemodynamic stenosis significance classification"},
+      {"metric": "specificity", "family": "specificity", "value_raw": "over 95%", "value_0_100": 95.0, "split": "cross_validation", "task": "hemodynamic stenosis significance classification"}
+    ],
+    "comparators": ["S3D", "ResNet_3D-18", "GVCNN", "MVCNN", "ViT-B_16", "ViT-3D", "Video Swin Transformer", "DMTRL", "DMQCA", "HEAL", "Non-local blocks"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://github.com/perceivelab/conv-transf-ffrifr-assessment"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "despite the limited dataset size", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "we plan to carry out a more extensive assessment including more data from different geographical areas to enhance the applicability of the proposed approach", "section": "discussion"},
+    "G3": {"status": "addresses", "quote": "our method learns blood flow dynamics throughout the entire cycle", "section": "discussion"},
+    "G4": {"status": "documents", "quote": "it is not able to reconstruct the geometry of arterial structures, for which FFR-CT procedure is required", "section": "discussion"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "addresses", "quote": "To further enhance trust in our model, we also evaluate interpretability maps", "section": "results"},
+    "G8": {"status": "documents", "quote": "We thus aim also to extend our approach with CT data to complement our findings", "section": "discussion"},
+    "G9": {"status": "addresses", "quote": "to deal with the overrepresentation of negative cases, we employed random oversampling", "section": "methods"},
+    "G10": {"status": "documents", "quote": "to share data in a privacy-preserving way", "section": "discussion"},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Validated only on single coronary lesions, not diffuse disease",
+    "Lower sensitivity attributed to hard clinical cut-off",
+    "FFR vs iFR ablation on small 81-case subset"
+  ],
+  "future_work": [
+    "More data from different geographical areas",
+    "Synthetic data generation for augmentation and privacy-preserving data sharing",
+    "Extend approach with CT data"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyynynyynyyyyyyyyyyynnyyynnyyyynyynyy"
+  }
+}

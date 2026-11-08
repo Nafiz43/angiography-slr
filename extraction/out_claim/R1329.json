@@ -1,0 +1,75 @@
+{
+ "record_id": "R1329",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "we propose the CVFSNet, a single-stage model, for automatic, objective, and end-to-end mTICI scoring",
+   "section": "introduction"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "we uniformly sampled the temporal depths to a default of 8 frames and spatial dimensions as 256 × 256 pixels using trilinear interpolation",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "Sampling the temporal depth to 8 frames compresses the redundant frames, increasing the proportion of effective frames and enhancing representational capacity.",
+   "section": "results"
+  },
+  "12": {
+   "answer": "yes",
+   "quote": "(2) a minimum frame count of 5 in the DSA sequence; (3) simultaneous availability of DSA sequences in both coronal and",
+   "section": "methods"
+  },
+  "15": {
+   "answer": "yes",
+   "quote": "the highest annotation error rates are observed between T2a and T2b due to their similarity, followed by errors in annotating T0 and T1",
+   "section": "discussion"
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "The scoring process commenced with a double-blind assessment by the two physicians. If their scores aligned, the assessment was finalized. In cases where discrepancies occurred, the scores were determined by the chief physician.",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "all DSA sequence pairs from the same patient exist solely in either the training or the test set",
+   "section": "methods"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "Each experiment was repeated three times, and the mean values and standard deviations were reported.",
+   "section": "methods"
+  },
+  "38": {
+   "answer": "yes",
+   "quote": "Each experiment was repeated three times, and the mean values and standard deviations were reported.",
+   "section": "methods"
+  }
+ }
+}

@@ -1,0 +1,337 @@
+{
+ "record_id": "R2376",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Automated catheter segmentation and tip detection in cerebral angiography with topology-aware geometric deep learning",
+  "year": 2024,
+  "venue": "Journal of neurointerventional surgery",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "USA"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "X-ray fluoroscopy sequences with DSA roadmapping mask frames (contrast and non-contrast) used as additional input",
+  "territory": "neurologic",
+  "territory_detail": "cerebral angiography (catheter/guidewire up to intracranial internal carotid artery)",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": 10,
+  "frames_per_sequence": null,
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 40,
+  "n_sequences": 54,
+  "n_images_or_frames": 3831,
+  "n_centers": 1,
+  "n_vendors": 1,
+  "data_origin": "clinical",
+  "public_dataset_used": {
+   "value": false,
+   "detail": "novel in-house annotated fluoroscopy dataset due to lack of public data"
+  },
+  "data_released": {
+   "value": false,
+   "detail": "Data available from the corresponding author upon reasonable request"
+  },
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 1,
+   "annotator_expertise": "MD/PhD student (6 years of experience) supervised by an experienced imaging scientist (15 years)",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "catheter_device_tracking",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Frame-by-frame segmentation of the complete catheter/guidewire structure in cerebral angiography fluoroscopy and tip position tracking derived from skeletonized masks; comparison of input schemes with DSA roadmap masks.",
+  "clinical_application": "AI augmentation and automation of robotic neurointervention (catheter visualization and tip tracking)"
+ },
+ "method": {
+  "architecture_names": [
+   "TAG-DL (rotation-reflection equivariant UNet, D4 group convolutions, centerline-Dice loss)",
+   "UNet",
+   "nnUNet",
+   "TransUNet"
+  ],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "frame_aggregation",
+  "temporal_evidence": {
+   "quote": "current frame with a non- contrast mask frame as second channel; (3) current frame with a non- contrast mask frame subtracted prior to input as one channel",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "centerline Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.95±0.05",
+    "value_0_100": 95.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame + non-contrast DSA mask"
+   },
+   {
+    "metric": "Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.88",
+    "value_0_100": 88.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame + non-contrast DSA mask"
+   },
+   {
+    "metric": "tip-distance error, median (IQR) mm",
+    "family": "error_distance",
+    "value_raw": "0.51 (IQR 1.36)",
+    "value_0_100": null,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame + non-contrast DSA mask"
+   },
+   {
+    "metric": "centerline Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.93",
+    "value_0_100": 93.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame + contrast DSA mask"
+   },
+   {
+    "metric": "Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.85",
+    "value_0_100": 85.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame + contrast DSA mask"
+   },
+   {
+    "metric": "tip-distance error, median (IQR) mm",
+    "family": "error_distance",
+    "value_raw": "0.73 (2.53)",
+    "value_0_100": null,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame + contrast DSA mask"
+   },
+   {
+    "metric": "centerline Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.59",
+    "value_0_100": 59.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame only"
+   },
+   {
+    "metric": "Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.58",
+    "value_0_100": 58.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame only"
+   },
+   {
+    "metric": "tip-distance error, median (IQR) mm",
+    "family": "error_distance",
+    "value_raw": "13.14 (34.27)",
+    "value_0_100": null,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, frontal view, current frame only"
+   },
+   {
+    "metric": "centerline Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.92±0.03",
+    "value_0_100": 92.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame + non-contrast DSA mask"
+   },
+   {
+    "metric": "Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.84",
+    "value_0_100": 84.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame + non-contrast DSA mask"
+   },
+   {
+    "metric": "tip-distance error, median (IQR) mm",
+    "family": "error_distance",
+    "value_raw": "0.59 (IQR 3.13)",
+    "value_0_100": null,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame + non-contrast DSA mask"
+   },
+   {
+    "metric": "centerline Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.89",
+    "value_0_100": 89.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame + contrast DSA mask"
+   },
+   {
+    "metric": "Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.80",
+    "value_0_100": 80.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame + contrast DSA mask"
+   },
+   {
+    "metric": "tip-distance error, median (IQR) mm",
+    "family": "error_distance",
+    "value_raw": "0.85 (4.77)",
+    "value_0_100": null,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame + contrast DSA mask"
+   },
+   {
+    "metric": "centerline Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.18",
+    "value_0_100": 18.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame only"
+   },
+   {
+    "metric": "Dice (mean)",
+    "family": "dice",
+    "value_raw": "0.19",
+    "value_0_100": 19.0,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame only"
+   },
+   {
+    "metric": "tip-distance error, median (IQR) mm",
+    "family": "error_distance",
+    "value_raw": "41.95 (21.39)",
+    "value_0_100": null,
+    "split": "test",
+    "task": "catheter segmentation and tip detection, TAG-DL, lateral view (unseen view), current frame only"
+   }
+  ],
+  "comparators": [
+   "UNet",
+   "nnUNet",
+   "TransUNet"
+  ],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": true,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "prospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": false,
+   "detail": "Code available from the corresponding author upon reasonable request"
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {
+   "status": "documents",
+   "quote": "Due to the lack of publicly available data, we developed a novel annotated fluoroscopy dataset to support this study.",
+   "section": "methods"
+  },
+  "G2": {
+   "status": "both",
+   "quote": "our dataset is limited to a single center and fluoroscopy vendor, and exclusively reflects diagnostic cerebral angiography",
+   "section": "discussion"
+  },
+  "G3": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G4": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G5": {
+   "status": "documents",
+   "quote": "Manual annotation of the complete catheter structure is considerably more laborious than annotating the tip alone, which has been a significant barrier to generating suitable datasets.",
+   "section": "introduction"
+  },
+  "G6": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G7": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G8": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G9": {
+   "status": "documents",
+   "quote": "sparsity of catheter pixels (<2%) compared with background pixels",
+   "section": "introduction"
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [
+  "Restricted to fully radio-opaque diagnostic devices (0.035 inch guidewire, 5 Fr catheters)",
+  "False-positive detections of contrast and other wire-like structures",
+  "Failure to detect large sections of catheter body",
+  "Centerline Dice treats all centerline regions as equally important"
+ ],
+ "future_work": [
+  "Incorporate tip-distance error into the loss function",
+  "Generalize to additional devices, especially partially radiolucent therapeutic devices",
+  "Add more data with extraneous implants and lines; spline-fitting post-processing",
+  "Pre-training on external data and fine-tuning to new scenarios",
+  "Development in animal models (pigs) for robotic neurointervention",
+  "Evaluation across fluoroscopy systems including robotic systems with haptic feedback"
+ ],
+ "claim2024": {
+  "items": "yyyyyyynyynynyynyynnyynyynynyynynnyyyynyyyyy"
+ }
+}

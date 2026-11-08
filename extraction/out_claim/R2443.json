@@ -1,0 +1,17 @@
+{"record_id": "R2443",
+ "items": {
+  "6": {"answer": "yes", "quote": "We propose the first federated detection transformer approach, FeDETR, to assess stenosis severity in angiography videos based on FFR/iFR values estimation.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "Scale augmentation is then applied to the images, resizing them so that the shortest side is 512 pixels and the longest side is 1333 pixels or less.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Then, two experienced cardiologists annotated the key frames in the angiography data.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Invasive assessment of coronary physiology, using either fractional flow reserve (FFR) or instantaneous wave-free ratio (iFR), is an established guideline method for grading coronary lesions", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "Cardiologists identified the major stenosis in each exam and labeled it as hemodynamically significant if the FFR was less than 0.80", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "we compare its performance to baseline approaches (FedAvg McMahan et al. [2017] and FedBN Li et al. [2021]) on standard object detection metrics, namely, accuracy (ACC), precision (PPV), recall (TPR) and intersection over union (IoU).", "section": "results"},
+  "38": {"answer": "yes", "quote": "Standard deviations refer to inter-node variability.", "section": "results"}
+ }}

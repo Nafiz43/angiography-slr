@@ -1,0 +1,193 @@
+{
+  "record_id": "R0025",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automated assessment of right ventricular systolic function from coronary angiograms with video-based artificial intelligence algorithms: development, validation, comparison against humans, and prospective deployment",
+    "year": 2026,
+    "venue": "European Heart Journal - Digital Health",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Canada; United States"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Routine invasive coronary angiogram videos (DICOM), left and right coronary artery videos, 7 or 15 frames per second",
+    "territory": "cardiac",
+    "territory_detail": "Left and right coronary angiograms used to predict right ventricular systolic function",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "minimum of 7 frames; acquired at 7 or 15 frames per second",
+    "vendors": ["Philips", "Siemens", "Toshiba"]
+  },
+  "dataset": {
+    "n_patients": 6035,
+    "n_sequences": 82120,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "Only Kinetics400 used for pretraining weights; study data are private MHI and UCSF angiograms"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Datasets not publicly available due to patient privacy; may be available on reasonable request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": null,
+      "annotator_expertise": "Labels derived from clinical transthoracic echocardiography (TAPSE, FAC, visual assessment)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Video-based deep neural network (DeepRV) classifying right ventricular systolic function as normal or reduced (echocardiography reference) from routine left and right coronary angiogram videos, aggregated to study level; internal test, external validation at UCSF, prospective deployment in STEMI, and reader study with/without AI.",
+    "clinical_application": "Point-of-care rule-out of right ventricular dysfunction during coronary angiography/primary PCI without additional imaging"
+  },
+  "method": {
+    "architecture_names": ["DeepRV", "X3D-M", "MVIT-2B-S"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "Multi-view coronary angiogram videos from left and right coronary arteries are processed through a video-based spatiotemporal deep neural network.",
+      "section": "other"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "Kinetics400 pre-trained weights (transfer learning)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Grad-CAM; Guided Backpropagation",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "prospective",
+    "external_validation_detail": "External validation at UCSF (2247 studies, 2031 patients, 2012-2019); prospective deployment via PACS-AI in 82 consecutive STEMI cases at MHI (January-June 2025)",
+    "metrics": [
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.80 (95% CI 0.76-0.84)", "value_0_100": 80.0, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "AUPRC", "family": "other", "value_raw": "0.39 (95% CI 0.33-0.47)", "value_0_100": null, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "70.5% (95% CI 63.1-77.2)", "value_0_100": 70.5, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "78.5% (95% CI 76.3-80.8)", "value_0_100": 78.5, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "27.7 (23.5-31.6)", "value_0_100": 27.7, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "NPV", "family": "other", "value_raw": "95.8% (94.5-96.9)", "value_0_100": null, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "Diagnostic odds ratio", "family": "other", "value_raw": "8.73 (95% CI 6.04-13.06)", "value_0_100": null, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "Estimated calibration index", "family": "other", "value_raw": "0.18 (95% CI 0.11-0.26)", "value_0_100": null, "split": "test", "task": "Reduced RVSF classification, study level (internal MHI)"},
+      {"metric": "AUROC (LCA videos only)", "family": "auc", "value_raw": "0.77 (0.73-0.82)", "value_0_100": 77.0, "split": "test", "task": "Reduced RVSF classification, LCA only (internal MHI)"},
+      {"metric": "AUROC (RCA videos only)", "family": "auc", "value_raw": "0.76 (0.71-0.81)", "value_0_100": 76.0, "split": "test", "task": "Reduced RVSF classification, RCA only (internal MHI)"},
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.75 (95% CI 0.72-0.77)", "value_0_100": 75.0, "split": "external", "task": "Reduced RVSF classification (UCSF external)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "71.3%", "value_0_100": 71.3, "split": "external", "task": "Reduced RVSF classification (UCSF external)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "71.8%", "value_0_100": 71.8, "split": "external", "task": "Reduced RVSF classification (UCSF external)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "50%", "value_0_100": 50.0, "split": "external", "task": "Reduced RVSF classification (UCSF external)"},
+      {"metric": "NPV", "family": "other", "value_raw": "86.6%", "value_0_100": null, "split": "external", "task": "Reduced RVSF classification (UCSF external)"},
+      {"metric": "Estimated calibration index (before -> after recalibration)", "family": "other", "value_raw": "0.23 -> 0.037", "value_0_100": null, "split": "external", "task": "Reduced RVSF classification (UCSF external)"},
+      {"metric": "AUROC (diagnostic-phase angiograms)", "family": "auc", "value_raw": "0.68 (95% CI 0.49-0.86)", "value_0_100": 68.0, "split": "other", "task": "Reduced RVSF classification, prospective STEMI deployment"},
+      {"metric": "AUROC (post-PCI angiograms)", "family": "auc", "value_raw": "0.83 (95% CI 0.71-0.93)", "value_0_100": 83.0, "split": "other", "task": "Reduced RVSF classification, prospective STEMI deployment"},
+      {"metric": "NPV (diagnostic phase)", "family": "other", "value_raw": "90.8%", "value_0_100": null, "split": "other", "task": "Reduced RVSF classification, prospective STEMI deployment"},
+      {"metric": "NPV (post-PCI phase)", "family": "other", "value_raw": "91.4%", "value_0_100": null, "split": "other", "task": "Reduced RVSF classification, prospective STEMI deployment"},
+      {"metric": "PPV (diagnostic phase)", "family": "precision_ppv", "value_raw": "50.0%", "value_0_100": 50.0, "split": "other", "task": "Reduced RVSF classification, prospective STEMI deployment"},
+      {"metric": "PPV (post-PCI phase)", "family": "precision_ppv", "value_raw": "71.4%", "value_0_100": 71.4, "split": "other", "task": "Reduced RVSF classification, prospective STEMI deployment"},
+      {"metric": "Median inference time", "family": "time", "value_raw": "5.1 s", "value_0_100": null, "split": "other", "task": "Prospective STEMI deployment via PACS-AI"},
+      {"metric": "Accuracy (AI alone)", "family": "accuracy", "value_raw": "79.5%", "value_0_100": 79.5, "split": "test", "task": "Reader study subset (n=200 internal test studies)"},
+      {"metric": "Sensitivity (AI alone)", "family": "sensitivity_recall", "value_raw": "70.0%", "value_0_100": 70.0, "split": "test", "task": "Reader study subset (n=200 internal test studies)"}
+    ],
+    "comparators": [
+      "CathEF (angiography-based LVEF model)",
+      "Combined DeepRV + CathEF",
+      "Interventional cardiologists with and without AI",
+      "Medical student with and without AI"
+    ],
+    "compared_with_humans": true,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "mixed",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": true,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "Inference code at https://github.com/HeartWise-AI/DeepRV"
+    },
+    "model_weights_available": {
+      "value": true,
+      "detail": "Open weights at https://huggingface.co/heartwise/DeepCoro"
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {
+      "status": "addresses",
+      "quote": "To assess the generalizability of DeepRV, we conducted an external validation study using coronary angiograms from the University of California of San Francisco (UCSF).",
+      "section": "methods"
+    },
+    "G3": {
+      "status": "addresses",
+      "quote": "activation intensifying as coronary arteries opacified, suggesting temporal awareness of contrast dynamics",
+      "section": "discussion"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {
+      "status": "documents",
+      "quote": "lack of core lab assessment of RVSF and potential inter-observer variability in TTE interpretation",
+      "section": "discussion"
+    },
+    "G6": {
+      "status": "addresses",
+      "quote": "We conducted a prospective evaluation of the model by applying DeepRV by the interventional cardiologist on consecutive STEMI patients between January 2025 and June 2025",
+      "section": "methods"
+    },
+    "G7": {
+      "status": "addresses",
+      "quote": "To interpret our DeepRV algorithm's decision-making process, we employed two complementary explainability techniques",
+      "section": "methods"
+    },
+    "G8": {
+      "status": "documents",
+      "quote": "Future work could look at integrating ECG with DeepRV to improve model performance",
+      "section": "discussion"
+    },
+    "G9": {
+      "status": "documents",
+      "quote": "small sample sizes for critical subgroups (cardiogenic shock n = 4, reduced PAPi n = 31)",
+      "section": "discussion"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "No race/ethnicity data, preventing fairness/bias assessment",
+    "Reference standard limited to echocardiography (no cardiac MRI/RHC validation)",
+    "Temporal mismatch between angiography and TTE (up to 5 days)",
+    "Poor performance in RCA-culprit STEMI on diagnostic-phase angiograms",
+    "Limited PPV (28%)"
+  ],
+  "future_work": [
+    "Integrate ECG-AI with DeepRV",
+    "Dedicated validation in isolated RV infarction and cardiogenic shock",
+    "External validation and fine-tuning using released open weights",
+    "Automated biventricular assessment combining DeepRV and CathEF"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynyyynnyynnyyyyynyyyyyyyyyyyynyyyyy"
+  }
+}

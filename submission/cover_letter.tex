@@ -1,0 +1,41 @@
+% Cover letter (uploaded as its own PDF by tools/split_submission.py)
+% Date comes from the system clock at compile time (pdflatex \day/\month/\year), never hardcoded.
+\newcommand{\CoverDate}{\number\day\ifcase\day\or st\or nd\or rd\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or th\or st\or nd\or rd\or th\or th\or th\or th\or th\or th\or th\or st\fi\space\ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi, \number\year}
+\begingroup\setlength{\parindent}{0pt}\large
+\edit{%
+\noindent\textbf{Nafiz Imtiaz Khan}\\
+Department of Computer Science\\
+University of California, Davis\\
+Davis, CA 95616, USA\\
+Email: nikhan@ucdavis.edu\\
+Date: \CoverDate\par\bigskip
+
+\noindent\textbf{Editor-in-Chief}\\
+\textit{Computers in Biology and Medicine}\par\bigskip\medskip
+
+\noindent Dear Editor,\par\medskip
+
+I am pleased to submit our manuscript entitled \textbf{``Artificial Intelligence for Angiographic Sequence Analysis: A Systematic Review of Temporal Modeling, Clinical Readiness, and Research Gaps''} for consideration as a \textbf{Review Article} in \textit{Computers in Biology and Medicine}.
+
+\medskip
+Digital subtraction angiography and fluoroscopy are read as image sequences: clinicians judge disease from how contrast fills and washes out over time. Many AI methods now analyze these sequences, but no review has examined how they use the temporal information or how ready they are for clinical use. Following PRISMA 2020, we screened 5,064 records from PubMed/MEDLINE and Semantic Scholar, validated the LLM-assisted screening with two independent human reviewers (Cohen's $\kappa = 0.98$), and synthesized 115 studies. Most studies (82.6\%) use temporal information, but about half do so with fixed operations rather than learned models, and transformer or state-space models appear in fewer than one in ten. 
+
+\medskip
+Evidence for clinical use and reproducibility remains thin. Only 19 studies (16.5\%) test their models on external data, three use a prospective design, and four report clinical deployment. Code is publicly released by 25 studies (21.7\%) and the authors' own data by only three (2.6\%), while 26 more offer data only on request. Because datasets, validation designs and metrics differ from study to study and shared benchmarks are lacking, reported performance cannot be compared across studies.
+
+\medskip
+We believe this review will help researchers in medical image analysis and interventional clinicians see where angiographic AI stands and what it still lacks. We assess reporting against the CLAIM 2024 checklist, identify twelve research gaps, and propose a roadmap with benchmark recommendations for each. The review was registered retrospectively on OSF Registries (doi:10.17605/OSF.IO/6XJK7), and the screening decisions, extraction records and analysis code are publicly available at \edit{\url{https://github.com/Nafiz43/angiography-slr}}.
+
+\medskip
+This manuscript is original, has not been published elsewhere, and is not under consideration by any other journal. All authors have approved the manuscript and agree with its submission to \textit{Computers in Biology and Medicine}. The work was funded by the RSNA (RSCH2306), which had no role in the study design, analysis or writing; none of the authors has a competing interest.
+
+\medskip
+Thank you for considering our work. We look forward to the opportunity to contribute to your journal.
+
+\bigskip
+\noindent Sincerely,\\
+\textbf{Nafiz Imtiaz Khan}\\
+On behalf of the co-authors:\\
+Roger Eric Goldman and Vladimir Filkov
+}
+\par\endgroup

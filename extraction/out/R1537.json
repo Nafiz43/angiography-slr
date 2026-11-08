@@ -1,0 +1,137 @@
+{
+ "record_id": "R1537",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Enhanced Cerebrovascular Extraction Using Vessel-Specific Preprocessing of Time-Series Digital Subtraction Angiograph",
+  "year": 2025,
+  "venue": "Photonics",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "China"
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Time-series cerebral DSA sequences (arterial phase frames, AP or lateral views, 800x800 px) from the DIAS dataset",
+  "territory": "neurologic",
+  "territory_detail": "Intracranial arteries; patients with intracranial atherosclerotic stenosis or middle cerebral artery occlusion",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": 4,
+  "frames_per_sequence": "4-14",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": null,
+  "n_sequences": 120,
+  "n_images_or_frames": 762,
+  "n_centers": 1,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": true, "detail": "DIAS (Digital Subtraction Angiography Intracranial Artery Segmentation dataset), Beijing Tiantan Hospital"},
+  "data_released": {"value": false, "detail": "Raw data available upon request from the authors"},
+  "split_level": "not_reported",
+  "annotation": {
+   "type": "semi_automatic",
+   "n_annotators": 4,
+   "annotator_expertise": "Two medical students labeled; verified by two experienced neurosurgeons (DIAS annotations)",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "vessel_segmentation",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Vessel-enhancing preprocessing that multiplies the MinIP image by an absolute temporal-difference map of sequential DSA frames, fed to U-Net++ and DeepLabv3+ for cerebrovascular segmentation.",
+  "clinical_application": "Automated cerebral vessel segmentation in DSA for diagnosis and intervention planning of cerebrovascular disease"
+ },
+ "method": {
+  "architecture_names": ["U-Net++ (L3)", "DeepLabv3+ (ResNet-50 backbone)"],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "frame_aggregation",
+  "temporal_evidence": {"quote": "the absolute value of the summed differences between consecutive DSA images in the time series was calculated", "section": "methods"},
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "DSC", "family": "dice", "value_raw": "0.83 ± 0.05", "value_0_100": 83.0, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "IoU", "family": "iou", "value_raw": "0.70 ± 0.07", "value_0_100": 70.0, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.98 ± 0.01", "value_0_100": 98.0, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.93 ± 0.04", "value_0_100": 93.0, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "Specificity", "family": "specificity", "value_raw": "0.94 ± 0.04", "value_0_100": 94.0, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.94 ± 0.05", "value_0_100": 94.0, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "F1-score", "family": "f1", "value_raw": "0.92 ± 0.03", "value_0_100": 92.0, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "Vascular Connectivity (VC, lower better)", "family": "other", "value_raw": "44.65 ± 0.63", "value_0_100": null, "split": "test", "task": "vessel segmentation (DeepLabv3+ proposed)"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.79 ± 0.05", "value_0_100": 79.0, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "IoU", "family": "iou", "value_raw": "0.68 ± 0.05", "value_0_100": 68.0, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.96 ± 0.01", "value_0_100": 96.0, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.89 ± 0.03", "value_0_100": 89.0, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "Specificity", "family": "specificity", "value_raw": "0.90 ± 0.02", "value_0_100": 90.0, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.87 ± 0.05", "value_0_100": 87.0, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "F1-score", "family": "f1", "value_raw": "0.87 ± 0.03", "value_0_100": 87.0, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "Vascular Connectivity (VC, lower better)", "family": "other", "value_raw": "65.46 ± 3.75", "value_0_100": null, "split": "test", "task": "vessel segmentation (U-Net++ proposed)"},
+   {"metric": "Processing time per 800x800 image (avg 6 frames), proposed preprocessing", "family": "time", "value_raw": "about 0.07 s", "value_0_100": null, "split": "other", "task": "vessel-enhancing preprocessing"}
+  ],
+  "comparators": ["U-Net++ with original MinIP input", "DeepLabv3+ with original MinIP input"],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "The lack of publicly available annotated DSA sequences has also limited progress", "section": "introduction"},
+  "G2": {"status": "documents", "quote": "its generalizability across a broader range of deep learning architectures and imaging modalities remains unverified", "section": "discussion"},
+  "G3": {"status": "both", "quote": "In this study, we propose a novel vessel-enhancing preprocessing technique using temporal differencing of DSA sequences to improve cerebrovascular segmentation accuracy.", "section": "abstract"},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Depends on temporal consistency of the series; motion artifacts and irregular frame intervals corrupt differencing",
+  "Assumes uniform vascular signal change; may miss delayed or pathological flow (stenosis, occlusion, collaterals)",
+  "Absolute differencing can amplify background noise and residual structures",
+  "Lacks flow-direction awareness (reflux, retrograde filling, turbulence)",
+  "Preprocessing and segmentation are separate, not end-to-end trainable"
+ ],
+ "future_work": [
+  "Integrate motion compensation (registration, temporal stabilization) before differencing",
+  "Temporally weighted subtraction or adaptive time-window selection",
+  "Flow-sensitive or direction-aware temporal differencing",
+  "Test robustness to frame number and X-ray tube current",
+  "End-to-end differentiable framework with learnable preprocessing on varied datasets",
+  "Hybrid enhancement with histogram equalization/CLAHE"
+ ],
+ "claim2024": {"items": "ynyyyyyyynyynyynynynnynyyyynnnnynnnynnnyyyny"}
+}

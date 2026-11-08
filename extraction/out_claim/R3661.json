@@ -1,0 +1,17 @@
+{"record_id": "R3661",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aimed to build an artificial intelligence model to assign dichotomized mTICI scores to complete DSA sequences autonomously.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "We flattened the matrix into a 2D matrix by adding the values for each pixel across the third dimension together. We multiplied the matrix by a constant of 1/N", "section": "methods"},
+  "10": {"answer": "yes", "quote": "We included the entire DSA sequence from the early arterial to the late venous phase irrespective of the length of image capture time.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "this method is prone to inter-observer variability and bias, and it may introduce errors to its evaluation with subsequent clinical ramifications", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "All collected DSAs were reviewed and assigned mTICI scores by two trained physicians with combined 4 years of experience in mTICI classification", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "using Python 3.7.6 (Python Software Foundation, Wilmington, DE) and TensorFlow 2.5.0.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "no improvement in binary cross-entropy loss on the inner fold validation set for three consecutive epochs", "section": "methods"},
+  "27": {"answer": "yes", "quote": "by having two InceptionResNetV2 models [30] feed into a concatenation layer followed by a series of layers designed to integrate the two channels and output a binary classification", "section": "methods"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The model built on only the L projections had an AUROC of 0.914 (95% CI 0.876–0.951) and an AUPRC of 0.906 (95% CI 0.844–0.968).", "section": "results"},
+  "38": {"answer": "yes", "quote": "We calculated confidence intervals for each metric by using 2000 bootstrap samples obtained through random sampling to replace the predictions for all outer folds.", "section": "methods"}
+ }}

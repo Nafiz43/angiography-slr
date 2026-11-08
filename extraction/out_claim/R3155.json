@@ -1,0 +1,17 @@
+{"record_id": "R3155",
+ "items": {
+  "6": {"answer": "yes", "quote": "We present an open-source tool for automatic thrombus classification and test it on three selected clinical cases regarding functionality and classification runtime.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "We were able to evaluate our system on three new cases that were generated with another angiography unit than the training data", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The tests were conducted under Python 3.10.8, PyTorch 1.18, CUDA 11.7.1", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "yes", "quote": "We utilize two models, one that was trained for frontal sequences, and another that was trained for lateral sequences. The final classification is the mean of both predictions.", "section": "methods"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "In all three cases, the first and second sequences were correctly classified as nonthrombus-free and thrombus-free.", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

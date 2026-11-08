@@ -1,0 +1,17 @@
+{"record_id": "R0100",
+ "items": {
+  "6":  {"answer": "yes", "quote": "In this feasibility study, we demonstrate the combination of a general hardware setup and software methods for performing advanced analysis of DSA, specifically for cerebral perfusion assessment.", "section": "discussion"},
+  "9":  {"answer": "yes", "quote": "images were downsampled to 256 × 256 px, normalized to 8-bit grayscale and converted into threedimensional arrays by encoding time steps into the third axis.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For this study, we limited output duplication, image processing and analysis to the posterior–anterior (pa) plane detector for computational efficiency.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "In cases of failure to fit, when the function’s default maximum number of iterations was reached before parameter convergence, values were arbitrarily set to zero.", "section": "methods"},
+  "15": {"answer": "yes", "quote": "However, for this technical proof-of-concept, the analytically more accessible Gaussian is adequate, as it contains an exponential function with nonlinear argument", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "We manually segmented the vertical part up to the carotid siphon in 72 randomly sampled pre- and post-thrombectomy runs of 36 patients on a suitable arterial phase", "section": "methods"},
+  "20": {"answer": "yes", "quote": "A total of 80 angiograms were randomly distributed in a ratio of 80:20, and their individual pixels (5,242,880 pxs) pooled to compile training/validation (80%) and test subsets (20%) of density curves.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "performed on an NVIDIA RTX 4090 GPU using the PyTorch library [26]", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Prediction of these C4-segments by the U-Net model achieved an average DICE-score of 0.79 ± 0.14.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

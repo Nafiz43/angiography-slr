@@ -1,0 +1,17 @@
+{"record_id": "R1565",
+ "items": {
+  "6": {"answer": "yes", "quote": "this project aims to train and develop a 3D convolutional neural network (CNN) to reconstruct 3D vascular contrast flow patterns from sparse angiographic data to improve clinical decision-making.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "For each timestep, the contrast distribution represented by volume fraction is assigned to a 128 x 128 x 128 grid and projected onto three orthogonal planes by integrating over the depth", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Time frames were excluded from the database if the remaining contrast was minimal.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Computational fluid dynamics (CFD) is a high-fidelity tool that can provide a wealth of 3D hemodynamic data", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "The 3D voxelized contrast was created using a k-nearest neighbors algorithm to interpolate into the 3D voxelized grid using the seven closest points in the CFD pointcloud.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The testing, validation, and unseen testing split is 76/12/12% (62/7/7) by the patient geometries.", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The average mean square error across all the unseen test patients was 5.27E-04.", "section": "abstract"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

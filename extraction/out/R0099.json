@@ -1,0 +1,149 @@
+{
+  "record_id": "R0099",
+  "schema_version": "2.0",
+  "study": {
+    "title": "AngioCAD: A public x-ray angiography dataset and an adaptive fusion framework for stenosis detection",
+    "year": 2026,
+    "venue": "Computer Methods and Programs in Biomedicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Iran"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray coronary angiography (XRA) video sequences, 512x512 grayscale frames, DICOM converted to PNG",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (LM, LAD, LCX, RCA and branches); left and right coronary views",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "8 to 135 frames per video; 5 key frames used as model input",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 413,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "DCA1 dataset (134 angiograms) used to train U-Net for key frame selection"
+    },
+    "data_released": {
+      "value": true,
+      "detail": "AngioCAD publicly available on Zenodo (doi 10.5281/zenodo.15826856)"
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "experienced cardiologists",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Video-level binary stenosis classification (lesion vs non-lesion) from five automatically selected key frames using dual-CNN adaptive feature fusion; also view classification (left vs right coronary) with CNN-LSTM and CAD detection from structured clinical features with classical ML.",
+    "clinical_application": "Automated coronary artery disease and stenosis detection from invasive coronary angiography"
+  },
+  "method": {
+    "architecture_names": ["ResNet101", "VGG16", "CBAM", "Adaptive Feature Fusion (AFF) module", "Conv1D temporal aggregation", "VGG19-LSTM (view detection)", "U-Net (key frame selection)", "k-means", "SVM", "Random Forest", "AdaBoost"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "The fused features of all frames in the angiography sequence are then temporally aggregated using a series of one-dimensional convolutional layers",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "ImageNet-pretrained ResNet101/VGG16/VGG19 backbones; U-Net trained on DCA1 for key frame selection",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Class weighting and focal loss (stenosis/view); random under-sampling (CAD detection)",
+    "uncertainty_quantification": false,
+    "explainability_method": "Analysis of learned adaptive fusion attention weights (alpha) per frame and fold",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "accuracy", "family": "accuracy", "value_raw": "71.82±2.35", "value_0_100": 71.82, "split": "cross_validation", "task": "stenosis detection (ResNet50 key frame detection)"},
+      {"metric": "precision", "family": "precision_ppv", "value_raw": "80.83±2.58", "value_0_100": 80.83, "split": "cross_validation", "task": "stenosis detection (ResNet50 key frame detection)"},
+      {"metric": "recall", "family": "sensitivity_recall", "value_raw": "80.29±3.06", "value_0_100": 80.29, "split": "cross_validation", "task": "stenosis detection (ResNet50 key frame detection)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "80.5±1.64 (95% CI 78.22-82.77)", "value_0_100": 80.5, "split": "cross_validation", "task": "stenosis detection (ResNet50 key frame detection)"},
+      {"metric": "ROC-AUC", "family": "auc", "value_raw": "69.51±4.34", "value_0_100": 69.51, "split": "cross_validation", "task": "stenosis detection (ResNet50 key frame detection)"},
+      {"metric": "PR-AUC", "family": "auc", "value_raw": "85.13±2.55", "value_0_100": 85.13, "split": "cross_validation", "task": "stenosis detection (ResNet50 key frame detection)"},
+      {"metric": "accuracy", "family": "accuracy", "value_raw": "70.78±2.96", "value_0_100": 70.78, "split": "cross_validation", "task": "stenosis detection (ViT-b16 key frame detection)"},
+      {"metric": "precision", "family": "precision_ppv", "value_raw": "81.34±2.8", "value_0_100": 81.34, "split": "cross_validation", "task": "stenosis detection (ViT-b16 key frame detection)"},
+      {"metric": "recall", "family": "sensitivity_recall", "value_raw": "77.6±3.44", "value_0_100": 77.6, "split": "cross_validation", "task": "stenosis detection (ViT-b16 key frame detection)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "79.36±2.14 (95% CI 76.39-82.33)", "value_0_100": 79.36, "split": "cross_validation", "task": "stenosis detection (ViT-b16 key frame detection)"},
+      {"metric": "ROC-AUC", "family": "auc", "value_raw": "71.44±3.62", "value_0_100": 71.44, "split": "cross_validation", "task": "stenosis detection (ViT-b16 key frame detection)"},
+      {"metric": "PR-AUC", "family": "auc", "value_raw": "86.14±2.74", "value_0_100": 86.14, "split": "cross_validation", "task": "stenosis detection (ViT-b16 key frame detection)"},
+      {"metric": "accuracy", "family": "accuracy", "value_raw": "96.99±0.63", "value_0_100": 96.99, "split": "cross_validation", "task": "view detection (VGG19-LSTM)"},
+      {"metric": "precision", "family": "precision_ppv", "value_raw": "93.36±1.37", "value_0_100": 93.36, "split": "cross_validation", "task": "view detection (VGG19-LSTM)"},
+      {"metric": "recall", "family": "sensitivity_recall", "value_raw": "96.37±1.91", "value_0_100": 96.37, "split": "cross_validation", "task": "view detection (VGG19-LSTM)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "94.83±1.1", "value_0_100": 94.83, "split": "cross_validation", "task": "view detection (VGG19-LSTM)"},
+      {"metric": "balanced accuracy", "family": "accuracy", "value_raw": "96.80±0.94", "value_0_100": 96.8, "split": "cross_validation", "task": "view detection (VGG19-LSTM)"},
+      {"metric": "accuracy", "family": "accuracy", "value_raw": "89.9±2.26", "value_0_100": 89.9, "split": "cross_validation", "task": "CAD detection from clinical features (SVM poly kernel)"},
+      {"metric": "precision", "family": "precision_ppv", "value_raw": "84.51±4.3", "value_0_100": 84.51, "split": "cross_validation", "task": "CAD detection from clinical features (SVM poly kernel)"},
+      {"metric": "recall", "family": "sensitivity_recall", "value_raw": "94.71±4.79", "value_0_100": 94.71, "split": "cross_validation", "task": "CAD detection from clinical features (SVM poly kernel)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "89.78±2.29", "value_0_100": 89.78, "split": "cross_validation", "task": "CAD detection from clinical features (SVM poly kernel)"}
+    ],
+    "comparators": ["Baseline model A (ResNet101+CBAM)", "Baseline model B (VGG16+CBAM)", "Baseline model C (dual-path VGG16+ResNet101 concatenation)", "ResNet50", "InceptionV3", "DenseNet121", "MobileNet", "VGG16 (view detection)", "SVM rbf/sigmoid/linear", "Random Forest", "AdaBoost", "Prior published stenosis classification studies (Table 7)"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "both", "quote": "Many medical datasets have been introduced for using in machine learning algorithms, but they are often either private or contain limited data.", "section": "introduction"},
+    "G2": {"status": "documents", "quote": "collected from a single clinical center, which may limit generalizability to other clinical settings", "section": "discussion"},
+    "G3": {"status": "both", "quote": "Unlike existing datasets that often consist of isolated frames or lack precise stenosis labeling, AngioCAD preserves the temporal continuity of angiographic procedures", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "addresses", "quote": "The model dynamically assigns attention weights to two feature extractors, enhancing robustness and interpretability.", "section": "introduction"},
+    "G8": {"status": "both", "quote": "Integrating angiographic sequences with textual clinical reports may further improve interpretability and diagnostic accuracy.", "section": "conclusion"},
+    "G9": {"status": "both", "quote": "class imbalance may reduce performance on less frequent stenosis severity levels", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "documents", "quote": "Integrating angiographic sequences with textual clinical reports may further improve interpretability and diagnostic accuracy.", "section": "conclusion"}
+  },
+  "other_limitations": [
+    "Reliance on key-frame selection; suboptimal frame choices degrade classification",
+    "Only binary stenosis classification evaluated"
+  ],
+  "future_work": [
+    "Class-rebalancing strategies and tailored loss functions",
+    "More robust key-frame selection algorithms",
+    "Expand dataset, frame-by-frame artery annotation and multi-center validation",
+    "Transformer-based architectures for long-range temporal dependencies",
+    "Multi-class stenosis severity classification",
+    "Integrate textual clinical reports and domain adaptation across datasets"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyynnyynyynyyyyyyyyyyyyyyynnnnynnnyynyy"
+  }
+}

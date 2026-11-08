@@ -1,0 +1,189 @@
+{
+  "record_id": "R2977",
+  "schema_version": "2.0",
+  "study": {
+    "title": "DEEP MOVEMENT: Deep learning of movie files for management of endovascular thrombectomy",
+    "year": 2023,
+    "venue": "European Radiology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Cerebral DSA runs (DICOM converted to mp4), PA and lateral projections, pre and post thrombectomy",
+    "territory": "neurologic",
+    "territory_detail": "Anterior cerebral circulation; terminal ICA, M1 and M2 MCA occlusions in acute ischaemic stroke",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 331,
+    "n_sequences": 1024,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data available from the corresponding author upon reasonable request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "Board-certified, subspecialty-trained neurointerventional radiologists (structured reports), verified by a separate radiologist; disagreements decided by a third certified radiologist",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [
+      "outcome_prediction"
+    ],
+    "task_description": "Classify DSA videos as normal or large vessel occlusion and by occlusion location (ICA, M1, M2); apply the pre-thrombectomy model to post-thrombectomy videos to assess reperfusion success and classify mTICI 3 vs <3.",
+    "clinical_application": "Decision support for acute ischaemic stroke mechanical thrombectomy: rapid LVO detection and objective grading of thrombectomy outcome"
+  },
+  "method": {
+    "architecture_names": [
+      "stacked-Xception",
+      "Xception",
+      "Inception-3D",
+      "ViT",
+      "stacked-Xception + Inception-3D ensemble",
+      "stacked-Xception + ViT ensemble"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "This method passes each frame into a 2D CNN, concatenates the features, and mixes at the feature-level across the time dimension.",
+      "section": "discussion"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Xception backbone pretrained on ImageNet; Inception-3D on Kinetics(-600); ViT backbone on Cifar100",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Consecutive normal studies included to balance classes; sensitivity, specificity and AUC reported for imbalanced classes",
+    "uncertainty_quantification": false,
+    "explainability_method": "Grad-CAM (dynamic saliency maps)",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Independent retrospective cohort of 44 patients from Indiana University (different tertiary centre, different fluoroscopy equipment); model applied without fine-tuning",
+    "metrics": [
+      {"metric": "Sensitivity (occlusion identification)", "family": "sensitivity_recall", "value_raw": "100% (CI 90.75 to 100.00%)", "value_0_100": 100.0, "split": "test", "task": "LVO identification"},
+      {"metric": "Specificity (occlusion identification)", "family": "specificity", "value_raw": "91.67% (CI 61.52 to 99.79%)", "value_0_100": 91.67, "split": "test", "task": "LVO identification"},
+      {"metric": "Accuracy (occlusion identification)", "family": "accuracy", "value_raw": "0.98", "value_0_100": 98.0, "split": "test", "task": "LVO identification"},
+      {"metric": "Accuracy ICA location", "family": "accuracy", "value_raw": "0.71", "value_0_100": 71.0, "split": "test", "task": "Occlusion location classification"},
+      {"metric": "Accuracy M1 location", "family": "accuracy", "value_raw": "0.84", "value_0_100": 84.0, "split": "test", "task": "Occlusion location classification"},
+      {"metric": "Accuracy M2 location", "family": "accuracy", "value_raw": "0.78", "value_0_100": 78.0, "split": "test", "task": "Occlusion location classification"},
+      {"metric": "F1 score (overall)", "family": "f1", "value_raw": "0.83", "value_0_100": 83.0, "split": "test", "task": "Pre-thrombectomy classification (normal/ICA/M1/M2)"},
+      {"metric": "Accuracy successful reperfusion ICA", "family": "accuracy", "value_raw": "1.0", "value_0_100": 100.0, "split": "test", "task": "Post-thrombectomy reperfusion assessment"},
+      {"metric": "Accuracy successful reperfusion M1", "family": "accuracy", "value_raw": "0.88", "value_0_100": 88.0, "split": "test", "task": "Post-thrombectomy reperfusion assessment"},
+      {"metric": "Accuracy successful reperfusion M2", "family": "accuracy", "value_raw": "0.35", "value_0_100": 35.0, "split": "test", "task": "Post-thrombectomy reperfusion assessment"},
+      {"metric": "AUC mTICI 3 vs <3", "family": "auc", "value_raw": "0.71", "value_0_100": 71.0, "split": "test", "task": "Post-thrombectomy mTICI classification"},
+      {"metric": "Sensitivity (occlusion identification)", "family": "sensitivity_recall", "value_raw": "91.30% (71.96 to 98.93%)", "value_0_100": 91.3, "split": "external", "task": "LVO identification"},
+      {"metric": "Specificity (occlusion identification)", "family": "specificity", "value_raw": "81.82% (48.22 to 97.72%)", "value_0_100": 81.82, "split": "external", "task": "LVO identification"},
+      {"metric": "Accuracy ICA location", "family": "accuracy", "value_raw": "73%", "value_0_100": 73.0, "split": "external", "task": "Occlusion location classification"},
+      {"metric": "Accuracy M1 location", "family": "accuracy", "value_raw": "35%", "value_0_100": 35.0, "split": "external", "task": "Occlusion location classification"},
+      {"metric": "Accuracy M2 location", "family": "accuracy", "value_raw": "50%", "value_0_100": 50.0, "split": "external", "task": "Occlusion location classification"},
+      {"metric": "Location accuracy within +/- one category", "family": "accuracy", "value_raw": "41 of 44 (93%)", "value_0_100": 93.0, "split": "external", "task": "Occlusion location classification"},
+      {"metric": "Accuracy successful reperfusion ICA", "family": "accuracy", "value_raw": "89%", "value_0_100": 89.0, "split": "external", "task": "Post-thrombectomy reperfusion assessment"},
+      {"metric": "Accuracy successful reperfusion M1", "family": "accuracy", "value_raw": "88%", "value_0_100": 88.0, "split": "external", "task": "Post-thrombectomy reperfusion assessment"},
+      {"metric": "Accuracy successful reperfusion M2", "family": "accuracy", "value_raw": "60%", "value_0_100": 60.0, "split": "external", "task": "Post-thrombectomy reperfusion assessment"}
+    ],
+    "comparators": [
+      "Xception (2D, single frames)",
+      "Inception-3D",
+      "ViT (2D)",
+      "stacked-Xception + Inception-3D ensemble",
+      "stacked-Xception + ViT ensemble"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/edhlee/DeepMovement"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "Possibly due to the limited sample size and overfitting, the 3D model trained from scratch performed considerably",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "both",
+      "quote": "We conducted a robust external validation of our primary model to examine its potential for generalizability.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "solve a clinical radiology problem with two temporal elements (dynamic video and pre and post intervention)",
+      "section": "abstract"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {
+      "status": "addresses",
+      "quote": "Grad-cams (dynamic saliency maps) were produced to aid interpretability.",
+      "section": "methods"
+    },
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {
+      "status": "documents",
+      "quote": "Our dataset could be interpreted as having bias classes, with 75% of our cases having pathology.",
+      "section": "discussion"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Video files corrupted during DICOM-to-mp4 conversion and excluded",
+    "3D model trained from scratch underperformed (overfitting)",
+    "Different image centring and equipment between sites made generalization challenging",
+    "Many redundant frames without diagnostic information reduce signal-to-noise"
+  ],
+  "future_work": [
+    "Real-time decision support for rapid pre-thrombectomy interpretation",
+    "Detection of more subtle or distal thrombi",
+    "Automated objective grading of thrombectomy outcomes and standardised TICI grading",
+    "Assessment of the efficacy of individual thrombectomy passes"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynynyynynyynyynyyynynyyyyyyyynyyyyy"
+  }
+}

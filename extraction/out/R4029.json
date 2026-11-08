@@ -1,0 +1,134 @@
+{
+  "record_id": "R4029",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep Learning-based Angiogram Generation Model for Cerebral Angiography without Misregistration Artifacts",
+    "year": 2021,
+    "venue": "Radiology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Japan"
+  },
+  "imaging": {
+    "modality": "DSA_and_fluoroscopy",
+    "modality_detail": "Paired non-subtracted dynamic angiograms (input) and DSA images (target) from cerebral angiography",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral angiography: internal, external and common carotid and vertebrobasilar arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["Siemens Healthineers"]
+  },
+  "dataset": {
+    "n_patients": 40,
+    "n_sequences": 608,
+    "n_images_or_frames": 17934,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": "Source code and trained model released; data release not stated"},
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": 2,
+      "annotator_expertise": "Two radiologists with 6 years of interventional radiologic experience categorized misregistration; DSA images served as paired targets",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Disagreements on misregistration presence reported in supplemental Table E2"
+    }
+  },
+  "task": {
+    "primary_task": "background_subtraction",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "pix2pix GAN generates DSA-like cerebral angiograms directly from dynamic angiograms without mask subtraction, avoiding misregistration artifacts",
+    "clinical_application": "Artifact-free cerebral angiography during neurointerventional procedures, avoiding reimaging due to patient movement"
+  },
+  "method": {
+    "architecture_names": ["pix2pix", "U-Net", "convolutional patch generative adversarial network"],
+    "architecture_family": "generative_gan_diffusion",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "Because the model was created on an image basis rather than on a sequence basis, the time-series information is not included in the model.",
+      "section": "discussion"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "PSNR (mean)", "family": "psnr", "value_raw": "43.5 dB ± 3.16", "value_0_100": null, "split": "validation", "task": "DSA-like image generation"},
+      {"metric": "SSIM (mean)", "family": "ssim", "value_raw": "0.98 ± 0.01", "value_0_100": null, "split": "validation", "task": "DSA-like image generation"},
+      {"metric": "PSNR (mean)", "family": "psnr", "value_raw": "40.2 dB ± 4.05", "value_0_100": null, "split": "test", "task": "DSA-like image generation"},
+      {"metric": "SSIM (mean)", "family": "ssim", "value_raw": "0.97 ± 0.02", "value_0_100": null, "split": "test", "task": "DSA-like image generation"},
+      {"metric": "PSNR estimated mean, internal carotid artery", "family": "psnr", "value_raw": "41.0 (95% CI 36.7-45.2)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (ICA)"},
+      {"metric": "PSNR estimated mean, external carotid artery", "family": "psnr", "value_raw": "41.1 (95% CI 36.8-45.4)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (ECA)"},
+      {"metric": "PSNR estimated mean, common carotid artery", "family": "psnr", "value_raw": "40.5 (95% CI 36.3-44.8)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (CCA)"},
+      {"metric": "PSNR estimated mean, vertebrobasilar artery", "family": "psnr", "value_raw": "40.7 (95% CI 36.2-45.1)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (vertebrobasilar)"},
+      {"metric": "PSNR estimated mean, other location", "family": "psnr", "value_raw": "44.1 (95% CI 39.6-48.5)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (other)"},
+      {"metric": "SSIM estimated mean, internal carotid artery", "family": "ssim", "value_raw": "0.97 (95% CI 0.96-0.98)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (ICA)"},
+      {"metric": "SSIM estimated mean, external carotid artery", "family": "ssim", "value_raw": "0.97 (95% CI 0.95-0.98)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (ECA)"},
+      {"metric": "SSIM estimated mean, common carotid artery", "family": "ssim", "value_raw": "0.97 (95% CI 0.96-0.98)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (CCA)"},
+      {"metric": "SSIM estimated mean, vertebrobasilar artery", "family": "ssim", "value_raw": "0.97 (95% CI 0.96-0.98)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (vertebrobasilar)"},
+      {"metric": "SSIM estimated mean, other location", "family": "ssim", "value_raw": "0.98 (95% CI 0.97-0.99)", "value_0_100": null, "split": "test", "task": "DSA-like image generation (other)"},
+      {"metric": "Median clinical usefulness score (1-5, vs misregistration DSA)", "family": "other", "value_raw": "4.0 (out of 5)", "value_0_100": null, "split": "test", "task": "Visual evaluation on misregistration test set"},
+      {"metric": "Median proper-working score (1-4)", "family": "other", "value_raw": "3.0 (out of 4)", "value_0_100": null, "split": "test", "task": "Visual evaluation on misregistration test set"}
+    ],
+    "comparators": ["Original DSA images (with misregistration)", "Previous image-to-image translation study (ref 8)"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://github.com/dsagan"},
+    "model_weights_available": {"value": true, "detail": "The trained model is open source (14)"},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the test data set was collected from 40 patients at a single institution", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "collected from 40 patients at a single institution and used a single imaging vendor", "section": "discussion"},
+    "G3": {"status": "documents", "quote": "Because the model was created on an image basis rather than on a sequence basis, the time-series information is not included in the model.", "section": "discussion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Image resolution (512 x 512) may not be large enough to depict fine vessels"
+  ],
+  "future_work": [
+    "Train with larger image resolution",
+    "Add time-series information to the model",
+    "Create models for areas other than the cerebrovascular field"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynyyyyyyynayynnnyyyynnynynyyynyyyyy"
+  }
+}

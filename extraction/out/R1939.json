@@ -1,0 +1,123 @@
+{
+  "record_id": "R1939",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Spatiotemporal Disentanglement of Arteriovenous Malformations in Digital Subtraction Angiography",
+    "year": 2024,
+    "venue": "Proceedings of SPIE--the International Society for Optical Engineering",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Clinical cerebral DSA image series acquired at low frame rate of 1.5fps to 6fps",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral arteriovenous malformations (feeding arteries, nidus, draining veins)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "12 to 38",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 10,
+    "n_sequences": 19,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": null, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": ["temporal_sequence_modeling"],
+    "task_description": "Artery/nidus/vein classification of vessels in DSA series of AVM patients by combining ICA-based decomposition of flow phases with U-Net vessel segmentation, producing phase-constrained color-coded visualizations.",
+    "clinical_application": "Enhanced visualization of cerebral AVM angioarchitecture for diagnosis and surgical/treatment planning"
+  },
+  "method": {
+    "architecture_names": ["U-Net", "MobileNetV2", "FastICA"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "by considering the images to be a linear mixture of three phases",
+      "section": "methods"
+    },
+    "input_dimensionality": "mixed",
+    "supervision": "mixed",
+    "pretraining": "MobileNetV2 pretrained on ImageNet (transfer learning)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Patches automatically selected using range entropy to balance the dataset",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Dice", "family": "dice", "value_raw": "0.944", "value_0_100": 94.4, "split": "cross_validation", "task": "vessel segmentation"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.957", "value_0_100": 95.7, "split": "cross_validation", "task": "vessel segmentation"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.977", "value_0_100": 97.7, "split": "cross_validation", "task": "vessel segmentation"},
+      {"metric": "Clinician rating: full score (% of visualizations)", "family": "other", "value_raw": "31.6%", "value_0_100": null, "split": "other", "task": "phase-constrained color-coded visualization"},
+      {"metric": "Clinician rating: minor errors (% of visualizations)", "family": "other", "value_raw": "47%", "value_0_100": null, "split": "other", "task": "phase-constrained color-coded visualization"},
+      {"metric": "Clinician rating: neutral (% of visualizations)", "family": "other", "value_raw": "10.5%", "value_0_100": null, "split": "other", "task": "phase-constrained color-coded visualization"},
+      {"metric": "Clinician rating: significant errors (% of series)", "family": "other", "value_raw": "10.5%", "value_0_100": null, "split": "other", "task": "phase-constrained color-coded visualization"},
+      {"metric": "Clinician rating: somewhat misleading (% of visualizations)", "family": "other", "value_raw": "5.3%", "value_0_100": null, "split": "other", "task": "phase-constrained color-coded visualization"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "addresses", "quote": "an unsupervised machine learning approach that decomposes the phases of flow with a supervised deep learning model for vessel segmentation used to recover temporal information", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "addresses", "quote": "The usage of this hybrid method circumvents the problem of scarcity of real labeled data.", "section": "conclusion"},
+    "G6": {"status": "documents", "quote": "Future work will consist on conducting a more extensive user study with a larger cohort of expert and non-expert neurovascular surgeons and neuroradiologist", "section": "conclusion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [],
+  "future_work": [
+    "More extensive user study with a larger cohort of expert and non-expert neurovascular surgeons and neuroradiologists",
+    "Extend the technique to high framerate, high-resolution DSA acquisition to improve accuracy"
+  ],
+  "claim2024": {
+    "items": "ynyyynnnnnnnnnnnyyyyyyyyyynnnnnynnnnnnnnynny"
+  }
+}

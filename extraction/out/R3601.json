@@ -1,0 +1,147 @@
+{
+  "record_id": "R3601",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Spatio-temporal deep learning for automatic detection of intracranial vessel perforation in digital subtraction angiography during endovascular thrombectomy",
+    "year": 2022,
+    "venue": "Medical Image Analysis",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Netherlands (MR CLEAN Registry, MR CLEAN-NoIV) plus international multi-trial HERMES collaboration"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "X-ray DSA series acquired during endovascular thrombectomy; 1024x1024 pixels, ~0.18x0.18 mm2",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial vessels in acute ischemic stroke EVT (vessel perforation detection)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "1 to 50 frames (temporal resolution 0.5-4 fps)",
+    "vendors": ["Philips", "GE", "Siemens"]
+  },
+  "dataset": {
+    "n_patients": 318,
+    "n_sequences": 466,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": "MR CLEAN Registry, MR CLEAN-NoIV trial, HERMES collaboration (access per trial data sharing policies)"},
+    "data_released": {"value": false, "detail": "Readers referred to data sharing policies of the source trials/registry"},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 1,
+      "annotator_expertise": "Experienced radiologist (expert 1) annotated perforation bounding boxes; ground truth also informed by intervention operators and core-lab neuroradiologists",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": ["disease_classification_grading"],
+    "task_description": "Per-frame detection/localization of intracranial vessel perforation (contrast extravasation) bounding boxes in DSA series using RetinaNet with temporal modules, plus series-level perforation/non-perforation classification after temporal-consistency post-processing.",
+    "clinical_application": "Prompt intra-procedural alarm and localization of vessel perforation during endovascular thrombectomy for acute ischemic stroke"
+  },
+  "method": {
+    "architecture_names": ["RetinaNet", "Faster R-CNN", "Cascade R-CNN", "ResNet50 FPN", "bidirectional convolutional GRU", "bidirectional convolutional LSTM", "temporal convolution module", "temporal attention module", "DR-IoU loss", "series level optimization (SO)", "ensemble"],
+    "architecture_family": "detector",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "Next, the spatial features of sequential frames are aggregated via RNNs.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "ResNet50 FPN backbone pre-trained on ImageNet",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Focal loss (RetinaNet); balanced selection of negative non-perforation series; stratified folds with balanced positive/negative series",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Leave-one-dataset-out generalizability test: trained on MR CLEAN + HERMES, tested on MR CLEAN-NoIV; trained on MR CLEAN + NoIV, tested on HERMES",
+    "metrics": [
+      {"metric": "Series-level AUC, ensemble of ST+SO models", "family": "auc", "value_raw": "0.929 (±0.006)", "value_0_100": 92.9, "split": "cross_validation", "task": "series-level perforation classification"},
+      {"metric": "mSpec, ensemble", "family": "specificity", "value_raw": "0.88", "value_0_100": 88.0, "split": "cross_validation", "task": "series-level perforation classification"},
+      {"metric": "mSens, ensemble", "family": "sensitivity_recall", "value_raw": "0.83", "value_0_100": 83.0, "split": "cross_validation", "task": "series-level perforation classification"},
+      {"metric": "mSens95, ensemble", "family": "sensitivity_recall", "value_raw": "0.70", "value_0_100": 70.0, "split": "cross_validation", "task": "series-level perforation classification"},
+      {"metric": "AUC, RN+BiLSTM+SO", "family": "auc", "value_raw": "0.909 (±0.008)", "value_0_100": 90.9, "split": "cross_validation", "task": "series-level perforation classification"},
+      {"metric": "AP_cin, RN+BiLSTM+SO", "family": "precision_ppv", "value_raw": "0.83", "value_0_100": 83.0, "split": "cross_validation", "task": "perforation localization"},
+      {"metric": "AR_cin, RN+BiLSTM+SO", "family": "sensitivity_recall", "value_raw": "0.70", "value_0_100": 70.0, "split": "cross_validation", "task": "perforation localization"},
+      {"metric": "AUPRC (center-overlap), RN+BiLSTM+SO", "family": "auc", "value_raw": "0.67", "value_0_100": 67.0, "split": "cross_validation", "task": "perforation localization"},
+      {"metric": "AP50, RN+BiLSTM+SO", "family": "precision_ppv", "value_raw": "0.43", "value_0_100": 43.0, "split": "cross_validation", "task": "perforation localization"},
+      {"metric": "AR50, RN+BiLSTM+SO", "family": "sensitivity_recall", "value_raw": "0.37", "value_0_100": 37.0, "split": "cross_validation", "task": "perforation localization"},
+      {"metric": "AUC, RN+BiLSTM+SO, averaged cross-dataset test", "family": "auc", "value_raw": "0.908 (±0.007)", "value_0_100": 90.8, "split": "external", "task": "series-level perforation classification"},
+      {"metric": "AUC, RN+BiLSTM+SO, test on NoIV", "family": "auc", "value_raw": "0.929 (±0.017)", "value_0_100": 92.9, "split": "external", "task": "series-level perforation classification"},
+      {"metric": "AUPRC, RN+BiLSTM+SO, test on NoIV", "family": "auc", "value_raw": "0.724 (±0.039)", "value_0_100": 72.4, "split": "external", "task": "perforation localization"},
+      {"metric": "mSens95, RN+BiLSTM+SO, test on NoIV", "family": "sensitivity_recall", "value_raw": "0.717 (±0.029)", "value_0_100": 71.7, "split": "external", "task": "series-level perforation classification"},
+      {"metric": "AUC, RN+BiLSTM+SO, test on HERMES", "family": "auc", "value_raw": "0.879 (±0.018)", "value_0_100": 87.9, "split": "external", "task": "series-level perforation classification"},
+      {"metric": "AUPRC, RN+BiLSTM+SO, test on HERMES", "family": "auc", "value_raw": "0.604 (±0.031)", "value_0_100": 60.4, "split": "external", "task": "perforation localization"},
+      {"metric": "mSens95, RN+BiLSTM+SO, test on HERMES", "family": "sensitivity_recall", "value_raw": "0.660 (±0.082)", "value_0_100": 66.0, "split": "external", "task": "series-level perforation classification"},
+      {"metric": "AUC, RN+TCM+SO, method-vs-human subset", "family": "auc", "value_raw": "0.922 (±0.005)", "value_0_100": 92.2, "split": "test", "task": "series-level perforation classification"},
+      {"metric": "Specificity, RN+TCM+SO, method-vs-human subset", "family": "specificity", "value_raw": "0.92", "value_0_100": 92.0, "split": "test", "task": "series-level perforation classification"},
+      {"metric": "Sensitivity, RN+TCM+SO, method-vs-human subset", "family": "sensitivity_recall", "value_raw": "0.85", "value_0_100": 85.0, "split": "test", "task": "series-level perforation classification"},
+      {"metric": "AP_cin, RN+TCM+SO, method-vs-human subset", "family": "precision_ppv", "value_raw": "0.86", "value_0_100": 86.0, "split": "test", "task": "perforation localization"},
+      {"metric": "AR_cin, RN+TCM+SO, method-vs-human subset", "family": "sensitivity_recall", "value_raw": "0.76", "value_0_100": 76.0, "split": "test", "task": "perforation localization"},
+      {"metric": "AUC, ensemble, method-vs-human subset", "family": "auc", "value_raw": "0.935 (±0.003)", "value_0_100": 93.5, "split": "test", "task": "series-level perforation classification"},
+      {"metric": "Specificity, ensemble, method-vs-human subset", "family": "specificity", "value_raw": "0.93", "value_0_100": 93.0, "split": "test", "task": "series-level perforation classification"},
+      {"metric": "Sensitivity, ensemble, method-vs-human subset", "family": "sensitivity_recall", "value_raw": "0.88", "value_0_100": 88.0, "split": "test", "task": "series-level perforation classification"}
+    ],
+    "comparators": ["Faster R-CNN", "Cascade R-CNN", "RetinaNet (single-frame)", "DIoU loss", "Expert radiologist (expert 2)"],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://gitlab.com/radiology/igit/q-maestro/perforationdetection"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "both", "quote": "it is non-trivial to obtain sufficient perforation cases for developing and validating algorithms", "section": "introduction"},
+    "G2": {"status": "addresses", "quote": "we showcased the model generalizability and its competitive performance via crossdataset testing", "section": "discussion"},
+    "G3": {"status": "addresses", "quote": "To exploit the temporal characteristics of DSA image series, we propose to incorporate a temporal module in the end-to-end network.", "section": "methods"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "addresses", "quote": "we propose a Distance-ReLu Intersection over Union (DR-IoU) regression loss to cope with imperfectness in ground truth bounding box annotation", "section": "methods"},
+    "G6": {"status": "documents", "quote": "this performance does not fully represent the clinical practice due to the fact that expert 2 was explicitly asked to look for perforations and was not under time pressure", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "The number of patients in this study is however insufficient to provide a meaningful analysis at the perforation type level.", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Wide venous structures occasionally trigger false positives",
+    "Missed small, low-contrast or uncommon perforation types",
+    "Number of input frames limited by GPU memory"
+  ],
+  "future_work": [
+    "Automatically exclude venous phase frames to reduce false positives",
+    "Embed prior knowledge of catheter location to guide model attention",
+    "Additional false positive reduction techniques to improve specificity",
+    "Construct a larger perforation dataset",
+    "Integration in Angio Suites for fast feedback between retrieval attempts"
+  ],
+  "claim2024": {
+    "items": "ynyyynyyynnnyyynyyyyyyyyyyyyyynyyyyynnnyyyyy"
+  }
+}

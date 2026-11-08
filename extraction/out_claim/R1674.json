@@ -1,0 +1,17 @@
+{"record_id": "R1674",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this work we propose ATFNet (Attentive Temporal Fusion Network), a compact multi-frame segmentation architecture—inspired by UNet++—that processes short temporal sequences of X-ray coronary angiography (XCA) frames to improve thin-vessel continuity and temporal stability.", "section": "introduction"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "the input is a stack of 4 consecutive X‐ray angiography frames (two before, one target, one after)", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "annotations on angiograms are inherently noisy (inter-observer variability, projection differences)", "section": "discussion"},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "It consists of 64 training, 16 validation, and 16 test angiography video datasets.", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Quantitative comparison of ATFNet and its ablated variants on the test set. Values are reported as mean ± standard deviation.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

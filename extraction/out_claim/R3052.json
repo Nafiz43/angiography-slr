@@ -1,0 +1,17 @@
+{"record_id": "R3052",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aimed to determine the agreement between novel RWSAngio and RWS derived from optical coherence tomography (OCT) followed by finite element analysis, as the established reference standard (RWSOCT).", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "Aided by AI, 4 frames with sharp lumen contours at representative cardiac phases, ie, end-diastole, early-systole, end-systole, and mid-diastole, were automatically selected", "section": "methods"},
+  "12": {"answer": "yes", "quote": "OCT cross-sections were excluded from FEA when the vessel structure was not completely imaged, insufficient blood clearance precluded the visualization of plaque components and vessels", "section": "methods"},
+  "15": {"answer": "yes", "quote": "The optimal image resolution and physical properties of OCT enable detailed tissue characterization, thus providing the most accurate geometric model for FEA.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "The maximal luminal deformation in the axis defined by the MLD was used to calculate the OCT-derived lumen diameter change (LDCOCT) and subsequently the OCT-derived radial wall strain (RWSOCT)", "section": "methods"},
+  "20": {"answer": "na", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "RWSAngio analysis was performed using a commercially available software package (AngioPlus Core, Version 3, Pulse Medical).", "section": "methods"},
+  "26": {"answer": "na", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "RWSAngio showed good correlation and agreement with RWSOCT (r 1⁄4 0.91; P < .001; Lin coefficient 1⁄4 0.85).", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "RWSAngio showed substantial agreement with RWSOCT (kappa 1⁄4 0.78, with 19 true positive, 21 true negative, 3 false negative, and 2 false positive) and excellent diagnostic performance (area under the curve 1⁄4 0.96)", "section": "results"}
+ }}

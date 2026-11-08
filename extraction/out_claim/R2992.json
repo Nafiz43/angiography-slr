@@ -1,0 +1,17 @@
+{"record_id": "R2992",
+ "items": {
+  "6": {"answer": "yes", "quote": "We aimed to provide an end-to-end workflow that separates cases with normal or mild stenoses from those with higher stenosis severities to facilitate safety screening of a large volume of the CAG images.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "A candidate frame was defined as an image with good quality, full contrasting, clear vessel border, and anatomical significance of stenosis (if it had stenosis) in a video frame.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "It is known that there is a mismatch between the coronary stenosis severity and functional significance.", "section": "methods"},
+  "17": {"answer": "yes", "quote": "the quantitative coronary angiography (QCA) results previously documented per segmental level in the CORE320 study were utilized as a reference", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The CNN, LSTM, CAM, and anchor-based models were performed on TensorFlow (version 2.4.0), Python (version 3.6), and the Ubuntu system (version 20.04).", "section": "methods"},
+  "26": {"answer": "yes", "quote": "the inception-v3 was employed finally in image-level, artery- and patient-level stenosis prediction, since it has a good balance in transfer timing, parameter size and performance.", "section": "methods"},
+  "27": {"answer": "yes", "quote": "For artery-level prediction, CNN scores from 4, or, 3 angleviews were combined and fed into a max pooling layer to generate LCA/RCA classification results, respectively.", "section": "methods"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The accuracies were 0.83, 0.81, 0.85, the sensitivities were 0.94, 0.90, and 0.96 and AUCs were 0.87, 0.88, and 0.86 at the artery-level; LCA and RCA, and at the per-patient level, respectively.", "section": "results"},
+  "38": {"answer": "yes", "quote": "receiver operating characteristic (ROC) analysis and areas under the curves (AUC) were used to further evaluate the image-/artery-/patient-level diagnostic performance.", "section": "methods"}
+ }}

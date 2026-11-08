@@ -1,0 +1,75 @@
+{
+ "record_id": "R4339",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "This paper develops a novel encoder–decoder deep network architecture which exploits the several contextual frames of 2D+t sequential images in a sliding window centered at current frame to segment 2D vessel masks from the current frame.",
+   "section": "abstract"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "we resize the images from the XCA sequence into 512 × 512 resolution with 8 bits per pixel,",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "We selected XCA images containing most of vessel structures as experiment samples from 120 annotated sequence according to their lengths and visual quality.",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "Images from 120 sequences have been manually annotated by three experts to constitute the ground truth.",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "The average detection rate (DR), precision (P) and F measure (mean value ± standard deviation) for test data.",
+   "section": "results"
+  },
+  "38": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  }
+ }
+}

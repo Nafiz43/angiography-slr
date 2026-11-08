@@ -1,0 +1,17 @@
+{"record_id": "R2490",
+ "items": {
+  "6": {"answer": "yes", "quote": "The rapid and accurate direct multi-frame interpolation method for Digital Subtraction Angiography (DSA) images is crucial for reducing radiation and providing real-time assistance to physicians for precise diagnostics and treatment.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "na", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "470 head DSA image sequences (329 for training and 141 for testing; 489*489 resolution) from 8 hospitals", "section": "methods"},
+  "21": {"answer": "yes", "quote": "For a fair comparison, we followed MoSt-DSA's settings, including trained two versions on their DSA dataset", "section": "methods"},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "GaraMoSt- _L_ 1 achieved a Mean of SSIM (M.SSIM) of 95.05 ( **+0.33** ), an S.SSIM of 1.89 ( **-0.23** ), a Mean of PSNR (M.PSNR) of 40.69", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

@@ -1,0 +1,182 @@
+{
+  "record_id": "R2411",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Auxiliary Input in Training: Incorporating Catheter Features into Deep Learning Models for ECG-Free Dynamic Coronary Roadmapping",
+    "year": 2024,
+    "venue": "International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Non-subtracted X-ray coronary angiography sequences paired with contrast-free X-ray fluoroscopy streams; frame rates 7.5, 15 or 30 fps; image sizes 492x492 to 624x624 after normalizing pixel spacing to 0.2 mm",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (dynamic coronary roadmapping for PCI)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 2483,
+    "n_images_or_frames": 174228,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "All experiments used in-house data (CPM: 2483 angiography-fluoroscopy video pairs, 174228 frames; CTT: 4098 videos, 255432 frames)"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "temporal_sequence_modeling",
+    "other_label": null,
+    "secondary_tasks": [
+      "catheter_device_tracking"
+    ],
+    "task_description": "Auxiliary Input in Training (AIT): catheter masks appended as an extra input channel and progressively ablated during training, applied to ECG-free cardiac phase matching between angiographic and live fluoroscopic sequences and to guiding-catheter tip tracking.",
+    "clinical_application": "ECG-free dynamic coronary roadmapping for navigation during percutaneous coronary interventions, reducing contrast and radiation"
+  },
+  "method": {
+    "architecture_names": [
+      "Auxiliary Input in Training (AIT)",
+      "CNN-ConvLSTM (CNN-C)",
+      "CNN-Transformer (CNN-T)",
+      "UNetResBlock",
+      "ConvLSTM",
+      "UNet",
+      "ResNet-50",
+      "STARK-S50"
+    ],
+    "architecture_family": "recurrent",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "a temporal neural network to infer temporal relations between image features, for which we experimented with both ConvLSTM and Transformer backbones",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Feature map visualization using first three principal components as RGB channels",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Phase matching distance (frames), AIT final, CNN-ConvLSTM", "family": "error_distance", "value_raw": "0.89±0.51", "value_0_100": null, "split": "test", "task": "cardiac phase matching"},
+      {"metric": "Phase matching distance (% of cardiac cycle), AIT final, CNN-ConvLSTM", "family": "error_distance", "value_raw": "7.01±4.08", "value_0_100": null, "split": "test", "task": "cardiac phase matching"},
+      {"metric": "Phase matching distance (frames), AIT final, CNN-Transformer", "family": "error_distance", "value_raw": "0.85±0.51", "value_0_100": null, "split": "test", "task": "cardiac phase matching"},
+      {"metric": "Phase matching distance (% of cardiac cycle), AIT final, CNN-Transformer", "family": "error_distance", "value_raw": "6.72±3.98", "value_0_100": null, "split": "test", "task": "cardiac phase matching"},
+      {"metric": "Tracking precision (2 mm threshold), AIT final, CNN-ConvLSTM", "family": "precision_ppv", "value_raw": "96.9", "value_0_100": 96.9, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Tracking recall (2 mm threshold), AIT final, CNN-ConvLSTM", "family": "sensitivity_recall", "value_raw": "97.6", "value_0_100": 97.6, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Tip distance for true positives (mm), AIT final, CNN-ConvLSTM", "family": "error_distance", "value_raw": "0.88±0.50", "value_0_100": null, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Tip distance all cases (mm), AIT final, CNN-ConvLSTM", "family": "error_distance", "value_raw": "1.10±1.48", "value_0_100": null, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Tracking precision (2 mm threshold), AIT final, CNN-Transformer", "family": "precision_ppv", "value_raw": "97.1", "value_0_100": 97.1, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Tracking recall (2 mm threshold), AIT final, CNN-Transformer", "family": "sensitivity_recall", "value_raw": "97.8", "value_0_100": 97.8, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Tip distance for true positives (mm), AIT final, CNN-Transformer", "family": "error_distance", "value_raw": "0.90±0.54", "value_0_100": null, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Tip distance all cases (mm), AIT final, CNN-Transformer", "family": "error_distance", "value_raw": "1.08±1.23", "value_0_100": null, "split": "test", "task": "catheter tip tracking"},
+      {"metric": "Inference time per frame (Nvidia V100)", "family": "time", "value_raw": "under 25 ms", "value_0_100": null, "split": "test", "task": "cardiac phase matching"},
+      {"metric": "Inference time per frame (Nvidia V100)", "family": "time", "value_raw": "under 40 ms", "value_0_100": null, "split": "test", "task": "catheter tip tracking"}
+    ],
+    "comparators": [
+      "Vanilla supervised learning",
+      "Fine-tuning from catheter segmentation model (FT)",
+      "Multi-task learning (MTL)",
+      "Teacher-student with MMD loss (T-S)",
+      "ConTrack (indirect, different dataset)"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "Although these models were trained and tested on different datasets",
+      "section": "discussion"
+    },
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {
+      "status": "addresses",
+      "quote": "the first end-to-end deep learning framework capable of accurately matching coronary X-ray frames by cardiac phases",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "complicated by foreshortening or overlaps with other objects",
+      "section": "introduction"
+    },
+    "G5": {
+      "status": "both",
+      "quote": "This question is important since acquiring extra labels can be expensive.",
+      "section": "methods"
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "to assess its practical clinical use compared to the ECG-based method, the accuracy needs further evaluation",
+      "section": "discussion"
+    },
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {
+      "status": "documents",
+      "quote": "ECG signals may not always be accessible in clinical settings",
+      "section": "introduction"
+    },
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [],
+  "future_work": [
+    "Evaluate phase matching accuracy by measuring distance between overlaid vessels and interventional devices (e.g. guide wires)",
+    "Assess practical clinical use compared with ECG-based phase matching"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnynynnynnnnynyyyyynyyynnnynnnyyynn"
+  }
+}

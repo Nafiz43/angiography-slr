@@ -1,0 +1,149 @@
+{
+  "record_id": "R1504",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Large-scale pretrained frame generative model enables real-time low-dose DSA imaging: An AI system development and multi-center validation study",
+    "year": 2025,
+    "venue": "Med (New York, N.Y.)",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China; Netherlands"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D-DSA (stationary C-arm) and rotational 3D-DSA video sequences; frame generation to reduce acquisition frame rate",
+    "territory": "multi",
+    "territory_detail": "Head and neck, thorax, abdomen, pelvis, limbs; external sets cerebrovascular",
+    "acquisition_geometry": "mixed",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["GE", "Phillips", "Siemens", "Neusoft"]
+  },
+  "dataset": {
+    "n_patients": 27117,
+    "n_sequences": 27117,
+    "n_images_or_frames": 3000000,
+    "n_centers": 35,
+    "n_vendors": 4,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "Data-Netherlands drawn from the MR CLEAN Registry (2,396 patients, 16 hospitals); not stated to be publicly downloadable"
+    },
+    "data_released": {
+      "value": null,
+      "detail": "Data and code availability section referenced but not included in available text"
+    },
+    "split_level": "site",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": "No manual annotation (self-supervised); reader study by five interventional radiologists with 8-15 years of experience",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Reader study: Kendall's W 0.565-0.791 (quality/lesion scoring); Fleiss' kappa 0.040-0.168 (visual Turing test)"
+    }
+  },
+  "task": {
+    "primary_task": "image_enhancement_denoising",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Video frame interpolation (generation of 1, 2 or 3 intermediate frames after each real frame) from temporally undersampled DSA sequences to enable low-dose, real-time DSA imaging.",
+    "clinical_application": "Radiation dose reduction (to 1/2-1/3 of clinical protocols) for patients and physicians during DSA-guided interventional procedures"
+  },
+  "method": {
+    "architecture_names": ["GenDSA", "MoStNet", "motion-structure feature extractor (MSFE)", "simplified UNet"],
+    "architecture_family": "other",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "motion features are mapped at different times and decoded with structural features to compute flow and masks",
+      "section": "results"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "self_supervised",
+    "pretraining": "Self-supervised pretraining on partial 2D DV-MuRC data from five body parts (foundation model), then fine-tuned separately per body part and 2D/3D",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "DV-MuRC centers 8-10 held out for testing (trained on centers 1-7); Data-Neusoft (475 patients, 9 Chinese hospitals, Neusoft 3D-DSA); Data-Netherlands (2,396 patients, 16 hospitals, MR CLEAN Registry 2D cerebral DSA)",
+    "metrics": [
+      {"metric": "PSNR", "family": "psnr", "value_raw": "37.60 ± 4.58", "value_0_100": null, "split": "external", "task": "1-frame generation, all body parts, Dataset 1 test (centers 8-10)"},
+      {"metric": "PSNR", "family": "psnr", "value_raw": "36.83 ± 4.48", "value_0_100": null, "split": "external", "task": "2-frame generation, all body parts, Dataset 1 test (centers 8-10)"},
+      {"metric": "PSNR", "family": "psnr", "value_raw": "36.15 ± 4.67", "value_0_100": null, "split": "external", "task": "3-frame generation, all body parts, Dataset 1 test (centers 8-10)"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.916 ± 0.048", "value_0_100": null, "split": "external", "task": "1-frame generation, all body parts, Dataset 1 test (centers 8-10)"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.911 ± 0.050", "value_0_100": null, "split": "external", "task": "2-frame generation, all body parts, Dataset 1 test (centers 8-10)"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.900 ± 0.055", "value_0_100": null, "split": "external", "task": "3-frame generation, all body parts, Dataset 1 test (centers 8-10)"},
+      {"metric": "Mean generation time", "family": "time", "value_raw": "0.057 s", "value_0_100": null, "split": "external", "task": "1-frame generation, all body parts"},
+      {"metric": "Mean generation time", "family": "time", "value_raw": "0.146 s", "value_0_100": null, "split": "external", "task": "2-frame generation, all body parts"},
+      {"metric": "Mean generation time", "family": "time", "value_raw": "0.236 s", "value_0_100": null, "split": "external", "task": "3-frame generation, all body parts"},
+      {"metric": "Generation time per frame", "family": "time", "value_raw": "0.07 s/frame", "value_0_100": null, "split": "external", "task": "2-frame generation (headline)"},
+      {"metric": "PSNR", "family": "psnr", "value_raw": "38.94 ± 3.38", "value_0_100": null, "split": "external", "task": "1-frame generation, Data-Neusoft 3D-DSA"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.935 ± 0.046", "value_0_100": null, "split": "external", "task": "1-frame generation, Data-Neusoft 3D-DSA"},
+      {"metric": "PSNR", "family": "psnr", "value_raw": "34.51 ± 3.92", "value_0_100": null, "split": "external", "task": "1-frame generation, Data-Netherlands 2D-DSA"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.941 ± 0.028", "value_0_100": null, "split": "external", "task": "1-frame generation, Data-Netherlands 2D-DSA"},
+      {"metric": "Overall quality Likert score (generated vs real 4.935)", "family": "other", "value_raw": "4.905", "value_0_100": null, "split": "other", "task": "Reader study, 2-frame generation, 474 video pairs"},
+      {"metric": "Lesion assessment Likert score (generated vs real 4.860)", "family": "other", "value_raw": "4.825", "value_0_100": null, "split": "other", "task": "Reader study, 2-frame generation, 474 video pairs"},
+      {"metric": "Fleiss' kappa among readers identifying generated vs real videos", "family": "kappa", "value_raw": "0.040 to 0.168", "value_0_100": null, "split": "other", "task": "Visual Turing test"},
+      {"metric": "Kendall's W for scoring of generated videos", "family": "other", "value_raw": "0.565 to 0.791", "value_0_100": null, "split": "other", "task": "Reader study scoring consistency"},
+      {"metric": "Normalized time-intensity signal error", "family": "error_distance", "value_raw": "below 0.02", "value_0_100": null, "split": "other", "task": "Time-intensity curves, 2D head example (2-frame generation)"},
+      {"metric": "Needle tip displacement vs fully sampled", "family": "error_distance", "value_raw": "within 2 pixels", "value_0_100": null, "split": "other", "task": "3D-DSA ablation needle example (2-frame generation)"}
+    ],
+    "comparators": ["EMA-VFI", "FILM", "Undersampled videos (no frame generation)"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": "Data and code availability section in STAR Methods not included in available text"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "both", "quote": "it also results in a large number of models lacking generalizability", "section": "discussion"},
+    "G3": {"status": "addresses", "quote": "MSFE efficiently extracts complex motion and structural features at multiple scales via cross-attention in a fully convolutional manner", "section": "discussion"},
+    "G4": {"status": "addresses", "quote": "the advantages of our frame generation models for 3D reconstruction were further evaluated", "section": "results"},
+    "G5": {"status": "addresses", "quote": "supports seamless scalability to large datasets without manual annotations", "section": "introduction"},
+    "G6": {"status": "documents", "quote": "the need for further verification of GenDSA's capabilities in more clinical trials", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "the 2,000 cases of test data we used are still insufficient when allocated to each disease, so we did not further analyze by disease type", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Diseases not categorized in detail for clinical assessment",
+    "Actual dose values for low-frame-rate acquisition unavailable; dose savings estimated theoretically",
+    "3-frame generation yields inferior video clarity and fluency",
+    "2-frame generation unsatisfactory on external datasets; only 1-frame results reported"
+  ],
+  "future_work": [
+    "Develop a single generalized model for all body regions",
+    "Further verification in more clinical trials",
+    "Disease-level categorized analysis as DV-MuRC grows",
+    "Combine with low-dose-per-frame DSA devices",
+    "Integration into DSA devices or standalone system for downstream tasks"
+  ],
+  "claim2024": {
+    "items": "yyyyyyynnynnyyyyyynannyynnyynynyyyyyyynyyyny"
+  }
+}

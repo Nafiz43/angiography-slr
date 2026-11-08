@@ -1,0 +1,17 @@
+{"record_id": "R3999",
+ "items": {
+  "6":  {"answer": "yes", "quote": "we propose a fully automatic and quantitative TICI scoring algorithm, as an objective and robust alternative to existing visual inspection based TICI scoring", "section": "introduction"},
+  "9":  {"answer": "yes", "quote": "Non-subtracted, duplicated, inverted, corrupted frames were removed and finally all acquisitions were re-ordered according to frame acquisition time.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "From each of those, we selected up to four acquisitions (pre-EVT/post-EVT, AP/lateral view) per subject which were of good image quality as described above.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Note that 20 patients had missing mRS records, which were imputed using multiple imputations by chained equations (MICE) [41].", "section": "methods"},
+  "15": {"answer": "yes", "quote": "eTICI is one of the most comparable metrics to autoTICI as both are proposed as brain perfusion measures. However, it should be pointed out that the definition of autoTICI and eTICI are not fully identical.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "141 testing sequences (Section III-A.2) were labelled by all three operators independently, and consensuses were derived afterwards.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "this test set was thus excluded from the training set for phase classification. From the remaining 539 patients, 648 acquisitions (9440 images) were randomly selected", "section": "methods"},
+  "21": {"answer": "yes", "quote": "Based on data quality and availability, a subset of 141 out of 680 patients were suitable for automatic TICI quantification.", "section": "methods"},
+  "23": {"answer": "yes", "quote": "The deep learning model for phase classification was developed using PyTorch [42]", "section": "results"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "the proposed autoTICI shows good correlation with the extended TICI (eTICI) reference with an average area under the curve (AUC) score of 0.81.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "As shown in Fig.7c, a micro-average (biased average by class frequency) AUC of 0.76 and 0.78 for AP and lateral view were achieved respectively.", "section": "results"}
+ }}

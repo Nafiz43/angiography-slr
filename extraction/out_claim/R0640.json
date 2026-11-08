@@ -1,0 +1,17 @@
+{"record_id": "R0640",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aims to improve the cerebrovascular extraction performance of a deep learning model that modifies the texture analysis techniques in time series DSA data to perform preprocessing and uses it as an input data.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "the brightness threshold was computed independently for each DSA frame using its cumulative histogram", "section": "methods"},
+  "10": {"answer": "yes", "quote": "120 sequences were selected for this study based on specific inclusion criteria: Clear visualization of the arterial phase; Minimal motion artifacts; and Absence of sequence duplication.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "Initially, two medical students conducted manual annotations of key frames from the early and late arterial phases. These annotations were then reviewed and verified by two board-certified neurosurgeons.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "All experiments were conducted using the DIAS dataset with a sequence-level split to prevent frame-level data leakage.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "All image processing and model implementation were carried out using MATLAB (R2023a, MathWorks, Natick, MA, USA) and PyTorch (v2.6.0, Meta AI, New York, NY, USA).", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "All quantitative results reported in Tables 1 and 2 represent aggregate performance across the entire test set, not a selection of images.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

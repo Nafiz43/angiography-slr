@@ -1,0 +1,176 @@
+{
+  "record_id": "R4317",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep neural networks for ECG-free cardiac phase and end-diastolic frame detection on coronary angiographies",
+    "year": 2020,
+    "venue": "Computerized Medical Imaging and Graphics",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive X-ray coronary angiography (cine), frames resampled to 512x512 and to 10 fps",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (LCA and RCA)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "Acquisitions at 7.5-30 fps; model input windows of 10 frames (1 s at 10 fps); 95.1 +/- 14.9 frames per angiography in the secondary set",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 13081,
+    "n_sequences": 77435,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data cannot be made public due to GDPR regulations and informed consent"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": 2,
+      "annotator_expertise": "Experienced clinical examiners annotated R and T peaks on ECG for a validation subset; training labels derived automatically from ECG; vessel centrelines manually annotated for the vesselness model",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "temporal_sequence_modeling",
+    "other_label": null,
+    "secondary_tasks": [
+      "vessel_segmentation",
+      "disease_classification_grading"
+    ],
+    "task_description": "ECG-free frame-level cardiac phase (systole/diastole) classification and end-diastolic frame detection on coronary angiographies, with a vesselness segmentation network preselecting frames with well visible arteries",
+    "clinical_application": "Automated EDF selection for 3D QCA and image-based FFR, and cardiac phase identification without ECG"
+  },
+  "method": {
+    "architecture_names": [
+      "U-Net-like vesselness network",
+      "Spatial CNN + temporal CNN cardiac phase predictor",
+      "Schmitt trigger post-processing filter"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "A second CNN performs temporal convolutions on this matrix, independently for all 64 image features.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Trained on 56,655 angiographies from 6820 patients; main evaluation on 20,780 angiographies from 6261 patients acquired at a different clinical site; additional expert-annotated subset (207 angiographies) and secondary dataset (175 angiographies, 84 patients)",
+    "metrics": [
+      {"metric": "Dice (vesselness segmentation)", "family": "dice", "value_raw": "0.86", "value_0_100": 86.0, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Accuracy (excluding frames adjacent to transitions, per-angiography weight)", "family": "accuracy", "value_raw": "98.8 %", "value_0_100": 98.8, "split": "external", "task": "cardiac phase detection"},
+      {"metric": "Sensitivity (excluding frames adjacent to transitions, per-angiography weight)", "family": "sensitivity_recall", "value_raw": "99.3 %", "value_0_100": 99.3, "split": "external", "task": "cardiac phase detection"},
+      {"metric": "Specificity (excluding frames adjacent to transitions, per-angiography weight)", "family": "specificity", "value_raw": "97.6 %", "value_0_100": 97.6, "split": "external", "task": "cardiac phase detection"},
+      {"metric": "PPV (excluding frames adjacent to transitions, per-angiography weight)", "family": "precision_ppv", "value_raw": "98.9 %", "value_0_100": 98.9, "split": "external", "task": "cardiac phase detection"},
+      {"metric": "NPV (excluding frames adjacent to transitions, per-angiography weight)", "family": "other", "value_raw": "98.6 %", "value_0_100": null, "split": "external", "task": "cardiac phase detection"},
+      {"metric": "Accuracy (including frames adjacent to transitions, per-angiography weight)", "family": "accuracy", "value_raw": "96.4 %", "value_0_100": 96.4, "split": "external", "task": "cardiac phase detection"},
+      {"metric": "EDF precision (+/-1 frame tolerance)", "family": "precision_ppv", "value_raw": "98.4 %", "value_0_100": 98.4, "split": "external", "task": "end-diastolic frame detection"},
+      {"metric": "EDF recall (+/-1 frame tolerance)", "family": "sensitivity_recall", "value_raw": "97.9 %", "value_0_100": 97.9, "split": "external", "task": "end-diastolic frame detection"},
+      {"metric": "EDF F1 score (+/-1 frame tolerance)", "family": "f1", "value_raw": "98.2 %", "value_0_100": 98.2, "split": "external", "task": "end-diastolic frame detection"},
+      {"metric": "Accuracy vs expert-annotated ECG GT (examiner 1 and 2)", "family": "accuracy", "value_raw": "97.6 %", "value_0_100": 97.6, "split": "external", "task": "cardiac phase detection (expert-annotated subset)"},
+      {"metric": "Sensitivity vs expert-annotated ECG GT (examiner 1)", "family": "sensitivity_recall", "value_raw": "97.2 %", "value_0_100": 97.2, "split": "external", "task": "cardiac phase detection (expert-annotated subset)"},
+      {"metric": "Specificity vs expert-annotated ECG GT (examiner 1 and 2)", "family": "specificity", "value_raw": "98.3 %", "value_0_100": 98.3, "split": "external", "task": "cardiac phase detection (expert-annotated subset)"},
+      {"metric": "Accuracy on secondary evaluation dataset (excluding frames adjacent to transitions, per-angiography weight)", "family": "accuracy", "value_raw": "99.3 %", "value_0_100": 99.3, "split": "other", "task": "cardiac phase detection (secondary dataset)"},
+      {"metric": "EDF precision on secondary dataset", "family": "precision_ppv", "value_raw": "99.5 %", "value_0_100": 99.5, "split": "other", "task": "end-diastolic frame detection (secondary dataset)"},
+      {"metric": "EDF recall on secondary dataset", "family": "sensitivity_recall", "value_raw": "99.4 %", "value_0_100": 99.4, "split": "other", "task": "end-diastolic frame detection (secondary dataset)"},
+      {"metric": "EDF F1 score on secondary dataset", "family": "f1", "value_raw": "99.5 %", "value_0_100": 99.5, "split": "other", "task": "end-diastolic frame detection (secondary dataset)"},
+      {"metric": "LCA/RCA classifier accuracy", "family": "accuracy", "value_raw": "98.0 %", "value_0_100": 98.0, "split": "other", "task": "vessel of interest (LCA/RCA) classification"},
+      {"metric": "Execution time of entire online workflow per angiography", "family": "time", "value_raw": "4.9 ± 1.25 s", "value_0_100": null, "split": "other", "task": "cardiac phase detection workflow"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": true
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "past methods cannot be directly applied on our data for performance comparison",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "addresses",
+      "quote": "the training / validation and evaluation datasets were acquired at different clinical sites",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "addresses",
+      "quote": "it takes as input sequences of 10 frames from the preselected frame interval, performs spatial and temporal convolutions",
+      "section": "methods"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {
+      "status": "both",
+      "quote": "This strategy allowed us to reduce drastically the annotation costs",
+      "section": "conclusion"
+    },
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {
+      "status": "documents",
+      "quote": "cannot be made public, considering GDPR regulations and the content of the informed consent signed by the patients",
+      "section": "other"
+    },
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Reduced confidence and accuracy under panning (table movement)",
+    "Suboptimal performance with total occlusions or few visible arteries",
+    "ECG-angiography desynchronization (e.g. conduction disorders) affects ECG-derived ground truth",
+    "No access to patient characteristics or diagnoses for the main evaluation dataset",
+    "T peaks not always reliably detectable on ECG signals"
+  ],
+  "future_work": [],
+  "claim2024": {
+    "items": "ynyyynynynynnyynyyynyynynnynnynyynynnynyyyyy"
+  }
+}

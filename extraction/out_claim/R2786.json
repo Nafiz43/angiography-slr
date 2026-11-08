@@ -1,0 +1,17 @@
+{"record_id": "R2786",
+ "items": {
+  "6": {"answer": "yes", "quote": "The study shows the feasibility of obtaining patient-specific velocity and pressure fields using an assumption-free data driven approach based purely on governing physical equations and imaging data.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "the HSA input is pre-processed to better isolate contrast signals in each frame, then is masked via mean intensity binary thresholding of the temporally averaged sequence. The walls of the vessel are identified via passage of a Sobel filter", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Using this information, a random sample of collocation points is generated between the bounds of the row.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "na", "quote": null, "section": null},
+  "17": {"answer": "na", "quote": null, "section": null},
+  "20": {"answer": "na", "quote": null, "section": null},
+  "21": {"answer": "na", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "no", "quote": null, "section": null},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

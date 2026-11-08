@@ -1,0 +1,150 @@
+{
+  "record_id": "R4154",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Using a Convolutional Neural Network and Convolutional Long Short-term Memory to Automatically Detect Aneurysms on 2D Digital Subtraction Angiography Images: Framework Development and Validation",
+    "year": 2022,
+    "venue": "JMIR Medical Informatics",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D DSA sequences (frontal and lateral); aneurysms confirmed via 3D DSA",
+    "territory": "neurologic",
+    "territory_detail": "Posterior communicating artery (PCoA) aneurysms, intracranial",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "6 to 12 selected frames providing visualization of the PCoA region",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 275,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "experienced radiologists",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Two-stage system: region localization stage locates the PCoA region in raw 2D DSA sequences; aneurysm detection stage uses a bi-input (frontal+lateral) RetinaNet with bidirectional C-LSTM to detect aneurysms and overlapping vessels.",
+    "clinical_application": "Detection of posterior communicating artery aneurysms on 2D DSA to assist physicians"
+  },
+  "method": {
+    "architecture_names": [
+      "bi-input+RetinaNet+C-LSTM",
+      "RetinaNet",
+      "ResNet-50",
+      "FPN",
+      "bidirectional C-LSTM"
+    ],
+    "architecture_family": "detector",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "In total, 3 feature layers were selected for temporal feature extraction by using bidirectional C-LSTM, namely C3, C4, and C5",
+      "section": "methods"
+    },
+    "input_dimensionality": "multi_view",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "focal loss (alpha 0.25, gamma 2.0)",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUC (best fold)", "family": "auc", "value_raw": "0.97", "value_0_100": 97.0, "split": "cross_validation", "task": "aneurysm detection"},
+      {"metric": "AUC (average over 5 folds)", "family": "auc", "value_raw": "0.936", "value_0_100": 93.6, "split": "cross_validation", "task": "aneurysm detection"},
+      {"metric": "Sensitivity (mean)", "family": "sensitivity_recall", "value_raw": "89% (range 67.02%-98.43%)", "value_0_100": 89.0, "split": "test", "task": "aneurysm detection"},
+      {"metric": "Specificity (mean)", "family": "specificity", "value_raw": "93% (range 72.30%-99.56%)", "value_0_100": 93.0, "split": "test", "task": "aneurysm detection"},
+      {"metric": "Accuracy (mean)", "family": "accuracy", "value_raw": "91% (range 77.63%-97.72%)", "value_0_100": 91.0, "split": "test", "task": "aneurysm detection"},
+      {"metric": "Time cost", "family": "time", "value_raw": "2.72 s", "value_0_100": null, "split": "test", "task": "aneurysm detection"},
+      {"metric": "mAP fold 1", "family": "other", "value_raw": "0.4435", "value_0_100": null, "split": "cross_validation", "task": "aneurysm and vessel overlap detection"},
+      {"metric": "mAP fold 2", "family": "other", "value_raw": "0.6523", "value_0_100": null, "split": "cross_validation", "task": "aneurysm and vessel overlap detection"},
+      {"metric": "mAP fold 3", "family": "other", "value_raw": "0.5254", "value_0_100": null, "split": "cross_validation", "task": "aneurysm and vessel overlap detection"},
+      {"metric": "mAP fold 4", "family": "other", "value_raw": "0.6506", "value_0_100": null, "split": "cross_validation", "task": "aneurysm and vessel overlap detection"},
+      {"metric": "mAP fold 5", "family": "other", "value_raw": "0.7408", "value_0_100": null, "split": "cross_validation", "task": "aneurysm and vessel overlap detection"},
+      {"metric": "Region localization accuracy", "family": "accuracy", "value_raw": "100%", "value_0_100": 100.0, "split": "test", "task": "PCoA region localization"}
+    ],
+    "comparators": [
+      "RetinaNet",
+      "RetinaNet+C-LSTM (Liao et al)",
+      "bi-input+RetinaNet (Duan et al)",
+      "human experts with 20 years of experience"
+    ],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "our data set is comparatively small and only includes PCoA aneurysms", "section": "discussion"},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "Duan et al [16] combined frontal and lateral DSA images for detection but did not use the timing information of the DSA sequence.", "section": "introduction"},
+    "G4": {"status": "both", "quote": "Unlike 3D images, 2D DSA images lack spatial information, and it is difficult for radiologists to distinguish aneurysms from overlapping vessels in 2D DSA images.", "section": "introduction"},
+    "G5": {"status": "documents", "quote": "It was difficult to label all of the overlaps, since our main task was to look for aneurysms, and labeling overlaps requires considerable amounts of work.", "section": "discussion"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Cascading network framework is relatively complex (not end-to-end)",
+    "Information loss when converting 2D information to 1D",
+    "Incomplete overlap labels caused fluctuating mAP values"
+  ],
+  "future_work": [
+    "Include cerebral aneurysms in different locations",
+    "Develop an end-to-end network",
+    "Compensate for information loss in 2D-to-1D conversion",
+    "Use a transformer to process temporal information"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyynnynyynyyyynynyyyyyynnynynynnnyynny"
+  }
+}

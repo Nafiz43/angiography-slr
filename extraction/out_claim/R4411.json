@@ -1,0 +1,17 @@
+{"record_id": "R4411",
+ "items": {
+  "6": {"answer": "yes", "quote": "This paper reports on the development of a novel dynamic coronary roadmapping approach for improving visual feedback and reducing contrast use during PCI.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "all images were resampled to a grid of 256 × 256 before being processed by the neural network. In addition, the image intensities were rescaled to the range from 0 to 1.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "In the training and validation sets, 4-5 frames were randomly selected from each sequence, which are not necessarily continuous.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "For some rare cases in our data where no guidewire is present in the image, we discarded that non-contrast frame, and chose those frames with little vessel contrast from the same sequence and annotated the vessel centerline.", "section": "methods"},
+  "15": {"answer": "yes", "quote": "One possible choice introduced by [50] is to use the guidewire as a surrogate of the target vessel centerline in non-contrast images, as guidewire is always inside vessels and commonly present in image sequences during interventions.", "section": "methods"},
+  "17": {"answer": "yes", "quote": "From each non-contrast sequence in the test set for tracking in Section 5.2, we uniformly select 8-20 frames to annotate guidewire.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "we selected data from 37 patients which were acquired since the year 2014 to develop our method, and used the data from the other 18 patients acquired before the year 2013 for evaluation.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The framework used for developing the deep learning approach for likelihood approximation is PyTorch.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "the mean Euclidean distance between the ground truth and the predicted tip location averaged over all validation frames, was used as the validation criteria for selecting the optimal training epoch and the network hyperparameters.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The tracking accuracies of all methods reported in this section were obtained on the test set from Table 2.", "section": "results"},
+  "38": {"answer": "yes", "quote": "Mean error of all images|3.74±4.93|3.05±4.05|5.62±15.91|**1.29**±**1.76**", "section": "results"}
+ }}

@@ -1,0 +1,316 @@
+{
+  "record_id": "R3469",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep learning-based classification of DSA image sequences of patients with acute ischemic stroke",
+    "year": 2022,
+    "venue": "International Journal of Computer Assisted Radiology and Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Germany"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "2D cerebral DSA sequences acquired simultaneously in posterior-anterior (PA) and lateral (LAT) views during thrombectomy; 1024 x 1024 pixels",
+    "territory": "neurologic",
+    "territory_detail": "Cerebrovasculature, perfusion territory of the internal carotid artery (acute ischemic stroke, thrombectomy); vertebral and external carotid-only sequences excluded",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": 3,
+    "frames_per_sequence": "13-61 (mean 32)",
+    "vendors": [
+      "Siemens Healthcare (Artis zee)"
+    ]
+  },
+  "dataset": {
+    "n_patients": 260,
+    "n_sequences": 1068,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Due to data protection reasons, the DSA data set cannot be published."
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "experienced neuroradiologists; discordant sequences re-annotated jointly",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Interobserver variability of thrombus position annotation 23 +/- 28 image pixels (2% +/- 3% of image width)"
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary classification of DSA sequences (and PA+LAT sequence pairs) into thrombus-free vs non-thrombus-free (thrombus-yes-no-classification) using CNN feature extractors combined with bidirectional GRU/LSTM networks.",
+    "clinical_application": "Intraprocedural alerting during thrombectomy for acute ischemic stroke to reduce the risk of overlooking new thrombi/emboli"
+  },
+  "method": {
+    "architecture_names": [
+      "ResNet18 + GRU",
+      "EfficientNet-B0/B1/B2/B3 + GRU",
+      "EfficientNet-B0/B1 + LSTM",
+      "Tf_EfficientNetV2_S/M + GRU",
+      "Rw_EfficientNetV2_S + GRU",
+      "RegNet_y_16gf + GRU",
+      "Ensemble of four network variants (two per view)"
+    ],
+    "architecture_family": "recurrent",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "The extracted features served as input to the LSTM or GRU network, which outputted the classification result",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "ImageNet (Torchvision) or ImageNet-21k (timm, EfficientNetV2) pretrained CNN backbones, fine-tuned end-to-end",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Matthews correlation coefficient used as model selection criterion due to unbalanced classes (72% positives)",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "MCC",
+        "family": "correlation",
+        "value_raw": "0.77",
+        "value_0_100": null,
+        "split": "test",
+        "task": "Paired PA+LAT classification, 4-model ensemble, test data set 1"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.94",
+        "value_0_100": 94.0,
+        "split": "test",
+        "task": "Paired PA+LAT classification, 4-model ensemble, test data set 1"
+      },
+      {
+        "metric": "MCC",
+        "family": "correlation",
+        "value_raw": "0.69",
+        "value_0_100": null,
+        "split": "test",
+        "task": "Paired PA+LAT classification, 4-model ensemble, test data set 2 (incl. uncertain cases)"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.91",
+        "value_0_100": 91.0,
+        "split": "test",
+        "task": "Paired PA+LAT classification, 4-model ensemble, test data set 2 (incl. uncertain cases)"
+      },
+      {
+        "metric": "MCC",
+        "family": "correlation",
+        "value_raw": "0.73",
+        "value_0_100": null,
+        "split": "test",
+        "task": "Paired PA+LAT classification, EfficientNet-B0 + LSTM, test data set 1"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.94",
+        "value_0_100": 94.0,
+        "split": "test",
+        "task": "Paired PA+LAT classification, EfficientNet-B0 + LSTM, test data set 1"
+      },
+      {
+        "metric": "MCC",
+        "family": "correlation",
+        "value_raw": "0.65",
+        "value_0_100": null,
+        "split": "test",
+        "task": "Single PA classification, best (Tf_EfficientNetV2_S + GRU), test data set 1"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.91",
+        "value_0_100": 91.0,
+        "split": "test",
+        "task": "Single PA classification, best (Tf_EfficientNetV2_S + GRU / EfficientNet-B0 + LSTM), test data set 1"
+      },
+      {
+        "metric": "MCC",
+        "family": "correlation",
+        "value_raw": "0.68",
+        "value_0_100": null,
+        "split": "test",
+        "task": "Single LAT classification, best (EfficientNet-B0 + LSTM), test data set 1"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.93",
+        "value_0_100": 93.0,
+        "split": "test",
+        "task": "Single LAT classification, best (EfficientNet-B2 + GRU), test data set 1"
+      },
+      {
+        "metric": "MCC",
+        "family": "correlation",
+        "value_raw": "0.66",
+        "value_0_100": null,
+        "split": "test",
+        "task": "Paired PA+LAT classification, EfficientNet-B2 + GRU, test data set 1"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.94",
+        "value_0_100": 94.0,
+        "split": "test",
+        "task": "Paired PA+LAT classification, EfficientNet-B2 + GRU, test data set 1"
+      },
+      {
+        "metric": "MCC",
+        "family": "correlation",
+        "value_raw": "0.58",
+        "value_0_100": null,
+        "split": "test",
+        "task": "Paired PA+LAT classification, ResNet18 + GRU, test data set 1"
+      },
+      {
+        "metric": "AUC",
+        "family": "auc",
+        "value_raw": "0.92",
+        "value_0_100": 92.0,
+        "split": "test",
+        "task": "Paired PA+LAT classification, ResNet18 + GRU, test data set 1"
+      }
+    ],
+    "comparators": [
+      "ResNet18 + GRU",
+      "EfficientNet-B0 + GRU",
+      "EfficientNet-B0 + LSTM",
+      "EfficientNet-B1 + GRU",
+      "EfficientNet-B1 + LSTM",
+      "EfficientNet-B2 + GRU",
+      "EfficientNet-B3 + GRU",
+      "Tf_EfficientNetV2_S + GRU",
+      "Tf_EfficientNetV2_M + GRU",
+      "Rw_EfficientNetV2_S + GRU",
+      "RegNet_y_16gf + GRU",
+      "Single-view vs paired (PA + LAT) classification"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/BMittmannTest/DeepLearningBasedDsaClassification"
+    },
+    "model_weights_available": {
+      "value": true,
+      "detail": "Trained network models published on the Open Science Framework (https://osf.io/n8k4r/)"
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "To improve the classification performance and the generalizability, a substantially larger amount of multi-center training data would be required.",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "As our retrospective study was based on single-center DSA imaging data, the trained neural networks could be less generalizable with respect to DSA data of other stroke units.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "addresses",
+      "quote": "we addressed the challenge of automatically identifying spatio-temporal perfusion abnormalities caused by thrombi in DSA image sequences of variable sequence length",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G5": {
+      "status": "documents",
+      "quote": "this is related to the high interobserver variability of the thrombus position annotation",
+      "section": "discussion"
+    },
+    "G6": {
+      "status": "documents",
+      "quote": "only a prospective study can analyze how the trained neural networks will perform in clinical practice",
+      "section": "discussion"
+    },
+    "G7": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "addresses",
+      "quote": "the Matthews correlation coefficient (MCC) [5] does not tend to overestimate the classification performance especially for an unbalanced binary class distribution",
+      "section": "methods"
+    },
+    "G10": {
+      "status": "documents",
+      "quote": "Due to data protection reasons, the DSA data set cannot be published.",
+      "section": "other"
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Small, inconspicuous distal perfusion abnormalities with uncertain annotation mostly misclassified as thrombus-free (false negatives)"
+  ],
+  "future_work": [
+    "External validation to assess generalizability",
+    "Prospective study of performance in clinical practice",
+    "Larger multi-center training data",
+    "Automatic thrombus detection/localization in DSA images",
+    "Determine handling of annotation variability and suitable evaluation metrics for thrombus detection",
+    "Transformer-based neural networks"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynyyyyyyyyynyyyyyynnynynyyyyynyyyyy"
+  }
+}

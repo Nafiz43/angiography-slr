@@ -1,0 +1,75 @@
+{
+ "record_id": "R4029",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "A retrospective model development and validation study was conducted on dynamic and DSA image pairs",
+   "section": "abstract"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "Angiograms larger than 512  512 pixels were resized to this size for consistency in 8-bit portable network graphic file format for training and validation.",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "The patient images with misregistration formed the misregistration test data set, excluding any nonmisregistration pairs.",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "yes",
+   "quote": "DL-generated angiograms in the misregistration data set were visually evaluated because they cannot be quantitatively compared with the DSA images as a result of the misregistration artifacts.",
+   "section": "methods"
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "All DSA images were categorized as with or without misregistration artifacts by two authors (D.U. and T.H, both with 6 years of interventional radiologic experience) individually. Consensus was achieved by discussion.",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "We performed this partition on a per-patient basis to prevent overlapping images between the data sets.",
+   "section": "methods"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "yes",
+   "quote": "based on the PyTorch framework (version 1.0.0, 2018; Facebook) (16)",
+   "section": "methods"
+  },
+  "26": {
+   "answer": "yes",
+   "quote": "its performance was optimal when the loss value on the validation data set was lowest.",
+   "section": "methods"
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "the mean PSNR values between the original DSA images and DL-generated angiograms were 43.5 dB  3.16 and 40.2 dB  4.05 for the validation and nonmisregistration test data sets",
+   "section": "results"
+  },
+  "38": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  }
+ }
+}

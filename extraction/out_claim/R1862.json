@@ -1,0 +1,17 @@
+{"record_id": "R1862",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this work, we present a learning-based method for efficient and accurate time-resolved angiographic CA concentrations reconstruction.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "Initially, centerlines are resampled at an inter-node distance of 0.46 mm. Subsequently, at each centerline point, the mean contrast intensity is computed over the vessel cross-section perpendicular to the centerline for each timestep.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Bifurcation regions are excluded from the computation as it is difficult to uniquely assign the concentration to the centerlines.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "In both training and validation set single CFD simulations that did not finish within 24 h and were discarded", "section": "methods"},
+  "15": {"answer": "yes", "quote": "Consequently, we cannot compare our method against a gold standard. Instead, we employed highly-resolved CFD simulations, which we believe provide a reliable representation of real CA distributions and enable quantitative evaluation of reconstruction performance.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "The spatially averaged concentration values for each centerline point are calculated, which are considered as the ground truth reconstruction.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The reconstruction cases form a dataset that is split by geometry into training, validation, and test set.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "the weights resulting in the lowest validation loss are chosen for testing", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "our trained model is able to reconstruct the CA concentration with a mean absolute error of 0.02 ± 0.02 and a mean absolute percentage error of 5.31(9.25)% on the test set.", "section": "discussion"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

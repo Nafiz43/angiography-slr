@@ -1,0 +1,295 @@
+
+\definecolor{claimTA}{HTML}{4C72B0}
+\definecolor{claimIntro}{HTML}{55A868}
+\definecolor{claimMeth}{HTML}{C44E52}
+\definecolor{claimRes}{HTML}{DD8452}
+\definecolor{claimDisc}{HTML}{8172B2}
+\definecolor{claimRepro}{HTML}{937860}
+
+\begin{table*}[pos=!tp]
+  \centering
+  \caption{Reporting completeness by CLAIM 2024 checklist subsection, studies published up to 2024 vs.\ from 2025 onward. The split follows the publication of CLAIM 2024~\cite{Tejani2024}. Items are official CLAIM 2024 item numbers with short descriptions.}
+  \label{tab:claim2024_temporal}
+
+  \footnotesize
+  \renewcommand{\arraystretch}{1.25}
+  \setlength{\tabcolsep}{4pt}
+
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{@{}
+      p{2.6cm}
+      c
+      p{8.6cm}
+      r r
+      r r
+      >{\centering\arraybackslash}p{1.9cm}
+  @{}}
+
+    \toprule
+
+    \multicolumn{1}{l}{\textbf{Subsection}} &
+    \multicolumn{1}{c}{\textbf{Items}} &
+    \multicolumn{1}{l}{\textbf{CLAIM 2024 checklist items}} &
+    \multicolumn{2}{c}{$\boldsymbol{\leq 2024}$ \textbf{(N\,=\,\edit{73})}} &
+    \multicolumn{2}{c}{$\boldsymbol{\geq 2025}$ \textbf{(N\,=\,\edit{42})}} &
+    \multicolumn{1}{c}{$\boldsymbol{\Delta}$ \textbf{($p$)}} \\
+
+    \cmidrule(lr){4-5}
+    \cmidrule(lr){6-7}
+
+    & & &
+    \textbf{\%} & \textbf{95\% CI} &
+    \textbf{\%} & \textbf{95\% CI} &
+    \\
+
+    \midrule
+
+    \rowcolor{claimTA!15}
+    \multicolumn{8}{l}{\textbf{\textcolor{claimTA}{Title/Abstract}}} \\
+
+    Title \& abstract & 1--2 & 1 identification as an AI study; 2 structured summary of design, methods, results and conclusions
+    & 100\% & [95, 100]
+    & 100\% & [92, 100]
+    & $\pm0\%$ (1.00) \\
+
+    \midrule
+    \rowcolor{claimIntro!15}
+    \multicolumn{8}{l}{\textbf{\textcolor{claimIntro}{Introduction}}} \\
+
+     & 3--4 & 3 scientific and clinical background, including the intended role of AI; 4 aims and objectives
+    & 100\% & [95, 100]
+    & 100\% & [92, 100]
+    & $\pm0\%$ (1.00) \\
+
+    \midrule
+    \rowcolor{claimMeth!15}
+    \multicolumn{8}{l}{\textbf{\textcolor{claimMeth}{Methods}}} \\
+
+    Study design & 5--6 & 5 prospective or retrospective; 6 study goal and intended use
+    & 100\% & [95, 100]
+    & 100\% & [92, 100]
+    & $\pm0\%$ (1.00) \\
+
+    Data & 7--13 & 7 data sources; 8 inclusion and exclusion criteria; 9 data preprocessing; 10 selection of data subsets; 11 de-identification; 12 missing data; 13 image acquisition protocol
+    & \edit{59\%} & [47, \edit{70]}
+    & \edit{64\%} & \edit{[49,} \edit{77]}
+    & $+5\%$ \edit{(0.69)} \\
+
+    Reference standard & 14--18 & 14 definition of the reference standard; 15 rationale for choosing it; 16 source of annotations and annotator qualifications; 17 annotation of the test set; 18 inter- and intrarater variability
+    & 76\% & [65, \edit{85]}
+    & \edit{69\%} & \edit{[54,} \edit{81]}
+    & $-7\%$ \edit{(0.51)} \\
+
+    Data partitions & 19--20 & 19 assignment of data to partitions; 20 level at which partitions are disjoint
+    & 84\% & \edit{[74,} \edit{91]}
+    & \edit{78\%} & \edit{[63,} \edit{88]}
+    & $-6\%$ \edit{(0.45)} \\
+
+    Testing data & 21 & 21 intended sample size
+    & 4\% & [1, \edit{12]}
+    & 5\% & [1, 16]
+    & $+1\%$ (1.00) \\
+
+    Model & 22--24 & 22 detailed model description; 23 software libraries and frameworks; 24 initialization of model parameters
+    & \edit{67\%} & \edit{[56,} \edit{77]}
+    & \edit{64\%} & \edit{[49,} \edit{77]}
+    & $-3\%$ (0.84) \\
+
+    Training & 25--27 & 25 training details (augmentation, objective function, hyperparameters, stopping criteria); 26 selection of the final model; 27 ensembling
+    & \edit{54\%} & [42, \edit{65]}
+    & \edit{44\%} & \edit{[30,} \edit{59]}
+    & $-10\%$ \edit{(0.43)} \\
+
+    Evaluation & 28--34 & 28 performance metrics and comparison with prior models; 29 statistical significance and uncertainty; 30 robustness or sensitivity analysis; 31 explainability; 32 evaluation on internal data; 33 testing on external data; 34 clinical trial registration
+    & \edit{59\%} & [47, \edit{70]}
+    & \edit{60\%} & \edit{[45,} \edit{73]}
+    & \edit{$+1\%$} (1.00) \\
+
+    \midrule
+    \rowcolor{claimRes!15}
+    \multicolumn{8}{l}{\textbf{\textcolor{claimRes}{Results}}} \\
+
+    Data & 35--36 & 35 numbers of patients or examinations included and excluded; 36 demographic and clinical characteristics
+    & \edit{54\%} & \edit{[43,} \edit{65]}
+    & \edit{64\%} & \edit{[49,} \edit{77]}
+    & $+10\%$ \edit{(0.33)} \\
+
+    Model performance & 37--39 & 37 performance on all partitions and datasets; 38 diagnostic performance estimates with their precision; 39 failure analysis
+    & \edit{92\%} & \edit{[83,} 96]
+    & \edit{81\%} & \edit{[67,} \edit{90]}
+    & $-11\%$ \edit{(0.14)} \\
+
+    \midrule
+    \rowcolor{claimDisc!15}
+    \multicolumn{8}{l}{\textbf{\textcolor{claimDisc}{Discussion}}} \\
+
+     & 40--41 & 40 limitations; 41 implications for practice
+    & 100\% & [95, 100]
+    & \edit{98\%} & \edit{[88,} \edit{100]}
+    & $-2\%$ \edit{(0.37)} \\
+
+    \midrule
+    \rowcolor{claimRepro!15}
+    \multicolumn{8}{l}{\textbf{\textcolor{claimRepro}{Other information}}} \\
+
+     & 42--44 & 42 reference to the full protocol or technical details; 43 availability of software, model or data; 44 funding and role of funders
+    & \edit{51\%} & \edit{[40,} \edit{62]}
+    & \edit{71\%} & \edit{[56,} \edit{83]}
+    & $+21\%$ \edit{(0.03)} \\
+
+    \bottomrule
+
+  \end{tabular}%
+  }
+
+  \par\smallskip
+  \footnotesize
+  \textit{Note:} Proportion of studies in which the subsection is reported (at least half of its applicable items), among studies where it applies, with 95\% Wilson CIs. $\Delta$: difference from unrounded proportions, with the two-sided Fisher's exact $p$-value. No subsection is significant after Holm correction (smallest adjusted \edit{$p=0.46$}). Item 34 (clinical trial registration) was not applicable to any study.
+
+\end{table*}
+% \definecolor{claimTA}{HTML}{4C72B0}
+% \definecolor{claimIntro}{HTML}{55A868}
+% \definecolor{claimMeth}{HTML}{C44E52}
+% \definecolor{claimRes}{HTML}{DD8452}
+% \definecolor{claimDisc}{HTML}{8172B2}
+% \definecolor{claimRepro}{HTML}{937860}
+
+% \begin{table}[ht]
+%   \centering
+%   \caption{CLAIM 2024 Adherence by Thematic Cluster: Temporal Comparison
+%     ($\leq 2024$ vs.\ $\geq 2025$).}
+%   \label{tab:claim2024_temporal}
+
+%   \footnotesize
+%   \renewcommand{\arraystretch}{1.25}
+%   \setlength{\tabcolsep}{4pt}
+
+%   \resizebox{\columnwidth}{!}{%
+%   \begin{tabular}{@{}
+%       l
+%       p{6.2cm}
+%       r r
+%       r r
+%       >{\centering\arraybackslash}p{1.2cm}
+%   @{}}
+
+%     \toprule
+
+%     \multicolumn{1}{l}{\textbf{ID}} &
+%     \multicolumn{1}{l}{\textbf{Cluster}} &
+%     \multicolumn{2}{c}{$\boldsymbol{\leq 2024}$ \textbf{(N\,=\,77)}} &
+%     \multicolumn{2}{c}{$\boldsymbol{\geq 2025}$ \textbf{(N\,=\,43)}} &
+%     \multicolumn{1}{c}{$\boldsymbol{\Delta}$} \\
+
+%     \cmidrule(lr){3-4}
+%     \cmidrule(lr){5-6}
+
+%     & &
+%     \textbf{\%} & \textbf{95\% CI} &
+%     \textbf{\%} & \textbf{95\% CI} &
+%     \\
+
+%     \midrule
+
+%     \rowcolor{claimTA!15}
+%     \multicolumn{7}{l}{\textbf{\textcolor{claimTA}{Title/Abstract}}} \\
+
+%     C01 & AI identification \& abstract completeness
+%     & 71\% & [62, 78]
+%     & 75\% & [62, 84]
+%     & $+4\%$~$\uparrow$ \\
+
+%     \midrule
+
+%     \rowcolor{claimIntro!15}
+%     \multicolumn{7}{l}{\textbf{\textcolor{claimIntro}{Introduction}}} \\
+
+%     C02 & Background \& study objectives
+%     & 98\% & [94, 100]
+%     & 98\% & [91, 100]
+%     & $\pm0\%$~$\sim$ \\
+
+%     \midrule
+
+%     \rowcolor{claimMeth!15}
+%     \multicolumn{7}{l}{\textbf{\textcolor{claimMeth}{Methods}}} \\
+
+%     C03 & Study design \& data sources
+%     & 42\% & [34, 50]
+%     & 61\% & [48, 72]
+%     & $+19\%$~$\uparrow$ \\
+
+%     C04 & Participants \& image acquisition
+%     & 29\% & [21, 37]
+%     & 38\% & [26, 51]
+%     & $+9\%$~$\uparrow$ \\
+
+%     C05 & Reference standards \& annotation
+%     & 31\% & [24, 40]
+%     & 46\% & [34, 59]
+%     & $+15\%$~$\uparrow$ \\
+
+%     C06 & Data partitioning \& class handling
+%     & 44\% & [36, 53]
+%     & 44\% & [31, 57]
+%     & $\pm0\%$~$\sim$ \\
+
+%     C07 & Model architecture \& training
+%     & 65\% & [56, 72]
+%     & 64\% & [50, 75]
+%     & $-1\%$~$\sim$ \\
+
+%     C08 & Evaluation design \& interpretability
+%     & 24\% & [17, 32]
+%     & 52\% & [39, 64]
+%     & $+28\%$~$\uparrow$ \\
+
+%     \midrule
+
+%     \rowcolor{claimRes!15}
+%     \multicolumn{7}{l}{\textbf{\textcolor{claimRes}{Results}}} \\
+
+%     C09 & Performance \& external validation
+%     & 35\% & [27, 44]
+%     & 44\% & [31, 57]
+%     & $+9\%$~$\uparrow$ \\
+
+%     C10 & Demographic \& subgroup reporting
+%     & 8\% & [4, 14]
+%     & 16\% & [9, 28]
+%     & $+8\%$~$\uparrow$ \\
+
+%     \midrule
+
+%     \rowcolor{claimDisc!15}
+%     \multicolumn{7}{l}{\textbf{\textcolor{claimDisc}{Discussion}}} \\
+
+%     C11 & Limitations, implications \& supporting documentation
+%     & 84\% & [77, 90]
+%     & 89\% & [79, 95]
+%     & $+5\%$~$\uparrow$ \\
+
+%     \midrule
+
+%     \rowcolor{claimRepro!15}
+%     \multicolumn{7}{l}{\textbf{\textcolor{claimRepro}{Reproducibility \& Transparency}}} \\
+
+%     C12 & Reproducibility \& funding disclosure
+%     & 21\% & [15, 29]
+%     & 23\% & [14, 36]
+%     & $+2\%$~$\sim$ \\
+
+%     \bottomrule
+
+%     \multicolumn{7}{p{\hsize}}{%
+%       \textit{Note:} Proportions are the fraction of studies reporting adherence
+%       (``Yes'') among those where the item was applicable (NA excluded).
+%       95\% Wilson confidence intervals are shown.
+%       $\Delta$ = post--pre difference; arrows indicate changes greater than
+%       2 percentage points.
+%     } \\
+
+%   \end{tabular}%
+%   }
+
+% \end{table}

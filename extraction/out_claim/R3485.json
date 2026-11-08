@@ -1,0 +1,17 @@
+{"record_id": "R3485",
+ "items": {
+  "6": {"answer": "yes", "quote": "This retrospective cohort study included a total of 605 patients with intermediate-stage HCC who received TACE as their initial therapy.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "a traditional min-max normalization was applied to the DSA images. Lastly, we used torchvision.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "We selected the frame in the DSA videos with full staining of the tumor or arterial flow stasis as the key frame.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "(3) no complete DSA videos or follow-up data;", "section": "methods"},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The tumor and whole liver were manually delineated on DSA images by two experienced radiologists using the Labelme software", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The primary dataset was randomly divided into training ( _n_ = 360) and internal validation cohorts ( _n_ = 124) at a ratio of 3:1.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Lastly, we used torchvision.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Model 1 yielded a Dice coefficient of 0.75 (95% confidence interval [CI]: 0.73–0.78) and 0.73 (95% CI: 0.71– 0.75) for the internal validation and external validation cohorts, respectively.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "The 95% confidence intervals (CIs) were obtained using bootstrapping to assess variability.", "section": "methods"}
+ }}

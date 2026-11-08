@@ -1,0 +1,17 @@
+{"record_id": "R1740",
+ "items": {
+  "6": {"answer": "yes", "quote": "we aim to develop a fast, deformable registration model to substantially reduce DSA misregistration in craniocervical angiography without compromising spatial resolution or introducing new artifacts.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "The 12-bit dynamic-range DICOM images (with an intensity range of 0-4,095) were then deidentified, downsampled from 1024 × 1024 to 512 × 512 pixels with bicubic interpolation,", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For each series-level training iteration in each epoch, 50 frames were randomly selected with replacement from each of the 5,046 angiographic series, and the model was trained on these 50 frames.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "na", "quote": null, "section": null},
+  "17": {"answer": "na", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "randomly divided into training (5,046 angiographic series) and hold-out datasets (194 series) so that no patients were present in both groups", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "All models and data preprocessing pipelines were implemented in TensorFlow.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "First, we identified the best learning-based BSA model by algorithm ranking.", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "significant improvements were reported ( _P <_ .0001) in vascular fidelity (pooled scores of 3 reviewers: 2.4 ± 0.6 for DSA vs. 3.6 ± 0.5 for Reg-VLE)", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

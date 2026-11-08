@@ -1,0 +1,17 @@
+{"record_id": "R2376",
+ "items": {
+  "6": {"answer": "yes", "quote": "this study develops an automatic and accurate image- based catheter segmentation method in cerebral angiography using deep learning.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "Prior to input, all frames and masks were resized to (512, 512) and intensities were scaled from 0 to 1.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "We included fluoroscopy sequences based on the following criteria: (1) use of DSA roadmapping, (2) containing only 0.035 inch guidewire and/or 5 Fr diagnostic catheter in- frame, and (3) catheter or guidewire tip at or proximal to the", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The combined structure of the catheter and guidewire were manually segmented as a single mask in frames of fluoroscopy sequences using MRIcron (NITRC, Washington, USA) by an expert MD/PhD student (6 years of experience)", "section": "methods"},
+  "20": {"answer": "yes", "quote": "the trained model was tested on 17 sequences from 14 unseen patients (971 frames).", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Four network architectures (UNet, TAG- DL, TransUNet, and nnUNet) were trained with three different inputs and tested on unseen fuoroscopy sequences in both frontal and", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

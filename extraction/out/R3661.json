@@ -1,0 +1,144 @@
+{
+  "record_id": "R3661",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Identification of successful cerebral reperfusions (mTICI ≥2b) using an artificial intelligence strategy",
+    "year": 2022,
+    "venue": "Neuroradiology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Cerebral DSA, AP and lateral projections, complete sequences from early arterial to late venous phase",
+    "territory": "neurologic",
+    "territory_detail": "Middle cerebral artery (M1/M2) occlusions after endovascular thrombectomy",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": 3,
+    "frames_per_sequence": "variable; entire sequence from early arterial to late venous phase",
+    "vendors": ["Phillips Allura Xper FD20/10"]
+  },
+  "dataset": {
+    "n_patients": 117,
+    "n_sequences": 234,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": "Additional data requests may be made available upon reasonable requests to the corresponding author"},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "Two trained physicians (combined 4 years mTICI experience); discrepancies resolved by a third physician with 18 years experience",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary classification of post-EVT cerebral DSA into low-grade (mTICI 0,1,2a) vs high-grade (mTICI 2b,2c,3) reperfusion using CNNs on time-averaged AP, lateral, or combined projections",
+    "clinical_application": "Automated, standardized mTICI reperfusion grading after endovascular thrombectomy for MCA occlusion stroke"
+  },
+  "method": {
+    "architecture_names": ["InceptionResNetV2", "AP model", "L model", "combined model"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "we averaged the individual frames of the cerebral angiograms together, forming single 2D images",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "ImageNet",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUROC (AP model)", "family": "auc", "value_raw": "0.863 (95% CI 0.816–0.909)", "value_0_100": 86.3, "split": "cross_validation", "task": "mTICI dichotomization, AP model"},
+      {"metric": "AUROC (L model)", "family": "auc", "value_raw": "0.914 (95% CI 0.876–0.951)", "value_0_100": 91.4, "split": "cross_validation", "task": "mTICI dichotomization, L model"},
+      {"metric": "AUROC (combined model)", "family": "auc", "value_raw": "0.890 (95% CI 0.848–0.932)", "value_0_100": 89.0, "split": "cross_validation", "task": "mTICI dichotomization, combined model"},
+      {"metric": "AUPRC (AP model)", "family": "other", "value_raw": "0.879 (95% CI 0.829–0.930)", "value_0_100": null, "split": "cross_validation", "task": "mTICI dichotomization, AP model"},
+      {"metric": "AUPRC (L model)", "family": "other", "value_raw": "0.906 (95% CI 0.844–0.968)", "value_0_100": null, "split": "cross_validation", "task": "mTICI dichotomization, L model"},
+      {"metric": "AUPRC (combined model)", "family": "other", "value_raw": "0.887 (95% CI 0.834–0.941)", "value_0_100": null, "split": "cross_validation", "task": "mTICI dichotomization, combined model"},
+      {"metric": "Sensitivity (AP model)", "family": "sensitivity_recall", "value_raw": "0.837 (0.774–0.899)", "value_0_100": 83.7, "split": "cross_validation", "task": "mTICI dichotomization, AP model"},
+      {"metric": "Sensitivity (L model)", "family": "sensitivity_recall", "value_raw": "0.923 (0.876–0.970)", "value_0_100": 92.3, "split": "cross_validation", "task": "mTICI dichotomization, L model"},
+      {"metric": "Sensitivity (combined model)", "family": "sensitivity_recall", "value_raw": "0.860 (0.802–0.919)", "value_0_100": 86.0, "split": "cross_validation", "task": "mTICI dichotomization, combined model"},
+      {"metric": "Specificity (AP model)", "family": "specificity", "value_raw": "0.772 (0.692–0.852)", "value_0_100": 77.2, "split": "cross_validation", "task": "mTICI dichotomization, AP model"},
+      {"metric": "Specificity (L model)", "family": "specificity", "value_raw": "0.779 (0.699–0.860)", "value_0_100": 77.9, "split": "cross_validation", "task": "mTICI dichotomization, L model"},
+      {"metric": "Specificity (combined model)", "family": "specificity", "value_raw": "0.809 (0.735–0.883)", "value_0_100": 80.9, "split": "cross_validation", "task": "mTICI dichotomization, combined model"},
+      {"metric": "Accuracy (AP model)", "family": "accuracy", "value_raw": "0.807 (0.759–0.856)", "value_0_100": 80.7, "split": "cross_validation", "task": "mTICI dichotomization, AP model"},
+      {"metric": "Accuracy (L model)", "family": "accuracy", "value_raw": "0.859 (0.814–0.904)", "value_0_100": 85.9, "split": "cross_validation", "task": "mTICI dichotomization, L model"},
+      {"metric": "Accuracy (combined model)", "family": "accuracy", "value_raw": "0.838 (0.792–0.883)", "value_0_100": 83.8, "split": "cross_validation", "task": "mTICI dichotomization, combined model"},
+      {"metric": "NPV (AP model)", "family": "other", "value_raw": "0.795 (0.717–0.873)", "value_0_100": null, "split": "cross_validation", "task": "mTICI dichotomization, AP model"},
+      {"metric": "NPV (L model)", "family": "other", "value_raw": "0.891 (0.825–0.957)", "value_0_100": null, "split": "cross_validation", "task": "mTICI dichotomization, L model"},
+      {"metric": "NPV (combined model)", "family": "other", "value_raw": "0.824 (0.752–0.897)", "value_0_100": null, "split": "cross_validation", "task": "mTICI dichotomization, combined model"},
+      {"metric": "PPV (AP model)", "family": "precision_ppv", "value_raw": "0.817 (0.752–0.882)", "value_0_100": 81.7, "split": "cross_validation", "task": "mTICI dichotomization, AP model"},
+      {"metric": "PPV (L model)", "family": "precision_ppv", "value_raw": "0.839 (0.778–0.890)", "value_0_100": 83.9, "split": "cross_validation", "task": "mTICI dichotomization, L model"},
+      {"metric": "PPV (combined model)", "family": "precision_ppv", "value_raw": "0.848 (0.788–0.908)", "value_0_100": 84.8, "split": "cross_validation", "task": "mTICI dichotomization, combined model"},
+      {"metric": "Inference time per image (all three models)", "family": "time", "value_raw": "less than 20 milliseconds on a Tesla P100-PCIE-16GB GPU", "value_0_100": null, "split": "other", "task": "mTICI dichotomization, inference"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://github.com/pwarman/mTICI_Classification"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "Our study is primarily limited by the relatively low number of angiograms used to train and validate our models", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "all our angiograms were from a single center and a single interventionalist", "section": "discussion"},
+    "G3": {"status": "documents", "quote": "alternative CNN architectures used for time-series analysis exist and may be employed in future research", "section": "discussion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "this method is prone to inter-observer variability and bias", "section": "introduction"},
+    "G6": {"status": "documents", "quote": "more extensive trials must corroborate its efficiency and clinical utility", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Only M1 and M2 segment MCA occlusions included",
+    "Angiograms with extensive motion artifacts excluded",
+    "Only dichotomized mTICI predicted, not the full range of scores"
+  ],
+  "future_work": [
+    "Larger datasets from multi-institution collaboration",
+    "Time-series CNN architectures",
+    "Application to other vascular territories",
+    "Identify masked occluded arterial tributaries",
+    "Clinical trials to corroborate efficiency and clinical utility"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyyyyyyynyyynnyyynyyyynnynyynynnyyyyy"
+  }
+}

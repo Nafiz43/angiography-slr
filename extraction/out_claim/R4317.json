@@ -1,0 +1,18 @@
+{"record_id": "R4317",
+ "items": {
+  "6": {"answer": "yes", "quote": "The main goal of the proposed workflow is to employ deep learning based techniques to determine the cardiac phase of each angiographic frame", "section": "methods"},
+  "9": {"answer": "yes", "quote": "angiographic frames are resampled to 512 × 512 pixel resolution if their original resolution is higher", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Frames having a vesselness score lower than 0.4 of the maximum vesselness score in the series are discarded. From the remaining frames, the longest subsequence of consecutive frames is selected for further processing.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Since T peaks could not always be reliably detected on the ECG signals extracted from the angiographic images, we finally only retained those angiographic acquisitions on which R and T peaks were identified by both clinical examiners", "section": "results"},
+  "15": {"answer": "yes", "quote": "Exploiting such a large dataset is beneficial due to the extreme variability in X-ray coronary angiography but makes the use of ground truth information defined from manual annotations unfeasible.", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "R-wave and T-wave peaks, employed for determining the onset and the end of systole respectively, are algorithmically detected, and the corresponding cardiac phase labels are mapped to each angiographic frame.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The main evaluation dataset consisted of 20,780 coronary angiographies from 6261 patients and was acquired at a different clinical site.", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The deep learning models were trained using Keras (Chollet et al., 2015) with a TensorFlow (Abadi et al., 2015) backend", "section": "results"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Cardiac phase detection had an accuracy of 98.8 %, a sensitivity of 99.3 % and a specificity of 97.6 % on the evaluation set. EDF prediction had a precision of 98.4 % and a recall of 97.9 %.", "section": "abstract"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }
+}

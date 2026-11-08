@@ -1,0 +1,129 @@
+{
+  "record_id": "R4323",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Motion-flow-guided recurrent network for respiratory signal estimation of x-ray angiographic image sequences",
+    "year": 2020,
+    "venue": "Physics in Medicine and Biology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Clinical x-ray coronary and hepatic angiographic image sequences (non-subtracted); 512x512 (coronary) and 1024x1024 (hepatic) pixels; 15, 30 and 12 FPS",
+    "territory": "cardiac",
+    "territory_detail": "Coronary angiographic sequences (left and right coronary) for training/testing; hepatic angiographic sequences as an additional generalization test set",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "34-150 (training/validation, mean 66.04); 28-451 across test sets",
+    "vendors": ["Philips", "GE", "Siemens"]
+  },
+  "dataset": {
+    "n_patients": 125,
+    "n_sequences": 386,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "professionals (manual labeling of diaphragm border trajectory; averaged)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "temporal_sequence_modeling",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Frame-wise respiratory signal regression (and respiratory state classification, exhalation/inhalation) from x-ray angiographic image sequences using optical-flow-guided CNN features and an LSTM over the sequence.",
+    "clinical_application": "Respiratory motion compensation for vascular 3D reconstruction and dynamic organ roadmapping in vascular interventions"
+  },
+  "method": {
+    "architecture_names": ["MGR-Net", "FlowNet 2.0", "ResNet18", "LSTM"],
+    "architecture_family": "recurrent",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "a recurrent neural network to learn the temporal features of the entire sequence",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "Pre-trained ResNet18 fine-tuned; FlowNet 2.0 for motion-flow",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Saliency maps of the spatial learning module",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Five-fold CV on training/validation data (Union Hospital); separate test sets incl. Data_H, 30 hepatic sequences from 19 patients at PLA General Hospital, Beijing, plus coronary sequences without diaphragm",
+    "metrics": [
+      {"metric": "RMSE", "family": "other", "value_raw": "0.06 ± 0.09", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CWD)"},
+      {"metric": "PCC", "family": "correlation", "value_raw": "0.94 ± 0.13", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CWD)"},
+      {"metric": "Running time (s)", "family": "time", "value_raw": "0.76 ± 0.02", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CWD)"},
+      {"metric": "RMSE", "family": "other", "value_raw": "0.19 ± 0.15", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CW/OD)"},
+      {"metric": "PCC", "family": "correlation", "value_raw": "0.79 ± 0.18", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CW/OD)"},
+      {"metric": "Running time (s)", "family": "time", "value_raw": "0.66 ± 0.49", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CW/OD)"},
+      {"metric": "RMSE", "family": "other", "value_raw": "0.26 ± 0.23", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CPW/OD)"},
+      {"metric": "PCC", "family": "correlation", "value_raw": "0.64 ± 0.37", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CPW/OD)"},
+      {"metric": "Running time (s)", "family": "time", "value_raw": "0.69 ± 0.04", "value_0_100": null, "split": "test", "task": "respiratory signal estimation (Data_CPW/OD)"},
+      {"metric": "RMSE", "family": "other", "value_raw": "0.10 ± 0.09", "value_0_100": null, "split": "external", "task": "respiratory signal estimation (Data_H, hepatic)"},
+      {"metric": "PCC", "family": "correlation", "value_raw": "0.91 ± 0.08", "value_0_100": null, "split": "external", "task": "respiratory signal estimation (Data_H, hepatic)"},
+      {"metric": "Running time (s)", "family": "time", "value_raw": "3.83 ± 2.77", "value_0_100": null, "split": "external", "task": "respiratory signal estimation (Data_H, hepatic)"}
+    ],
+    "comparators": ["PCA", "C_PCA (Ma et al 2015)", "P_PCA (Fischer et al 2017)", "MGR-Net with EpicFlow", "MGR-Net with TCN temporal module", "Manual user labeling"],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "both", "quote": "our MGR-Net trained with coronary angiographic sequence samples with a diaphragm structure can estimate respiratory signals from samples without a diaphragm because of its generalization ability, but the accuracy is lower", "section": "discussion"},
+    "G3": {"status": "addresses", "quote": "enables the recurrent network to learn better temporal features from dynamic spatial features than from static spatial features", "section": "abstract"},
+    "G4": {"status": "documents", "quote": "Given the principle of fluoroscopic imaging, 3D information from angiographic images remains lacking.", "section": "introduction"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Jitter in estimated signals for sequences with complex motion patterns"
+  ],
+  "future_work": [
+    "Expand training data with sequences without diaphragm and with multiple vascular types",
+    "Add a curve-smoothing constraint to the loss function"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnyyyynyyynnyyyyyynnyyyynyynynyynny"
+  }
+}

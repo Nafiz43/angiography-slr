@@ -1,0 +1,143 @@
+{
+ "record_id": "R0514",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Identifying Pathogenesis of Acute Coronary Syndromes using Sequence Contrastive Learning in Coronary Angiography",
+  "year": 2026,
+  "venue": "The American Journal of Cardiology",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "Japan"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "X-ray coronary angiography (CAG) videos, Canon INFX-8000C/INFX-8000V flat-panel systems, 15 or 10 fps, converted to 512x512 8-bit and MP4",
+  "territory": "cardiac",
+  "territory_detail": "Coronary arteries (culprit lesions in LAD, LCx, RCA) in acute coronary syndrome",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": null,
+  "vendors": ["Canon"]
+ },
+ "dataset": {
+  "n_patients": 278,
+  "n_sequences": 842,
+  "n_images_or_frames": 19196,
+  "n_centers": 1,
+  "n_vendors": 1,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 1,
+   "annotator_expertise": "Experienced cardiologist drew lesion bounding boxes; PR/PE labels from OCT assessed by an experienced interventional cardiologist",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "disease_classification_grading",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Classification of ACS pathogenesis (plaque rupture vs plaque erosion, OCT-confirmed) from cropped culprit-lesion regions of coronary angiography videos, evaluated at frame, video and patient level",
+  "clinical_application": "Non-invasive identification of ACS mechanism from routine CAG to support tailored therapy (e.g., stent deferral in plaque erosion) without intracoronary imaging"
+ },
+ "method": {
+  "architecture_names": ["SeqCon (Sequence Contrastive Learning)", "ResNet-50", "SimCLR"],
+  "architecture_family": "cnn_classifier",
+  "temporal_category": "none",
+  "temporal_evidence": {
+   "quote": "The neural network has predicted the type of ACS for each individual frame.",
+   "section": "results"
+  },
+  "input_dimensionality": "2D_single_frame",
+  "supervision": "mixed",
+  "pretraining": "Sequence contrastive pretraining (SeqCon, SimCLR-modified; frames of the same video as positives) followed by transfer learning to classification",
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": "Weighted cross-entropy loss and balanced model selection by mean F1-score",
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": "Authors call the test set 'external' but it is a random non-overlapping patient subset (29 patients, 76 videos) from the same single institution",
+  "metrics": [
+   {"metric": "Accuracy (frame-level)", "family": "accuracy", "value_raw": "64.652%", "value_0_100": 64.652, "split": "test", "task": "PR/PE classification, frame level"},
+   {"metric": "Sensitivity (frame-level)", "family": "sensitivity_recall", "value_raw": "70.796%", "value_0_100": 70.796, "split": "test", "task": "PR/PE classification, frame level"},
+   {"metric": "Specificity (frame-level)", "family": "specificity", "value_raw": "52.277%", "value_0_100": 52.277, "split": "test", "task": "PR/PE classification, frame level"},
+   {"metric": "PPV (frame-level)", "family": "precision_ppv", "value_raw": "74.922%", "value_0_100": 74.922, "split": "test", "task": "PR/PE classification, frame level"},
+   {"metric": "NPV (frame-level)", "family": "other", "value_raw": "47.059%", "value_0_100": null, "split": "test", "task": "PR/PE classification, frame level"},
+   {"metric": "F1 PR (frame-level)", "family": "f1", "value_raw": "72.801%", "value_0_100": 72.801, "split": "test", "task": "PR/PE classification, frame level"},
+   {"metric": "F1 PE (frame-level)", "family": "f1", "value_raw": "49.531%", "value_0_100": 49.531, "split": "test", "task": "PR/PE classification, frame level"},
+   {"metric": "Accuracy (video-level)", "family": "accuracy", "value_raw": "71.053%", "value_0_100": 71.053, "split": "test", "task": "PR/PE classification, video level"},
+   {"metric": "Sensitivity (video-level)", "family": "sensitivity_recall", "value_raw": "71.739%", "value_0_100": 71.739, "split": "test", "task": "PR/PE classification, video level"},
+   {"metric": "Specificity (video-level)", "family": "specificity", "value_raw": "70.000%", "value_0_100": 70.0, "split": "test", "task": "PR/PE classification, video level"},
+   {"metric": "PPV (video-level)", "family": "precision_ppv", "value_raw": "78.571%", "value_0_100": 78.571, "split": "test", "task": "PR/PE classification, video level"},
+   {"metric": "NPV (video-level)", "family": "other", "value_raw": "61.765%", "value_0_100": null, "split": "test", "task": "PR/PE classification, video level"},
+   {"metric": "F1 PR (video-level)", "family": "f1", "value_raw": "75.000%", "value_0_100": 75.0, "split": "test", "task": "PR/PE classification, video level"},
+   {"metric": "F1 PE (video-level)", "family": "f1", "value_raw": "65.625%", "value_0_100": 65.625, "split": "test", "task": "PR/PE classification, video level"},
+   {"metric": "Accuracy (patient-level)", "family": "accuracy", "value_raw": "82.759%", "value_0_100": 82.759, "split": "test", "task": "PR/PE classification, patient level"},
+   {"metric": "Sensitivity (patient-level)", "family": "sensitivity_recall", "value_raw": "88.889%", "value_0_100": 88.889, "split": "test", "task": "PR/PE classification, patient level"},
+   {"metric": "Specificity (patient-level)", "family": "specificity", "value_raw": "72.727%", "value_0_100": 72.727, "split": "test", "task": "PR/PE classification, patient level"},
+   {"metric": "PPV (patient-level)", "family": "precision_ppv", "value_raw": "84.211%", "value_0_100": 84.211, "split": "test", "task": "PR/PE classification, patient level"},
+   {"metric": "NPV (patient-level)", "family": "other", "value_raw": "80.000%", "value_0_100": null, "split": "test", "task": "PR/PE classification, patient level"},
+   {"metric": "F1 PR (patient-level)", "family": "f1", "value_raw": "86.486%", "value_0_100": 86.486, "split": "test", "task": "PR/PE classification, patient level"},
+   {"metric": "F1 PE (patient-level)", "family": "f1", "value_raw": "76.190%", "value_0_100": 76.19, "split": "test", "task": "PR/PE classification, patient level"},
+   {"metric": "Inference time per cropped 64x64 image", "family": "time", "value_raw": "1.97 ms", "value_0_100": null, "split": "test", "task": "PR/PE classification inference"}
+  ],
+  "comparators": ["ResNet-50 with weighted cross-entropy (wCE)", "SimCLR+CE"],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "the dataset was modest in size and imbalanced (PR > PE) despite weighting strategies", "section": "discussion"},
+  "G2": {"status": "documents", "quote": "all data were derived from a single institution, and acquisition protocols, image quality, and vendor differences may affect performance elsewhere", "section": "discussion"},
+  "G3": {"status": "both", "quote": "consecutive frames within the same sequence, which share the same underlying pathobiology, are incorrectly treated as negatives", "section": "methods"},
+  "G4": {"status": "documents", "quote": "provides only 2-dimensional views of the lumen and is generally considered inadequate for identifying underlying pathology", "section": "introduction"},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "documents", "quote": "Prospective studies are required to test whether AI‐assisted angiographic classification can influence management or outcomes.", "section": "discussion"},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "documents", "quote": "we will aim to incorporate these nonimaging factors, together with CAG images, to better distinguish PR from PE", "section": "discussion"},
+  "G9": {"status": "both", "quote": "excluded less common ACS etiologies such as calcified nodule and spontaneous coronary artery dissection; model behavior in these settings is untested", "section": "discussion"},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "documents", "quote": "we did not evaluate clinical decision thresholds or patient outcomes", "section": "discussion"},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Ground truth based on OCT interpretation without histopathologic confirmation",
+  "Selection bias from requiring interpretable OCT and analyzable angiography",
+  "Culprit lesion cropping performed manually; no automated lesion detector"
+ ],
+ "future_work": [
+  "Stenosis detector to automatically localize culprit lesion for real-time decision aid",
+  "Incorporate nonimaging patient factors together with CAG images",
+  "Prospective, multicenter validation",
+  "Integration into prospective clinical workflows and evaluation of effect on management/outcomes"
+ ],
+ "claim2024": {
+  "items": "ynyyyyyyyyyyyyynyynyyyyyyyyynnnynynyynnyyynn"
+ }
+}

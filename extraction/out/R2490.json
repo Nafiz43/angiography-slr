@@ -1,0 +1,125 @@
+{
+ "record_id": "R2490",
+ "schema_version": "2.0",
+ "study": {
+  "title": "GaraMoSt: Parallel Multi-Granularity Motion and Structural Modeling for Efficient Multi-Frame Interpolation in DSA Images",
+  "year": 2024,
+  "venue": "AAAI Conference on Artificial Intelligence (AAAI-25)",
+  "publication_type": "conference_full_paper",
+  "text_is_full_paper": true,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Head DSA image sequences, 489*489 resolution",
+  "territory": "neurologic",
+  "territory_detail": "head DSA",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": null,
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": null,
+  "n_sequences": 470,
+  "n_images_or_frames": null,
+  "n_centers": 8,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": null, "detail": "MoSt-DSA's dataset (2024a); public availability not stated"},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "sequence",
+  "annotation": {
+   "type": "none",
+   "n_annotators": null,
+   "annotator_expertise": null,
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "image_enhancement_denoising",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Direct multi-frame interpolation (1 to 3 intermediate frames) between two DSA frames with improved high- and low-frequency noise suppression at real-time cost.",
+  "clinical_application": "Radiation dose reduction in DSA by reducing acquired frames and real-time assistance during interventional procedures"
+ },
+ "method": {
+  "architecture_names": ["GaraMoSt", "MG-MSFE", "Multi-Granularity MoSt Attention", "Lambda Layer", "DL-FME", "UNet refiner"],
+  "architecture_family": "other",
+  "temporal_category": "optical_flow_registration",
+  "temporal_evidence": {"quote": "we predict dual-layer flows and masks and refine them using a simplified UNet", "section": "introduction"},
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "self_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "Mean SSIM (%)", "family": "ssim", "value_raw": "95.05", "value_0_100": null, "split": "test", "task": "single-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Mean PSNR", "family": "psnr", "value_raw": "40.69", "value_0_100": null, "split": "test", "task": "single-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Inference time (s)", "family": "time", "value_raw": "0.029", "value_0_100": null, "split": "test", "task": "single-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Mean SSIM (%)", "family": "ssim", "value_raw": "94.37", "value_0_100": null, "split": "test", "task": "single-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Mean PSNR", "family": "psnr", "value_raw": "40.19", "value_0_100": null, "split": "test", "task": "single-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Inference time (s)", "family": "time", "value_raw": "0.029", "value_0_100": null, "split": "test", "task": "single-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Mean SSIM (%)", "family": "ssim", "value_raw": "94.70", "value_0_100": null, "split": "test", "task": "two-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Mean PSNR", "family": "psnr", "value_raw": "40.16", "value_0_100": null, "split": "test", "task": "two-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Inference time (s)", "family": "time", "value_raw": "0.076", "value_0_100": null, "split": "test", "task": "two-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Mean SSIM (%)", "family": "ssim", "value_raw": "94.01", "value_0_100": null, "split": "test", "task": "two-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Mean PSNR", "family": "psnr", "value_raw": "39.66", "value_0_100": null, "split": "test", "task": "two-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Inference time (s)", "family": "time", "value_raw": "0.076", "value_0_100": null, "split": "test", "task": "two-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Mean SSIM (%)", "family": "ssim", "value_raw": "94.22", "value_0_100": null, "split": "test", "task": "three-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Mean PSNR", "family": "psnr", "value_raw": "39.53", "value_0_100": null, "split": "test", "task": "three-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Inference time (s)", "family": "time", "value_raw": "0.122", "value_0_100": null, "split": "test", "task": "three-frame interpolation (GaraMoSt-L1)"},
+   {"metric": "Mean SSIM (%)", "family": "ssim", "value_raw": "93.49", "value_0_100": null, "split": "test", "task": "three-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Mean PSNR", "family": "psnr", "value_raw": "39.06", "value_0_100": null, "split": "test", "task": "three-frame interpolation (GaraMoSt, combined loss)"},
+   {"metric": "Inference time (s)", "family": "time", "value_raw": "0.122", "value_0_100": null, "split": "test", "task": "three-frame interpolation (GaraMoSt, combined loss)"}
+  ],
+  "comparators": ["ABME", "FILM-L1", "FILM-LVGG", "FILM-LStyle", "EMA-VFI-small", "EMA-VFI", "SoftSplat-LF", "MoSt-DSA-L1", "MoSt-DSA"],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": true, "detail": "https://github.com/ZyoungXu/GaraMoSt"},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "Due to data scarcity and cross-disciplinary complexities, these issues received little attention and lacked targeted solutions.", "section": "introduction"},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "none", "quote": null, "section": null},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [],
+ "future_work": [],
+ "claim2024": {"items": "ynyyynynnnnnnnaaynnanynyyyynnnnynnnynnnnyyyy"}
+}

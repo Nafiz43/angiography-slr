@@ -1,0 +1,256 @@
+{
+  "record_id": "R4441",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automatic Diagnosis Based on Spatial Information Fusion Feature for Intracranial Aneurysm",
+    "year": 2020,
+    "venue": "IEEE Transactions on Medical Imaging",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Unreconstructed 3D rotational angiography (3D-RA) projection sequences, digitally subtracted using pre-contrast sequences",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial arteries (intracranial aneurysms)",
+    "acquisition_geometry": "rotational_3D",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "133 (15 radiologist-selected frames per sequence used for training)",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 300,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 5,
+      "annotator_expertise": "professional radiologists",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Detection of intracranial aneurysms in 3D-RA projection sequences by classifying spatial information fusion (SIF) images built from ROIs of consecutive frames with a VGG16 CNN; sliding overlapping patches yield sequence-level positive/negative decisions and bounding-box positions.",
+    "clinical_application": "Computer-aided diagnosis of intracranial aneurysm on DSA/3D-RA to assist radiologists"
+  },
+  "method": {
+    "architecture_names": [
+      "VGG16",
+      "SIF (spatial information fusion) feature"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "consecutive frames of every imaging time series are extracted and concatenated in a specific way, so that the spatial contextual information could be embedded into a single two-dimensional image",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "Transfer learning with VGG16; shallow layers frozen, top layers replaced",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Accuracy",
+        "family": "accuracy",
+        "value_raw": "98.89%",
+        "value_0_100": 98.89,
+        "split": "test",
+        "task": "aneurysm detection (SIF images, VGG16)"
+      },
+      {
+        "metric": "Sensitivity",
+        "family": "sensitivity_recall",
+        "value_raw": "99.38%",
+        "value_0_100": 99.38,
+        "split": "test",
+        "task": "aneurysm detection (SIF images, VGG16)"
+      },
+      {
+        "metric": "Specificity",
+        "family": "specificity",
+        "value_raw": "98.19%",
+        "value_0_100": 98.19,
+        "split": "test",
+        "task": "aneurysm detection (SIF images, VGG16)"
+      },
+      {
+        "metric": "Accuracy (sequence-level on original 133-frame sequences)",
+        "family": "accuracy",
+        "value_raw": "98%",
+        "value_0_100": 98.0,
+        "split": "test",
+        "task": "sequence-level aneurysm detection"
+      },
+      {
+        "metric": "Accuracy, aneurysm diameter <3mm (average)",
+        "family": "accuracy",
+        "value_raw": "87.6%",
+        "value_0_100": 87.6,
+        "split": "test",
+        "task": "aneurysm detection, diameter <3mm"
+      },
+      {
+        "metric": "Accuracy, aneurysm diameter 3-5mm (average)",
+        "family": "accuracy",
+        "value_raw": "99.09%",
+        "value_0_100": 99.09,
+        "split": "test",
+        "task": "aneurysm detection, diameter 3-5mm"
+      },
+      {
+        "metric": "Accuracy, aneurysm diameter 5-7mm (average)",
+        "family": "accuracy",
+        "value_raw": "98.84%",
+        "value_0_100": 98.84,
+        "split": "test",
+        "task": "aneurysm detection, diameter 5-7mm"
+      },
+      {
+        "metric": "Accuracy, aneurysm diameter >7mm",
+        "family": "accuracy",
+        "value_raw": "99.7%",
+        "value_0_100": 99.7,
+        "split": "test",
+        "task": "aneurysm detection, diameter >7mm"
+      }
+    ],
+    "comparators": [
+      "ResNet50",
+      "InceptionV3",
+      "DenseNet121",
+      "Non-SIF single-frame training data",
+      "Unfiltered SIF data",
+      "Malik et al. 2D-DSA aneurysm detection",
+      "Other published aneurysm CAD methods (Table V)"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "Since there exists little data available to the public, most medical image-based deep learning is limited by the size and breadth of the data.",
+      "section": "results"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "Both lead to insufficient representation and generalization of CAD system.",
+      "section": "introduction"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "it cannot effectively identify targets in video sequence, which is mainly because of the loss of spatial or temporal relationship between frames",
+      "section": "methods"
+    },
+    "G4": {
+      "status": "both",
+      "quote": "But in 2D data, due to the occlusion, when the diameter of aneurysm is similar to that of the brain vessel, they cannot be clearly distinguished.",
+      "section": "methods"
+    },
+    "G5": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G6": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G7": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "documents",
+      "quote": "the proportion of data distribution between the saccular aneurysm and the fusiform aneurysm is very unbalanced",
+      "section": "discussion"
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Sliding-window detection struggles with adjacent multiple aneurysms",
+    "Too many ROIs per SIF image lose aneurysms and add redundant information",
+    "Lower accuracy for miniature aneurysms under 3mm",
+    "Poor detection of small fusiform aneurysms"
+  ],
+  "future_work": [
+    "Improve feature classification methods",
+    "Improve the form of SIF features",
+    "Improve detection of multiple adjacent aneurysms"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnyynyynnnynnyyyynynnynynnyynynyynny"
+  }
+}

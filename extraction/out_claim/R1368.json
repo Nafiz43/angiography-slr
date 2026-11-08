@@ -1,0 +1,17 @@
+{"record_id": "R1368",
+ "items": {
+  "6": {"answer": "yes", "quote": "Differential analysis of inter-frame latent codes is employed for heartbeat keyframe localization, aiding in coronary 3D modeling.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "The dataset images are grayscale images, and we uniformly set the image size of each sequence to 512 × 512.", "section": "methods"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "we followed a methodology involving annotation by two individuals and verification by one individual. In cases of disagreement, three individuals voted on the contentious item to determine the final annotation for that data.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The server runs Ubuntu 20.04.4 with CUDA 12.2, Python 3.9, and PyTorch 2.1.2.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Experimental results on a self-constructed coronary DSA heartbeat keyframe recognition dataset demonstrate an accuracy of 97%, outperforming traditional metrics such as L1, SSIM, and PSNR.", "section": "abstract"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

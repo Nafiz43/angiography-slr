@@ -1,0 +1,41 @@
+\renewcommand{\arraystretch}{1.25}
+\begin{table*}[pos=ht]
+\centering
+\caption{Temporal-modeling categories of the proposed method in each of the \edit{115} included studies, each assignment backed by a verbatim quote from the article.}
+\label{tab:temporal_taxonomy}
+\begin{tabularx}{\textwidth}{@{}l X r r@{}}
+\toprule
+\textbf{Category} & \textbf{Operational Definition} & \textbf{N} & \textbf{\%} \\
+\midrule
+No Temporal Use
+  & Each frame is processed \edit{independently;} no \edit{information} \edit{is} \edit{combined} across frames.
+  & \edit{20} & \edit{17.4\%} \\
+\dashedrule
+Frame Aggregation
+  & \edit{Frames} are combined \edit{by} \edit{a} \edit{fixed} \edit{operation} (channel stacking, concatenation, \edit{differencing,} \edit{averaging or temporal pooling)} before a 2D model. \edit{A model trained on stacked frames can learn short-range cross-frame relations, but the sequence has no dedicated temporal mechanism.}
+  & \edit{16} & \edit{13.9\%} \\
+\dashedrule
+Optical Flow / Registration
+  & Explicit frame-to-frame motion estimation, registration, or classical tracking/association (e.g., optical flow, particle filters, cross-correlation).
+  & 19 & \edit{16.5\%} \\
+\dashedrule
+RNN / LSTM / GRU
+  & Recurrent architectures (LSTM, GRU, ConvLSTM, recurrent residual modules) propagate a hidden state across the sequence.
+  & \edit{16} & \edit{13.9\%} \\
+\dashedrule
+3D CNN / Video Model
+  & 3D or spatiotemporal convolutions, or video-/sequence-level representation learning, treating the sequence as a joint spatiotemporal volume.
+  & \edit{19} & \edit{16.5\%} \\
+\dashedrule
+Transformer / State-Space
+  & Self-attention or state-space mechanisms modeling long-range dependencies across frames.
+  & 10 & \edit{8.7\%} \\
+\dashedrule
+Hemodynamic / Physics-Informed
+  & Explicit physiological or physics-based temporal modeling (reduced-order flow models, hemodynamic priors, time-density curve modeling).
+  & 15 & \edit{13.0\%} \\
+\midrule
+\edit{\textbf{Total}} & & \edit{\textbf{115}} & \edit{\textbf{100.0\%}} \\
+\bottomrule
+\end{tabularx}
+\end{table*}

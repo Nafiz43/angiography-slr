@@ -1,0 +1,17 @@
+{"record_id": "R1541",
+ "items": {
+  "6":  {"answer": "yes", "quote": "This work proposes OccluNet, a spatio-temporal deep learning model that integrates YOLOX, a single-stage object detector, with transformer-based temporal attention mechanisms to automate occlusion detection in DSA sequences.", "section": "abstract"},
+  "9":  {"answer": "yes", "quote": "DSA sequences were normalized and resized to target dimensions of 640 × 640 pixels using bicubic interpolation.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "We included one lateral and one anteroposterior pre-EVT DSA per", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "All cases were annotated by AK and reviewed by MvdS, FtN.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "OccluNet was implemented in Python using PyTorch [14] and the MMDetection library [5].", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "showing an overall precision and recall of 89.02% and 74.87%, respectively", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

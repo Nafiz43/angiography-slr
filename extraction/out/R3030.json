@@ -1,0 +1,188 @@
+{
+  "record_id": "R3030",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Coronary artery stenosis detection via proposal-shifted spatial-temporal transformer in X-ray angiography",
+    "year": 2023,
+    "venue": "Computers in Biology and Medicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray coronary angiography (XRA) video sequences, 512x512, 0.3 mm x 0.3 mm resolution",
+    "territory": "cardiac",
+    "territory_detail": "Left and right coronary arteries (stenosis detection)",
+    "acquisition_geometry": "monoplane",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": "9 consecutive contrast-filled frames selected per video; model input T = 5 consecutive frames",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 233,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "COCO used only for ResNet50 backbone pretraining; study data are private"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "Experienced interventional radiologists; bounding boxes, average annotations taken as ground truth",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Bounding-box detection of coronary artery stenoses in XRA sequences using a Faster R-CNN-style detector with a proposal-shifted spatio-temporal Transformer feature aggregation module (PSSTT + TFA).",
+    "clinical_application": "Automatic stenosis detection to assist diagnosis of coronary artery disease"
+  },
+  "method": {
+    "architecture_names": [
+      "ResNet50",
+      "Feature Pyramid Network",
+      "Region Proposal Network",
+      "Faster R-CNN",
+      "Proposal-shifted spatio-temporal tokenization (PSSTT)",
+      "Transformer-based feature aggregation (TFA)",
+      "PSTFA module"
+    ],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "transformer_ssm",
+    "temporal_evidence": {
+      "quote": "the tokens are fed into the Transformer-based feature aggregation (TFA) block to model the spatio-temporal interaction for the feature aggregation from all frames of the input sequence",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "ResNet50 backbone initialized with COCO pre-trained weights",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Precision",
+        "family": "precision_ppv",
+        "value_raw": "92.27%",
+        "value_0_100": 92.27,
+        "split": "cross_validation",
+        "task": "stenosis detection"
+      },
+      {
+        "metric": "Sensitivity",
+        "family": "sensitivity_recall",
+        "value_raw": "89.56%",
+        "value_0_100": 89.56,
+        "split": "cross_validation",
+        "task": "stenosis detection"
+      },
+      {
+        "metric": "F1 score",
+        "family": "f1",
+        "value_raw": "90.88%",
+        "value_0_100": 90.88,
+        "split": "cross_validation",
+        "task": "stenosis detection"
+      }
+    ],
+    "comparators": [
+      "RetinaNet",
+      "Faster RCNN",
+      "Cascade R-CNN",
+      "FoveaBox",
+      "DETR",
+      "Deformable DETR",
+      "FGFA",
+      "DFF",
+      "SELSA",
+      "Temporal ROI Align",
+      "TransVOD",
+      "Segmentation-based stenosis detection (SSD)",
+      "H-CQN",
+      "DSSD",
+      "Stenosis-DetNet"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {
+      "status": "both",
+      "quote": "most of these methods [8,10,11] only use the spatial information in each single frame for stenosis detection, not exploiting the inter-frame context relationship of the XRA sequence",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "Due to the overlapping vessel structures caused by the projection in XRA images, a multi-view learning strategy is promising to further improve stenosis detection accuracy.",
+      "section": "discussion"
+    },
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Relies on hand-crafted components such as dense anchor generation (not fully end-to-end)",
+    "Does not quantify stenosis degree, which is further required clinically",
+    "Separate detection then quantification would accumulate errors"
+  ],
+  "future_work": [
+    "Integrate PSTFA module into DETR or Deformable DETR for fully end-to-end detection",
+    "Multi-view learning strategy to handle projection overlap",
+    "Multitask learning to jointly detect and quantify stenosis"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnnyynyynnnyynyyynnnnynnnynnnyynny"
+  }
+}

@@ -1,0 +1,17 @@
+{"record_id": "R3093",
+ "items": {
+  "6": {"answer": "yes", "quote": "This was a retrospective multicenter study that aimed to automatically calculate the collaterals flow ( Φ coll) and the collateral flow index (CFI) from each donor artery in CTO patients", "section": "methods"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "Angiographic projections with minimal overlap and foreshortening were selected pre- and post-PCI for the donor arteries and post-PCI for the CTO artery.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "the AI software failed to correctly segment the donor artery in 3 cases, and the fitting coefficient of the length/time curve was < 0.90 in 4 cases, resulting in 105 patients suitable for analysis", "section": "results"},
+  "15": {"answer": "yes", "quote": "The lack of a head-to-head comparison with intracoronary Doppler or pressure wire is a substantial limitation", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "All angiograms were independently analyzed offline by 2 experienced interventional cardiologists (F.D. and W.S.), blinded to computational calculations and independent from the angiographic corelab.", "section": "methods"},
+  "20": {"answer": "na", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "na", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The pre-post change in flow velocity was ranked in parallel to the initial Rentrop filling: 0.02 ± 0.01 m/s for Rentrop 1, 0.04 ± 0.01 m/s for Rentrop 2, and 0.07 ± 0.02 m/s for Rentrop 3", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

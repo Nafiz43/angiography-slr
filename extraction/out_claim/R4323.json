@@ -1,0 +1,18 @@
+{"record_id": "R4323",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this study, an end-to-end deep learning framework based on a motion-flow-guided recurrent network is proposed to address the aforementioned problem.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "we use morphological closing as a preprocessing method to suppress these structures and reduce motion caused by heartbeat and manual operations.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "we choose 60 sequences from Data_CWD and crop regions without diaphragm structures as new test samples, named Data_CPW/OD.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Three professionals annotate the respiratory signals (blue, yellow, and green curves in figure 3(c)) to avoid inaccuracies of the reference standard caused by operator subjectivity", "section": "methods"},
+  "17": {"answer": "yes", "quote": "a rectangular strip (blue, yellow or green) is manually selected on the diaphragm border of the angiogram in which the diaphragm trajectory of the sequence is visible", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Implemented in PyTorch, our network is trained using adaptive moment estimation (Adam)", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 4 shows the mean and the STD of the RMSE and the PCC in Data_CWD, Data_CW/OD, Data_CPW/OD and Data_H by the MGR-Net method", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }
+}

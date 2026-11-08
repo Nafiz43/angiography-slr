@@ -1,0 +1,17 @@
+{"record_id": "R3454",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose a novel semi-supervised learning method to improve the accuracy of optical flow estimation on DSA image sequences", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "The resolution of the images is resized to 512 × 512.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "In this step, we only keep the original DSA frames and the estimated optical flow when DSC>v, where we set _v_ = 0 _._ 75 in our experiments.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "the values of these evaluation metrics can mainly reflect the deviation between the estimated optical flow and the enhanced optical flow, but there may also be some deviation from the real deviation", "section": "results"},
+  "17": {"answer": "yes", "quote": "We save the original DSA images and corresponding estimated optical flow from enhanced DSA frames in stage 2 as the Original-DSA dataset.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The entire dataset contains 71 image sequences of 71 patients. We randomly select 7 sequences to generate 312 pairs of coronary angiography frames", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Our proposed method is developed and implemented based on the PyTorch library.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Hybrid-RAFT has 5.6%, 11.7%, 19.6%, 11%, 20.4%and 15.4% improvement on VC1, VC2, VC3, VC4, Original-DSA test dataset, and Flying-artery test dataset, respectively.", "section": "discussion"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

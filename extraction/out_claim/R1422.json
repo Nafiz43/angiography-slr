@@ -1,0 +1,17 @@
+{"record_id": "R1422",
+ "items": {
+  "6":  {"answer": "yes", "quote": "As the goal of the study was to explore feasibility and performance of the methods for anatomic classification", "section": "discussion"},
+  "9":  {"answer": "yes", "quote": "were resized to a 256 × 256 matrix size for each individual image in a DSA sequence and saved in the default JPEG format with an 8-bit pixel depth", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Sequences exceeding 50 images were capped at 50 for computational efficiency and consistency across deep learning models.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "The requirement for cross-sectional imaging was specified to allow direct comparison of the conventional angiography for more accurate anatomic location labeling.", "section": "methods"},
+  "17": {"answer": "yes", "quote": "labeling of the DSA sequences was performed separately by two interventional radiology attending physicians (A.S., R.G.) with 4 and 5 years of post-fellowship experience.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "split into partitions at the patient level to preclude data leakage", "section": "abstract"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Code was written in Python 3.9.12, leveraging the MONAI 1.2.0, Pandas 1.4.3, and PyTorch 2.0.1 packages.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "A MIL model, trained and tested with all data, demonstrated an overall multiclass classification accuracy of 0.966 (95% CI 0.932–0.992).", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "Confidence intervals (CI) for the multi-class measures were computed by bootstrapping the test data over 1000 iterations.", "section": "methods"}
+ }}

@@ -1,0 +1,122 @@
+{
+  "record_id": "R3129",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Learning spatiotemporal features of DSA using 3D CNN and BiConvGRU for ischemic moyamoya disease detection",
+    "year": 2023,
+    "venue": "International Journal of Neuroscience",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "DSA sequences, ICA anteroposterior (ICA_AP) view; 10 frames extracted per sequence plus Horn-Schunck optical flow images",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral vessels, internal carotid artery injection (ICA_AP)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "10 frames extracted per sequence",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 630,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary classification of DSA sequences as ischemic moyamoya disease vs control using spatiotemporal features from gray and optical flow images",
+    "clinical_application": "Diagnosis of ischemic moyamoya disease on DSA"
+  },
+  "method": {
+    "architecture_names": ["3DCNN-BiConvGRU", "2D CNN", "BiConvGRU", "3D CNN"],
+    "architecture_family": "recurrent",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "the long-term spatiotemporal features of DSA sequence are extracted by BiConvGRU",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Visualization of feature maps after BiConvGRU",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "accuracy", "family": "accuracy", "value_raw": "0.9788", "value_0_100": 97.88, "split": "test", "task": "ischemic MMD detection"},
+      {"metric": "sensitivity", "family": "sensitivity_recall", "value_raw": "0.9780", "value_0_100": 97.8, "split": "test", "task": "ischemic MMD detection"},
+      {"metric": "specificity", "family": "specificity", "value_raw": "0.9796", "value_0_100": 97.96, "split": "test", "task": "ischemic MMD detection"},
+      {"metric": "F1", "family": "f1", "value_raw": "0.9780", "value_0_100": 97.8, "split": "test", "task": "ischemic MMD detection"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.9856", "value_0_100": 98.56, "split": "test", "task": "ischemic MMD detection"},
+      {"metric": "mean square error", "family": "other", "value_raw": "0.0206", "value_0_100": null, "split": "test", "task": "ischemic MMD detection"}
+    ],
+    "comparators": ["C3D (Tran et al.)", "LRCN (Donahue et al.)", "3D CNN + ConvLSTM (Zhu et al.)", "2D CNN + ConvGRU", "2D CNN + ConvGRU + 3D CNN", "2D CNN + BiConvGRU", "Proposed (gray images only)"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "if the gray images selected from DSA are not in the arterial phase, the detection effect will be affected", "section": "discussion"},
+    "G4": {"status": "documents", "quote": "we chose ICA_AP of DSA to detect MMD, which contains only one directional information of DSA", "section": "discussion"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [],
+  "future_work": [
+    "Extract multi-directional features of DSA",
+    "Extract multi-period (multi-phase) features of DSA",
+    "Use dynamic RNN to learn spatiotemporal features"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyynynnnnnnyynnyyyyyyynnnyynnnyynnyynny"
+  }
+}

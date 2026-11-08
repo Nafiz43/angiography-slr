@@ -1,0 +1,163 @@
+{
+  "record_id": "R0521",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automated and explainable coronary angiogram interpretation for selection of coronary artery bypass grafting candidates using artificial intelligence",
+    "year": 2026,
+    "venue": "The Journal of Thoracic and Cardiovascular Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive coronary angiogram video clips (DICOM, 512 x 512 x L frames)",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries: left main, proximal/distal LAD, left circumflex, RCA",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 349,
+    "n_sequences": 4472,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "MICCAI Segmentation and MICCAI Stenosis datasets (international competition benchmark) used in development data"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": null,
+      "annotator_expertise": "Reference standard from cardiologist angiogram reports; training annotations by physicians with unclear formalized training",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [
+      "object_detection_localization"
+    ],
+    "task_description": "Seven-algorithm pipeline (left/right classification, non-coronary object detection, best-frame selection, anatomy segmentation, stenosis segmentation, stenosis registration, rule-based decision) detecting >50% stenosis in major coronary vessels and classifying patients as meeting AHA/ACC 2021 anatomic criteria for CABG.",
+    "clinical_application": "Identification of CABG candidates from coronary angiograms to support guideline-directed revascularization and quality control"
+  },
+  "method": {
+    "architecture_names": [
+      "YOLOv8",
+      "nnUNET",
+      "multiscale top hat transformation",
+      "clinical decision tree / knowledge representation"
+    ],
+    "architecture_family": "detector",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "followed by selection of the frame with maximum average contrast",
+      "section": "other"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "YOLOv8 and nnUNET fine-tuned for angiogram-specific tasks",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Human-interpretable pixel-level segmentation overlays highlighting stenosis and anatomic segments",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "74%", "value_0_100": 74.0, "split": "test", "task": "CABG indication"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "61%", "value_0_100": 61.0, "split": "test", "task": "CABG indication"},
+      {"metric": "NPV", "family": "other", "value_raw": "87%", "value_0_100": null, "split": "test", "task": "CABG indication"},
+      {"metric": "Mean analysis time per study", "family": "time", "value_raw": "51.1 seconds", "value_0_100": null, "split": "test", "task": "full pipeline"},
+      {"metric": "Mean analysis time per video clip", "family": "time", "value_raw": "4.6 seconds", "value_0_100": null, "split": "test", "task": "full pipeline"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.822", "value_0_100": 82.2, "split": "test", "task": "LM disease detection"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.451", "value_0_100": 45.1, "split": "test", "task": "LM disease detection"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.911", "value_0_100": null, "split": "test", "task": "LM disease detection"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.54", "value_0_100": 54.0, "split": "test", "task": "LM disease detection"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.742", "value_0_100": 74.2, "split": "test", "task": "proximal LAD disease detection"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.635", "value_0_100": 63.5, "split": "test", "task": "proximal LAD disease detection"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.854", "value_0_100": null, "split": "test", "task": "proximal LAD disease detection"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.819", "value_0_100": 81.9, "split": "test", "task": "proximal LAD disease detection"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.671", "value_0_100": 67.1, "split": "test", "task": "distal LAD disease detection"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.744", "value_0_100": 74.4, "split": "test", "task": "distal LAD disease detection"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.842", "value_0_100": null, "split": "test", "task": "distal LAD disease detection"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.712", "value_0_100": 71.2, "split": "test", "task": "distal LAD disease detection"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.736", "value_0_100": 73.6, "split": "test", "task": "LCx disease detection"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.679", "value_0_100": 67.9, "split": "test", "task": "LCx disease detection"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.761", "value_0_100": null, "split": "test", "task": "LCx disease detection"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.554", "value_0_100": 55.4, "split": "test", "task": "LCx disease detection"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.670", "value_0_100": 67.0, "split": "test", "task": "RCA disease detection"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.609", "value_0_100": 60.9, "split": "test", "task": "RCA disease detection"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.719", "value_0_100": null, "split": "test", "task": "RCA disease detection"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.64", "value_0_100": 64.0, "split": "test", "task": "RCA disease detection"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "This early technology was developed with a small, imperfect training set.", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "The cohort and comparison groups were highly selected with strict exclusion criteria not fully reflecting the depth and breadth of clinical practice.", "section": "discussion"},
+    "G3": {"status": "documents", "quote": "A video-based training set from a broader clinical cohort would result in a more accurate reflection of realworld inputs.", "section": "discussion"},
+    "G4": {"status": "documents", "quote": "The data source comprised 2-dimensional angiograms that can overlook eccentric lesions and valuable physiologic data.", "section": "discussion"},
+    "G5": {"status": "documents", "quote": "A robust angiography model may require considerable ground truth annotations by experts, which is limited by financial and time constraints.", "section": "discussion"},
+    "G6": {"status": "documents", "quote": "future testing of this technology should involve prospective study", "section": "discussion"},
+    "G7": {"status": "both", "quote": "Our models explain why stenosis is localized to specific arteries by highlighting relevant pixels and are thus human interpretable.", "section": "discussion"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "The training dataset also lacked situations such as prior stents, pacemakers, or totally occluded arteries.", "section": "discussion"},
+    "G10": {"status": "documents", "quote": "Future work may require robust multi-institutional data-sharing agreements.", "section": "discussion"},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "documents", "quote": "the potential for automated report generation, which is a capability of our pipeline but not thoroughly explored in this investigation", "section": "discussion"}
+  },
+  "other_limitations": [
+    "Reference standard from clinical reports may over- or underestimate disease",
+    "Model limited to major vessels; diagonal, ostial and posterolateral branches excluded",
+    "Training annotations by physicians with unclear formalized training",
+    "Errors from incorrect maximum contrast frame selection",
+    "Clinical context for surgery not always clear"
+  ],
+  "future_work": [
+    "Annotate a larger number of angiograms",
+    "Include greater lesion variation such as chronic total occlusion and variable anatomy",
+    "Incorporate Medina bifurcation classification, tortuosity, calcification and bypass anatomy",
+    "Automate SYNTAX score calculation",
+    "Embed in electronic medical record to flag patients for heart team discussion",
+    "Prospective testing"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyynyynynnynnnynynnnyynnyynyynnynyyynn"
+  }
+}

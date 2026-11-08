@@ -1,0 +1,130 @@
+{
+  "record_id": "R2491",
+  "schema_version": "2.0",
+  "study": {
+    "title": "MoSt-DSA: Modeling Motion and Structural Interactions for Direct Multi-Frame Interpolation in DSA Images",
+    "year": 2024,
+    "venue": "European Conference on Artificial Intelligence",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "4D DSA head image sequences; NeuAngio33C, NeuAngio43C and NeuAngio-CT equipment, SpinDSA protocol; 489x489 resolution",
+    "territory": "neurologic",
+    "territory_detail": "head / cerebral DSA",
+    "acquisition_geometry": "rotational_3D",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "typically 152",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 470,
+    "n_sequences": 470,
+    "n_images_or_frames": null,
+    "n_centers": 8,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "image_enhancement_denoising",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Direct multi-frame interpolation (1 to 3 intermediate frames) between DSA frames in a single forward pass, to allow fewer acquired frames.",
+    "clinical_application": "Radiation dose reduction in cerebral DSA imaging (50%, 67%, 75% for interpolating 1-3 frames); support for 3D reconstruction"
+  },
+  "method": {
+    "architecture_names": ["MoSt-DSA", "MoSt-DSA-L1", "MSFE (Motion-Structure Feature Extractor)", "MoSt Attention", "Lambda Layer", "Cross-Scale Feature Fusion", "Flow-Mask Estimator", "simplified UNet Refiner"],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "eventually leading to the generation of bidirectional optical flow",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "self_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "SSIM (%) mean, MoSt-DSA-L1", "family": "ssim", "value_raw": "94.62", "value_0_100": null, "split": "test", "task": "1-frame interpolation"},
+      {"metric": "PSNR mean, MoSt-DSA-L1", "family": "psnr", "value_raw": "40.32", "value_0_100": null, "split": "test", "task": "1-frame interpolation"},
+      {"metric": "Inference time (s), MoSt-DSA-L1", "family": "time", "value_raw": "0.024", "value_0_100": null, "split": "test", "task": "1-frame interpolation"},
+      {"metric": "Memory usage, MoSt-DSA-L1", "family": "other", "value_raw": "2.59 G", "value_0_100": null, "split": "test", "task": "1-frame interpolation"},
+      {"metric": "SSIM (%) mean, MoSt-DSA", "family": "ssim", "value_raw": "93.65", "value_0_100": null, "split": "test", "task": "1-frame interpolation"},
+      {"metric": "PSNR mean, MoSt-DSA", "family": "psnr", "value_raw": "39.55", "value_0_100": null, "split": "test", "task": "1-frame interpolation"},
+      {"metric": "SSIM (%) mean, MoSt-DSA-L1", "family": "ssim", "value_raw": "94.35", "value_0_100": null, "split": "test", "task": "2-frame interpolation"},
+      {"metric": "PSNR mean, MoSt-DSA-L1", "family": "psnr", "value_raw": "39.78", "value_0_100": null, "split": "test", "task": "2-frame interpolation"},
+      {"metric": "Inference time (s), MoSt-DSA-L1", "family": "time", "value_raw": "0.070", "value_0_100": null, "split": "test", "task": "2-frame interpolation"},
+      {"metric": "Memory usage, MoSt-DSA-L1", "family": "other", "value_raw": "2.61 G", "value_0_100": null, "split": "test", "task": "2-frame interpolation"},
+      {"metric": "SSIM (%) mean, MoSt-DSA", "family": "ssim", "value_raw": "93.14", "value_0_100": null, "split": "test", "task": "2-frame interpolation"},
+      {"metric": "PSNR mean, MoSt-DSA", "family": "psnr", "value_raw": "38.94", "value_0_100": null, "split": "test", "task": "2-frame interpolation"},
+      {"metric": "SSIM (%) mean, MoSt-DSA-L1", "family": "ssim", "value_raw": "93.58", "value_0_100": null, "split": "test", "task": "3-frame interpolation"},
+      {"metric": "PSNR mean, MoSt-DSA-L1", "family": "psnr", "value_raw": "38.85", "value_0_100": null, "split": "test", "task": "3-frame interpolation"},
+      {"metric": "Inference time (s), MoSt-DSA-L1", "family": "time", "value_raw": "0.117", "value_0_100": null, "split": "test", "task": "3-frame interpolation"},
+      {"metric": "Memory usage, MoSt-DSA-L1", "family": "other", "value_raw": "2.61 G", "value_0_100": null, "split": "test", "task": "3-frame interpolation"},
+      {"metric": "SSIM (%) mean, MoSt-DSA", "family": "ssim", "value_raw": "93.03", "value_0_100": null, "split": "test", "task": "3-frame interpolation"},
+      {"metric": "PSNR mean, MoSt-DSA", "family": "psnr", "value_raw": "38.66", "value_0_100": null, "split": "test", "task": "3-frame interpolation"}
+    ],
+    "comparators": ["ABME", "FILM-L1", "FILM-LVGG", "FILM-LStyle", "EMA-VFI", "EMA-VFI small", "SoftSplat-LF"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://github.com/ZyoungXu/MoSt-DSA"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "addresses", "quote": "we devise a general module that models motion and structural context interactions between frames", "section": "abstract"},
+    "G4": {"status": "documents", "quote": "vessels rotate during imaging, causing occlusions and overlaps that complicate motion analysis", "section": "introduction"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [],
+  "future_work": [],
+  "claim2024": {
+    "items": "ynyyynynnnnnyyaayyyanynyyyynnynynnnynnnnyyyn"
+  }
+}

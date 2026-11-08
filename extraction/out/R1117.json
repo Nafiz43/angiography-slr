@@ -1,0 +1,156 @@
+{
+  "record_id": "R1117",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Real-Time Coronary Artery Dominance Classification from Angiographic Images Using Advanced Deep Video Architectures",
+    "year": 2025,
+    "venue": "Diagnostics (Basel, Switzerland)",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive coronary angiography video sequences (RCA and LCA projections) from the public CoronaryDominance dataset",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (RCA and LCA); coronary dominance by origin of the posterior descending artery",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 1574,
+    "n_sequences": 5157,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "CoronaryDominance dataset (Kruzhilov et al., Sci. Data 2025), https://huggingface.co/datasets/BearSubj13/CoronaryDominance"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data availability statement points to the existing public CoronaryDominance dataset; no new data released"
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary video-level classification of coronary artery dominance (right vs left) from whole angiographic video sequences without separating RCA and LCA projections, comparing TSN, Video Swin Transformer and VideoMAEv2 implemented in MMAction2.",
+    "clinical_application": "Automated coronary dominance assessment for SYNTAX/Gensini scoring, risk stratification and revascularization planning; real-time decision support in the cath lab/PACS"
+  },
+  "method": {
+    "architecture_names": [
+      "Temporal Segment Network (TSN, ResNet-50)",
+      "Video Swin Transformer (Swin Transformer 3D Large)",
+      "VideoMAEv2 (ViT-Base)"
+    ],
+    "architecture_family": "transformer",
+    "temporal_category": "transformer_ssm",
+    "temporal_evidence": {
+      "quote": "transformer architectures, including VideoMAEv2 and the Video Swin Transformer, utilize self-attention mechanisms that dynamically focus on spatially and temporally distributed regions of interest",
+      "section": "discussion"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "VideoMAEv2: ViT-G (Kinetics-710) self-supervised masked autoencoder weights; Video Swin: Swin-L (ImageNet22K); TSN: ResNet-50 (ImageNet)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "No oversampling or synthetic balancing (deliberately); stratified splitting and class-sensitive metrics (recall, F1, MCC)",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Accuracy (VideoMAEv2)", "family": "accuracy", "value_raw": "92.89%", "value_0_100": 92.89, "split": "test", "task": "coronary dominance classification"},
+      {"metric": "AUC (VideoMAEv2)", "family": "auc", "value_raw": "0.9781", "value_0_100": 97.81, "split": "test", "task": "coronary dominance classification"},
+      {"metric": "Accuracy (VideoMAEv2)", "family": "accuracy", "value_raw": "93.80%", "value_0_100": 93.8, "split": "validation", "task": "coronary dominance classification"},
+      {"metric": "AUC (VideoMAEv2)", "family": "auc", "value_raw": "0.9834", "value_0_100": 98.34, "split": "validation", "task": "coronary dominance classification"},
+      {"metric": "Precision (VideoMAEv2)", "family": "precision_ppv", "value_raw": "88.98%", "value_0_100": 88.98, "split": "validation", "task": "coronary dominance classification"},
+      {"metric": "Recall/TPR (VideoMAEv2)", "family": "sensitivity_recall", "value_raw": "90.52%", "value_0_100": 90.52, "split": "validation", "task": "coronary dominance classification"},
+      {"metric": "F1-score (VideoMAEv2)", "family": "f1", "value_raw": "89.74%", "value_0_100": 89.74, "split": "validation", "task": "coronary dominance classification"},
+      {"metric": "TNR/specificity (VideoMAEv2)", "family": "specificity", "value_raw": "95.20%", "value_0_100": 95.2, "split": "validation", "task": "coronary dominance classification"},
+      {"metric": "MCC (VideoMAEv2)", "family": "other", "value_raw": "0.8530", "value_0_100": null, "split": "validation", "task": "coronary dominance classification"},
+      {"metric": "Overall accuracy, Table 5 (VideoMAEv2)", "family": "accuracy", "value_raw": "94.70%", "value_0_100": 94.7, "split": "other", "task": "coronary dominance classification"},
+      {"metric": "Inference time (VideoMAEv2)", "family": "time", "value_raw": "12.3 ms/frame", "value_0_100": null, "split": "other", "task": "coronary dominance classification"},
+      {"metric": "Accuracy on real distribution dataset (VideoMAEv2)", "family": "accuracy", "value_raw": "90.48%", "value_0_100": 90.48, "split": "other", "task": "coronary dominance classification (real distribution dataset)"},
+      {"metric": "Precision on real distribution dataset (VideoMAEv2)", "family": "precision_ppv", "value_raw": "87.81%", "value_0_100": 87.81, "split": "other", "task": "coronary dominance classification (real distribution dataset)"},
+      {"metric": "Recall on real distribution dataset (VideoMAEv2)", "family": "sensitivity_recall", "value_raw": "54.35%", "value_0_100": 54.35, "split": "other", "task": "coronary dominance classification (real distribution dataset)"},
+      {"metric": "F1-score on real distribution dataset (VideoMAEv2)", "family": "f1", "value_raw": "67.14%", "value_0_100": 67.14, "split": "other", "task": "coronary dominance classification (real distribution dataset)"},
+      {"metric": "TNR on real distribution dataset (VideoMAEv2)", "family": "specificity", "value_raw": "98.36%", "value_0_100": 98.36, "split": "other", "task": "coronary dominance classification (real distribution dataset)"},
+      {"metric": "MCC on real distribution dataset (VideoMAEv2)", "family": "other", "value_raw": "0.643", "value_0_100": null, "split": "other", "task": "coronary dominance classification (real distribution dataset)"}
+    ],
+    "comparators": [
+      "Temporal Segment Networks (TSN)",
+      "Video Swin Transformer",
+      "Kruzhilov et al. multi-stage RCA/LCA classification approach"
+    ],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "documents", "quote": "The current models should be tested on extensive datasets obtained from diverse geographic regions, devices, and patient populations for prospective and multi-center clinical validation", "section": "conclusion"},
+    "G3": {"status": "addresses", "quote": "The integrated approach processes entire angiographic video sequences, eliminating the need for separate RCA and LCA identification during preprocessing", "section": "abstract"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "This ability presents a substantial solution to the commonly encountered problem of limited labeled data in the healthcare domain", "section": "methods"},
+    "G6": {"status": "documents", "quote": "for prospective and multi-center clinical validation. This is crucial for verifying generalizability and reliability", "section": "conclusion"},
+    "G7": {"status": "documents", "quote": "lack of inherent interpretability remains a concern. The transparency of decision-making processes is critically important for clinical trust and acceptance", "section": "methods"},
+    "G8": {"status": "documents", "quote": "Diagnostic accuracy could be improved by integrating other modalities such as electrocardiogram (ECG), echocardiogram (ECHO), clinical notes, and laboratory data in addition to angiographic videos", "section": "conclusion"},
+    "G9": {"status": "documents", "quote": "Class imbalance presents a significant challenge, particularly affecting the training and validation processes for less represented classes such as left dominance", "section": "methods"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Performance below the multi-stage artery-specific method of Kruzhilov et al. on the same dataset",
+    "No RCA/LCA distinction, vessel segmentation or artery-focused preprocessing",
+    "No artifact or low-quality frame removal",
+    "Unified RCA-LCA data may lose anatomical specificity and mask specific arterial anomalies",
+    "k-fold cross-validation not performed due to computational cost"
+  ],
+  "future_work": [
+    "Explainability via attention maps and Grad-CAM",
+    "Prospective multi-center validation on diverse regions, devices and populations",
+    "Multimodal integration of ECG, echocardiography, clinical notes and laboratory data",
+    "Hybrid Video Swin Transformer and VideoMAEv2 models",
+    "Software integration into PACS/CCTA clinical workflow",
+    "Explainable expert-AI collaboration user interfaces"
+  ],
+  "claim2024": {
+    "items": "yyyyynynnynynynnyynynyynyyynnnnynnnynnnyynyy"
+  }
+}

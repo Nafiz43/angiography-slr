@@ -1,0 +1,17 @@
+{"record_id": "R3555",
+ "items": {
+  "6": {"answer": "yes", "quote": "construct a deep learning diagnostic system to improve the ability to detect posterior communicating artery aneurysms on 2D DSA images", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "each frame of the output sequence was resized to 288×288 pixels during the RLS", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Two experienced radiologists identified 6 to 12 frameworks for 2D DSA images, which provided sufficient visualization of the PCoA region.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "The exclusion criteria consisted of the following: (1) patients lacking lateral", "section": "methods"},
+  "15": {"answer": "yes", "quote": "The application of 3D DSA has dramatically improved the diagnostic accuracy for aneurysms.", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "Manual annotations were performed for the identification of aneurysms, vessel overlaps, and PCoA regions.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "All models were trained and tested with a Keras [30] deep learning framework", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The mean sensitivity, specificity, and accuracy of the bi-input+RetinaNet+C-LSTM framework were 89% (range 67.02%-98.43%), 93% (range 72.30%-99.56%), and 91% (range 77.63%-97.72%), respectively.", "section": "results"},
+  "38": {"answer": "yes", "quote": "The adjusted Wald method was used to determine the 95% CIs of the accuracy, sensitivity, and specificity values from the contingency tables", "section": "methods"}
+ }}

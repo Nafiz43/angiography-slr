@@ -1,0 +1,17 @@
+{"record_id": "R1939",
+ "items": {
+  "6": {"answer": "yes", "quote": "The presented method aims to enhance DSA image series by highlighting critical information via automatic classification of vessels using a combination of two learning models", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "We first manually trim the DSA image series to remove superfluous frames and borders or to define a region of interest around the malformation", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "The patches were manually split into 5 folds for cross validation to prevent data leakage due to a lack of independence between patches from the same DSA series.", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The network was implemented using the Tensorflow framework (www.tensorflow.org)", "section": "results"},
+  "26": {"answer": "yes", "quote": "Three validation steps per epoch were used for monitoring to reduce the learning rate on plateau and enforce early stopping.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The model achieved high scores as measured by a dice score of 0.944, recall of 0.957, and precision of 0.977.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

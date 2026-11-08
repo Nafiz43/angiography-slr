@@ -1,0 +1,168 @@
+{
+  "record_id": "R1329",
+  "schema_version": "2.0",
+  "study": {
+    "title": "CVFSNet: A Cross View Fusion Scoring Network for end-to-end mTICI scoring",
+    "year": 2025,
+    "venue": "Medical Image Analysis",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Dual-view (coronal and sagittal) DSA sequences from mechanical thrombectomy procedures",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral; M1 segment of the middle cerebral artery occlusion/stenosis, anterior circulation sequences in acute ischemic stroke",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "5 to 76 frames; uniformly resampled to 8 frames for input",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 341,
+    "n_sequences": 411,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": true,
+      "detail": "AmTICIS dataset (411 dual-view DSA sequence pairs) stated as publicly released via https://github.com/xwjBupt/CVFSNet; data availability statement says data available on request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "Two physicians with 4 years of experience and a chief physician with 20 years of experience (15 years stated in Discussion); double-blind scoring, chief physician adjudicated disagreements",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Cohen's kappa between physicians A and B = 0.408 (fair); A-C and B-C moderate"
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "End-to-end automatic 5-class mTICI reperfusion scoring (T0/1, T2a, T2b, T3 after merging T0 and T1) from dual-view DSA sequences, plus dichotomized good/bad reperfusion (mTICI >= 2b) classification.",
+    "clinical_application": "Assessment of reperfusion success after mechanical thrombectomy for acute ischemic stroke"
+  },
+  "method": {
+    "architecture_names": ["CVFSNet", "Cross View Fusion Module (CVFM)", "X3D"],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "To capture hierarchical information within the DSA sequence and model blood flow velocity variations, we integrated the 3D convolutional network X3D (Feichtenhofer, 2020) as the backbone of our network.",
+      "section": "methods"
+    },
+    "input_dimensionality": "multi_view",
+    "supervision": "fully_supervised",
+    "pretraining": "Kinetics 400 (K400)",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "MARC margin calibration in the linear layer; Label smoothing loss and Seesaw loss",
+    "uncertainty_quantification": false,
+    "explainability_method": "Attention heatmaps",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Accuracy (mTICI multi-class)", "family": "accuracy", "value_raw": "66.44 ± 1.67%", "value_0_100": 66.44, "split": "test", "task": "mTICI scoring"},
+      {"metric": "Accuracy within ±1 grade (Acc±1)", "family": "accuracy", "value_raw": "92.22 ± 1.02%", "value_0_100": 92.22, "split": "test", "task": "mTICI scoring"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "59.70 ± 1.88%", "value_0_100": 59.7, "split": "test", "task": "mTICI scoring"},
+      {"metric": "F1", "family": "f1", "value_raw": "59.44 ± 1.86%", "value_0_100": 59.44, "split": "test", "task": "mTICI scoring"},
+      {"metric": "Micro AUC", "family": "auc", "value_raw": "83.48 ± 0.51%", "value_0_100": 83.48, "split": "test", "task": "mTICI scoring"},
+      {"metric": "TPR for T2b", "family": "sensitivity_recall", "value_raw": "42%", "value_0_100": 42.0, "split": "test", "task": "mTICI scoring (T2b class)"},
+      {"metric": "AUC for T2a", "family": "auc", "value_raw": "71.59%", "value_0_100": 71.59, "split": "test", "task": "mTICI scoring (T2a class)"},
+      {"metric": "Accuracy (dichotomized)", "family": "accuracy", "value_raw": "90.67 ± 0.66%", "value_0_100": 90.67, "split": "test", "task": "Dichotomized good/bad reperfusion"},
+      {"metric": "Recall (dichotomized)", "family": "sensitivity_recall", "value_raw": "90.83 ± 0.61%", "value_0_100": 90.83, "split": "test", "task": "Dichotomized good/bad reperfusion"},
+      {"metric": "F1 (dichotomized)", "family": "f1", "value_raw": "90.64 ± 0.66%", "value_0_100": 90.64, "split": "test", "task": "Dichotomized good/bad reperfusion"},
+      {"metric": "AUC (dichotomized)", "family": "auc", "value_raw": "92.72 ± 0.16%", "value_0_100": 92.72, "split": "test", "task": "Dichotomized good/bad reperfusion"}
+    ],
+    "comparators": ["R2Plus1D", "UniFormerV2", "TimeSformer", "SlowFast", "VideoSwin", "TSM", "C3D", "TANet", "I3D", "TSN", "Nielsen et al. (2020)", "Neves et al. (2022)"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "Code and data will be available at https://github.com/xwjBupt/CVFSNet"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "both",
+      "quote": "Currently, the absence of a publicly available mTICI scoring dataset based on dual-view DSA sequences impedes the progress of automatic mTICI scoring research.",
+      "section": "methods"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "the sample size of AmTICIS can be further expanded by incorporating data from multiple centers to enhance its diversity.",
+      "section": "conclusion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "They decouple the spatiotemporal features, extracting spatial features first and then temporal features, which may lose the inter-frame spatiotemporal characteristics in the DSA sequence.",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "both",
+      "quote": "As DSA images represent projections, blood vessels may overlap at a single viewing angle, making it challenging to distinguish individual vessels accurately.",
+      "section": "methods"
+    },
+    "G5": {
+      "status": "documents",
+      "quote": "improving annotation consistency and reducing observer bias could benefit from involving more annotators, inviting more experienced annotators, or adopting a more standardized annotation protocol.",
+      "section": "discussion"
+    },
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {
+      "status": "both",
+      "quote": "In order to alleviate the majority class domination effect caused by the category imbalance, we used MARC (Wang et al., 2023) in the linear layer to calibrate the margins",
+      "section": "methods"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Dataset only includes M1 segment occlusions, limiting clinical applicability",
+    "Compared video classification methods support only single-view input, possibly disadvantaging them",
+    "Only three physicians annotated due to time, manpower and financial constraints",
+    "Temporal depth limited to 8 frames partly due to computational resources"
+  ],
+  "future_work": [
+    "Expand dataset to other occlusion locations (ICA, BA, ACA, PCA)",
+    "Incorporate multi-center data to increase sample size and diversity",
+    "Involve more or more experienced annotators and a standardized annotation protocol"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyyyynyyyyyyyyyyyynynynyynynyyynyynyy"
+  }
+}

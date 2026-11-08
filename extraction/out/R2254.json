@@ -1,0 +1,160 @@
+{
+  "record_id": "R2254",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Radiation reduction for interventional radiology imaging: a video frame interpolation solution",
+    "year": 2024,
+    "venue": "Insights into Imaging",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA_and_fluoroscopy",
+    "modality_detail": "IR sequences in three modes: unsubtracted angiography, subtraction (DSA), and fluoroscopy",
+    "territory": "abdominopelvic",
+    "territory_detail": "Pediatric abdominal/peripheral interventions; arterial, venous and portal vein angiography across various regions (e.g., splenic, hepatic)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 167,
+    "n_sequences": 1367,
+    "n_images_or_frames": 95308,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Image data not shareable under agreement with data custodian; model and de-identified reader outputs available on request"
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "none",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "image_enhancement_denoising",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Video frame interpolation of simulated low-frame-rate IR sequences (every other frame removed) to restore high-frame-rate sequences, enabling reduced acquisition frame rate.",
+    "clinical_application": "Radiation dose reduction in pediatric interventional radiology"
+  },
+  "method": {
+    "architecture_names": ["SepConv++", "U-Net-style backbone"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "optical_flow_registration",
+    "temporal_evidence": {
+      "quote": "These kernels were applied in the convolution process of preceding and succeeding frames, and their output features were fused to generate the interpolated intermediate frame.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "self_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "PSNR (dB)", "family": "psnr", "value_raw": "44.94", "value_0_100": null, "split": "test", "task": "frame interpolation - angiography"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.9840", "value_0_100": null, "split": "test", "task": "frame interpolation - angiography"},
+      {"metric": "RMSE", "family": "error_distance", "value_raw": "1.5348", "value_0_100": null, "split": "test", "task": "frame interpolation - angiography"},
+      {"metric": "PSNR (dB)", "family": "psnr", "value_raw": "34.84", "value_0_100": null, "split": "test", "task": "frame interpolation - subtraction"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.9194", "value_0_100": null, "split": "test", "task": "frame interpolation - subtraction"},
+      {"metric": "RMSE", "family": "error_distance", "value_raw": "3.7446", "value_0_100": null, "split": "test", "task": "frame interpolation - subtraction"},
+      {"metric": "PSNR (dB)", "family": "psnr", "value_raw": "33.82", "value_0_100": null, "split": "test", "task": "frame interpolation - fluoroscopy"},
+      {"metric": "SSIM", "family": "ssim", "value_raw": "0.7752", "value_0_100": null, "split": "test", "task": "frame interpolation - fluoroscopy"},
+      {"metric": "RMSE", "family": "error_distance", "value_raw": "4.8724", "value_0_100": null, "split": "test", "task": "frame interpolation - fluoroscopy"},
+      {"metric": "Radiologist votes Ground Truth / Uncertain / SepConv++", "family": "other", "value_raw": "33 / 75 / 27", "value_0_100": null, "split": "test", "task": "subjective reader evaluation (15 sequences, 9 radiologists)"}
+    ],
+    "comparators": ["Average (adjacent-frame averaging)", "FLAVR"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": true,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": true,
+      "detail": "Model available upon request to the corresponding authors"
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "our IR sequences were obtained from pediatric patients undergoing peripheral interventions at a single imaging center",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "The applicability of our deep learning model requires further verification on sequences obtained from diverse imaging devices.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "addresses",
+      "quote": "our study is the first to explore this application on IR images with noticeable motions",
+      "section": "introduction"
+    },
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {
+      "status": "documents",
+      "quote": "Our future work will involve evaluating the model's performance through clinical animal trials to quantify radiation dose reduction",
+      "section": "discussion"
+    },
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Pediatric-only cohort; transferability to adults with different blood flow untested",
+    "Sequences with significant motion (e.g., cardiac interventions) not included",
+    "Radiation dose reduction simulated retrospectively, not measured"
+  ],
+  "future_work": [
+    "Verify model on sequences from diverse imaging devices and institutions",
+    "Investigate transfer from pediatric to adult populations",
+    "Experiments on sequences with significant motion such as cardiac interventions",
+    "Clinical animal trials to quantify radiation dose reduction",
+    "Develop a model applicable across modalities, demographics and lesion locations"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynynyaayynannnnnnyynnnynyyyyynyyyyy"
+  }
+}

@@ -1,0 +1,17 @@
+{"record_id": "R3126",
+ "items": {
+  "6":  {"answer": "yes", "quote": "We proposed a deep learning-based technique to increase the angular resolution of projection radiography, with implementation on rotational angiography.", "section": "other"},
+  "9":  {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "for every Nþ2 frames, the first and last frames were submitted as inputs to superresolve the intermediate N frames", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "Both objective image fidelity metrics calculation and subjective image quality assessment were performed using ground truth as the reference image.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "80% of all rotational angiograms were assigned to the training dataset). The remaining 20% were equally partitioned into validation and test datasets.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The model was implemented in Python 3.7.0 using PyTorch 1.4.0 package", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The IE, PSNR, and SSIM of ASR images are shown in Table 2 and visualized as boxplots", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

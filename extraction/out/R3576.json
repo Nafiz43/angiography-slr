@@ -1,0 +1,146 @@
+{
+ "record_id": "R3576",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Automatic Identification of Bioprostheses on X-ray Angiographic Sequences of Transcatheter Aortic Valve Implantation Procedures Using Deep Learning",
+  "year": 2022,
+  "venue": "Diagnostics (Basel, Switzerland)",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "Spain"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Conventional fluoroscopy and cine X-ray angiography at 15 and 25 fps during TAVI",
+  "territory": "cardiac",
+  "territory_detail": "Aortic valve / aortic root during transcatheter aortic valve implantation (TAVI)",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "25-100",
+  "vendors": ["Philips"]
+ },
+ "dataset": {
+  "n_patients": 15,
+  "n_sequences": 50,
+  "n_images_or_frames": 2827,
+  "n_centers": 1,
+  "n_vendors": 1,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": false, "detail": "Not publicly available due to privacy restrictions; available from the corresponding author upon reasonable request"},
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": null,
+   "annotator_expertise": "Experienced hemodynamic cardiologists (clinical members of the research team), using GIMP",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "catheter_device_tracking",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Pixel-wise segmentation of the transcatheter heart valve (THV, Allegra bioprosthesis) on X-ray angiographic frames of TAVI procedures with a U-Net, including hyperparameter tuning (training set size, data augmentation, cross-entropy vs focal loss) and evaluation with new distance/noise metrics D1 and D2 and two binarization schemes (Otsu, PKFP).",
+  "clinical_application": "Automatic THV identification to support TAVI, e.g. assessing device positioning and expansion and extracting quantitative implant parameters"
+ },
+ "method": {
+  "architecture_names": ["U-Net"],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "none",
+  "temporal_evidence": {"quote": "The expected inputs are 512 × 512, 8-bit (integer values from 0 to 255), grayscale images and their corresponding labels as binary masks for the training.", "section": "methods"},
+  "input_dimensionality": "2D_single_frame",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": "Focal loss (alpha=0.25, gamma=2) evaluated during hyperparameter tuning (cross-entropy selected); imbalance-specific metrics D1/D2 and prior-knowledge (PKFP) binarization",
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "D1 mean min distance (Otsu), pixels", "family": "error_distance", "value_raw": "0.91 ± 0.86", "value_0_100": null, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "D1 mean min distance (PKFP), pixels", "family": "error_distance", "value_raw": "0.30 ± 0.38", "value_0_100": null, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "D2 noise", "family": "other", "value_raw": "138.48 ± 75.76", "value_0_100": null, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Accuracy (Otsu)", "family": "accuracy", "value_raw": "0.99 ± 0.01", "value_0_100": 99.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Accuracy (PKFP)", "family": "accuracy", "value_raw": "0.99 ± 0.01", "value_0_100": 99.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Precision (Otsu)", "family": "precision_ppv", "value_raw": "0.73 ± 0.05", "value_0_100": 73.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Precision (PKFP)", "family": "precision_ppv", "value_raw": "0.63 ± 0.07", "value_0_100": 63.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Recall (Otsu)", "family": "sensitivity_recall", "value_raw": "0.87 ± 0.04", "value_0_100": 87.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Recall (PKFP)", "family": "sensitivity_recall", "value_raw": "0.97 ± 0.02", "value_0_100": 97.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Dice coefficient (Otsu)", "family": "dice", "value_raw": "0.15 ± 0.03", "value_0_100": 15.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Dice coefficient (PKFP)", "family": "dice", "value_raw": "0.22 ± 0.06", "value_0_100": 22.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Jaccard index (Otsu)", "family": "iou", "value_raw": "0.74 ± 0.04", "value_0_100": 74.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "Jaccard index (PKFP)", "family": "iou", "value_raw": "0.64 ± 0.07", "value_0_100": 64.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "AUROC (Otsu)", "family": "auc", "value_raw": "0.94 ± 0.02", "value_0_100": 94.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "AUROC (PKFP)", "family": "auc", "value_raw": "0.98 ± 0.01", "value_0_100": 98.0, "split": "test", "task": "THV segmentation, fully expanded frames (Exp. 1, 460 frames)"},
+   {"metric": "D2 noise", "family": "other", "value_raw": "2.40 ± 9.21", "value_0_100": null, "split": "test", "task": "Frames without THV, aortic root before deployment (Exp. 2, 65 frames)"},
+   {"metric": "D1 mean min distance (PKFP), pixels", "family": "error_distance", "value_raw": "52.94 ± 62.72", "value_0_100": null, "split": "test", "task": "THV segmentation during deployment (Exp. 3, 3 frames)"},
+   {"metric": "D2 noise", "family": "other", "value_raw": "204.45 ± 19.83", "value_0_100": null, "split": "test", "task": "THV segmentation during deployment (Exp. 3, 3 frames)"},
+   {"metric": "Dice coefficient (PKFP)", "family": "dice", "value_raw": "0.36 ± 0.05", "value_0_100": 36.0, "split": "test", "task": "THV segmentation during deployment (Exp. 3, 3 frames)"},
+   {"metric": "AUROC (Otsu)", "family": "auc", "value_raw": "0.85 ± 0.05", "value_0_100": 85.0, "split": "test", "task": "THV segmentation during deployment (Exp. 3, 3 frames)"},
+   {"metric": "AUROC (PKFP)", "family": "auc", "value_raw": "0.90 ± 0.04", "value_0_100": 90.0, "split": "test", "task": "THV segmentation during deployment (Exp. 3, 3 frames)"},
+   {"metric": "D1 mean min distance (PKFP), pixels", "family": "error_distance", "value_raw": "3.92 ± 4.16", "value_0_100": null, "split": "test", "task": "THV segmentation with contrast injection (Exp. 4, 6 frames)"},
+   {"metric": "Dice coefficient (PKFP)", "family": "dice", "value_raw": "0.47 ± 0.06", "value_0_100": 47.0, "split": "test", "task": "THV segmentation with contrast injection (Exp. 4, 6 frames)"},
+   {"metric": "AUROC (Otsu)", "family": "auc", "value_raw": "0.89 ± 0.02", "value_0_100": 89.0, "split": "test", "task": "THV segmentation with contrast injection (Exp. 4, 6 frames)"},
+   {"metric": "AUROC (PKFP)", "family": "auc", "value_raw": "0.96 ± 0.01", "value_0_100": 96.0, "split": "test", "task": "THV segmentation with contrast injection (Exp. 4, 6 frames)"}
+  ],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "none", "quote": null, "section": null},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "both", "quote": "THV identification is a class imbalance problem. Therefore, conventional classification metrics used in supervised learning, based on the number of true/false positives and negatives, are not fully suitable on this problem", "section": "methods"},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "documents", "quote": "the possibility of extracting additional value from images gathered during and after the procedure for its evaluation and the prediction of long-term outcomes is still an open challenge", "section": "introduction"},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Model not trained on THV shapes during deployment; poor, incomplete segmentation in deployment frames",
+  "Contrast injection frames impair segmentation",
+  "PKFP binarization requires a priori THV knowledge and is invalid when no device is present",
+  "Dice coefficient performs poorly for thread-like THV structure",
+  "Fixed 0.5 threshold binarization did not perform correctly"
+ ],
+ "future_work": [
+  "Extraction of quantitative features from THV segmentations",
+  "Real-time checking of device placement and expansion during TAVI",
+  "Automation of the TAVI procedure",
+  "Identification of other THV models and devices from other manufacturers",
+  "Identification of ridge structures in X-ray sequences in general"
+ ],
+ "claim2024": {
+  "items": "ynyyynyyyynyyynnyyyyyynyyyynnynynyynyynyynyy"
+ }
+}

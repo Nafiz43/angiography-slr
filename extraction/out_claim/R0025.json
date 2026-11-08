@@ -1,0 +1,17 @@
+{"record_id": "R0025",
+ "items": {
+  "6":  {"answer": "yes", "quote": "We developed and validated DeepRV, a deep learning model predicting RVSF from routine coronary angiograms.", "section": "abstract"},
+  "9":  {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "The first videos of the left coronary artery (LCA) and right coronary artery (RCA) without guide wire were considered diagnostic.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Missing data rows were not considered for analysis.", "section": "methods"},
+  "15": {"answer": "yes", "quote": "lack of core lab assessment of RVSF and potential inter-observer variability in TTE interpretation", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Right ventricular systolic function was assessed via TTE using a combination of tricuspid annular plane systolic excursion (TAPSE) (normal > 17 mm, reduced ≤ 17 mm), fractional area change (FAC), and visual assessment (eyeballing)", "section": "methods"},
+  "20": {"answer": "yes", "quote": "we split the data at the patient level", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "External validation demonstrated AUROC 0.75 (95% CI: 0.72–0.77) on the UCSF dataset", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "a sensitivity of 70.5% (95% CI: 63.1–77.2), specificity of 78.5% (95% CI: 76.3–80.8)", "section": "results"}
+ }}

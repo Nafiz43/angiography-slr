@@ -1,0 +1,127 @@
+{
+  "record_id": "R1209",
+  "schema_version": "2.0",
+  "study": {
+    "title": "perfDSA: Automatic Perfusion Imaging in Cerebral Digital Subtraction Angiography",
+    "year": 2025,
+    "venue": "International Journal of Computer Assisted Radiology and Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Netherlands"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Cerebral 2D+time DSA series, AP or lateral views; initial temporal resolution 2-4 frames per second",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral; supraclinoid ICA as input artery; ICA and MCA territories in acute ischemic stroke after thrombectomy",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "10 to 50",
+    "vendors": ["Philips", "GE", "Siemens"]
+  },
+  "dataset": {
+    "n_patients": 1006,
+    "n_sequences": 1882,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": "MR CLEAN Registry (nationwide multicenter observational cohort, Netherlands); not described as publicly downloadable"},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 1,
+      "annotator_expertise": "experienced medical doctor",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "contrast_flow_analysis",
+    "other_label": null,
+    "secondary_tasks": ["vessel_segmentation", "outcome_prediction"],
+    "task_description": "Fully automatic deconvolution-based perfusion parametric imaging (CBV, CBF, MTT, Tmax) from cerebral DSA, using UNet segmentation of the supraclinoid ICA to extract the arterial input function; perfusion parameters then used to predict functional stroke outcome via logistic regression.",
+    "clinical_application": "Quantitative perfusion assessment during endovascular thrombectomy for acute ischemic stroke; biomarkers for functional outcome"
+  },
+  "method": {
+    "architecture_names": ["perfDSA", "UNet"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {"quote": "This approach involves deconvolving time–intensity curves (TICs) using the extracted AIF.", "section": "methods"},
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Dice", "family": "dice", "value_raw": "0.73±0.21", "value_0_100": 73.0, "split": "test", "task": "supraclinoid ICA segmentation"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "1 ± 0", "value_0_100": 100.0, "split": "test", "task": "supraclinoid ICA segmentation"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.79 ± 0.22", "value_0_100": 79.0, "split": "test", "task": "supraclinoid ICA segmentation"},
+      {"metric": "On-target rate (Dice > 0)", "family": "other", "value_raw": "0.98", "value_0_100": null, "split": "test", "task": "supraclinoid ICA segmentation"},
+      {"metric": "AIF RMSE vs manual", "family": "error_distance", "value_raw": "0.01 ± 0.02", "value_0_100": null, "split": "test", "task": "AIF extraction"},
+      {"metric": "AIF Pearson correlation vs manual", "family": "correlation", "value_raw": "0.99 ± 0.09", "value_0_100": null, "split": "test", "task": "AIF extraction"},
+      {"metric": "AUC (logistic regression, dichotomized mRS)", "family": "auc", "value_raw": "0.63", "value_0_100": 63.0, "split": "test", "task": "functional outcome prediction"},
+      {"metric": "AIF extraction runtime per series", "family": "time", "value_raw": "0.004s", "value_0_100": null, "split": "test", "task": "AIF extraction"},
+      {"metric": "Perfusion parametric image generation runtime per series", "family": "time", "value_raw": "approximately 1s", "value_0_100": null, "split": "test", "task": "perfusion parametric imaging"}
+    ],
+    "comparators": ["Manual AIF extraction from manually annotated input artery masks"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://github.com/RuishengSu/perfDSA"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "the temporal flow dynamics are generally not intuitively visualized and explained in such methods", "section": "introduction"},
+    "G4": {"status": "documents", "quote": "The lack of automatic approaches for reliable assessment of cerebral flow dynamics might be partially due to the projective nature of DSA.", "section": "introduction"},
+    "G5": {"status": "documents", "quote": "As the annotations were created by a single individual, interannotator variability was not quantitatively assessed.", "section": "discussion"},
+    "G6": {"status": "documents", "quote": "These interesting initial findings necessitate further large-scale clinical validations.", "section": "results"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "addresses", "quote": "this work also investigates the association between quantitative perfusion parameters and functional stroke outcomes after endovascular stroke treatment", "section": "introduction"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Full quantitative accuracy of DSA perfusion parameters not confirmed",
+    "Segmentation tends to under-segment the target vessel (sensitivity 79%)",
+    "Off-target segmentations due to motion artifacts or static instruments",
+    "High boundary uncertainty in manual annotations of small target segment"
+  ],
+  "future_work": [
+    "Enhance perfDSA with state-of-the-art segmentation models (e.g., nnUNet, CAVE)",
+    "Validate DSA-derived perfusion parameters against MRA in the same patient cohort",
+    "Large-scale clinical studies to assess associations with outcomes"
+  ],
+  "claim2024": {
+    "items": "nyyyynyyynnyyyynyyynyynyyyyynnnynyynnnnyyyyy"
+  }
+}

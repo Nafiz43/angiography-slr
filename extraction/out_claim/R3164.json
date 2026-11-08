@@ -1,0 +1,17 @@
+{"record_id": "R3164",
+ "items": {
+  "6": {"answer": "yes", "quote": "To address this radiocontrast flow and high radiation issue, we propose a Time-aware Attenuation Voxel (TiAVox) approach for sparse-view 4D DSA reconstruction", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "Since the distance from the patient to the transmitter cannot be acquired straightly, we estimated half of the distance from the transmitter to the receiver. This information is transformed into camera poses used for reconstruction.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "N of them (N = 4, 10, 20, 30, 40, 50) are selected at approximately equal intervals as training views, and all others are used as test views.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "the 3D DSA labels, obtained via the gold standard method (FDK), require intricate post-processing with deformation. This inevitably leads to misalignment with the input 2D DSA image", "section": "introduction"},
+  "17": {"answer": "yes", "quote": "Training views are employed for reconstruction, while test views are rendered and subsequently compared to the ground truth for evaluation.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "N of them (N = 4, 10, 20, 30, 40, 50) are selected at approximately equal intervals as training views, and all others are used as test views.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "we implement our model based on PyTorch [42], reference the code of DirectVoxGo [24]", "section": "methods"},
+  "26": {"answer": "yes", "quote": "In our experiments, optimal results emerged when spatial resolution was set to 320[3] and temporal resolution to 4.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 2: Novel view synthesis 2D PSNR and SSIM results from clinically collected images over views (8 patients)", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

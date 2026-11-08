@@ -1,0 +1,17 @@
+{"record_id": "R0546",
+ "items": {
+  "6": {"answer": "yes", "quote": "The model is designed to synthesize intermediate frames in DSA sequences, thereby reducing the number of scans required in clinical practice and directly decreasing the radiation dose.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "During model training, images were padded into squares and resized to 128 × 128 to accelerate computation.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For fine-tuning, images were cropped with a uniform size of 512 × 512.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "na", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "Dataset 2 included 3,255 DSA sequences collected from two external institutions using GE MEDICAL SYSTEMS and Philips Azurion 5M20. This dataset was used exclusively for external evaluation", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Our framework is trained and implemented in PyTorch 2.5.1", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "SAVE-Net achieved an average SSIM of 0.951 [95% CI: (0.948, 0.956)] and a PSNR of 40.764 dB [95% CI: (40.673, 40.798)]", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

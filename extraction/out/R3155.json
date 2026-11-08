@@ -1,0 +1,128 @@
+{
+  "record_id": "R3155",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Towards clinical translation of deep-learning based classification of DSA image sequences for stroke treatment",
+    "year": 2023,
+    "venue": "Bildverarbeitung für die Medizin",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "DSA sequences (frontal and lateral) acquired during thrombectomy; test cases on Siemens ARTIS icono biplane, training data on Siemens ARTIS zee biplane",
+    "territory": "neurologic",
+    "territory_detail": "Middle cerebral artery (M1-M3) and carotid terminus occlusions in acute ischemic stroke",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": ["Siemens"]
+  },
+  "dataset": {
+    "n_patients": 3,
+    "n_sequences": 6,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": "Application and trained model released; data release not stated"},
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": "physicians (selected cases)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Open-source client-server tool classifying whole DSA sequences as thrombus-free vs non-thrombus-free using retrained EfficientNetV2+GRU models (frontal and lateral, predictions averaged); evaluated on functionality, correctness on three new clinical cases from a different DSA system, and runtime across hardware.",
+    "clinical_application": "Detection of remaining thrombi during mechanical thrombectomy for acute ischemic stroke"
+  },
+  "method": {
+    "architecture_names": ["EfficientNetV2+GRU"],
+    "architecture_family": "recurrent",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "One network setup that yielded good results in [6] is EfficentNetV2+GRU. We employ this architecture for classification",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Three new physician-selected cases (pre- and post-treatment sequences) acquired with a Siemens ARTIS icono biplane, a different angiography unit than the training data (Siemens ARTIS zee biplane)",
+    "metrics": [
+      {"metric": "Mean classification time per case, Nvidia RTX 3090", "family": "time", "value_raw": "1.1s±0.1", "value_0_100": null, "split": "external", "task": "thrombus classification runtime"},
+      {"metric": "Mean classification time per case, Nvidia GTX 1050Ti", "family": "time", "value_raw": "1.8s±0.1", "value_0_100": null, "split": "external", "task": "thrombus classification runtime"},
+      {"metric": "Mean classification time per case, Intel i7-11700KF", "family": "time", "value_raw": "4.8s±0.5", "value_0_100": null, "split": "external", "task": "thrombus classification runtime"},
+      {"metric": "Mean classification time per case, Intel i7-7700K", "family": "time", "value_raw": "8.8s±0.9", "value_0_100": null, "split": "external", "task": "thrombus classification runtime"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": true
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://osf.io/n8k4r/"},
+    "model_weights_available": {"value": true, "detail": "Trained model provided at https://osf.io/n8k4r/"},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "since the amount of data samples was quite limited", "section": "methods"},
+    "G2": {"status": "both", "quote": "test the classification on new datasets acquired in the clinic with a different DSA system", "section": "introduction"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "documents", "quote": "It was however not used live in the clinic, yet.", "section": "abstract"},
+    "G7": {"status": "documents", "quote": "we are working on visualizing the parts of the sequence that lead to the classification", "section": "discussion"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "As these kind of thrombi were not focus of the training process, we already expected this behavior.", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Only three test cases evaluated",
+    "Threshold derived from training data may not hold on unseen data",
+    "PACS system sometimes failed to export DICOM data correctly",
+    "Runtime not yet optimized"
+  ],
+  "future_work": [
+    "Extend training data to detect M2 and M3 thrombi",
+    "Collect user feedback to continually recompute the classification threshold",
+    "Larger study assessing model quality",
+    "Background watch-dog system warning of remaining thrombi",
+    "Visualize sequence parts driving the classification",
+    "Realtime connection via manufacturer API or framegrabbers"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnynnynnnynnnnnnnnnynnnnnynynnnnyyyyy"
+  }
+}

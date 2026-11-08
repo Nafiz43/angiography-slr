@@ -1,0 +1,81 @@
+\section{Methodology}
+\subsection{Search Strategy}
+\label{sec:search}
+This systematic review was conducted in accordance with the Preferred Reporting Items for Systematic Reviews and Meta-Analyses 2020 (PRISMA 2020) guidelines~\cite{Page2021PRISMA}. The review was registered retrospectively on OSF Registries \href{https://doi.org/10.17605/OSF.IO/6XJK7} {https://doi.org/10.17605/OSF.IO/6XJK7}. The completed PRISMA 2020 checklist is provided as Supplementary Table S2. Since the primary objective of this review is to characterize AI methods that operate on angiographic image sequences, the search strategy was designed to jointly capture both the imaging modality and the computational methodology.
+
+
+Because most clinical articles are indexed by PubMed/\allowbreak MEDLINE \cite{white2020pubmed} and most engineering articles by Semantic Scholar \cite{fricke2018semantic}, we searched these two databases. The search spans publications from \textit{1 January 2000} to the search date, \textit{31 July 2026}. The year 2000 was selected as a practical lower bound because modern digital angiographic workflows and contemporary machine learning approaches largely emerged after this period.
+
+The search query combined two Boolean blocks:
+
+\medskip
+\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{Block 1: Imaging modality}
+\begin{quote}
+\small\texttt{(angiograph* OR fluoroscop* OR ``digital subtraction angiography'' OR DSA)}
+\end{quote}
+
+\noindent\textbf{AND}
+
+\noindent\textbf{Block 2: Computational methodology}
+\begin{quote}
+\small\texttt{(``deep learning'' OR ``machine learning'' OR CNN OR transformer OR ``artificial intelligence'' OR AI)}
+\end{quote}
+\end{minipage}
+\medskip
+
+
+To facilitate reproduction or extension, the database-specific queries, execution dates, filters, and retrieval statistics are given in Appendix~\ref{appendix:search_log}.
+
+
+\subsection{Eligibility Criteria}
+\label{sec:eligibility}
+Following PRISMA 2020, we defined explicit inclusion and exclusion criteria, summarized in Table~\ref{tab:criteria}. 
+
+\input{tables/inclusion_exclusion_criteria}
+We first screened titles and abstracts and retrieved the full text of every record that passed the eligibility criteria. To be included at title--abstract screening, a record had to satisfy four inclusion criteria: (I1) the study uses conventional angiographic imaging, that is, catheter-based angiography (DSA or contrast fluoroscopy in which vessels are opacified by an intravascular contrast medium delivered by the catheter directly into the vessel of interest); (I2) it uses temporally ordered multi-frame data rather than single images; (I3) it addresses at least one in-scope computational task, such as image enhancement, denoising, motion correction, registration, vessel segmentation, lesion detection, classification, tracking, flow or perfusion quantification, or outcome prediction, whether by deep learning, classical machine learning, or traditional image processing; and (I4) it reports an evaluation of the method against data. A record was excluded if (E1) it was an abstract or poster without a full methods section; (E2) it was a non-research document such as an editorial, commentary, letter, review, case report or erratum; or (E3) its full text was not available in English. The inclusion and exclusion criteria judge the content of a record and the form of the publication, respectively.
+
+
+\subsection{LLM-Assisted Screening Pipeline}
+\label{sec:llm-pipeline}
+
+Given the large volume of records available in the searched databases, title--abstract screening was performed by an LLM and the quality of the LLM screening was validated by human reviewers (Section~\ref{sec:validation}). All screening inference was performed locally with the open-weight \texttt{Qwen3.8} model (27B parameters) \footnote{\url{https://ollama.com/library/qwen3.8:27b}} served through the \texttt{Ollama} framework~\cite{marcondes2025using}, which kept the records on local hardware and removed any dependence on external services. We chose a local open-weight model for screening because it is faster and cheaper to run over thousands of records than a large commercial model. Qwen3.8-27B, which is a 27-billion-parameter model released by Alibaba \footnote{https://www.alibabagroup.com/en-US/}, was the strongest and most recent open-weight model that fit on our local server at the time of screening. In prior literature, open-weight models showed high sensitivity in title--abstract screening at no usage cost~\cite{sciurti2025compact}, and models of the Qwen family have previously been used for study selection in systematic reviews~\cite{looareesuwan2026study}.
+
+\subsubsection{Title-Abstract Eligibility Assessment}
+\label{sec:title-abstract-sceening}
+
+Screening of database records was performed using two separate LLM calls, one for the inclusion criteria and another for the exclusion criteria. We tailored two prompts for screening against these criteria. In the inclusion criteria prompt, we asked the model to determine which inclusion criteria (I1--I4) were satisfied, while the exclusion criteria prompt asked which exclusion criteria (E1--E3) applied. In both tasks, the model was asked to respond only in yes/no format, with no explanation for its judgment, and responses were obtained in JSON \footnote{https://www.json.org/json-en.html} format. An article was selected for full-text review only if it satisfied all inclusion criteria and met none of the exclusion criteria. Both of the prompts are available in Appendix~\ref{appendix:screening_prompts}.
+
+
+
+\subsubsection{Validation of the Screening Pipeline}
+\label{sec:validation}
+
+We validated the LLM screening decisions against a human-annotated sample stratified by the pipeline decision. All records \edit{labeled} INCLUDE were reviewed, because each of them changes the review corpus. From the records \edit{labeled} EXCLUDE, we drew a random sample whose size was set by Cochran's formula for a proportion with a finite-population correction~\cite{cochran1977sampling},
+\begin{equation}
+n_0 = \frac{Z^2\,p(1-p)}{e^2}, \qquad n = \frac{n_0}{1 + \dfrac{n_0-1}{N}},
+\end{equation}
+where $N$ is the number of excluded records, $Z=1.96$, $p=0.5$ (maximum variance) and $e=0.05$.
+
+Two reviewers, an interventional radiologist and a biomedical AI researcher, \edit{independently screened the title and abstract of every sampled record against the same criteria.} Both of the reviewers had at least 5 years of research experience in their respective fields. If they were unsure about a particular record, the full text of that record was reviewed. We measured the reviewer agreement with Cohen's $\kappa$ \cite{kvaalseth1989note} and resolved disagreements by discussion. The consensus labels formed the gold standard, which served both to evaluate the pipeline and as the final eligibility decision for every sampled record\edit{. Because all LLM-eligible records were sampled, both reviewers checked every record that entered full-text review.}
+
+
+
+\subsection{Recurrent Theme Extraction}
+We retrieved the full text of all eligible articles and identified research gaps by combining topic modeling with an analysis of each study's stated limitations and future work. We applied Latent Dirichlet Allocation (LDA) \cite{blei2003latent} to the limitations and future work sections of the reviewed studies to identify recurring themes across the included studies. Text preprocessing involved i) lowercasing the text; ii) removing irrelevant content, such as URLs, HTML tags, and reference lists; iii) tokenizing the text into words and removing stop words, such as ``the,'' ``and,'' and ``of''; and iv) lemmatizing words \cite{khyani2021interpretation} to their base \edit{forms, for} example, ``models'' $\rightarrow$ ``model'', ``sequences'' $\rightarrow$ ``sequence.'' Documents were represented using a document--term matrix with bigram features. Next, the number of topics (K) was selected by comparing candidate values from 5 to 20 using the C\_v coherence score~\cite{roder2015exploring}, as in prior topic-model-based systematic reviews~\cite{ogunleye2024systematic}, supplemented by manual assessment of topic interpretability and redundancy. The model used symmetric document--topic and topic--word priors of 1/K each and was trained using Gensim \cite{rehurek2010gensim} with 20 passes, a maximum of 100 iterations per document, and a random seed of 42. \edit{The} \edit{gap framework was built in three steps. First, LDA surfaced recurring topics. Second, one reviewer (a biomedical AI researcher)} interpreted \edit{each} \edit{topic} \edit{from its} 10 highest-weighted terms and representative \edit{studies} and \edit{wrote} the \edit{gap} \edit{definitions, merging topics that described the same problem} and \edit{splitting topics that mixed several;} a \edit{second} \edit{reviewer} \edit{(an} \edit{interventional} \edit{radiologist)} \edit{checked} and \edit{validated} \edit{the} \edit{definitions,} \edit{and} \edit{the} \edit{concerns} raised by the second reviewer were resolved by discussion with the first. Third, the fixed gap definitions (G1--G12) were applied to every included study during data extraction (Section~\ref{sec:full-text-screening}). Supplementary Table~S3 contains the details about the correspondence between topics and gaps. The topics were only a starting point; the gaps themselves result from this careful two-reviewer curation.
+
+\subsection{Data Extraction}
+\label{sec:full-text-screening}
+We extracted analysis data in a structured format with the help of a reasoning model with high reasoning effort (\texttt{Claude Opus 5.5}). The particular model was selected because it was the most capable model available to us through the institutional Amazon Bedrock platform at the time of extraction. Claude Opus 5.5, released by Anthropic in September 2026, is described by its developer as its strongest Opus model, performing at the level of its frontier model on most work~\cite{anthropic2026opus55}. The use of state-of-the-art (SOTA) commercial models for this purpose has precedent in systematic reviews and meta-analyses \cite{konet2024extraction,khan2025collaborative,reason2024automation}. Each article was processed in a fresh model context holding only the extraction instructions to ensure no information carried over between articles. The extraction schema (provided in Appendix~\ref{appendix:extraction_schema}) covers bibliographic data, imaging modality \& anatomical territory, dataset, tasks, architecture, the temporal-modeling category of the proposed method (Table~\ref{tab:temporal_taxonomy}), validation design, reported metrics, reproducibility, clinical validation, the status of each manually curated research gap, and the 44 items of the CLAIM 2024 checklist~\cite{Tejani2024} \edit{(Table~\ref{tab:claim2024_temporal}). For each gap, the model recorded whether the article documents the gap (states it as a limitation, a motivation or a direction for future work), addresses it with the proposed method, both, or neither, together with a verbatim quote. The evidence count of a gap is the number of studies coded as documenting it; it counts studies that report the problem, not studies that demonstrate it experimentally.}
+
+% Each temporal category and gap assignment had to be backed by a verbatim quote from the article. Every output was validated against the schema, every quote was checked against the article text, and failing outputs were corrected before acceptance. We piloted the protocol on five articles of different types before the full run.
+
+To estimate extraction accuracy, two reviewers independently checked every extracted value of a random sample of studies against the full text and marked each value either correct or incorrect.
+
+\subsection{Statistical Analysis}
+\label{sec:stats-methods}
+We summarized study characteristics using frequencies and percentages, and reporting completeness against the CLAIM 2024 checklist~\cite{Tejani2024} using proportions with Wilson 95\% confidence intervals~\cite{wilson1927probable}. To assess differences in reporting between publication periods, we compared studies published up to 2024 with those published from 2025 onward. We split at 2025 because the CLAIM 2024 update was published in 2024~\cite{Tejani2024}, so studies from 2025 onward could have followed the updated checklist. We used the comparison as an early check of whether the most recent literature shows any shift toward the updated checklist; a null result indicates that uptake, if any, is not yet visible. We summarized the 44 items within the 14 subsections of the official checklist (e.g., Data, items 7--13); a subsection counts as reported when at least half of its applicable items are reported. The comparison used a two-sided Fisher's exact test for each subsection~\cite{fisher1922interpretation}, with Holm correction for multiple comparisons across subsections~\cite{holm1979simple}.
+
+To characterize overlap between task categories, we computed the Tanimoto distance between the sets of studies assigned to each pair of categories, considering both primary and secondary tasks~\cite{rogers1960tanimoto}. We then performed hierarchical clustering using average linkage, also known as the unweighted pair-group method with arithmetic mean (UPGMA)~\cite{sokal1958statistical}. This analysis summarizes relationships based on shared study membership, conceptually related to co-occurrence-based bibliometric mapping~\cite{vaneck2010software}.
+
+Reported performance metrics were summarized using histograms. Because datasets, validation protocols, and evaluation metrics differed substantially across studies, we did not perform a meta-analysis. 

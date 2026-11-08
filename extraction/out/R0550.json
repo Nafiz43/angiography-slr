@@ -1,0 +1,139 @@
+{
+  "record_id": "R0550",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Stent-RD-UNet: A Deep Learning Network for Real-Time Pose Estimation and Tracking of Aortic Stents in Image-Assisted Interventions",
+    "year": 2026,
+    "venue": "Vascular Health",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA_and_fluoroscopy",
+    "modality_detail": "Intraoperative DSA/X-ray fluoroscopy videos during EVAR/TEVAR, exported as AVI segments at 1,920 x 1,080",
+    "territory": "aortic_thoracic",
+    "territory_detail": "Abdominal and thoracic aorta (EVAR/TEVAR stent grafts and delivery systems)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "AVI segments of approximately 8 min (delivery) and 4 min (retrieval)",
+    "vendors": ["GE Healthcare (Innova IGS 630)"]
+  },
+  "dataset": {
+    "n_patients": 60,
+    "n_sequences": 60,
+    "n_images_or_frames": 36418,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": "Not publicly available; may be obtained from the authors upon reasonable request"},
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "experienced vascular surgeons",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "catheter_device_tracking",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Keypoint/skeleton-based pose estimation and frame-by-frame tracking of bifurcation stents, straight stents and delivery systems in intraoperative fluoroscopy/DSA, compared against UNet-based device segmentation.",
+    "clinical_application": "Real-time intraoperative guidance of stent graft delivery, deployment and retrieval during EVAR/TEVAR"
+  },
+  "method": {
+    "architecture_names": ["Stent-RD-UNet", "UNet", "RDFF (Residual Dense Feature Fusion)"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "The network takes an input fluoroscopy frame",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "CE Dice", "family": "dice", "value_raw": "0.94", "value_0_100": 94.0, "split": "cross_validation", "task": "pose estimation BS"},
+      {"metric": "CE Dice", "family": "dice", "value_raw": "0.95", "value_0_100": 95.0, "split": "cross_validation", "task": "pose estimation SS"},
+      {"metric": "CE Dice", "family": "dice", "value_raw": "0.94", "value_0_100": 94.0, "split": "cross_validation", "task": "pose estimation DS"},
+      {"metric": "OKS", "family": "other", "value_raw": "0.96 ± 0.17", "value_0_100": null, "split": "cross_validation", "task": "pose estimation BS"},
+      {"metric": "OKS", "family": "other", "value_raw": "0.90 ± 0.05", "value_0_100": null, "split": "cross_validation", "task": "pose estimation SS"},
+      {"metric": "OKS", "family": "other", "value_raw": "0.91 ± 0.14", "value_0_100": null, "split": "cross_validation", "task": "pose estimation DS"},
+      {"metric": "HD95 (edge) px", "family": "error_distance", "value_raw": "4.2 ± 1.6", "value_0_100": null, "split": "cross_validation", "task": "pose estimation BS"},
+      {"metric": "HD95 (edge) px", "family": "error_distance", "value_raw": "3.9 ± 1.6", "value_0_100": null, "split": "cross_validation", "task": "pose estimation SS"},
+      {"metric": "HD95 (edge) px", "family": "error_distance", "value_raw": "3.7 ± 1.5", "value_0_100": null, "split": "cross_validation", "task": "pose estimation DS"},
+      {"metric": "HD95 (skeleton) px", "family": "error_distance", "value_raw": "3.4 ± 1.4", "value_0_100": null, "split": "cross_validation", "task": "pose estimation BS"},
+      {"metric": "HD95 (skeleton) px", "family": "error_distance", "value_raw": "3.3 ± 1.4", "value_0_100": null, "split": "cross_validation", "task": "pose estimation SS"},
+      {"metric": "HD95 (skeleton) px", "family": "error_distance", "value_raw": "3.1 ± 1.3", "value_0_100": null, "split": "cross_validation", "task": "pose estimation DS"},
+      {"metric": "mFPS", "family": "time", "value_raw": "22.79", "value_0_100": null, "split": "cross_validation", "task": "pose estimation BS"},
+      {"metric": "mFPS", "family": "time", "value_raw": "20.93", "value_0_100": null, "split": "cross_validation", "task": "pose estimation SS"},
+      {"metric": "mFPS", "family": "time", "value_raw": "22.76", "value_0_100": null, "split": "cross_validation", "task": "pose estimation DS"},
+      {"metric": "Detection rate (DR)", "family": "other", "value_raw": "95.28%", "value_0_100": null, "split": "cross_validation", "task": "pose estimation BS"},
+      {"metric": "Detection rate (DR)", "family": "other", "value_raw": "97.88%", "value_0_100": null, "split": "cross_validation", "task": "pose estimation SS"},
+      {"metric": "Detection rate (DR)", "family": "other", "value_raw": "99.79%", "value_0_100": null, "split": "cross_validation", "task": "pose estimation DS"}
+    ],
+    "comparators": ["UNet-seg", "UNet+M1 (segmentation)", "UNet+M1+M2+M3 (segmentation)", "UNet-pose", "UNet+M1 (pose)", "UNet+M1+M2+M3 (pose)", "ResNet50"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "Comparable DSA device datasets are not publicly available", "section": "methods"},
+    "G2": {"status": "documents", "quote": "This study was conducted on a single-center dataset acquired using one fluoroscopy/DSA system", "section": "discussion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "documents", "quote": "changes in C-arm projection angles that alter apparent device shape and visibility", "section": "introduction"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Extreme position changes and severe occlusions remain dominant failure sources",
+    "Extreme projection angles excluded from evaluation",
+    "Runtime measured on a single GPU; per-frame latency limiting for high-frame-rate protocols"
+  ],
+  "future_work": [
+    "Expand data diversity across centers and devices",
+    "Validate robustness in broader clinical settings",
+    "Targeted augmentation for robustness",
+    "ROI-based inference, mixed-precision execution and lightweight variants for deployment"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyynynnyyynynynnynyyyynnynynnnynynyynyy"
+  }
+}

@@ -1,0 +1,17 @@
+{"record_id": "R4699",
+ "items": {
+  "6": {"answer": "yes", "quote": "We take the lead in proposing an efficient and accurate approach to segment dual-guidewire in 2D X-ray images", "section": "introduction"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "we first determine the area where the guidewire is located and enlarge the image of the area through the bounding box. Then we mark some points on the guidewire and fit a spline by these points.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The patient data of the training set is independent of the test set.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "we implemented our model on PyTorch.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "weighing factor _α_ and modulating factor _γ_ are 100 and 2.5 respectively, and the model has the optimal performance", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "precision is 0.919, recall is 0.946, _F_ 1-score reaches 0.932", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

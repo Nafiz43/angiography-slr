@@ -1,0 +1,17 @@
+{"record_id": "R4683",
+ "items": {
+  "6": {"answer": "yes", "quote": "The aim of this project was to test the feasibility of using Deep Neural Networks (DNN) to classify intracranial aneurysms as treated or un-treated", "section": "conclusion"},
+  "9": {"answer": "yes", "quote": "To account for this variability and to normalize the API values for each patient, each API parameter value in the aneurysm is divided by the API parameter value in the vessel entering the aneurysm.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Regions of Interest (ROI) were selected on the aneurysm as well as the input main vessel.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "yes", "quote": "A split of 70% of data for training and 30% of data for testing the trained model was used.[10 ]", "section": "methods"},
+  "23": {"answer": "yes", "quote": "All models were created using Keras[11] which is Google’s (Google LLC, Menlo Park CA) python machine learning framework and a backend to TensorFlow[12] .", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The DNN had an accuracy and ROC AUC of 72.4% and 0.80 respectively on un-normalized coiled data, 87.9% and 0.95 respectively on normalized coiled data", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "ROCs were generated to compare performance of the 3 different classifiers on classifying both normalized and un-normalized datasets.", "section": "methods"}
+ }}

@@ -1,0 +1,75 @@
+{
+ "record_id": "R4220",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "We established a dataset for video frame insertion and tested and verified the feasibility of frame insertion in different ways.",
+   "section": "introduction"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "we preprocessed the recorded videos to remove duplicate video",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "Every three coronary angiography images were used as a group, and 1000 groups of data were selected.",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "the ground truth is the actual middle frame",
+   "section": "results"
+  },
+  "20": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "Table 2 shows a comparison of PSNRs and SSIM values of different interpolation methods applied on the coronary angiography test dataset.",
+   "section": "discussion"
+  },
+  "38": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  }
+ }
+}

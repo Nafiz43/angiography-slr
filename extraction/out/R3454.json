@@ -1,0 +1,132 @@
+{
+ "record_id": "R3454",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Optical flow estimation of coronary angiography sequences based on semi-supervised learning",
+  "year": 2022,
+  "venue": "Computers in Biology and Medicine",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "Coronary angiography sequences referred to by the authors as DSA image sequences",
+  "territory": "cardiac",
+  "territory_detail": "Coronary arteries",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "30-62 frames (Test-DSA sequences, 7.5-15 fps)",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 71,
+  "n_sequences": 71,
+  "n_images_or_frames": null,
+  "n_centers": null,
+  "n_vendors": null,
+  "data_origin": "clinical_plus_synthetic",
+  "public_dataset_used": {"value": true, "detail": "FlyingThings (pre-training of RAFT teacher model)"},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "sequence",
+  "annotation": {
+   "type": "weak_or_derived",
+   "n_annotators": null,
+   "annotator_expertise": null,
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "motion_correction_registration",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Dense optical flow estimation between adjacent coronary angiography frames using a semi-supervised teacher-student RAFT scheme with vessel-enhanced pseudo-labels and a synthetic Flying-artery dataset.",
+  "clinical_application": "Motion/deformation estimation in coronary angiography to support registration, segmentation, reconstruction and diagnosis of cardiac disease"
+ },
+ "method": {
+  "architecture_names": ["RAFT", "Semi-RAFT", "Syn-RAFT", "Hybrid-RAFT"],
+  "architecture_family": "other",
+  "temporal_category": "optical_flow_registration",
+  "temporal_evidence": {"quote": "the feature encoder extracts the feature maps of two adjacent frames", "section": "methods"},
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "semi_supervised",
+  "pretraining": "RAFT pre-trained on FlyingThings",
+  "uses_synthetic_training_data": true,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "AEPE", "family": "error_distance", "value_raw": "1.5977", "value_0_100": null, "split": "test", "task": "optical flow, Hybrid-RAFT, Original-DSA test"},
+   {"metric": "F1-all (outlier %)", "family": "other", "value_raw": "9.9%", "value_0_100": null, "split": "test", "task": "optical flow, Hybrid-RAFT, Original-DSA test"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.7511", "value_0_100": 75.11, "split": "test", "task": "optical flow, Hybrid-RAFT, Original-DSA test"},
+   {"metric": "AEPEV", "family": "error_distance", "value_raw": "5.9740", "value_0_100": null, "split": "test", "task": "optical flow, Hybrid-RAFT, Original-DSA test"},
+   {"metric": "AEPE", "family": "error_distance", "value_raw": "1.6025", "value_0_100": null, "split": "test", "task": "optical flow, Semi-RAFT, Original-DSA test"},
+   {"metric": "F1-all (outlier %)", "family": "other", "value_raw": "11.0%", "value_0_100": null, "split": "test", "task": "optical flow, Semi-RAFT, Original-DSA test"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.7339", "value_0_100": 73.39, "split": "test", "task": "optical flow, Semi-RAFT, Original-DSA test"},
+   {"metric": "AEPEV", "family": "error_distance", "value_raw": "4.9037", "value_0_100": null, "split": "test", "task": "optical flow, Semi-RAFT, Original-DSA test"},
+   {"metric": "AEPE", "family": "error_distance", "value_raw": "0.9796", "value_0_100": null, "split": "test", "task": "optical flow, Syn-RAFT, Flying-artery test"},
+   {"metric": "F1-all (outlier %)", "family": "other", "value_raw": "3.3%", "value_0_100": null, "split": "test", "task": "optical flow, Syn-RAFT, Flying-artery test"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.7980", "value_0_100": 79.8, "split": "test", "task": "optical flow, Syn-RAFT, Flying-artery test"},
+   {"metric": "AEPEV", "family": "error_distance", "value_raw": "2.9311", "value_0_100": null, "split": "test", "task": "optical flow, Syn-RAFT, Flying-artery test"},
+   {"metric": "AEPE", "family": "error_distance", "value_raw": "1.0224", "value_0_100": null, "split": "test", "task": "optical flow, Hybrid-RAFT, Flying-artery test"},
+   {"metric": "F1-all (outlier %)", "family": "other", "value_raw": "3.4%", "value_0_100": null, "split": "test", "task": "optical flow, Hybrid-RAFT, Flying-artery test"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.7950", "value_0_100": 79.5, "split": "test", "task": "optical flow, Hybrid-RAFT, Flying-artery test"},
+   {"metric": "AEPEV", "family": "error_distance", "value_raw": "3.1815", "value_0_100": null, "split": "test", "task": "optical flow, Hybrid-RAFT, Flying-artery test"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.8101", "value_0_100": 81.01, "split": "test", "task": "optical flow, Hybrid-RAFT, Test-DSA VC1"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.7635", "value_0_100": 76.35, "split": "test", "task": "optical flow, Hybrid-RAFT, Test-DSA VC2"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.7193", "value_0_100": 71.93, "split": "test", "task": "optical flow, Hybrid-RAFT, Test-DSA VC3"},
+   {"metric": "DSC", "family": "dice", "value_raw": "0.8454", "value_0_100": 84.54, "split": "test", "task": "optical flow, Hybrid-RAFT, Test-DSA VC4"}
+  ],
+  "comparators": ["DDFlow", "ARFlow", "FlowNet", "PWCNet", "PWC+IRR", "RAFT (pre-trained)"],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "the lack of medical image optical flow datasets is very important", "section": "introduction"},
+  "G2": {"status": "both", "quote": "directly applying models trained on existing synthetic datasets to medical image sequences does not perform well", "section": "introduction"},
+  "G3": {"status": "none", "quote": null, "section": null},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "both", "quote": "Since our dataset lacks the ground truth of optical flow", "section": "introduction"},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Real-DSA metrics computed against teacher-derived pseudo flow, which may deviate from true flow",
+  "Synthetic Flying-artery distribution differs from real DSA frames"
+ ],
+ "future_work": [
+  "Apply semi-supervised and data synthesis methods to other medical image sequences such as cardiac MRI or echocardiography"
+ ],
+ "claim2024": {"items": "ynyyynnnnnnnnynnyynnnyyyyyynnynynnnynnnnynnn"}
+}

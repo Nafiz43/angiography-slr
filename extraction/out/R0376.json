@@ -1,0 +1,202 @@
+{
+  "record_id": "R0376",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Machine learning-enabled prediction of hemorrhagic transformation post-thrombectomy using quantitative DSA",
+    "year": 2026,
+    "venue": "Scientific reports",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Quantitative DSA (qDSA); immediate post-thrombectomy anteroposterior and lateral angiograms after ICA injection (4 mL/s, 6 mL), 4 frames per second",
+    "territory": "neurologic",
+    "territory_detail": "Anterior circulation (ICA C2/C7, MCA M1/M3, ACA A1) after mechanical thrombectomy for large-vessel occlusion",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": 4,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 171,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Two neuroradiologists with >5 years of interventional experience (ROI placement), third senior neuroradiologist (>10 years) for consensus; HT labels from 6-hour post-MT CT",
+      "inter_rater_reported": true,
+      "inter_rater_value": "ICC > 0.75 for TDC-derived features; inter-observer discrepancies in <=3% of cases"
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Prediction of hemorrhagic transformation after mechanical thrombectomy using hemodynamic features (TTP, MTT, FWHM, WIS, WOS, stasis index) derived from gamma-variate-fitted time-density curves of post-procedural DSA, alone and combined with clinical features, using feature selection and classical machine learning classifiers.",
+    "clinical_application": "Early risk stratification for post-thrombectomy hemorrhagic transformation in acute ischemic stroke to guide blood pressure, antiplatelet management and follow-up CT"
+  },
+  "method": {
+    "architecture_names": [
+      "XGBoost",
+      "AdaBoost",
+      "Random forest",
+      "Logistic regression",
+      "Support vector machine",
+      "Elastic-LogisticRegression",
+      "Relief",
+      "ElasticNet",
+      "DecisionTree",
+      "Lasso-regression",
+      "Mutual-Information"
+    ],
+    "architecture_family": "classical_ml",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "a time-density curve (TDC) was generated from the data within these regions. The TDC was then fitted using a gamma variate function",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": [
+      "clinical baseline data",
+      "interventional procedural information"
+    ],
+    "class_imbalance_handling": "Stratified train/test splitting (StratifiedShuffleSplit) preserving class proportions",
+    "uncertainty_quantification": false,
+    "explainability_method": "SHAP",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUC", "family": "auc", "value_raw": "0.81", "value_0_100": 81.0, "split": "test", "task": "HT prediction, qDSA features only (Elastic-LogisticRegression)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.74", "value_0_100": 74.0, "split": "test", "task": "HT prediction, qDSA features only (Elastic-LogisticRegression)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.80", "value_0_100": 80.0, "split": "test", "task": "HT prediction, qDSA features only (Elastic-LogisticRegression)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.71", "value_0_100": 71.0, "split": "test", "task": "HT prediction, qDSA features only (Elastic-LogisticRegression)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.65", "value_0_100": 65.0, "split": "test", "task": "HT prediction, qDSA features only (Elastic-LogisticRegression)"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.86", "value_0_100": null, "split": "test", "task": "HT prediction, qDSA features only (Elastic-LogisticRegression)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.71", "value_0_100": 71.0, "split": "test", "task": "HT prediction, qDSA features only (Elastic-LogisticRegression)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.86", "value_0_100": 86.0, "split": "test", "task": "HT prediction, qDSA + clinical features (Elastic-LogisticRegression)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.72", "value_0_100": 72.0, "split": "test", "task": "HT prediction, qDSA + clinical features (Elastic-LogisticRegression)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.88", "value_0_100": 88.0, "split": "test", "task": "HT prediction, qDSA + clinical features (Elastic-LogisticRegression)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.62", "value_0_100": 62.0, "split": "test", "task": "HT prediction, qDSA + clinical features (Elastic-LogisticRegression)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "0.60", "value_0_100": 60.0, "split": "test", "task": "HT prediction, qDSA + clinical features (Elastic-LogisticRegression)"},
+      {"metric": "NPV", "family": "other", "value_raw": "0.92", "value_0_100": null, "split": "test", "task": "HT prediction, qDSA + clinical features (Elastic-LogisticRegression)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.71", "value_0_100": 71.0, "split": "test", "task": "HT prediction, qDSA + clinical features (Elastic-LogisticRegression)"}
+    ],
+    "comparators": [
+      "Clinical-only multivariate logistic regression (age, NIHSS, thrombectomy attempts)",
+      "XGBoost",
+      "AdaBoost",
+      "Random forest",
+      "SVM",
+      "Relief feature selector",
+      "Lasso feature selector",
+      "DecisionTree feature selector",
+      "Mutual-Information feature selector",
+      "Most frequently selected qDSA features"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "Future multi-center studies with larger sample sizes are needed to validate the predictive performance of our models.",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "the retrospective design and single-center nature of the study may limit the generalizability of our findings.",
+      "section": "discussion"
+    },
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {
+      "status": "documents",
+      "quote": "Firstly, the retrospective design and single-center nature of the study may limit the generalizability of our findings.",
+      "section": "discussion"
+    },
+    "G7": {
+      "status": "addresses",
+      "quote": "SHapley Additive exPlanations (SHAP) were used for model interpretation.",
+      "section": "abstract"
+    },
+    "G8": {
+      "status": "addresses",
+      "quote": "By integrating clinical and hemodynamic features, machine learning algorithms can be effectively utilized to construct a preliminary predictive model for post-thrombectomy HT",
+      "section": "abstract"
+    },
+    "G9": {
+      "status": "documents",
+      "quote": "In our study, there were relatively few cases with eTICI grade 2b, while most were grade 2C or 3.",
+      "section": "discussion"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {
+      "status": "addresses",
+      "quote": "This study aims to construct a predictive model for post-thrombectomy hemorrhagic transformation (HT) by integrating hemodynamic features derived from quantitative DSA (qDSA) with machine learning models.",
+      "section": "abstract"
+    },
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "No subgroup analysis by eTICI grade",
+    "Patients with large-area infarction or cerebral herniation excluded",
+    "Statistical bias from p < 0.1 threshold in univariate clinical feature selection"
+  ],
+  "future_work": [
+    "Multi-center validation with larger sample sizes",
+    "External data validation",
+    "Subgroup analyses and separate models by eTICI grade",
+    "Three-category study including large infarction and herniation outcomes",
+    "Study of postoperative blood pressure control in high-risk patients"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyynyyyyyyynnyyaayyyynyyynynyynnyyyny"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "record_id": "R1609",
+  "schema_version": "2.0",
+  "study": {
+    "title": "DSA-NRP: No-Reflow Prediction from Angiographic Perfusion Dynamics in Stroke EVT",
+    "year": 2025,
+    "venue": "arXiv.org",
+    "publication_type": "preprint",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Intra-procedural pre- and post-EVT DSA sequences, grayscale 1024x1024, ~6 s at 3 fps, AP and lateral views",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral; M1 MCA / ICA large-vessel occlusion acute ischemic stroke, target downstream territory",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": 3,
+    "frames_per_sequence": "~6 seconds at 3 fps; analysis truncated to first 5 s after contrast onset; RAW vectors fixed at L = 15 frames",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 39,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "BRATS21 (pretraining) and ISLES 2022 (fine-tuning) used only for the DWI U-Net infarct ROI model in label generation"
+    },
+    "data_released": {
+      "value": null,
+      "detail": "Annotation GUI released (github.com/cao826/dsa-annotations); data release not stated"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "weak_or_derived",
+      "n_annotators": 3,
+      "annotator_expertise": "Expert interventional radiologist marked thrombus/series; two graduate students annotated TDT under IR supervision; no-reflow labels derived automatically from MRI perfusion (rCBV/rCBF >15% reduction)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary prediction of post-thrombectomy no-reflow from time-intensity perfusion features of pre/post-EVT DSA in the target downstream territory, combined with clinical features, using gradient boosting.",
+    "clinical_application": "Immediate intra-procedural identification of no-reflow risk after successful EVT for acute ischemic stroke, avoiding wait for follow-up perfusion MRI"
+  },
+  "method": {
+    "architecture_names": ["gradient boosting classifier", "random forest", "support vector classifier", "multi-layer perceptron", "U-Net (DWI infarct ROI for label generation)"],
+    "architecture_family": "classical_ml",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "mean pixel intensity within the TDT was computed, converting 3D spatio-temporal data into a 1D time-series signal",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": ["clinical variables (age, sex, final mTICI)"],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": "Feature importance analysis",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.9330", "value_0_100": 93.3, "split": "cross_validation", "task": "no-reflow prediction (CLN+TSF+RAW ensemble)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.9231", "value_0_100": 92.31, "split": "cross_validation", "task": "no-reflow prediction (CLN+TSF+RAW ensemble)"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "1.0000", "value_0_100": 100.0, "split": "cross_validation", "task": "no-reflow prediction (CLN+TSF+RAW ensemble)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.9063", "value_0_100": 90.63, "split": "cross_validation", "task": "no-reflow prediction (CLN+TSF+RAW ensemble)"},
+      {"metric": "F1 score", "family": "f1", "value_raw": "0.8235", "value_0_100": 82.35, "split": "cross_validation", "task": "no-reflow prediction (CLN+TSF+RAW ensemble)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.7000", "value_0_100": 70.0, "split": "cross_validation", "task": "no-reflow prediction (CLN+TSF+RAW ensemble)"},
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.9152", "value_0_100": 91.52, "split": "cross_validation", "task": "no-reflow prediction (RAW, ensemble views)"},
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.9018", "value_0_100": 90.18, "split": "cross_validation", "task": "no-reflow prediction (TSF, lateral view)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.8974", "value_0_100": 89.74, "split": "cross_validation", "task": "no-reflow prediction (TSF, lateral view)"},
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.9571", "value_0_100": 95.71, "split": "cross_validation", "task": "no-reflow prediction, subgroup mTICI 2c (CLN+TSF+RAW)"},
+      {"metric": "AUROC", "family": "auc", "value_raw": "0.8889", "value_0_100": 88.89, "split": "cross_validation", "task": "no-reflow prediction, subgroup mTICI 3 (CLN+TSF+RAW)"}
+    ],
+    "comparators": ["Clinical-features baseline (CLN: age, sex, mTICI)", "random forest", "support vector classifier", "multi-layer perceptron"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://github.com/ShreeramAthreya/DSA_NRP"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "The primary limitation is the relatively small cohort size of 39 patients from a single academic medical center", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "these findings should be interpreted as preliminary and require validation in larger, multi-center cohorts", "section": "discussion"},
+    "G3": {"status": "addresses", "quote": "all further analyses used the full frame-by-frame DSA data to preserve temporal perfusion dynamics", "section": "methods"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "addresses", "quote": "the first ML framework to predict post-thrombectomy no-reflow using structured, interpretable features derived from intra-procedural DSA sequences", "section": "introduction"},
+    "G8": {"status": "both", "quote": "Future work incorporating CT-based imaging and procedural metadata may improve generalizability and model robustness", "section": "discussion"},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "addresses", "quote": "a pilot machine learning framework that predicts no-reflow immediately after EVT by integrating clinical features with intra-procedural DSA sequences", "section": "introduction"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Restricted to M1/ICA occlusions; distal M2 would need modified TDT annotation",
+    "Possible selection bias from requiring pre- and post-procedure MRI",
+    "Biological significance of identified predictors not definitively established",
+    "Risk of overfitting and limited statistical power"
+  ],
+  "future_work": [
+    "Validation in larger, multi-center cohorts",
+    "Extension to distal segments such as M2 branches",
+    "Incorporating CT-based imaging and procedural metadata",
+    "Prospective automation of manual annotation steps",
+    "Real-time deployment in the angiography suite"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyynyyyynyynnyyaayayynyyynynyyyyyyyyy"
+  }
+}

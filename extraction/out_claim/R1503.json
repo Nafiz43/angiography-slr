@@ -1,0 +1,17 @@
+{"record_id": "R1503",
+ "items": {
+  "6": {"answer": "yes", "quote": "We explored multidimensional features to construct predictive models for assessing the hemorrhage risk of AVMs by employing various machine and ensemble learning methods.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "A fast Fourier transform (FFT) algorithm was used for this fitting, which was calculated using the sum of the cosine terms. Frequency components with low power spectral densities were zeroed out", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For each patient, the DSA sequence that demonstrated the entire nidus was selected for the extraction of the hemodynamic features.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "The main exclusion criteria were as follows: (1) Previously treated AVMs, (2) Poor image quality, (3) Missing critical baseline information", "section": "methods"},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "During the follow- up period, subsequent ruptures were confirmed by signs of hemorrhage on CT, with no other probable causes identified.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "Patients who met the criteria were randomly divided into training and test datasets.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "yes", "quote": "An ensemble model was constructed using a weighted softvoting strategy that predicted outcomes based on the probabilities calculated from the individual models. Voting weights were assigned based on the area under the curve (AUC)", "section": "methods"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "achieved an area under the curve of 0.880 (0.824–0.937) on the test dataset and 0.864 (0.769–0.959) on the independent validation dataset.", "section": "abstract"},
+  "38": {"answer": "yes", "quote": "achieved an area under the curve of 0.880 (0.824–0.937) on the test dataset and 0.864 (0.769–0.959) on the independent validation dataset.", "section": "abstract"}
+ }}

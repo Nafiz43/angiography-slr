@@ -1,0 +1,17 @@
+{"record_id": "R3469",
+ "items": {
+  "6": {"answer": "yes", "quote": "We performed a retrospective study based on the single-center DSA data of thrombectomy patients.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "the images were normalized and uniformly resized to 512 × 512 pixel", "section": "methods"},
+  "10": {"answer": "yes", "quote": "DSA sequences visualizing only the perfusion of either the vertebral arteries ( _n_ = 103) or the external carotid artery ( _n_ = 18) were excluded, as well.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "we excluded DSA sequences, when not both the PA and the LAT sequence were available", "section": "methods"},
+  "15": {"answer": "yes", "quote": "this is related to the high interobserver variability of the thrombus position annotation, which was 23 ± 28 image pixels", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "were annotated by two experienced neuroradiologists. For each thrombus, they were asked to mark the proximal thrombus ending.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "PyTorch served as deep learning library.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "we chose it as decision criterion during training and saved the model checkpoint, which achieved the highest MCC on the validation data.", "section": "methods"},
+  "27": {"answer": "yes", "quote": "achieved based on a paired classification by equally ensembling four different network variants, two for each view.", "section": "results"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The best classification performance with MCC|AUC values of up to 0.77|0.94 and 0.69|0.91 for test data set 1 and 2, respectively", "section": "results"},
+  "38": {"answer": "yes", "quote": "Figure 5 shows the receiver operating characteristics (ROC) curves of selected network variants.", "section": "results"}
+ }}

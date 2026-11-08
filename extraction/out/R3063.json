@@ -1,0 +1,115 @@
+{
+  "record_id": "R3063",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Jigsaw training-based background reverse attention transformer network for guidewire segmentation",
+    "year": 2023,
+    "venue": "International Journal of Computer Assisted Radiology and Surgery",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Intraoperative X-ray fluoroscopy sequences during percutaneous coronary intervention",
+    "territory": "cardiac",
+    "territory_detail": "Coronary (PCI guidewires)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 23,
+    "n_sequences": 75,
+    "n_images_or_frames": 9266,
+    "n_centers": 3,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": "Private dataset from three hospitals; authors state no public guidewire datasets exist"},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "catheter_device_tracking",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Single and dual guidewire segmentation in X-ray fluoroscopy sequences using an RPCA background map, a background reverse attention module on a TransUNet backbone, and a jigsaw training strategy that merges single-guidewire images into dual-guidewire images. Single guidewire set: 75 sequences (9266 frames, 23 cases); additional 19 dual-guidewire sequences (1247 frames) used only for testing.",
+    "clinical_application": "Guidewire segmentation for percutaneous coronary intervention"
+  },
+  "method": {
+    "architecture_names": ["Jigsaw training-based background reverse attention (BRA) transformer network", "TransUNet", "ResNet-50", "RPCA"],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "the generated background map L and the current frame I are fed into the segmentation network to generate the guidewire segmentation result",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "ResNet-50 encoder pre-trained on ImageNet",
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Background reverse attention module to weaken background given foreground/background pixel imbalance; jigsaw strategy to compensate for scarce dual-guidewire data",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Mean F1 score (Table 2/4 ablation)", "family": "f1", "value_raw": "0.882", "value_0_100": 88.2, "split": "test", "task": "single guidewire segmentation"},
+      {"metric": "Mean F1 score (Table 5 comparison)", "family": "f1", "value_raw": "0.894", "value_0_100": 89.4, "split": "test", "task": "single guidewire segmentation"},
+      {"metric": "Mean precision", "family": "precision_ppv", "value_raw": "0.899", "value_0_100": 89.9, "split": "test", "task": "single guidewire segmentation"},
+      {"metric": "Mean F1 score", "family": "f1", "value_raw": "0.832", "value_0_100": 83.2, "split": "test", "task": "dual guidewire segmentation"},
+      {"metric": "Mean precision", "family": "precision_ppv", "value_raw": "0.846", "value_0_100": 84.6, "split": "test", "task": "dual guidewire segmentation"}
+    ],
+    "comparators": ["U-Net", "Attention U-Net", "Channel-attention U-Net", "TransUNet", "Zhou et al. 2019 dual-guidewire segmentation", "Pyramid attention recurrent network (Zhou et al. 2020)", "FRR-NET"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "No public guidewire datasets are available for training and testing guidewire detection and segmentation networks.", "section": "methods"},
+    "G2": {"status": "documents", "quote": "there is a gap between the generated dual guidewire and the dual guidewire in the real world", "section": "conclusion"},
+    "G3": {"status": "documents", "quote": "segmentations for the entire X-ray fluoroscopy guidewire sequence were generated by passing the frames of the sequence one by one through our network", "section": "conclusion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "addresses", "quote": "This step helps reduce the need for dual guidewire data and improve the performance of the network.", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "both", "quote": "The great imbalance between the number of foreground and background pixels makes it challenging to segment the guidewire. A background reverse attention (BRA) module is designed to weaken the influence of back-", "section": "introduction"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": ["Pre-computing the low-rank background before attention may reduce algorithm efficiency"],
+  "future_work": ["Collect more dual guidewire data", "Balance model efficiency and accuracy", "Make efficient use of temporal information in guidewire sequences"],
+  "claim2024": {"items": "yyyyynynnnnnnynnynyynyynyyynnnnynnnynynyynny"}
+}

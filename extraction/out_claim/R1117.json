@@ -1,0 +1,17 @@
+{"record_id": "R1117",
+ "items": {
+  "6": {"answer": "yes", "quote": "This study aims to develop and evaluate an integrated videobased deep learning framework for classifying coronary dominance without distinguishing between RCA and LCA angiograms.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "all angiographic frames were resized to a resolution of 224 _×_ 224 pixels.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Each video sequence was sampled at regular intervals based on its total frame count, with frames selected according to the structural requirements of each model.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "performed using the MMACTION2 (OpenMMLab) video processing framework, built upon the PyTorch (v2.5.1) deep learning library.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The training, validation, and test accuracy rates of the three deep learning models are presented in Table 6.", "section": "results"},
+  "38": {"answer": "yes", "quote": "The area under the curve (AUC) is 0.98, and with a high true positive rate across almost all false positive rates, the model demonstrates excellent discriminative power", "section": "results"}
+ }}

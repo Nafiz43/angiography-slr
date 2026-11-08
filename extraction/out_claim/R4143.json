@@ -1,0 +1,17 @@
+{"record_id": "R4143",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose a novel patient-specific deep-learning-based approach for DCR that uses only two types of X-ray images without using an electrocardiogram (ECG)", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "resize all images to 256 x 256 for training and validation", "section": "methods"},
+  "10": {"answer": "yes", "quote": "the angiographic sequence is the consecutive angiographic images that should include at least one heartbeat cycle and contain coronary arteries that are fully filled with contrast agent", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "However, these metrics (registration error in [5], and ICP error) may not properly indicate registration quality.", "section": "methods"},
+  "17": {"answer": "yes", "quote": "Therefore, 34 registered interventional DCR videos were evaluated by three cardiologists.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "the segmented real guidewire images from the live fluoroscopy were not included in the training and validation data", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Ubuntu 18.04 Lts, and TensorFlow 2.4.2", "section": "methods"},
+  "26": {"answer": "yes", "quote": "This vPSNR is then used as an early stopping criterion in the training process", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "For 34 DCR, the registration (ICP) error (1.06 ± 0.18 mm, median 1.05 mm) was comparable to the results of [5]", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

@@ -1,0 +1,150 @@
+{
+  "record_id": "R1251",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Linking sequence restoration capability of shuffled coronary angiography to coronary artery disease diagnosis",
+    "year": 2025,
+    "venue": "Scientific Reports",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive X-ray coronary angiography videos (RCA and LCA views, 512x512)",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (RCA from 3 angles, LCA from 6 angles)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "variable-length videos; 5 manually selected frames per question in the MTurk survey",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 353,
+    "n_sequences": 1936,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": false, "detail": "Available from the corresponding author on reasonable request"},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "attending physicians (SYNTAX score averaged across three)",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Self-supervised encoder-decoder GRU learns to restore shuffled frame order from dense optical flow of an effective zone; the restoration loss (DZL score) is used to classify CAD severity (SYNTAX score >= 23). A crowdsourced MTurk survey tests human sequence restoration on normal vs abnormal angiograms.",
+    "clinical_application": "CAD severity assessment and PCI vs CABG decision support during coronary angiography"
+  },
+  "method": {
+    "architecture_names": ["Disarranged Zone Learning (DZL)", "Encoder-Decoder GRU", "Farneback dense optical flow", "LSTM (alternative core)"],
+    "architecture_family": "recurrent",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "Through a GRU that generates its output and the hidden layer. The current hidden layer then acts as part of the next input.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "self_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUC (5-fold mean)", "family": "auc", "value_raw": "80.084 (72.926-85.869)", "value_0_100": 80.084, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "AUC median, fold 1", "family": "auc", "value_raw": "82.129 (70.312-91.216)", "value_0_100": 82.129, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "AUC median, fold 2", "family": "auc", "value_raw": "89.16 (76.953-98.438)", "value_0_100": 89.16, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "AUC median, fold 3", "family": "auc", "value_raw": "78.893 (67.128-89.451)", "value_0_100": 78.893, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "AUC median, fold 4", "family": "auc", "value_raw": "70.222 (55.331-82.222)", "value_0_100": 70.222, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "AUC median, fold 5", "family": "auc", "value_raw": "80.017 (67.904-90.052)", "value_0_100": 80.017, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Sensitivity, fold 1", "family": "sensitivity_recall", "value_raw": "100.0 (75.0-100.0)", "value_0_100": 100.0, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Sensitivity, fold 2", "family": "sensitivity_recall", "value_raw": "100.0 (100.0-100.0)", "value_0_100": 100.0, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Sensitivity, fold 3", "family": "sensitivity_recall", "value_raw": "100.0 (85.294-100.0)", "value_0_100": 100.0, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Sensitivity, fold 4", "family": "sensitivity_recall", "value_raw": "56.667 (40.0-100.0)", "value_0_100": 56.667, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Sensitivity, fold 5", "family": "sensitivity_recall", "value_raw": "76.471 (58.824-91.176)", "value_0_100": 76.471, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Specificity, fold 1", "family": "specificity", "value_raw": "68.75 (46.875-90.625)", "value_0_100": 68.75, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Specificity, fold 2", "family": "specificity", "value_raw": "87.5 (75.0-96.875)", "value_0_100": 87.5, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Specificity, fold 3", "family": "specificity", "value_raw": "64.706 (47.059-82.353)", "value_0_100": 64.706, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Specificity, fold 4", "family": "specificity", "value_raw": "93.333 (33.333-100.0)", "value_0_100": 93.333, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Specificity, fold 5", "family": "specificity", "value_raw": "88.235 (73.529-97.059)", "value_0_100": 88.235, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "PPV, fold 1", "family": "precision_ppv", "value_raw": "74.419 (65.306-88.889)", "value_0_100": 74.419, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "PPV, fold 2", "family": "precision_ppv", "value_raw": "88.889 (80.0-96.97)", "value_0_100": 88.889, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "PPV, fold 3", "family": "precision_ppv", "value_raw": "73.913 (65.385-82.937)", "value_0_100": 73.913, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "PPV, fold 4", "family": "precision_ppv", "value_raw": "89.474 (60.0-100.0)", "value_0_100": 89.474, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "PPV, fold 5", "family": "precision_ppv", "value_raw": "86.207 (74.194-96.552)", "value_0_100": 86.207, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "Sensitivity (overall, as reported in discussion)", "family": "sensitivity_recall", "value_raw": "87.89%", "value_0_100": 87.89, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "PPV (overall, as reported in discussion)", "family": "precision_ppv", "value_raw": "82.58%", "value_0_100": 82.58, "split": "cross_validation", "task": "SYNTAX >= 23 classification"},
+      {"metric": "AUC (5-fold mean, without interferent set)", "family": "auc", "value_raw": "80.502 (73.020-90.716)", "value_0_100": 80.502, "split": "cross_validation", "task": "SYNTAX >= 23 classification (robustness check)"},
+      {"metric": "Maximum calculation time", "family": "time", "value_raw": "within 30 s", "value_0_100": null, "split": "other", "task": "DZL score computation per video"}
+    ],
+    "comparators": ["Wu et al. CNN with temporal constraint (literature values)", "Pang et al. Stenosis-DetNet (literature values)", "QFR analysis time (FAVOR II Europe-Japan)", "DZL with LSTM core", "DZL with hidden size 1500"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "in the field of medical imaging, especially Coronary Angiography, there is no mature annotation library developed", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "This limitation may result in an incomplete representation of the overall population or phenomena under study", "section": "discussion"},
+    "G3": {"status": "both", "quote": "most existing studies focus on identifying high-quality static frames for analysis, overlooking the rich temporal dynamics inherent in angiography sequences", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "both", "quote": "Due to the expertise and cost associated with medical data annotation, the application of AI, especially deep learning, has been limited; this study's self-supervised model avoids the need for manual annotation", "section": "discussion"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "documents", "quote": "Future improvements could include integrating multi-modal data and temporal modeling", "section": "discussion"},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "addresses", "quote": "By correlating sequence restoration capability with clinical outcomes, this approach inherently captures the integrity of coronary hemodynamics and structural coherence", "section": "introduction"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Cannot distinguish LAD and LCX separately (video-level LCA score)",
+    "Cannot localize lesions within the coronary vasculature",
+    "Limited extraction of lesion-specific features (plaque, stenosis degree)",
+    "No image-level preprocessing (segmentation, centerline extraction) applied",
+    "Effective-zone dimension reduction due to GPU memory loses information"
+  ],
+  "future_work": [
+    "Expand dataset beyond the limited 2018 timeframe for representativeness",
+    "Integrate functional assessment such as FFR",
+    "Combine DZL with transfer learning (ResNet/EfficientNet) to differentiate LAD/LCX and localize lesions",
+    "Integrate multi-modal data and additional data sources",
+    "Integrate segmentation and centerline extraction into the model",
+    "Use more GPU memory to reduce dimension reduction and improve AUC"
+  ],
+  "claim2024": {
+    "items": "ynyyynyyyyyynyynyynnyynyynyyyynynynyynnyyyyy"
+  }
+}

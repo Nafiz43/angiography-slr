@@ -1,0 +1,17 @@
+{"record_id": "R4762",
+ "items": {
+  "6": {"answer": "yes", "quote": "This paper describes the design, training, and evaluation of a deep neural network for removing noise from medical fluoroscopy videos.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "The videos were grayscale with pixel intensities encoded as fractional values between 0.0 and 1.0", "section": "methods"},
+  "10": {"answer": "yes", "quote": "190 still frames were selected out of the set of fluoroscopy videos. These frames came from the “clear” set of videos–they were specifically chosen because they contained little noise. 1,150 patches of 60 × 60 pixels were extracted", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "675 patches of 60 × 60 pixels were extracted from the selected video frames at random. These patches were then corrupted with artificial Gaussian noise with a mean of zero and a sigma of 0.05.", "section": "results"},
+  "20": {"answer": "yes", "quote": "Four clear videos were included in the testing dataset. The remaining videos were used as the training dataset.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "implemented using the Python programming language and the Keras and TensorFlow toolkits for neural network computations", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The difference between the denoised patch and the original, uncorrupted patch was quantified with mean squared error (MSE) and the structured similarity index (SSIM). Means and standard deviations are reported in Table 1.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

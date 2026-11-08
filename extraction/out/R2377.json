@@ -1,0 +1,125 @@
+{
+  "record_id": "R2377",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Locating X-Ray Coronary Angiogram Keyframes via Long Short-Term Spatiotemporal Attention With Image-to-Patch Contrastive Learning",
+    "year": 2024,
+    "venue": "IEEE Transactions on Medical Imaging",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray coronary angiography (XCA) sequences",
+    "territory": "cardiac",
+    "territory_detail": "coronary arteries; contrast filling/disappearing phases",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "31 to 379 frames",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 260,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": "New XCA video dataset collected from Renji Hospital; release not stated"},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "clinicians",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "temporal_sequence_modeling",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Locating start, apex and end keyframes of contrast filling/disappearing phases in XCA sequences, formulated as temporal action localization.",
+    "clinical_application": "Keyframe counting of contrast diffusion time span for evaluating coronary microvascular function"
+  },
+  "method": {
+    "architecture_names": ["STA-IPCon (long short-term spatiotemporal attention with image-to-patch contrastive learning)", "CLSTM", "Actionformer", "SVS-Net"],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "we propose long short-term spatiotemporal attention by integrating a convolutional long short-term memory (CLSTM) network into a multiscale Transformer",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Focal loss for action classification; patchwise contrastive module for foreground/background imbalance",
+    "uncertainty_quantification": false,
+    "explainability_method": "Attention maps",
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "mAP@[0.3:0.1:0.7]", "family": "precision_ppv", "value_raw": "72.45%", "value_0_100": 72.45, "split": "test", "task": "keyframe temporal action localization"},
+      {"metric": "AP@IoU=0.3", "family": "precision_ppv", "value_raw": "98.44%", "value_0_100": 98.44, "split": "test", "task": "keyframe temporal action localization"},
+      {"metric": "AP@IoU=0.7", "family": "precision_ppv", "value_raw": "36.10%", "value_0_100": 36.1, "split": "test", "task": "keyframe temporal action localization"},
+      {"metric": "F-score", "family": "f1", "value_raw": "0.8296", "value_0_100": 82.96, "split": "test", "task": "keyframe temporal action localization"},
+      {"metric": "Average deviation (AD)", "family": "error_distance", "value_raw": "4.71 frames", "value_0_100": null, "split": "test", "task": "keyframe localization"}
+    ],
+    "comparators": ["AFSD", "TALLFormer", "E2E-TAD", "Actionformer", "I3D features"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": true, "detail": "https://github.com/BinjieQin/STA-IPCon"},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "existing methods will ignore a gradually evolving trend of blood vessels in XCA sequence and lead to a loss of long-term dependencies in TAL", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "both", "quote": "supervised learning is tedious and costly in manually annotating the frame- or shot-level labels for video sequences", "section": "other"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "addresses", "quote": "To improve the explainability of the proposed modules, attention maps are used to show the proposed modules' performance", "section": "results"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "both", "quote": "To solve class-imbalance and imperceptible differences between foreground vessels and vessel-like background disturbances", "section": "methods"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Predicted start frame may be later than apex frame, affecting P/R/F metrics",
+    "Larger deviation on samples with strongly boundary-agnostic characteristics",
+    "Actionformer-based regression handles overlapping actions poorly",
+    "Attention map artifacts from SVS-Net frame compression"
+  ],
+  "future_work": [
+    "More principled handling of start/apex frame ordering in evaluation",
+    "Application to other flow-like spatiotemporal monitoring scenarios (crowd gathering, traffic inflow/outflow)"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnnyynyynynynyyyyyyyyynnyynnnyyyyy"
+  }
+}

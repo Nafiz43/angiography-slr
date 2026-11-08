@@ -1,0 +1,75 @@
+{
+ "record_id": "R2377",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "Locating the start, apex and end keyframes of moving contrast agents for keyframe counting in X-ray coronary angiography (XCA) is very important for the diagnosis and treatment of cardiovascular diseases.",
+   "section": "abstract"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "Each frame is reshaped to 512×512 and processed by SVS-Net [15]. The final resolution of features is 64×64 pixels.",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "Each sequence is annotated by two clinicians to obtain the three keyframe locations and frames per second (FPS)",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "the dataset is divided randomly into three subsets for training, validation and test, at a ratio of 136:60:64.",
+   "section": "methods"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "yes",
+   "quote": "The code is implemented by PyTorch and trained on a NVIDIA GeForce RTX 3090.",
+   "section": "methods"
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "Our method achieves a _m AP_ of 72.45%, with an _AP_ of 98.44% at IoU = 0 _._ 3 and an _AP_ of 36.10% at IoU = 0 _._ 7.",
+   "section": "results"
+  },
+  "38": {
+   "answer": "yes",
+   "quote": "Furthermore, the 95% confidence intervals of the baseline and the proposed methods are 0 to 6 _._ 13 and 0 to 5 _._ 30, respectively.",
+   "section": "results"
+  }
+ }
+}

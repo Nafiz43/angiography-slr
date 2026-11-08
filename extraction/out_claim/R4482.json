@@ -1,0 +1,17 @@
+{"record_id": "R4482",
+ "items": {
+  "6": {"answer": "yes", "quote": "This technical efficacy study investigated the use of a GAP layer to generate CAMs to gain insight as to how a convolutional neural network makes pixel classifications for an intracranial aneurysm segmentation task.", "section": "discussion"},
+  "9": {"answer": "yes", "quote": "Flattening was carried out using four different methods, taking the average, median, standard deviation, or minimum value along the time-axis at each pixel location.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "the frames in the DSA sequences were flattened along the time-axis when the IAs were fully opacified to create a single frame.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Our aneurysm labels were created by multiple authors, hence, this process is subject to intra- and inter-observer variability which may lead to the introduction of bias.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "The IAs were hand-contoured by users using a custom algorithm developed in the Laboratory Virtual Instrument Engineering Workbench (LabVIEW) (National Instruments, Austin, Texas) programming environment.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The 547 image frames were randomly split into 2 cohorts; 390 for training and 157 for testing.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The CNN framework was developed using Python’s Keras [13].", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "DSC and the JI averaged over the entire test cohort comparing the four different DSA sequence pre-processing schemes can be found in Table 1. Included in Table 1 is the 95% confidence interval (CI).", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

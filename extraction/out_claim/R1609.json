@@ -1,0 +1,17 @@
+{"record_id": "R1609",
+ "items": {
+  "6": {"answer": "yes", "quote": "a pilot machine learning framework that predicts no-reflow immediately after EVT by integrating clinical features with intra-procedural DSA sequences", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "each DSA sequence underwent grayscale intensity inversion that ensured brighter pixels corresponded to higher tracer concentrations", "section": "methods"},
+  "10": {"answer": "yes", "quote": "For each patient, four DSA sequences were selected: paired pre- and post-procedure series in both anteroposterior (AP) and lateral views.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "missing values are extrapolated using exponential decay", "section": "methods"},
+  "15": {"answer": "yes", "quote": "chosen for its rigorous use of perfusion asymmetry in confirmed infarct zones", "section": "methods"},
+  "17": {"answer": "yes", "quote": "To automate this process, we generated infarct Regions of Interest (ROIs) from follow-up Diffusion-Weighted Imaging (DWI) using a U-Net architecture.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "In each iteration, a single patient was held out as the test case, and the model was trained on the remaining subjects.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "The gradient boosting classifier, with 10 estimators, max depth of 3, and a 0.9 learning rate, was selected for its strong performance and stability.", "section": "methods"},
+  "27": {"answer": "no", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Performance metrics were then computed using the aggregated predictions across all LOOCV iterations", "section": "methods"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

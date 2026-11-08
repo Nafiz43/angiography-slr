@@ -1,0 +1,134 @@
+{
+  "record_id": "R0548",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Auxiliary learning for anatomical localization of hierarchical vascular structures in digital subtraction angiography",
+    "year": 2026,
+    "venue": "Medical Imaging 2026: Clinical and Biomedical Imaging, Proc. of SPIE Vol. 13929",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Subtracted abdominopelvic angiographic sequences (1024 x 1024 DICOM), manually selected key frames",
+    "territory": "abdominopelvic",
+    "territory_detail": "Aorta, celiac trunk, common hepatic, splenic, SMA, IMA, renal, internal and external iliac arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "5 to 150 images",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 276,
+    "n_sequences": 2897,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "expert radiologists",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Multi-task ResNet-50 classifying the anatomical location of the angiographic catheter (12 classes) in abdominopelvic DSA key frames, with an auxiliary head classifying vascular hierarchy (primary/secondary/tertiary); frame predictions aggregated to sequence labels by mode; Monte Carlo dropout uncertainty flags low-confidence predictions.",
+    "clinical_application": "Automated anatomical localization in abdominopelvic DSA for interpretation and image-guided interventions"
+  },
+  "method": {
+    "architecture_names": ["ResNet-50", "multi-task auxiliary learning", "Monte Carlo dropout"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "Since the proposed model was trained on individual frames rather than entire angiographic sequences, a post-processing step was applied to obtain sequencelevel predictions.",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "ImageNet",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Inverse-frequency class weights in weighted multi-task cross-entropy loss; auxiliary hierarchy task",
+    "uncertainty_quantification": true,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "overall accuracy", "family": "accuracy", "value_raw": "0.88", "value_0_100": 88.0, "split": "test", "task": "anatomical localization (primary, sequence-level)"},
+      {"metric": "precision", "family": "precision_ppv", "value_raw": "0.89", "value_0_100": 89.0, "split": "test", "task": "anatomical localization (primary, sequence-level)"},
+      {"metric": "recall", "family": "sensitivity_recall", "value_raw": "0.87", "value_0_100": 87.0, "split": "test", "task": "anatomical localization (primary, sequence-level)"},
+      {"metric": "F1-score", "family": "f1", "value_raw": "0.87", "value_0_100": 87.0, "split": "test", "task": "anatomical localization (primary, sequence-level)"},
+      {"metric": "precision (weighted)", "family": "precision_ppv", "value_raw": "0.89", "value_0_100": 89.0, "split": "test", "task": "vascular hierarchy classification (auxiliary)"},
+      {"metric": "recall (weighted)", "family": "sensitivity_recall", "value_raw": "0.89", "value_0_100": 89.0, "split": "test", "task": "vascular hierarchy classification (auxiliary)"},
+      {"metric": "F1-score (weighted)", "family": "f1", "value_raw": "0.89", "value_0_100": 89.0, "split": "test", "task": "vascular hierarchy classification (auxiliary)"},
+      {"metric": "F1-score aorta", "family": "f1", "value_raw": "1.00", "value_0_100": 100.0, "split": "test", "task": "anatomical localization (primary, aorta class)"},
+      {"metric": "F1-score celiac trunk", "family": "f1", "value_raw": "0.84", "value_0_100": 84.0, "split": "test", "task": "anatomical localization (primary, celiac trunk class)"},
+      {"metric": "F1-score common hepatic artery", "family": "f1", "value_raw": "0.82", "value_0_100": 82.0, "split": "test", "task": "anatomical localization (primary, common hepatic artery class)"},
+      {"metric": "precision at entropy threshold 0.02 (25% coverage)", "family": "precision_ppv", "value_raw": "1.00", "value_0_100": 100.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.02"},
+      {"metric": "recall at entropy threshold 0.02 (25% coverage)", "family": "sensitivity_recall", "value_raw": "0.99", "value_0_100": 99.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.02"},
+      {"metric": "F1-score at entropy threshold 0.02 (25% coverage)", "family": "f1", "value_raw": "0.99", "value_0_100": 99.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.02"},
+      {"metric": "precision at entropy threshold 0.12 (75% coverage)", "family": "precision_ppv", "value_raw": "0.94", "value_0_100": 94.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.12"},
+      {"metric": "recall at entropy threshold 0.12 (75% coverage)", "family": "sensitivity_recall", "value_raw": "0.89", "value_0_100": 89.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.12"},
+      {"metric": "F1-score at entropy threshold 0.12 (75% coverage)", "family": "f1", "value_raw": "0.90", "value_0_100": 90.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.12"},
+      {"metric": "precision at entropy threshold 0.32 (95% coverage)", "family": "precision_ppv", "value_raw": "0.84", "value_0_100": 84.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.32"},
+      {"metric": "recall at entropy threshold 0.32 (95% coverage)", "family": "sensitivity_recall", "value_raw": "0.80", "value_0_100": 80.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.32"},
+      {"metric": "F1-score at entropy threshold 0.32 (95% coverage)", "family": "f1", "value_raw": "0.81", "value_0_100": 81.0, "split": "test", "task": "anatomical localization with MC dropout rejection, threshold 0.32"}
+    ],
+    "comparators": ["ResNet50 baseline without auxiliary learning"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "both", "quote": "resolving challenges posed by overlapping vascular structures", "section": "abstract"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "both", "quote": "the model might be overconfident in their predictions when an out of distribution data is presented", "section": "introduction"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "both", "quote": "class imbalance and anatomical similarity are the major challenges affecting the deep learning model accuracy for anatomical classification", "section": "introduction"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [],
+  "future_work": [
+    "Expand the dataset",
+    "Synthetic data generation to mitigate class imbalance and enhance generalization"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyynnnnynnyynyyyyyyyyynnnynnyynynnynny"
+  }
+}

@@ -1,0 +1,17 @@
+{"record_id": "R2400",
+ "items": {
+  "6":  {"answer": "yes", "quote": "this study aims to localize DSA images with respect to each other using unsupervised deep learning to match overlapping vascular anatomy.", "section": "introduction"},
+  "9":  {"answer": "yes", "quote": "padding obtained during image acquisition was removed from all images and each image was normalized between 0 and 255. They were also resized to 256 by 256 pixels using cubic interpolation.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Although all image frames from each DSA sequence could be used to train the network, the diagnostic frames are chosen.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The data was labeled by an interventional radiologist with four years of attending experience. Each series in the dataset was labeled with the anatomic location of the vessel at which the contrast is being injected.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "The dataset is split up randomly into a train (258 patients) and a validation set (150 patients).", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "All augmentations originated from the `Albumentations` package.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The top-1 accuracy for matching the synthetic dataset was 84.0%. In the real-world dataset, the top-1 accuracy was 21.1%, the top-3 accuracy was 49.8%, and the top-5 accuracy was 70.2%.", "section": "results"},
+  "38": {"answer": "yes", "quote": "The synthetic dataset yielded an AUC of 0.98, while the real-world dataset achieved an AUC of 0.69.", "section": "results"}
+ }}

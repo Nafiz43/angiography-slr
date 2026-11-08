@@ -1,0 +1,214 @@
+{
+  "record_id": "R3900",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Deep Learning-Based Automated Thrombolysis in Cerebral Infarction Scoring: A Timely Proof-of-Principle Study",
+    "year": 2021,
+    "venue": "Stroke",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "Germany"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Time-resolved X-ray DSA series, frontal and lateral views, acquired during mechanical thrombectomy",
+    "territory": "neurologic",
+    "territory_detail": "Middle cerebral artery territory; M1 occlusions in acute ischemic stroke",
+    "acquisition_geometry": "biplane",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "minimum 5 frames (inference example: 15 frames)",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 297,
+    "n_sequences": 586,
+    "n_images_or_frames": null,
+    "n_centers": 2,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "In-house dataset (UKE Hamburg, 491 series/236 patients) and external dataset from the NEUROSQUAD study (95 series/61 patients)"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Data available from the corresponding author upon reasonable request"
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Neuroradiologists (>5 years experience); in-house scores from clinical reports reviewed by one neuroradiologist, external data rescored by 2 neuroradiologists with consensus",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Cohen's kappa 0.75 between the 2 in-house experts on the external dataset"
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Fully automated mTICI reperfusion scoring (0/1, 2a, 2b, 3; plus dichotomized <=2a vs >=2b) of biplane DSA series after mechanical thrombectomy for M1 occlusions, modeled as ordinal regression.",
+    "clinical_application": "Objective assessment of mechanical thrombectomy success in acute ischemic stroke"
+  },
+  "method": {
+    "architecture_names": [
+      "EfficientNet",
+      "GRU",
+      "DeepTICI"
+    ],
+    "architecture_family": "recurrent",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "the developed DL system builds on gated recurrent units[33] (GRU; a specific type of recurrent neural networks)",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Independent external dataset (NEUROSQUAD study, 95 DSA series of 61 patients, different center): direct application (exp. II) and after model updating with 3-fold cross validation (exp. III)",
+    "metrics": [
+      {"metric": "Cohen's kappa, overall (exp. I)", "family": "kappa", "value_raw": "0.61", "value_0_100": 61.0, "split": "validation", "task": "mTICI scoring"},
+      {"metric": "Accuracy, overall (exp. I)", "family": "accuracy", "value_raw": "71.1%", "value_0_100": 71.1, "split": "validation", "task": "mTICI scoring"},
+      {"metric": "ACC±1, overall (exp. I)", "family": "accuracy", "value_raw": "100.0%", "value_0_100": 100.0, "split": "validation", "task": "mTICI scoring"},
+      {"metric": "Specific agreement, class range (exp. I)", "family": "other", "value_raw": "62.5-84.0%", "value_0_100": null, "split": "validation", "task": "mTICI scoring"},
+      {"metric": "Cohen's kappa, dichotomized (exp. I)", "family": "kappa", "value_raw": "0.91", "value_0_100": 91.0, "split": "validation", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Accuracy, dichotomized (exp. I)", "family": "accuracy", "value_raw": "95.6%", "value_0_100": 95.6, "split": "validation", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Specific agreement, dichotomized (exp. I)", "family": "other", "value_raw": "95.5/95.7%", "value_0_100": null, "split": "validation", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Cohen's kappa, overall (exp. II)", "family": "kappa", "value_raw": "0.52", "value_0_100": 52.0, "split": "external", "task": "mTICI scoring"},
+      {"metric": "Accuracy, overall (exp. II)", "family": "accuracy", "value_raw": "64.2%", "value_0_100": 64.2, "split": "external", "task": "mTICI scoring"},
+      {"metric": "ACC±1, overall (exp. II)", "family": "accuracy", "value_raw": "96.8%", "value_0_100": 96.8, "split": "external", "task": "mTICI scoring"},
+      {"metric": "Specific agreement, class range (exp. II)", "family": "other", "value_raw": "42.6-87.1%", "value_0_100": null, "split": "external", "task": "mTICI scoring"},
+      {"metric": "Cohen's kappa, dichotomized (exp. II)", "family": "kappa", "value_raw": "0.73", "value_0_100": 73.0, "split": "external", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Accuracy, dichotomized (exp. II)", "family": "accuracy", "value_raw": "86.3%", "value_0_100": 86.3, "split": "external", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Specific agreement, dichotomized (exp. II)", "family": "other", "value_raw": "86.6/86.0%", "value_0_100": null, "split": "external", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Cohen's kappa, overall (exp. III, external after model update)", "family": "kappa", "value_raw": "0.65", "value_0_100": 65.0, "split": "cross_validation", "task": "mTICI scoring"},
+      {"metric": "Accuracy, overall (exp. III, external after model update)", "family": "accuracy", "value_raw": "73.7%", "value_0_100": 73.7, "split": "cross_validation", "task": "mTICI scoring"},
+      {"metric": "ACC±1, overall (exp. III, external after model update)", "family": "accuracy", "value_raw": "97.9%", "value_0_100": 97.9, "split": "cross_validation", "task": "mTICI scoring"},
+      {"metric": "Specific agreement, class range (exp. III, external after model update)", "family": "other", "value_raw": "60.4-89.7%", "value_0_100": null, "split": "cross_validation", "task": "mTICI scoring"},
+      {"metric": "Cohen's kappa, dichotomized (exp. III, external after model update)", "family": "kappa", "value_raw": "0.85", "value_0_100": 85.0, "split": "cross_validation", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Accuracy, dichotomized (exp. III, external after model update)", "family": "accuracy", "value_raw": "92.6%", "value_0_100": 92.6, "split": "cross_validation", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Specific agreement, dichotomized (exp. III, external after model update)", "family": "other", "value_raw": "92.6/92.6%", "value_0_100": null, "split": "cross_validation", "task": "dichotomized mTICI <=2a vs >=2b"},
+      {"metric": "Inference time per DSA series (GPU, 1024x1024, 15 frames)", "family": "time", "value_raw": "0.7 seconds", "value_0_100": null, "split": "other", "task": "mTICI scoring"},
+      {"metric": "Inference time per DSA series (CPU, 1024x1024, 15 frames)", "family": "time", "value_raw": "3.7 seconds", "value_0_100": null, "split": "other", "task": "mTICI scoring"}
+    ],
+    "comparators": [
+      "Published inter-/intrarater variability of expert TICI scoring",
+      "Agreement of 2 in-house experts on the external dataset"
+    ],
+    "compared_with_humans": true,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/IPMI-ICNS-UKE/DeepTICI"
+    },
+    "model_weights_available": {
+      "value": true,
+      "detail": "The final DL network is available at https://github.com/IPMI-ICNS-UKE/DeepTICI"
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "the main limitations of the present proof-of-principle study are the strict patient selection criteria and the limited size of the resulting dataset",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "both",
+      "quote": "A direct application of the DL model trained on the in-house dataset to the external dataset revealed nevertheless a drop of the prediction accuracy for the different center data.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "algorithms capable of exploiting the inherent information of temporal DSA series have been rarely reported on as of yet",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G5": {
+      "status": "both",
+      "quote": "the medical expert-based scoring for cases close to mTICI-inherent reperfusion thresholds is not as reliable as ideally desired for training of neural networks",
+      "section": "discussion"
+    },
+    "G6": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G7": {
+      "status": "documents",
+      "quote": "This, in turn, leads to the active field of explainable artificial intelligence and corresponding methodical developments.",
+      "section": "discussion"
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "documents",
+      "quote": "especially with regard to the mTICI 1 and 2a classes that were, due to their lower clinical frequency, underrepresented in our in-house dataset",
+      "section": "discussion"
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "documents",
+      "quote": "the investigation of the system outputs with respect to clinical questions like correlation to patient outcome will be the next steps of our future work",
+      "section": "discussion"
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "Restricted to M1 occlusions with strict selection criteria",
+    "Lowest performance for mTICI 2b; cases near the 2a/2b threshold",
+    "Cannot yet handle additional pathologies, foreign materials or image artifacts",
+    "Model update based on only 31-32 DSA series per fold"
+  ],
+  "future_work": [
+    "Extend to other occlusion sites and expanded TICI",
+    "Consensus rating by multiple experts for training labels",
+    "Analyze class probabilities or network ensembles to estimate uncertainty",
+    "Reformulate as continuous reperfusion-degree prediction",
+    "Model updating or data debiasing for new centers",
+    "Correlate system outputs with clinical outcome (e.g. mRS, NIHSS)"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyyyynyyyyynnnynyyyyynnnyyyyyyynyyyyn"
+  }
+}

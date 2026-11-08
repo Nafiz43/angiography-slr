@@ -1,0 +1,17 @@
+{"record_id": "R3576",
+ "items": {
+  "6": {"answer": "yes", "quote": "U-Net architecture is proposed for the automatic segmentation of THV on angiographies, studying the role of its hyperparameters in the quality of the segmentations.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "The training set consisted of 2026 frames where the THV was completely expanded and 267 frames containing the aortic root previous to the device deployment, without any THV.", "section": "results"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "These labels where manually drawn by the clinical members of the research team, namely, experienced hemodynamic cardiologists, using GNU Image Manipulation Program (GIMP) software.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "ensuring that the frames used to test the model did not belong to the patients used during training.", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The whole work has been implemented in Python, using Keras [22] and Tensorflow [23] libraries.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "normalizing by the worst mean result obtained for each of the metrics, the best configuration would be the closest to the origin.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The metrics are computed over several frames and the results are expressed in mean and standard deviation for different image sets.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

@@ -1,0 +1,75 @@
+{
+ "record_id": "R0514",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "this is the first study to develop and evaluate deep learning models that distinguish PR from PE in ACS using routine X-ray CAG alone",
+   "section": "discussion"
+  },
+  "9": {
+   "answer": "yes",
+   "quote": "we first crop the lesion area from the original 512 \u00a3 512 images. The cropped regions are then resized to 64 \u00a3 64 pixels, while maintaining the aspect ratio.",
+   "section": "methods"
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "Among these acquisitions, those in which the culprit lesion was clearly visualized were selected for subsequent analysis.",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "yes",
+   "quote": "ground-truth labels were based on OCT interpretation by experienced readers; histopathologic confirmation was not feasible.",
+   "section": "discussion"
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "OCT images were analyzed using offline software at Nippon Medical School Chiba Hokusoh Hospital. An experienced interventional cardiologist assessed culprit-plaque morphology.",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "yes",
+   "quote": "patients were randomly divided into nonoverlapping subsets",
+   "section": "results"
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "yes",
+   "quote": "The experiments were implemented in PyTorch on a NVIDIA GPU workstation with 8 RTX6000s.",
+   "section": "results"
+  },
+  "26": {
+   "answer": "yes",
+   "quote": "The optimal strategy for CE and SeqCon+CE is the mean F1-score model selection with weighted learning",
+   "section": "results"
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "SeqCon +wCE demonstrated superior performance, achieving an accuracy of 64.652%, an F1PR of 72.801% and an F1PE of 49.531%.",
+   "section": "results"
+  },
+  "38": {
+   "answer": "yes",
+   "quote": "Figure 6. Experimental Comparison by ROC and AUC results.",
+   "section": "results"
+  }
+ }
+}

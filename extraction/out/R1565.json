@@ -1,0 +1,217 @@
+{
+  "record_id": "R1565",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Reconstruction of 3D vascular flow patterns from sparse angiographic data using a 3D convolutional neural network (CNN)",
+    "year": 2025,
+    "venue": "Medical Imaging 2025: Clinical and Biomedical Imaging, Proc. of SPIE Vol. 13410",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Simulated (virtual) noiseless DSA images from CFD contrast transport, parallel-beam projections in 3 orthogonal directions",
+    "territory": "neurologic",
+    "territory_detail": "Cerebral aneurysms and surrounding vasculature (internal carotid artery inlets)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 100,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 76,
+    "n_sequences": 76,
+    "n_images_or_frames": 2639,
+    "n_centers": 2,
+    "n_vendors": null,
+    "data_origin": "synthetic",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "AneuriskWeb project (66 of 76 aneurysm geometries)"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "automatic",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "motion_correction_registration",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "3D volumetric reconstruction of contrast distribution (percent contrast per voxel) in cerebral aneurysm vasculature from three orthogonal 2D virtual angiograms plus a 3D anatomical mask, frame by frame.",
+    "clinical_application": "Visualization of 3D cerebral aneurysm hemodynamics during endovascular treatment to aid decision-making"
+  },
+  "method": {
+    "architecture_names": [
+      "3D Angiographic Reconstruction Neural Network (ARNN)",
+      "3D convolutional neural network"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "ARNN also uses a frame-by-frame approach with no additional transient information and predicts the flow of contrast in 3D.",
+      "section": "results"
+    },
+    "input_dimensionality": "multi_view",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": true,
+    "physics_informed": false,
+    "multimodal_inputs": [
+      "3D anatomical binary mask of patient vessel geometry"
+    ],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {
+        "metric": "Mean square error (average over unseen test patients)",
+        "family": "error_distance",
+        "value_raw": "5.27E-04",
+        "value_0_100": null,
+        "split": "test",
+        "task": "3D contrast reconstruction"
+      },
+      {
+        "metric": "Mean absolute error (average over unseen test patients)",
+        "family": "error_distance",
+        "value_raw": "1.57E-03",
+        "value_0_100": null,
+        "split": "test",
+        "task": "3D contrast reconstruction"
+      },
+      {
+        "metric": "Root mean square error (average over unseen test patients)",
+        "family": "error_distance",
+        "value_raw": "2.21E-02",
+        "value_0_100": null,
+        "split": "test",
+        "task": "3D contrast reconstruction"
+      },
+      {
+        "metric": "3D prediction time per frame",
+        "family": "time",
+        "value_raw": "less than 1 second per frame",
+        "value_0_100": null,
+        "split": "test",
+        "task": "3D contrast reconstruction"
+      }
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "3D contrast reconstruction was obtained from virtual angiographic images with no noise or artifacts with a parallel beam projection geometry.",
+      "section": "conclusion"
+    },
+    "G3": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G4": {
+      "status": "both",
+      "quote": "These techniques ‘flatten’ the 3D vasculature to a projected 2D image, limiting the information available to clinicians during endovascular treatment.",
+      "section": "introduction"
+    },
+    "G5": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G6": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G7": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G8": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G9": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G10": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G11": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    },
+    "G12": {
+      "status": "none",
+      "quote": null,
+      "section": null
+    }
+  },
+  "other_limitations": [
+    "No modeling of exposure-acquisition time lag between biplane views"
+  ],
+  "future_work": [
+    "Add noise to cone-beam-projected virtual angiograms for training and testing",
+    "Use a more extensive database of virtual angiograms",
+    "Implement time delay in biplane angiograms",
+    "Modify architecture for biplane inputs with real-time in vitro and in vivo HSA",
+    "Reconstruct 3D aneurysm hemodynamics over time from 2D projections"
+  ],
+  "claim2024": {
+    "items": "ynyyynynynnnyyaayynnyynyyyynnnnynyynnynyyyny"
+  }
+}

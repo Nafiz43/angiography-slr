@@ -1,0 +1,17 @@
+{"record_id": "R4804",
+ "items": {
+  "6":  {"answer": "yes", "quote": "we propose a fully automatic method for cerebrovascular DSA sequence images artifact removal based on rigid registration and guided", "section": "abstract"},
+  "9":  {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "Select an original DSA image with the most vascular details as the guided image for the guided", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "na", "quote": null, "section": null},
+  "17": {"answer": "na", "quote": null, "section": null},
+  "20": {"answer": "na", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Windows10 operating system, CORE i5 6300HQ CPU, 8G memory and MATLAB 2014a software", "section": "methods"},
+  "26": {"answer": "na", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "the index Cof the proposed method with mean value 0.557 is larger than that of the method of Ref. 24 with mean value of 0.423", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

@@ -1,0 +1,123 @@
+record_id,title,year,journal_venue,doi,llm_bucket
+R0025,"Automated assessment of right ventricular systolic function from coronary angiograms with video-based artificial intelligence algorithms: development, validation, comparison against humans, and prospective deployment.",2026,European heart journal. Digital health,10.1093/ehjdh/ztag059,INCLUDE_CENSUS
+R0058,S-MEOD: A Novel Evaluation Metric for Frame-Based Medical Object Detection.,2026,Journal of imaging informatics in medicine,10.1007/s10278-026-01957-5,INCLUDE_CENSUS
+R0099,AngioCAD: A public x-ray angiography dataset and an adaptive fusion framework for stenosis detection.,2026,Computer methods and programs in biomedicine,10.1016/j.cmpb.2026.109368,INCLUDE_CENSUS
+R0100,Real-time planar angiographic cerebral perfusion imaging.,2026,International journal of computer assisted radiology and surgery,10.1007/s11548-026-03670-8,INCLUDE_CENSUS
+R0309,Deep learning for estimating right ventricular function from routine coronary angiography.,2026,European heart journal. Digital health,10.1093/ehjdh/ztag004,INCLUDE_CENSUS
+R0339,Artificial intelligence risk stratification from dynamic digital subtraction angiography radiomics predicts pulmonary embolism and associates with clinical outcomes in deep vein thrombosis: A retrospective cohort study.,2026,Journal of vascular surgery. Venous and lymphatic disorders,10.1016/j.jvsv.2026.102450,INCLUDE_CENSUS
+R0352,DOSTA-Net: Domain-Shuffle Temporal Attention Network for Vessel Extraction in X-Ray Coronary Angiography Using Synthetic Data.,2026,IEEE transactions on medical imaging,10.1109/TMI.2026.3659754,INCLUDE_CENSUS
+R0376,Machine learning-enabled prediction of hemorrhagic transformation post-thrombectomy using quantitative DSA.,2026,Scientific reports,10.1038/s41598-026-37036-6,INCLUDE_CENSUS
+R0514,Identifying Pathogenesis of Acute Coronary Syndromes using Sequence Contrastive Learning in Coronary Angiography.,2026,The American journal of cardiology,10.1016/j.amjcard.2025.08.051,INCLUDE_CENSUS
+R0521,Automated and explainable coronary angiogram interpretation for selection of coronary artery bypass grafting candidates using artificial intelligence.,2026,The Journal of thoracic and cardiovascular surgery,10.1016/j.jtcvs.2025.08.005,INCLUDE_CENSUS
+R0529,Temporal consistency-aware network for renal artery segmentation in X-ray angiography.,2026,International journal of computer assisted radiology and surgery,10.1007/s11548-025-03486-y,INCLUDE_CENSUS
+R0546,Deep learning-based frame synthesis enables radiation dose reduction in digital subtraction angiography imaging: a multicenter study,2026,Frontiers in Medicine,10.3389/fmed.2026.1793962,INCLUDE_CENSUS
+R0548,Auxiliary learning for anatomical localization of hierarchical vascular structures in digital subtraction angiography,2026,Medical Imaging,10.1117/12.3087798,INCLUDE_CENSUS
+R0550,Stent-RD-UNet: A Deep Learning Network for Real-Time Pose Estimation and Tracking of Aortic Stents in Image-Assisted Interventions,2026,Vascular Health,10.64187/vh.2026.v1.i1.009,INCLUDE_CENSUS
+R0554,Automated Coronary Artery Disease Detection Using a CNN Model with Temporal Attention,2026,medRxiv,10.64898/2026.02.11.26346085,INCLUDE_CENSUS
+R0570,Development and application of AI enabled automated drug delivery system for TACE guided by DSA,2026,The Innovation Oncology,10.59717/j.xinn-oncol.2026.100009,INCLUDE_CENSUS
+R0640,Texture-Based Preprocessing Framework with nnU-Net Model for Accurate Intracranial Artery Segmentation.,2025,Journal of imaging,10.3390/jimaging11120438,INCLUDE_CENSUS
+R0643,Multimodal machine learning for 5-year mortality prediction after percutaneous coronary intervention.,2025,Scientific reports,10.1038/s41598-025-32734-z,INCLUDE_CENSUS
+R0774,End-to-end deep learning approach for uterine artery-ovarian artery anastomosis detection from digital subtraction angiography sequences.,2025,Medical physics,10.1002/mp.70083,INCLUDE_CENSUS
+R0939,Gastrointestinal bleeding detection on digital subtraction angiography using convolutional neural networks with and without temporal information.,2025,"Diagnostic and interventional radiology (Ankara, Turkey)",10.4274/dir.2025.253134,INCLUDE_CENSUS
+R1117,Real-Time Coronary Artery Dominance Classification from Angiographic Images Using Advanced Deep Video Architectures.,2025,"Diagnostics (Basel, Switzerland)",10.3390/diagnostics15101186,INCLUDE_CENSUS
+R1209,perfDSA: Automatic Perfusion Imaging in Cerebral Digital Subtraction Angiography.,2025,International journal of computer assisted radiology and surgery,10.1007/s11548-025-03359-4,INCLUDE_CENSUS
+R1222,LT-YOLO: long-term temporal enhanced YOLO for stenosis detection on invasive coronary angiography.,2025,Frontiers in molecular biosciences,10.3389/fmolb.2025.1558495,INCLUDE_CENSUS
+R1238,Optimizing Input Selection for Cardiac Model Training and Inference: An Efficient 3D Convolutional Neural Networks-Based Approach to Automate Coronary Angiogram Video Selection.,2025,Mayo Clinic proceedings. Digital health,10.1016/j.mcpdig.2025.100195,INCLUDE_CENSUS
+R1251,Linking sequence restoration capability of shuffled coronary angiography to coronary artery disease diagnosis.,2025,Scientific reports,10.1038/s41598-025-95640-4,INCLUDE_CENSUS
+R1295,Intraoperative stenosis detection in X-ray coronary angiography via temporal fusion and attention-based CNN.,2025,Computerized medical imaging and graphics : the official journal of the Computerized Medical Imaging Society,10.1016/j.compmedimag.2025.102513,INCLUDE_CENSUS
+R1317,Deep learning based coronary vessels segmentation in X-ray angiography using temporal information.,2025,Medical image analysis,10.1016/j.media.2025.103496,INCLUDE_CENSUS
+R1329,CVFSNet: A Cross View Fusion Scoring Network for end-to-end mTICI scoring.,2025,Medical image analysis,10.1016/j.media.2025.103508,INCLUDE_CENSUS
+R1362,World's First Real-Time Artificial Intelligence-Assisted Mechanical Thrombectomy for Acute Ischemic Stroke.,2025,AJNR. American journal of neuroradiology,10.3174/ajnr.A8704,INCLUDE_CENSUS
+R1368,CDKD-w+: A Keyframe Recognition Method for Coronary Digital Subtraction Angiography Video Sequence Based on w+ Space Encoding.,2025,"Sensors (Basel, Switzerland)",10.3390/s25030710,INCLUDE_CENSUS
+R1421,Automated stenosis estimation of coronary angiographies using end-to-end learning.,2025,The international journal of cardiovascular imaging,10.1007/s10554-025-03324-x,INCLUDE_CENSUS
+R1422,Deep Learning Models for Automatic Classification of Anatomic Location in Abdominopelvic Digital Subtraction Angiography.,2025,Journal of imaging informatics in medicine,10.1007/s10278-024-01351-z,INCLUDE_CENSUS
+R1504,Large-scale pretrained frame generative model enables real-time low-dose DSA imaging: An AI system development and multi-center validation study.,2025,"Med (New York, N.Y.)",10.1016/j.medj.2024.07.025,INCLUDE_CENSUS
+R1537,Enhanced Cerebrovascular Extraction Using Vessel-Specific Preprocessing of Time-Series Digital Subtraction Angiograph,2025,Photonics,10.3390/photonics12090852,INCLUDE_CENSUS
+R1541,OccluNet: Spatio-Temporal Deep Learning for Occlusion Detection on DSA,2025,SWITCH@MICCAI,10.48550/arXiv.2508.14286,INCLUDE_CENSUS
+R1565,Reconstruction of 3D vascular flow patterns from sparse angiographic data using a 3D convolutional neural network (CNN),2025,Medical Imaging,10.1117/12.3047074,INCLUDE_CENSUS
+R1609,DSA-NRP: No-Reflow Prediction from Angiographic Perfusion Dynamics in Stroke EVT,2025,arXiv.org,10.48550/arXiv.2506.17501,INCLUDE_CENSUS
+R1674,Multi-Frame Coronary Vessel Segmentation in X-Ray Angiography,2025,Iranian Conference on Biomedical Engineering,10.1109/ICBME68496.2025.11392168,INCLUDE_CENSUS
+R1740,Reducing motion artifacts in craniocervical background subtraction angiography with deformable registration and unsupervised deep learning.,2024,Radiology advances,10.1093/radadv/umae020,INCLUDE_CENSUS
+R1862,Simulation-informed learning for time-resolved angiographic contrast agent concentration reconstruction.,2024,Computers in biology and medicine,10.1016/j.compbiomed.2024.109178,INCLUDE_CENSUS
+R1939,Spatiotemporal Disentanglement of Arteriovenous Malformations in Digital Subtraction Angiography.,2024,Proceedings of SPIE--the International Society for Optical Engineering,10.1117/12.3006740,INCLUDE_CENSUS
+R2087,Evaluation of stenoses using AI video models applied to coronary angiography.,2024,NPJ digital medicine,10.1038/s41746-024-01134-4,INCLUDE_CENSUS
+R2114,CAVE: Cerebral artery-vein segmentation in digital subtraction angiography.,2024,Computerized medical imaging and graphics : the official journal of the Computerized Medical Imaging Society,10.1016/j.compmedimag.2024.102392,INCLUDE_CENSUS
+R2254,Radiation reduction for interventional radiology imaging: a video frame interpolation solution.,2024,Insights into imaging,10.1186/s13244-024-01620-z,INCLUDE_CENSUS
+R2263,Background Subtraction Angiography with Deep Learning Using Multi-frame Spatiotemporal Angiographic Input.,2024,Journal of imaging informatics in medicine,10.1007/s10278-023-00921-x,INCLUDE_CENSUS
+R2376,Automated catheter segmentation and tip detection in cerebral angiography with topology-aware geometric deep learning.,2024,Journal of neurointerventional surgery,10.1136/jnis-2023-020300,INCLUDE_CENSUS
+R2377,Locating X-Ray Coronary Angiogram Keyframes via Long Short-Term Spatiotemporal Attention With Image-to-Patch Contrastive Learning.,2024,IEEE transactions on medical imaging,10.1109/TMI.2023.3286859,INCLUDE_CENSUS
+R2400,Unsupervised deep learning for the matching of vascular anatomy in multiple digital subtraction angiograms,2024,Medical Imaging,10.1117/12.3004394,INCLUDE_CENSUS
+R2411,Auxiliary Input in Training: Incorporating Catheter Features into Deep Learning Models for ECG-Free Dynamic Coronary Roadmapping,2024,International Conference on Medical Image Computing and Computer-Assisted Intervention,10.48550/arXiv.2408.15947,INCLUDE_CENSUS
+R2415,A Patient-Specific Registration of Coronary Angiogram-Fluoroscopy by Similarity- Based Transfer Learning,2024,IEEE Access,10.1109/ACCESS.2024.3422135,INCLUDE_CENSUS
+R2430,LB-3 | Artificial Intelligence for Extracting Non-COronary Data from Angiography: The AI-ENCODE Study,2024,Journal of the Society for Cardiovascular Angiography &amp; Interventions,10.1016/j.jscai.2024.101870,INCLUDE_CENSUS
+R2434,Optimizing Input Selection for Cardiac Model Training and Inference: An Efficient 3D CNN-based Approach to Automate Coronary Angiogram Video Selection,2024,medRxiv,10.1101/2024.04.22.24306184,INCLUDE_CENSUS
+R2443,FeDETR: A Federated Approach for Stenosis Detection in Coronary Angiography,2024,ICIAP Workshops,10.1007/978-3-031-51026-7_17,INCLUDE_CENSUS
+R2466,4DRGS: 4D Radiative Gaussian Splatting for Efficient 3D Vessel Reconstruction from Sparse-View Dynamic DSA Images,2024,Information Processing in Medical Imaging,10.48550/arXiv.2412.12919,INCLUDE_CENSUS
+R2490,GaraMoSt: Parallel Multi-Granularity Motion and Structural Modeling for Efficient Multi-Frame Interpolation in DSA Images,2024,AAAI Conference on Artificial Intelligence,10.48550/arXiv.2412.14118,INCLUDE_CENSUS
+R2491,MoSt-DSA: Modeling Motion and Structural Interactions for Direct Multi-Frame Interpolation in DSA Images,2024,European Conference on Artificial Intelligence,10.48550/arXiv.2407.07078,INCLUDE_CENSUS
+R2675,A framework of myocardial bridge detection with x-ray angiography sequence.,2023,Biomedical engineering online,10.1186/s12938-023-01163-2,INCLUDE_CENSUS
+R2786,Use of high-speed angiography HSA-derived boundary conditions and Physics Informed Neural Networks (PINNs) for comprehensive estimation of neurovascular hemodynamics.,2023,Proceedings of SPIE--the International Society for Optical Engineering,10.1117/12.2654261,INCLUDE_CENSUS
+R2845,Application of Pseudo-Three-Dimensional Residual Network to Classify the Stages of Moyamoya Disease.,2023,Brain sciences,10.3390/brainsci13050742,INCLUDE_CENSUS
+R2855,FSTIF-UNet: A Deep Learning-Based Method Towards Automatic Segmentation of Intracranial Aneurysms in Un-Reconstructed 3D-RA.,2023,IEEE journal of biomedical and health informatics,10.1109/JBHI.2023.3278472,INCLUDE_CENSUS
+R2873,Automated Assessment of Cardiac Systolic Function From Coronary Angiograms With Video-Based Artificial Intelligence Algorithms.,2023,JAMA cardiology,10.1001/jamacardio.2023.0968,INCLUDE_CENSUS
+R2977,DEEP MOVEMENT: Deep learning of movie files for management of endovascular thrombectomy.,2023,European radiology,10.1007/s00330-023-09478-3,INCLUDE_CENSUS
+R2992,Deep learning-based end-to-end automated stenosis classification and localization on catheter coronary angiography.,2023,Frontiers in cardiovascular medicine,10.3389/fcvm.2023.944135,INCLUDE_CENSUS
+R3030,Coronary artery stenosis detection via proposal-shifted spatial-temporal transformer in X-ray angiography.,2023,Computers in biology and medicine,10.1016/j.compbiomed.2023.106546,INCLUDE_CENSUS
+R3052,Radial Wall Strain Assessment From AI-Assisted Angiography: Feasibility and Agreement With OCT as Reference Standard.,2023,Journal of the Society for Cardiovascular Angiography & Interventions,10.1016/j.jscai.2022.100570,INCLUDE_CENSUS
+R3063,Jigsaw training-based background reverse attention transformer network for guidewire segmentation.,2023,International journal of computer assisted radiology and surgery,10.1007/s11548-022-02803-z,INCLUDE_CENSUS
+R3093,Automatic assessment of collaterals physiology in chronic total occlusions by means of artificial intelligence.,2023,Cardiology journal,10.5603/CJ.a2022.0089,INCLUDE_CENSUS
+R3126,Angular super-resolution in X-ray projection radiography using deep neural network: Implementation on rotational angiography.,2023,Biomedical journal,10.1016/j.bj.2022.01.001,INCLUDE_CENSUS
+R3128,Angiography-based coronary flow reserve: The feasibility of automatic computation by artificial intelligence.,2023,Cardiology journal,10.5603/CJ.a2021.0087,INCLUDE_CENSUS
+R3129,Learning spatiotemporal features of DSA using 3D CNN and BiConvGRU for ischemic moyamoya disease detection.,2023,The International journal of neuroscience,10.1080/00207454.2021.1929214,INCLUDE_CENSUS
+R3149,ConTrack: Contextual Transformer for Device Tracking in X-ray,2023,International Conference on Medical Image Computing and Computer-Assisted Intervention,10.48550/arXiv.2307.07541,INCLUDE_CENSUS
+R3155,Towards clinical translation of deep-learning based classification of DSA image sequences for stroke treatment,2023,Bildverarbeitung für die Medizin,10.48550/arXiv.2306.06207,INCLUDE_CENSUS
+R3164,TiAVox: Time-aware Attenuation Voxels for Sparse-view 4D DSA Reconstruction,2023,arXiv.org,10.48550/arXiv.2309.02318,INCLUDE_CENSUS
+R3391,Initial investigation of the use of angiographic parametric imaging for early prognosis of delayed cerebral ischemia in patients with subarachnoid hemorrhage.,2022,Proceedings of SPIE--the International Society for Optical Engineering,10.1117/12.2612081,INCLUDE_CENSUS
+R3392,Quantitative angiography prognosis of intracranial aneurysm treatment failure using parametric imaging and distal vessel analysis.,2022,Proceedings of SPIE--the International Society for Optical Engineering,10.1117/12.2611550,INCLUDE_CENSUS
+R3454,Optical flow estimation of coronary angiography sequences based on semi-supervised learning.,2022,Computers in biology and medicine,10.1016/j.compbiomed.2022.105663,INCLUDE_CENSUS
+R3469,Deep learning-based classification of DSA image sequences of patients with acute ischemic stroke.,2022,International journal of computer assisted radiology and surgery,10.1007/s11548-022-02654-8,INCLUDE_CENSUS
+R3485,Real-time automatic prediction of treatment response to transcatheter arterial chemoembolization in patients with hepatocellular carcinoma using deep learning based on digital subtraction angiography videos.,2022,Cancer imaging : the official publication of the International Cancer Imaging Society,10.1186/s40644-022-00457-3,INCLUDE_CENSUS
+R3555,Using a Convolutional Neural Network and Convolutional Long Short-term Memory to Automatically Detect Aneurysms on 2D Digital Subtraction Angiography Images: Framework Development and Validation.,2022,JMIR medical informatics,10.2196/28880,INCLUDE_CENSUS
+R3576,Automatic Identification of Bioprostheses on X-ray Angiographic Sequences of Transcatheter Aortic Valve Implantation Procedures Using Deep Learning.,2022,"Diagnostics (Basel, Switzerland)",10.3390/diagnostics12020334,INCLUDE_CENSUS
+R3601,Spatio-temporal deep learning for automatic detection of intracranial vessel perforation in digital subtraction angiography during endovascular thrombectomy.,2022,Medical image analysis,10.1016/j.media.2022.102377,INCLUDE_CENSUS
+R3615,Automatic construction of coronary artery tree structure based on vessel blood flow tracking.,2022,Catheterization and cardiovascular interventions : official journal of the Society for Cardiac Angiography & Interventions,10.1002/ccd.30061,INCLUDE_CENSUS
+R3648,Deep Learning-Based Approach to Automatically Assess Coronary Distensibility Following Kawasaki Disease.,2022,Pediatric cardiology,10.1007/s00246-021-02790-z,INCLUDE_CENSUS
+R3661,Identification of successful cerebral reperfusions (mTICI ≥2b) using an artificial intelligence strategy.,2022,Neuroradiology,10.1007/s00234-021-02851-3,INCLUDE_CENSUS
+R3712,Robust Landmark-based Stent Tracking in X-ray Fluoroscopy,2022,European Conference on Computer Vision,10.48550/arXiv.2207.09933,INCLUDE_CENSUS
+R3900,Deep Learning-Based Automated Thrombolysis in Cerebral Infarction Scoring: A Timely Proof-of-Principle Study.,2021,Stroke,10.1161/STROKEAHA.120.033807,INCLUDE_CENSUS
+R3910,Real-time respiratory motion compensated roadmaps for hepatic arterial interventions.,2021,Medical physics,10.1002/mp.15187,INCLUDE_CENSUS
+R3970,Temporal-Spatial Feature Extraction of DSA Video and Its Application in AVM Diagnosis.,2021,Frontiers in neurology,10.3389/fneur.2021.655523,INCLUDE_CENSUS
+R3999,autoTICI: Automatic Brain Tissue Reperfusion Scoring on 2D DSA Images of Acute Ischemic Stroke Patients.,2021,IEEE transactions on medical imaging,10.1109/TMI.2021.3077113,INCLUDE_CENSUS
+R4029,Deep Learning-based Angiogram Generation Model for Cerebral Angiography without Misregistration Artifacts.,2021,Radiology,10.1148/radiol.2021203692,INCLUDE_CENSUS
+R4102,Automatic stenosis recognition from coronary angiography using convolutional neural networks.,2021,Computer methods and programs in biomedicine,10.1016/j.cmpb.2020.105819,INCLUDE_CENSUS
+R4114,Development of Novel Artificial Intelligence to Detect the Presence of Clinically Meaningful Coronary Atherosclerotic Stenosis in Major Branch from Coronary Angiography Video.,2021,Journal of atherosclerosis and thrombosis,10.5551/jat.59675,INCLUDE_CENSUS
+R4143,Deep-Learning-Based Registration of Diagnostic Angiogram and Live Fluoroscopy for Percutaneous Coronary Intervention,2021,IEEE Access,10.1109/ACCESS.2021.3098527,INCLUDE_CENSUS
+R4148,Stent enhancement using marker response network and focus conversion learning in x-ray fluoroscopy sequences,2021,,10.1117/12.2580810,INCLUDE_CENSUS
+R4154,Using a Convolutional Neural Network and Convolutional Long Short-term Memory to Automatically Detect Aneurysms on 2D-DSA Images (Preprint),2021,,10.2196/preprints.36057,INCLUDE_CENSUS
+R4204,Automated Deep Learning Analysis of Angiography Video Sequences for Coronary Artery Disease,2021,arXiv.org,,INCLUDE_CENSUS
+R4208,Automatic vessel segmentation in X-ray angiogram using spatio-temporal fully-convolutional neural network,2021,Biomedical Signal Processing and Control,10.1016/J.BSPC.2021.102646,INCLUDE_CENSUS
+R4220,Analysis of Coronary Angiography Video Interpolation Methods to Reduce X-ray Exposure Frequency Based on Deep Learning,2021,,10.15212/CVIA.2021.0011,INCLUDE_CENSUS
+R4265,End-to-End Deep Learning Model for Cardiac Cycle Synchronization from Multi-View Angiographic Sequences.,2020,Annual International Conference of the IEEE Engineering in Medicine and Biology Society. IEEE Engineering in Medicine and Biology Society. Annual International Conference,10.1109/EMBC44109.2020.9175453,INCLUDE_CENSUS
+R4317,Deep neural networks for ECG-free cardiac phase and end-diastolic frame detection on coronary angiographies.,2020,Computerized medical imaging and graphics : the official journal of the Computerized Medical Imaging Society,10.1016/j.compmedimag.2020.101749,INCLUDE_CENSUS
+R4323,Motion-flow-guided recurrent network for respiratory signal estimation of x-ray angiographic image sequences.,2020,Physics in medicine and biology,10.1088/1361-6560/aba087,INCLUDE_CENSUS
+R4339,Sequential vessel segmentation via deep channel attention network.,2020,Neural networks : the official journal of the International Neural Network Society,10.1016/j.neunet.2020.05.005,INCLUDE_CENSUS
+R4411,Dynamic coronary roadmapping via catheter tip tracking in X-ray fluoroscopy with deep learning based Bayesian filtering.,2020,Medical image analysis,10.1016/j.media.2020.101634,INCLUDE_CENSUS
+R4441,Automatic Diagnosis Based on Spatial Information Fusion Feature for Intracranial Aneurysm.,2020,IEEE transactions on medical imaging,10.1109/TMI.2019.2951439,INCLUDE_CENSUS
+R4479,Fully automated intracranial aneurysm detection and segmentation from digital subtraction angiography series using an end-to-end spatiotemporal deep neural network,2020,Journal of NeuroInterventional Surgery,10.1136/neurintsurg-2020-015824,INCLUDE_CENSUS
+R4482,Optimization of DSA image data input to a machine learning aneurysm identifier,2020,"Biomedical Applications in Molecular, Structural, and Functional Imaging",10.1117/12.2549727,INCLUDE_CENSUS
+R4671,Fully automated unruptured intracranial aneurysm detection and segmentation from digital subtraction angiography series using an end-to-end spatiotemporal deep neural network,2019,Image Processing,10.1117/12.2512623,INCLUDE_CENSUS
+R4683,Feasibility study of deep neural networks to classify intracranial aneurysms using angiographic parametric imaging,2019,Medical Imaging,10.1117/12.2512643,INCLUDE_CENSUS
+R4699,Fully Automatic Dual-Guidewire Segmentation for Coronary Bifurcation Lesion,2019,IEEE International Joint Conference on Neural Network,10.1109/IJCNN.2019.8851827,INCLUDE_CENSUS
+R4762,Real-Time Medical Video Denoising with Deep Learning: Application to Angiography.,2018,International journal of applied information systems,10.5120/ijais2018451755,INCLUDE_CENSUS
+R4804,A Motion Artifact Reduction Method in Cerebrovascular DSA Sequence Images,2018,International journal of pattern recognition and artificial intelligence,10.1142/S0218001418540228,INCLUDE_CENSUS
+R1213,Multitask Deep Learning for Automated Detection of Endoleak at Digital Subtraction Angiography during Endovascular Aneurysm Repair.,2025,Radiology. Artificial intelligence,10.1148/ryai.240392,INCLUDE_CENSUS
+R1263,Minimizing Human-Induced Variability in Quantitative Angiography for Robust and Explainable AI-Based Occlusion Prediction.,2025,ArXiv,,INCLUDE_CENSUS
+R1503,Rupture risk assessment in cerebral arteriovenous malformations: an ensemble model using hemodynamic and morphological features.,2025,Journal of neurointerventional surgery,10.1136/jnis-2024-022208,EXCLUDE_SAMPLE
+R1680,"Integrated Pipeline for Coronary Angiography With Automated Lesion Profiling, Virtual Stenting, and 100-Vessel FFR Validation",2025,arXiv.org,10.48550/arXiv.2512.09134,INCLUDE_CENSUS
+R1725,FLOW LAYER HETEROGENEITY LEADING PLAQUE ECCENTRICITY IN CORONARY ARTERIES: DYNAMIC ANGIOGRAPHY WITH IVUS AND DEEP LEARNING ANALYSIS,2025,Journal of the American College of Cardiology,10.1016/s0735-1097(25)02866-9,INCLUDE_CENSUS
+R2022,A Convolutional-Transformer Model for FFR and iFR Assessment From Coronary Angiography.,2024,IEEE transactions on medical imaging,10.1109/TMI.2024.3383283,INCLUDE_CENSUS
+R3338,Self-supervised learning enables 3D digital subtraction angiography reconstruction from ultra-sparse 2D projection views: A multicenter study.,2022,Cell reports. Medicine,10.1016/j.xcrm.2022.100775,INCLUDE_CENSUS
+R3707,Spatio-Temporal U-Net for Cerebral Artery and Vein Segmentation in Digital Subtraction Angiography,2022,,,INCLUDE_CENSUS
+R4468,Learning Depth from a Single 2D Digital Subtraction Angiography Image as Semantic Segmentation,2020,,,INCLUDE_CENSUS
+R4475,Deep learning for cerebral DSA to free from misregistration artifacts.,2020,,,INCLUDE_CENSUS
+R4557,Automatic detection on intracranial aneurysm from digital subtraction angiography with cascade convolutional neural networks.,2019,Biomedical engineering online,10.1186/s12938-019-0726-2,EXCLUDE_SAMPLE

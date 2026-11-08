@@ -1,0 +1,17 @@
+{"record_id": "R0309",
+ "items": {
+  "6": {"answer": "yes", "quote": "We sought to explore the role of deep learning (DL) in detecting right ventricular dysfunction from routinely acquired cine images during coronary angiography.", "section": "abstract"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "Next, we removed the first 15 frames of each video (∼1 s) as those correspond with coronary filling with contrast agent.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Next, we excluded angiograms from patients who did not have RV systolic function documented on echocardiography within 30 days of the angiogram.", "section": "methods"},
+  "15": {"answer": "yes", "quote": "In contrast, we chose to assess RV function using echocardiography, which is noninvasive, widely available, and routinely utilized in clinical practice.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "The ground truth (labels) obtained based on the patients’ RV systolic function variable as documented on an echocardiogram done within 30 days at Mayo Clinic.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The models were implemented using Python (version 3.7.11) and in PyTorch (version 1.7.1) deep learning framework", "section": "methods"},
+  "26": {"answer": "yes", "quote": "The results presented below correspond to the frame count yielding the maximum AUC unless explicitly stated.", "section": "results"},
+  "27": {"answer": "yes", "quote": "The logits obtained from the last layer of the model for each patient along with the corresponding outcomes of the AI-Cath model were then fed into an MLP to predict the final binary label", "section": "results"},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "In the testing sets, the models attained an area under the ROC curve (AUC), sensitivity, and specificity of 0.82 (95% CI: 0.80–0.84), 0.75, 0.74 for detecting any RV dysfunction", "section": "results"},
+  "38": {"answer": "yes", "quote": "0.83 (95% CI: 0.80–0.86), 0.82, 0.70 for detecting significant (≥mild-moderate) RV dysfunction", "section": "results"}
+ }}

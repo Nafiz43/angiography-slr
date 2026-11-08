@@ -1,0 +1,17 @@
+{"record_id": "R4265",
+ "items": {
+  "6": {"answer": "yes", "quote": "we show how a neural network can be trained from angiographic sequences to synchronize different views during the cardiac cycle using raw x-ray angiography videos exclusively", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "The images are downsized from 1024x1024 pixels to 224x224 or 248x248 pixels to comply with the expected input size of the selected model.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "We keep only frames where the global pixel intensity gradient starts being greater than the average of the video up until it falls back under the average.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "the latter seems to be off by a few frames at the end of systole phases", "section": "results"},
+  "17": {"answer": "yes", "quote": "That algorithm detects the peak of R-waves by locating local maxima of the smoothed and normalized signals using gaussian kernels and gradients.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "39 sequences from 5 patients are used to create the validation set and 30 sequences from 5 other patients compose the testing set", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "yes", "quote": "For every sequence combination of each patient of the validation set, the C matrix is generated and the best synchronization path is found.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "While the average score of the best model is 0.9604, the median is much higher at 0.979.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

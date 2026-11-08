@@ -1,0 +1,17 @@
+{"record_id": "R0058",
+ "items": {
+  "6":  {"answer": "yes", "quote": "This study aims to address this limitation by introducing a new evaluation metric tailored for frame-based medical object detection tasks.", "section": "abstract"},
+  "9":  {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "Only informative frames containing visible contrast in stenotic vessels were selected by interventional cardiologists.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The resulting images, ranging in size from 512×512 to 1000×1000 pixels, were annotated using the LabelBox tool.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Python 3.10.14, PyTorch 2.4.0+cu121, YOLOv10, CUDA 12.1", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Table 5 presents details on the total number of frames, sequences, true positives (TP), false positives (FP), Sequenceaware Precision (SaP), and Sequence-oriented Detections (SoD) for each video ID in the validation dataset.", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

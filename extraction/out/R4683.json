@@ -1,0 +1,132 @@
+{
+  "record_id": "R4683",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Feasibility study of deep neural networks to classify intracranial aneurysms using angiographic parametric imaging",
+    "year": 2019,
+    "venue": "Medical Imaging 2019: Computer-Aided Diagnosis, Proc. of SPIE Vol. 10950",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "DSA sequences analyzed with Canon Parametric Imaging software to derive angiographic parametric imaging (API) parameters (MTT, TTP, PH, TDCI)",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial saccular aneurysms and main entry vessel",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 115,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": null},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "sequence",
+    "annotation": {
+      "type": "not_reported",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Classify intracranial aneurysms as untreated or treated (coiled, flow-diverted, combined datasets) from aneurysm and entry-vessel API parameters, normalized and un-normalized, using a DNN compared with Naive Bayes and KNN.",
+    "clinical_application": "Assessment of endovascular treatment (coiling, flow diversion) of intracranial aneurysms"
+  },
+  "method": {
+    "architecture_names": ["Deep Neural Network (DNN) with 1D convolutional and fully connected layers", "Naive Bayes", "K-Nearest Neighbor"],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "hemodynamic_physics",
+    "temporal_evidence": {
+      "quote": "The value of pixels in each frame are tracked, and a time-density curve is generated at each pixel.",
+      "section": "introduction"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Accuracy (coiled, un-normalized)", "family": "accuracy", "value_raw": "72.40%", "value_0_100": 72.4, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "Accuracy (coiled, normalized)", "family": "accuracy", "value_raw": "87.90%", "value_0_100": 87.9, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "Accuracy (flow diverted, un-normalized)", "family": "accuracy", "value_raw": "73.91%", "value_0_100": 73.91, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "Accuracy (flow diverted, normalized)", "family": "accuracy", "value_raw": "85.30%", "value_0_100": 85.3, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "Accuracy (combined, un-normalized)", "family": "accuracy", "value_raw": "62.86%", "value_0_100": 62.86, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "Accuracy (combined, normalized)", "family": "accuracy", "value_raw": "64.76%", "value_0_100": 64.76, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "ROC AUC (coiled, un-normalized)", "family": "auc", "value_raw": "0.80", "value_0_100": 80.0, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "ROC AUC (coiled, normalized)", "family": "auc", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "ROC AUC (flow diverted, un-normalized)", "family": "auc", "value_raw": "0.79", "value_0_100": 79.0, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "ROC AUC (flow diverted, normalized)", "family": "auc", "value_raw": "0.84", "value_0_100": 84.0, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "ROC AUC (combined, un-normalized)", "family": "auc", "value_raw": "0.64", "value_0_100": 64.0, "split": "test", "task": "treated vs untreated classification"},
+      {"metric": "ROC AUC (combined, normalized)", "family": "auc", "value_raw": "0.73", "value_0_100": 73.0, "split": "test", "task": "treated vs untreated classification"}
+    ],
+    "comparators": ["Naive Bayes", "K-Nearest Neighbor"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the number of samples included in the training and testing cohorts is relatively small", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "we cannot say how other types of aneurysms such as fusiform or other types of treatment methods such as stent-coiling will impact this analysis", "section": "discussion"},
+    "G3": {"status": "none", "quote": null, "section": null},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "the only type of aneurysm considered was a saccular aneurysm", "section": "discussion"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Only coiling and flow diversion considered as interventions",
+    "Gaussian-noise augmentation may introduce overfitting",
+    "Different treatment methods cannot be combined into a single dataset"
+  ],
+  "future_work": [
+    "Collect a larger, more diverse dataset with API values computed from image data",
+    "Use models in the operating room to predict intervention success post treatment",
+    "Non-Gaussian augmentation for NB and KNN models"
+  ],
+  "claim2024": {
+    "items": "yyyyynynnnnynynnyyynnynnynynnnnynnnynynyynny"
+  }
+}

@@ -1,0 +1,20 @@
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.7cm} >{\raggedright\arraybackslash}p{6.2cm} >{\raggedright\arraybackslash}p{2.9cm} r >{\raggedright\arraybackslash}p{4.2cm}}
+\caption{Topic model and its correspondence to the research gaps. We reran the procedure of Section 2.4 on the full texts of the 115 included studies (2,641 terms after filtering). C\_v coherence was highest at K = 10 (0.386; 0.329 to 0.386 for K = 5 to 20). Representative studies have the highest weight on the topic; $n$ is the number of studies for which the topic is dominant. The gap column lists gaps whose coding correlates with the topic weight across studies at $r \geq 0.2$, a deliberately broad threshold chosen to surface as many candidate gaps as possible. Topics served only as a starting point: the gaps were defined and validated through careful manual curation by two reviewers.}\label{tab:lda_topics}\\
+\toprule
+\textbf{Topic} & \textbf{Top 10 terms} & \textbf{Representative studies} & \textbf{\textit{n}} & \textbf{Correlated gaps}\\
+\midrule\endfirsthead
+\toprule
+\textbf{Topic} & \textbf{Top 10 terms} & \textbf{Representative studies} & \textbf{\textit{n}} & \textbf{Correlated gaps}\\
+\midrule\endhead
+\bottomrule\endfoot
+T1 & angiogram, video, system, dsa, assessment, function, classification, dnn, automated, coronary angiography & R2873, R0570, R3999 & 11 & G7 explainability ($r=0.28$); G11 outcome prediction ($r=0.26$); G6 prospective validation ($r=0.22$); G9 class imbalance ($r=0.22$)\\
+T2 & detection, stenosis, coronary artery, coronary angiography, stenosis detection, key frame, coronary, angiographic, view, classification & R4317, R4102, R3030 & 11 & none ($r<0.2$)\\
+T3 & dsa, aneurysm, occlusion, segmentation, dsa sequence, prediction, treatment, stroke, flow, intervention & R4683, R4482, R3093 & 20 & none ($r<0.2$)\\
+T4 & aneurysm, detection, segmentation, dsa, intracranial aneurysm, ia, radiologist, digital subtraction, detect, dsa image & R2855, R4441, R4479 & 10 & G4 2D constraints ($r=0.28$)\\
+T5 & video, stenosis, set, segment, coronary artery, classification, cag, prediction, assessment, visual assessment & R1421, R2992, R2087 & 9 & none ($r<0.2$)\\
+T6 & reconstruction, view, projection, dsa, dsa image, flow, psnr ssim, x-ray, synthesis, kernel & R3164, R2466, R1565 & 3 & none ($r<0.2$)\\
+T7 & video, datasets, across, score, selection, classification, framework, coronary artery, prediction, precision & R0643, R1238, R0521 & 13 & G12 LLMs and reporting ($r=0.44$); G8 multimodal integration ($r=0.36$); G7 explainability ($r=0.24$); G2 generalizability ($r=0.24$)\\
+T8 & tracking, segmentation, detection, point, motion, stent, x-ray, section, pixel, set & R4411, R4143, R3576 & 13 & none ($r<0.2$)\\
+T9 & optical flow, dsa, dsa image, video, coronary angiography, motion, artery, data set, text, dsa sequence & R2490, R2491, R4029 & 11 & none ($r<0.2$)\\
+T10 & segmentation, vessel segmentation, vascular, u-net, dsa, temporal, artifact, module, background, region & R0546, R0352, R2377 & 14 & G3 temporal modeling ($r=0.24$)\\
+\end{longtable}

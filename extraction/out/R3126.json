@@ -1,0 +1,384 @@
+{
+ "record_id": "R3126",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Angular super-resolution in X-ray projection radiography using deep neural network: Implementation on rotational angiography",
+  "year": 2023,
+  "venue": "Biomedical Journal",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "Taiwan"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Projection radiographs of carotid and vertebral rotational angiograms (cone-beam CT mask and fill acquisitions)",
+  "territory": "neurologic",
+  "territory_detail": "Carotid (common, internal, external) and vertebrobasilar arteries",
+  "acquisition_geometry": "rotational_3D",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "108 (Toshiba) or 133 (Siemens) radiographs per rotation",
+  "vendors": [
+   "Toshiba Medical Systems (Infinix-I Biplane)",
+   "Siemens Healthineers (Axiom Artis zee)"
+  ]
+ },
+ "dataset": {
+  "n_patients": 723,
+  "n_sequences": 1003,
+  "n_images_or_frames": 107164,
+  "n_centers": 1,
+  "n_vendors": 2,
+  "data_origin": "clinical",
+  "public_dataset_used": {
+   "value": false,
+   "detail": null
+  },
+  "data_released": {
+   "value": null,
+   "detail": null
+  },
+  "split_level": "sequence",
+  "annotation": {
+   "type": "none",
+   "n_annotators": 2,
+   "annotator_expertise": "Two board-certified neuroradiologists (3 and 15 years experience) rated image quality; original intermediate frames served as ground truth",
+   "inter_rater_reported": true,
+   "inter_rater_value": "ICC 0.63 (95% CI 0.53-0.70)"
+  }
+ },
+ "task": {
+  "primary_task": "image_enhancement_denoising",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Angular super-resolution (frame interpolation) of rotational angiography: synthesizing N intermediate projection frames from the first and last of every N+2 frames (ASR1-ASR10).",
+  "clinical_application": "Reducing the number of projections and radiation dose needed for diagnosable cerebral rotational angiography"
+ },
+ "method": {
+  "architecture_names": [
+   "ASRNet",
+   "Super SloMo"
+  ],
+  "architecture_family": "other",
+  "temporal_category": "optical_flow_registration",
+  "temporal_evidence": {
+   "quote": "optical flow is probably by far the most suitable method for the ASR technique",
+   "section": "discussion"
+  },
+  "input_dimensionality": "2D_multi_frame",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "32.24 ± 1.91",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR1"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.77 ± 0.06",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR1"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "31.63 ± 2.00",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR2"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.75 ± 0.06",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR2"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "30.77 ± 2.13",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR3"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.73 ± 0.07",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR3"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "30.27 ± 2.18",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR4"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.71 ± 0.07",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR4"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "29.78 ± 2.23",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR5"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.70 ± 0.08",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR5"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "29.30 ± 2.26",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR6"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.68 ± 0.08",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR6"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "28.86 ± 2.33",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR7"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.67 ± 0.08",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR7"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "28.70 ± 2.31",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR8"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.67 ± 0.08",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR8"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "28.25 ± 2.36",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR9"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.65 ± 0.09",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR9"
+   },
+   {
+    "metric": "PSNR (dB)",
+    "family": "psnr",
+    "value_raw": "28.00 ± 2.34",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR10"
+   },
+   {
+    "metric": "SSIM",
+    "family": "ssim",
+    "value_raw": "0.64 ± 0.09",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR10"
+   },
+   {
+    "metric": "Interpolation error (IE)",
+    "family": "other",
+    "value_raw": "6.38 ± 1.47",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR1"
+   },
+   {
+    "metric": "Interpolation error (IE)",
+    "family": "other",
+    "value_raw": "6.87 ± 1.67",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR2"
+   },
+   {
+    "metric": "Interpolation error (IE)",
+    "family": "other",
+    "value_raw": "7.61 ± 1.98",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR3"
+   },
+   {
+    "metric": "Interpolation error (IE)",
+    "family": "other",
+    "value_raw": "8.08 ± 2.16",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR4"
+   },
+   {
+    "metric": "Interpolation error (IE)",
+    "family": "other",
+    "value_raw": "8.56 ± 2.35",
+    "value_0_100": null,
+    "split": "test",
+    "task": "angular super-resolution ASR5"
+   }
+  ],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": true,
+  "confidence_intervals": true,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": true,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {
+   "value": null,
+   "detail": null
+  },
+  "model_weights_available": {
+   "value": null,
+   "detail": null
+  },
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G2": {
+   "status": "documents",
+   "quote": "Whether or not the methodology can be generalized to various clinical settings in other institutions needs to be explored.",
+   "section": "discussion"
+  },
+  "G3": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G4": {
+   "status": "documents",
+   "quote": "Standard radiography obtains two-dimensional projections of the three-dimensional anatomy in which structures are overlaid on each other.",
+   "section": "other"
+  },
+  "G5": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G6": {
+   "status": "documents",
+   "quote": "First, this is a retrospective study using data from a single center.",
+   "section": "discussion"
+  },
+  "G7": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G8": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G9": {
+   "status": "documents",
+   "quote": "the training data set suffered from an imbalanced number of imaged blood vessels",
+   "section": "discussion"
+  },
+  "G10": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G11": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  },
+  "G12": {
+   "status": "none",
+   "quote": null,
+   "section": null
+  }
+ },
+ "other_limitations": [
+  "ASR5-10 failed to show non-inferior image quality; small vessels (perforating arteries) blurred at higher ASR levels"
+ ],
+ "future_work": [
+  "Replace the interpolation algorithm with more advanced frame interpolation approaches",
+  "Validate generalizability in other institutions",
+  "Integrate ASR into angiographic machine post-processing pipelines"
+ ],
+ "claim2024": {
+  "items": "yyyyyyyyyynyyyyyyynnnynnyyyyyynynyynyynyyynn"
+ }
+}

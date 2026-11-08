@@ -1,0 +1,120 @@
+{
+ "record_id": "R3707",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Spatio-Temporal U-Net for Cerebral Artery and Vein Segmentation in Digital Subtraction Angiography",
+  "year": 2022,
+  "venue": null,
+  "publication_type": "preprint",
+  "text_is_full_paper": true,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "DSA",
+  "modality_detail": "2D+t cerebral DSA series, post-EVT acquisitions, 1024x1024, variable temporal resolution 0.5-4 fps",
+  "territory": "neurologic",
+  "territory_detail": "cerebral arteries and veins in acute ischemic stroke patients after endovascular thrombectomy",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "10-50 frames (0.5-4 fps; resampled to 1 fps)",
+  "vendors": ["Philips", "GE", "Siemens"]
+ },
+ "dataset": {
+  "n_patients": 90,
+  "n_sequences": 97,
+  "n_images_or_frames": null,
+  "n_centers": null,
+  "n_vendors": 3,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": "subset of a prospective observational multi-center registry of 3232 EVT patients"},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 5,
+   "annotator_expertise": "four trained students working in pairs, refined by another trained student; experienced radiologist available for consultancy",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "vessel_segmentation",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Binary vessel segmentation and artery-vein segmentation from a variable-length 2D+t cerebral DSA series into a single 2D mask using a spatio-temporal U-Net with ConvGRU.",
+  "clinical_application": "Vessel-based quantitative analysis in stroke/EVT (treatment evaluation, emboli detection, flow biomarkers, image guidance)"
+ },
+ "method": {
+  "architecture_names": ["ST U-Net (spatio-temporal U-Net)", "ConvGRU", "U-Net"],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "recurrent",
+  "temporal_evidence": {
+   "quote": "All frames of the DSA series are fed into the same down block for feature extraction, followed by a convolutional GRU network for feature aggregation",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "Accuracy (vessel segmentation)", "family": "accuracy", "value_raw": "0.906 ± 0.031", "value_0_100": 90.6, "split": "test", "task": "vessel segmentation"},
+   {"metric": "Sensitivity (vessel segmentation)", "family": "sensitivity_recall", "value_raw": "0.825 ± 0.076", "value_0_100": 82.5, "split": "test", "task": "vessel segmentation"},
+   {"metric": "Specificity (vessel segmentation)", "family": "specificity", "value_raw": "0.943 ± 0.022", "value_0_100": 94.3, "split": "test", "task": "vessel segmentation"},
+   {"metric": "Dice (vessel segmentation)", "family": "dice", "value_raw": "0.834 ± 0.047", "value_0_100": 83.4, "split": "test", "task": "vessel segmentation"},
+   {"metric": "Accuracy (artery-vein)", "family": "accuracy", "value_raw": "0.904 ± 0.035", "value_0_100": 90.4, "split": "test", "task": "artery-vein segmentation"},
+   {"metric": "Sensitivity (artery-vein)", "family": "sensitivity_recall", "value_raw": "0.793 ± 0.078", "value_0_100": 79.3, "split": "test", "task": "artery-vein segmentation"},
+   {"metric": "Specificity (artery-vein)", "family": "specificity", "value_raw": "0.950 ± 0.024", "value_0_100": 95.0, "split": "test", "task": "artery-vein segmentation"},
+   {"metric": "Artery Dice (A-Dice)", "family": "dice", "value_raw": "0.824 ± 0.077", "value_0_100": 82.4, "split": "test", "task": "artery-vein segmentation"},
+   {"metric": "Vein Dice (V-Dice)", "family": "dice", "value_raw": "0.762 ± 0.054", "value_0_100": 76.2, "split": "test", "task": "artery-vein segmentation"},
+   {"metric": "Multi-class Dice (M-Dice)", "family": "dice", "value_raw": "0.794 ± 0.057", "value_0_100": 79.4, "split": "test", "task": "artery-vein segmentation"}
+  ],
+  "comparators": ["Frangi + K-means", "U-Net", "U-Net + K-means"],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": true,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": "Code will be made publicly available upon acceptance"},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "both", "quote": "While existing vessel segmentation networks could be directly adopted for end-to-end artery-vein segmentation, most methods use static images.", "section": "introduction"},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "documents", "quote": "Considering the manual annotation effort, we randomly selected a subset of 110 DSA series from 90 patients for annotation.", "section": "methods"},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [],
+ "future_work": [],
+ "claim2024": {"items": "ynyyynynynnnyyynyyynyynyyyyynnnynyyynnnnynnn"}
+}

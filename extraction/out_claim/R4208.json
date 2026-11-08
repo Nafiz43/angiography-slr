@@ -1,0 +1,17 @@
+{"record_id": "R4208",
+ "items": {
+  "6": {"answer": "yes", "quote": "The main purpose of this work is to develop a dynamic segmentation method to partition the whole coronary tree during the contrast agent diffusion.", "section": "introduction"},
+  "9": {"answer": "yes", "quote": "In order to eliminate the impulse-Gaussian combination of noises, two image denoising methods were sequentially adopted on the original high-contrast angiogram", "section": "methods"},
+  "10": {"answer": "yes", "quote": "In all the experiments, the optimally high-contrast frame, and its previous and subsequent 4 frames were selected as the high-contrast angiogram, covering approximately one cardiac cycle.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "The enclosed vessel contours were manually delineated by an experienced cardiothoracic radiologist using a drawing tool.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "We implemented the ST-FCN model with TensorFlow on the VGG-16 network.", "section": "results"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The ST-FCN model outperformed the state-of-the-art segmentation methods with dice similarity coefficient (DSC) of 0.90, accuracy (AC) of 0.92, and sensitivity (SN) of 0.89.", "section": "abstract"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

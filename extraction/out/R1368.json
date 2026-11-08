@@ -1,0 +1,126 @@
+{
+  "record_id": "R1368",
+  "schema_version": "2.0",
+  "study": {
+    "title": "CDKD-w+: A Keyframe Recognition Method for Coronary Digital Subtraction Angiography Video Sequence Based on w+ Space Encoding",
+    "year": 2025,
+    "venue": "Sensors (Basel, Switzerland)",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Coronary DSA image sequences (grayscale, resized to 512x512) from multiple C-arm positions",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "each sequence contains at least one complete heartbeat cycle; 959 images over 50 sequences",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 100,
+    "n_sequences": 50,
+    "n_images_or_frames": 959,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "Coronary DSA stenosis detection dataset by Danilov et al. (Sci Rep 2021), 100 patients"
+    },
+    "data_released": {
+      "value": null,
+      "detail": "Data availability statement refers to the source public dataset; release of the authors' keyframe labels is not stated"
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "temporal_sequence_modeling",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Heartbeat keyframe recognition (maximal vasodilation/vasoconstriction frames) in coronary DSA sequences by encoding frames into StyleGAN2 w+ space with a pSp encoder, computing inter-frame cosine similarity matrix, local minimum search and non-minimum suppression.",
+    "clinical_application": "Selecting cardiac-phase-matched frames to aid 3D modeling/reconstruction of coronary arteries"
+  },
+  "method": {
+    "architecture_names": ["CDKD-w+", "pSp (pixel2style2pixel) encoder", "StyleGAN2", "EG3D"],
+    "architecture_family": "generative_gan_diffusion",
+    "temporal_category": "frame_aggregation",
+    "temporal_evidence": {
+      "quote": "Differential analysis of inter-frame latent codes is employed for heartbeat keyframe localization",
+      "section": "abstract"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "unsupervised",
+    "pretraining": "Pre-trained EG3D network used to provide w+ latent labels for training the pSp encoder",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "not_reported",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.97", "value_0_100": 97.0, "split": "other", "task": "heartbeat keyframe recognition"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.93", "value_0_100": 93.0, "split": "other", "task": "heartbeat keyframe recognition"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.95", "value_0_100": 95.0, "split": "other", "task": "heartbeat keyframe recognition"}
+    ],
+    "comparators": ["L1 loss", "SSIM", "PSNR", "ResNet18 feature extractor"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "Since there is currently no coronary DSA dataset serving the heartbeat keyframe recognition task", "section": "methods"},
+    "G2": {"status": "none", "quote": null, "section": null},
+    "G3": {"status": "both", "quote": "do not consider the impact of heartbeat on DSA images. This article fills this gap and achieves the localization of heartbeat keyframes", "section": "other"},
+    "G4": {"status": "both", "quote": "the 2D images may sometimes lack sufficient information, necessitating the construction of a 3D model", "section": "abstract"},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Only measures size of differences between paired frames; cannot directly distinguish vasoconstriction from vasodilation frames"
+  ],
+  "future_work": [
+    "Use a three-dimensional encoder for high-dimensional encoding to enable image difference detection without special labeling",
+    "Introduce image segmentation to independently locate vasoconstriction and vasodilation frames"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnynynyyynnnnnnyynnynnnnnnnnyynnyynyy"
+  }
+}

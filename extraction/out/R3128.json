@@ -1,0 +1,136 @@
+{
+ "record_id": "R3128",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Angiography-based coronary flow reserve: The feasibility of automatic computation by artificial intelligence",
+  "year": 2023,
+  "venue": "Cardiology Journal",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": null
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Invasive X-ray coronary angiography runs at rest and under maximal hyperemia (DICOM loops)",
+  "territory": "cardiac",
+  "territory_detail": "Main epicardial coronary arteries: LAD, LCx, RCA",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": null,
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 2407,
+  "n_sequences": 5913,
+  "n_images_or_frames": 137126,
+  "n_centers": null,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": "Corelab (CardHemo, Med-X Research Institute, Shanghai Jiao Tong University) database"},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "not_reported",
+  "annotation": {
+   "type": "semi_automatic",
+   "n_annotators": null,
+   "annotator_expertise": "Experienced analysts trained in quantitative coronary angiography (QCA), regularly audited at the core laboratory",
+   "inter_rater_reported": true,
+   "inter_rater_value": "CFRmanual inter-observer ICCa 0.62 (95% CI 0.41-0.76), intra-observer ICCa 0.71 (95% CI 0.54-0.83)"
+  }
+ },
+ "task": {
+  "primary_task": "contrast_flow_analysis",
+  "other_label": null,
+  "secondary_tasks": ["vessel_segmentation"],
+  "task_description": "Automatic computation of coronary flow reserve (CFRauto) from paired rest and hyperemic coronary angiograms: a modified U-Net segments the main coronary artery in every frame, centerline length over time yields a length/time curve whose slope during contrast injection gives flow velocity; CFR is the hyperemic-to-rest velocity ratio, compared with manual TIMI frame count CFR. Segmentation evaluated by 5-fold cross-validation (development cohort of 2407 patients); CFRauto validated on an independent sample of 149 vessels from 138 patients.",
+  "clinical_application": "Wire-free assessment of coronary microcirculatory function (coronary flow reserve) in the catheterization laboratory"
+ },
+ "method": {
+  "architecture_names": ["modified U-Net (CNN)", "FlowPlus prototype software"],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "hemodynamic_physics",
+  "temporal_evidence": {
+   "quote": "The flow velocity could then be easily calculated by fitting a straight line to the length/time curve during the phase of contrast injection, using the least-square method.",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_single_frame",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": "Combination of Dice and focal loss (focal loss for small vessel area relative to image size)",
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "cross_validation",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "Dice", "family": "dice", "value_raw": "0.780 ± 0.007", "value_0_100": 78.0, "split": "cross_validation", "task": "LAD segmentation"},
+   {"metric": "Dice", "family": "dice", "value_raw": "0.722 ± 0.005", "value_0_100": 72.2, "split": "cross_validation", "task": "LCx segmentation"},
+   {"metric": "Dice", "family": "dice", "value_raw": "0.758 ± 0.003", "value_0_100": 75.8, "split": "cross_validation", "task": "RCA segmentation"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.763 ± 0.004", "value_0_100": 76.3, "split": "cross_validation", "task": "LAD segmentation"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.748 ± 0.004", "value_0_100": 74.8, "split": "cross_validation", "task": "LCx segmentation"},
+   {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.777 ± 0.006", "value_0_100": 77.7, "split": "cross_validation", "task": "RCA segmentation"},
+   {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.919 ± 0.004", "value_0_100": 91.9, "split": "cross_validation", "task": "LAD segmentation"},
+   {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.849 ± 0.005", "value_0_100": 84.9, "split": "cross_validation", "task": "LCx segmentation"},
+   {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.893 ± 0.004", "value_0_100": 89.3, "split": "cross_validation", "task": "RCA segmentation"},
+   {"metric": "F1", "family": "f1", "value_raw": "0.834 ± 0.002", "value_0_100": 83.4, "split": "cross_validation", "task": "LAD segmentation"},
+   {"metric": "F1", "family": "f1", "value_raw": "0.796 ± 0.003", "value_0_100": 79.6, "split": "cross_validation", "task": "LCx segmentation"},
+   {"metric": "F1", "family": "f1", "value_raw": "0.831 ± 0.002", "value_0_100": 83.1, "split": "cross_validation", "task": "RCA segmentation"},
+   {"metric": "Feasibility (successful CFRauto computation)", "family": "other", "value_raw": "136/149 (91.3%)", "value_0_100": null, "split": "test", "task": "CFR computation"},
+   {"metric": "Pearson correlation r (CFRauto vs CFRmanual)", "family": "correlation", "value_raw": "0.51 (p < 0.001)", "value_0_100": null, "split": "test", "task": "CFR computation"},
+   {"metric": "ICCa (CFRauto vs CFRmanual)", "family": "correlation", "value_raw": "0.50 (95% CI 0.36-0.62)", "value_0_100": null, "split": "test", "task": "CFR computation"},
+   {"metric": "Mean difference (Bland-Altman, CFRmanual - CFRauto)", "family": "other", "value_raw": "0.12 ± 0.53", "value_0_100": null, "split": "test", "task": "CFR computation"},
+   {"metric": "Analysis time per vessel", "family": "time", "value_raw": "18.1 ± 10.3 s", "value_0_100": null, "split": "test", "task": "CFR computation"}
+  ],
+  "comparators": ["CFRmanual (manual TIMI frame count by experienced QCA analysts)"],
+  "compared_with_humans": true,
+  "ablation": false,
+  "statistical_testing": true,
+  "confidence_intervals": true,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "not_reported",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "none", "quote": null, "section": null},
+  "G4": {"status": "documents", "quote": "might have limited feasibility in cases of extreme foreshortening or vessel overlap, which were excluded from the current study", "section": "discussion"},
+  "G5": {"status": "documents", "quote": "The reproducibility of CFRmanual is only moderate, as indicated by the inter- and intraobserver ICCa of 0.62", "section": "discussion"},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "Validated against manual frame-count CFR rather than an invasive reference standard",
+  "CFR depends on both epicardial and microvascular function; not specific for microvascular dysfunction",
+  "Chronic total occlusions and bypass grafts excluded; accuracy may be lower in these scenarios",
+  "Only moderate agreement with CFRmanual"
+ ],
+ "future_work": [
+  "Validation against an invasive CFR standard",
+  "Fine-tuning of the CNN model",
+  "Deriving other microvascular indices such as IMR with a similar rationale"
+ ],
+ "claim2024": {"items": "yyyyynynyynynynyyynynynyyyyyyynynyyyyynyynny"}
+}

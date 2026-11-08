@@ -1,0 +1,153 @@
+{
+  "record_id": "R0339",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Artificial intelligence risk stratification from dynamic digital subtraction angiography radiomics predicts pulmonary embolism and associates with clinical outcomes in deep vein thrombosis: A retrospective cohort study",
+    "year": 2026,
+    "venue": "Journal of Vascular Surgery: Venous and Lymphatic Disorders",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Intraprocedural dynamic DSA sequences of lower extremity veins (Siemens Artis Q, frame rate >=15 fps, iodixanol 2 mL/s)",
+    "territory": "peripheral",
+    "territory_detail": "Lower extremity deep veins (iliac and femoral veins) in acute DVT",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": 15,
+    "frames_per_sequence": null,
+    "vendors": ["Siemens"]
+  },
+  "dataset": {
+    "n_patients": 168,
+    "n_sequences": null,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 1,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "RSNA Pulmonary Embolism CT Dataset (n = 10,000 examinations) used for pretraining"
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "not_reported",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Two blinded radiologists; discordances resolved by a third senior radiologist",
+      "inter_rater_reported": true,
+      "inter_rater_value": "kappa = 0.85; discordances 7.3%"
+    }
+  },
+  "task": {
+    "primary_task": "outcome_prediction",
+    "other_label": null,
+    "secondary_tasks": ["contrast_flow_analysis"],
+    "task_description": "Hybrid transformer-UNet/BiLSTM model processing dynamic DSA sequences to quantify thrombus kinematics (optical flow) and venous quantitative flow ratio, fused with clinical variables, to predict pulmonary embolism risk in lower extremity DVT; AI-stratified groups compared for 12-month outcomes.",
+    "clinical_application": "Intraprocedural risk stratification for PE during endovascular DVT intervention to guide thrombus clearance and IVC filter decisions"
+  },
+  "method": {
+    "architecture_names": ["hybrid transformer-UNet", "bidirectional LSTM", "multilayer perceptron", "1D CNN (clinical data)", "3D-CNN (imaging sequences)", "Horn-Schunck optical flow"],
+    "architecture_family": "hybrid_cnn_transformer",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "Bidirectional long short-term memory configuration: Configured with two layers (128 units/layer) to jointly learn forward and backward temporal dependencies",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": "Backbone pretrained on RSNA Pulmonary Embolism CT Dataset (cross-modality transfer learning), fine-tuned on DSA",
+    "uses_synthetic_training_data": false,
+    "physics_informed": true,
+    "multimodal_inputs": ["Wells score", "peak D-dimer level", "thrombus location"],
+    "class_imbalance_handling": "SMOTE; focal loss (alpha = 0.25, gamma = 2.0)",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "AUC-ROC", "family": "auc", "value_raw": "0.88 (95% CI 0.85-0.92)", "value_0_100": 88.0, "split": "test", "task": "PE prediction (AI model)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "89.6% (87.2-92.1)", "value_0_100": 89.6, "split": "test", "task": "PE prediction (AI model)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "86.5% (81.3-91.4)", "value_0_100": 86.5, "split": "test", "task": "PE prediction (AI model)"},
+      {"metric": "Feature-extraction success rate", "family": "other", "value_raw": "98.7%", "value_0_100": null, "split": "test", "task": "Kinematic parameter extraction from DSA sequences"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.91 (0.86-0.95)", "value_0_100": 91.0, "split": "other", "task": "PE prediction (displacement velocity >=2.1 mm/cycle)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "86.5%", "value_0_100": 86.5, "split": "other", "task": "PE prediction (displacement velocity >=2.1 mm/cycle)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "88.8%", "value_0_100": 88.8, "split": "other", "task": "PE prediction (displacement velocity >=2.1 mm/cycle)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "92.3%", "value_0_100": 92.3, "split": "other", "task": "PE prediction (displacement velocity >=2.1 mm/cycle)"},
+      {"metric": "NPV", "family": "other", "value_raw": "80.9%", "value_0_100": null, "split": "other", "task": "PE prediction (displacement velocity >=2.1 mm/cycle)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.89 (0.84-0.93)", "value_0_100": 89.0, "split": "other", "task": "PE prediction (theta vector angle >45 deg)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "84.6%", "value_0_100": 84.6, "split": "other", "task": "PE prediction (theta vector angle >45 deg)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "83.6%", "value_0_100": 83.6, "split": "other", "task": "PE prediction (theta vector angle >45 deg)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "75.0%", "value_0_100": 75.0, "split": "other", "task": "PE prediction (theta vector angle >45 deg)"},
+      {"metric": "NPV", "family": "other", "value_raw": "90.5%", "value_0_100": null, "split": "other", "task": "PE prediction (theta vector angle >45 deg)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.78 (0.71-0.84)", "value_0_100": 78.0, "split": "other", "task": "PTS prediction (collateral index >0.3)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "74.2%", "value_0_100": 74.2, "split": "other", "task": "PTS prediction (collateral index >0.3)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "76.9%", "value_0_100": 76.9, "split": "other", "task": "PTS prediction (collateral index >0.3)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "65.2%", "value_0_100": 65.2, "split": "other", "task": "PTS prediction (collateral index >0.3)"},
+      {"metric": "NPV", "family": "other", "value_raw": "83.6%", "value_0_100": null, "split": "other", "task": "PTS prediction (collateral index >0.3)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.85 (0.79-0.90)", "value_0_100": 85.0, "split": "other", "task": "PTS prediction (venous QFR <=0.80)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "86.2%", "value_0_100": 86.2, "split": "other", "task": "PTS prediction (venous QFR <=0.80)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "77.4%", "value_0_100": 77.4, "split": "other", "task": "PTS prediction (venous QFR <=0.80)"},
+      {"metric": "PPV", "family": "precision_ppv", "value_raw": "70.2%", "value_0_100": 70.2, "split": "other", "task": "PTS prediction (venous QFR <=0.80)"},
+      {"metric": "NPV", "family": "other", "value_raw": "90.0%", "value_0_100": null, "split": "other", "task": "PTS prediction (venous QFR <=0.80)"},
+      {"metric": "Specificity (cancer-associated DVT subgroup)", "family": "specificity", "value_raw": "91.2%", "value_0_100": 91.2, "split": "other", "task": "Risk stratification (venous QFR)"}
+    ],
+    "comparators": ["Wells score", "3D-CNN baseline", "same architecture trained from scratch on DSA (no CT pretraining)"],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": true,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "the modest sample size and low number of outcome events (12 PEs among 168 patients) resulted in wide CIs for key clinical estimates", "section": "discussion"},
+    "G2": {"status": "documents", "quote": "Its performance on images from other equipment or with different acquisition parameters (eg, frame rate, contrast protocol) is unknown", "section": "discussion"},
+    "G3": {"status": "addresses", "quote": "Our hybrid transformer-UNet/ LSTM architecture captures concurrent high-frequency kinematics and low-frequency hemodynamics", "section": "discussion"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "documents", "quote": "It is essential to emphasize that this was a retrospective, post hoc analysis, not a prospective trial of AI-guided therapy", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "addresses", "quote": "These were integrated with the DSA radiomics using a multimodal neural network that combined one-dimensional CNNs for clinical data and 3D-CNNs for imaging sequences.", "section": "methods"},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "addresses", "quote": "Its impact on clinical decision-making and 12-month outcomes was evaluated rigorously.", "section": "abstract"},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Possible ascertainment bias: asymptomatic PE may be underdetected (no systematic screening)",
+    "vQFR uses simplified linear pressure model with fixed constant, not patient-specific",
+    "Applicable only to patients undergoing interventional procedures with high-quality dynamic DSA",
+    "Model recommendations applied in silico; unmeasured confounding possible"
+  ],
+  "future_work": [
+    "Prospective multicenter trial of real-time AI guidance",
+    "Calibration and validation of vQFR against invasively measured pressure gradients",
+    "External validation in independent multicenter cohorts",
+    "Adapting the framework to dynamic ultrasound examination"
+  ],
+  "claim2024": {
+    "items": "yyyyyyyyyyyyyyyyynyynnyyyyyyynnynnnyyynyyyny"
+  }
+}

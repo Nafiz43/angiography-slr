@@ -1,0 +1,17 @@
+{"record_id": "R2415",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose a patient-specific approach for DCR using similarity-based patient data matching in transfer learning with a residual U-Net", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "we resized the input and output dimensions of the segmentation model from 1024×1024×4 to 256×256×4 and from 1024×1024× 1 to 256 × 256 × 1, respectively", "section": "methods"},
+  "10": {"answer": "yes", "quote": "To ensure uniformity in the training process, we standardized the frame count per patient to 15 images.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "the shape of guide wire may differ from the actual vascular centerline, such as bending at the tip, which may affect the performance of image registration", "section": "discussion"},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "yes", "quote": "it can also be used to evaluate the image quality of unseen data (segmented real guidewire images in Fig. 5) that were not used for training", "section": "results"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "TensorFlow 2.4.2 was employed for the computational framework.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "The v-PSNR was then used as an early stopping criterion in the training process", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "high registration image quality with over 30 dB in peak signal-to-noise ratio, while maintaining a registration error of 1.04±0.19 mm", "section": "abstract"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

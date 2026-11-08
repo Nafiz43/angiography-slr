@@ -1,0 +1,113 @@
+{
+ "record_id": "R4114",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Development of Novel Artificial Intelligence to Detect the Presence of Clinically Meaningful Coronary Atherosclerotic Stenosis in Major Branch from Coronary Angiography Video",
+  "year": 2021,
+  "venue": "Journal of Atherosclerosis and Thrombosis",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "Japan"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Coronary angiography (CAG) cine video, multiple views per patient",
+  "territory": "cardiac",
+  "territory_detail": "Coronary arteries: RCA, LAD, LCx including left main",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": 30.3,
+  "frames_per_sequence": "initial 45 frames used per video (one frame every 33 ms)",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 199,
+  "n_sequences": 1838,
+  "n_images_or_frames": null,
+  "n_centers": 1,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": false, "detail": null},
+  "split_level": "patient",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 1,
+   "annotator_expertise": "Highly trained cardiologist outside the study",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "disease_classification_grading",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Video-level binary classification of presence of clinically meaningful (>=75%) stenosis in a major coronary branch from CAG videos using a 3D CNN.",
+  "clinical_application": "Detection of significant coronary stenosis in patients with chest pain undergoing coronary angiography"
+ },
+ "method": {
+  "architecture_names": ["multilayer 3-dimensional CNN"],
+  "architecture_family": "cnn_classifier",
+  "temporal_category": "cnn3d_video",
+  "temporal_evidence": {"quote": "This 3D matrix was learned by a multi-layer 3-dimensional CNN.", "section": "methods"},
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "internal_split",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "c-statistic (AUC)", "family": "auc", "value_raw": "0.61", "value_0_100": 61.0, "split": "validation", "task": "stenosis detection"},
+   {"metric": "c-statistic (AUC)", "family": "auc", "value_raw": "0.61", "value_0_100": 61.0, "split": "test", "task": "stenosis detection"},
+   {"metric": "sensitivity", "family": "sensitivity_recall", "value_raw": "0.61", "value_0_100": 61.0, "split": "test", "task": "stenosis detection"},
+   {"metric": "specificity", "family": "specificity", "value_raw": "0.60", "value_0_100": 60.0, "split": "test", "task": "stenosis detection"},
+   {"metric": "accuracy", "family": "accuracy", "value_raw": "0.60", "value_0_100": 60.0, "split": "test", "task": "stenosis detection"},
+   {"metric": "F-value", "family": "f1", "value_raw": "0.60", "value_0_100": 60.0, "split": "test", "task": "stenosis detection"}
+  ],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": false,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": false,
+  "failure_analysis": false
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": true, "detail": "Code for model definition and running in supplemental code section"},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": true
+ },
+ "gaps": {
+  "G1": {"status": "documents", "quote": "Further studies with improved AI at larger sample size is necessary.", "section": "abstract"},
+  "G2": {"status": "none", "quote": null, "section": null},
+  "G3": {"status": "both", "quote": "time dependent change in 2-dimensional images of CAG video was difficult to handle even using a computer equipped with standard computer vision software", "section": "introduction"},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "none", "quote": null, "section": null},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": ["modest predictive value (AUC 0.61)", "no standardized method for assessing coronary stenosis on CAG"],
+ "future_work": ["improved AI model", "larger sample size"],
+ "claim2024": {"items": "yyyyyyyyynnynyynyynnyynyyyyynnnynynnnnnnyyyn"}
+}

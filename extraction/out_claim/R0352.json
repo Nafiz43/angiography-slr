@@ -1,0 +1,17 @@
+{"record_id": "R0352",
+ "items": {
+  "6": {"answer": "yes", "quote": "we propose a novel framework that leverages synthetic temporal XCA data to a train deep learning model without the need for human annotation.", "section": "abstract"},
+  "9": {"answer": "yes", "quote": "all sequences were resized from their original resolution to 256 × 256 pixels to accelerate training and evaluation.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "Specifically, for each XCA sequence, we extracted the first frame.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "Vessel segmentation evaluation is typically based on binary vessel maps, which often fail to capture other critical aspects such as vessel fidelity and clinical usability.", "section": "results"},
+  "17": {"answer": "yes", "quote": "Each generated sample includes paired data: the fused XCA image, the contrast-free background, and the vessel-only image.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "In all experiments, the above three datasets described above were used only for testing and evaluation.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "The proposed network was implemented in Python using the PyTorch framework.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "TABLE I: Vessel Segmentation Results (mean ± std) on Internal and External Datasets.", "section": "results"},
+  "38": {"answer": "na", "quote": null, "section": null}
+ }}

@@ -1,0 +1,17 @@
+{"record_id": "R1295",
+ "items": {
+  "6":  {"answer": "yes", "quote": "Therefore, we aim to provide an automatic method for accurate stenosis localization.", "section": "abstract"},
+  "9":  {"answer": "yes", "quote": "The gray values of XCA images were z-score normalized using the mean and standard deviation of the training set.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "To annotate the dataset, several physicians first selected a high-contrast frame as the keyframe for each video.", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "manually labeled with bounding boxes on the keyframe, which served as the ground truth for evaluation.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "For each fold, 80% of the sequences were used for training and the remaining 20% for testing.", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "We implemented all networks based on PyTorch 1.10.2.", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "We compared our method against other stenosis detection methods in the private and public datasets, as shown in Tables 4 and 5.", "section": "results"},
+  "38": {"answer": "yes", "quote": "the proposed method was evaluated using the recall at different false positive per image (FPPI) levels, namely, the free-response receiver operating characteristic (FROC) analysis", "section": "methods"}
+ }}

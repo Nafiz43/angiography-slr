@@ -1,0 +1,17 @@
+{"record_id": "R1263",
+ "items": {
+  "6": {"answer": "yes", "quote": "We developed a deep neural network (DNN) using Keras to predict IA occlusion as a six-month binary outcome (occluded vs. unoccluded).", "section": "methods"},
+  "9": {"answer": "yes", "quote": "we reconvolved the IRF with a standardized injection profile to obtain a clinically relevant and injection-invariant TDC (Qnew) of the IA dome.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "neurosurgeon fellows and residents (having 2 years of neuro-intervention experience) drew regions of interest (ROI) over the aneurysm and their corresponding main artery (inlet) to generate time TDCs", "section": "methods"},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "yes", "quote": "our study was limited by the relatively small sample size, single-center retrospective data collection and self-adjudicated outcomes.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Occlusion outcome (occluded/unoccluded) was provided by neurosurgeons from the follow-up DSAs, based on their clinical judgement.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "We developed a deep neural network (DNN) using Keras", "section": "methods"},
+  "26": {"answer": "yes", "quote": "stopping based on validation loss (patience = 15).", "section": "methods"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The DNN trained on SVD-corrected QA parameters achieved a mean AUROC of 0.79 ± 0.02 and a classification accuracy of 0.73 ± 0.01 (Table 1).", "section": "results"},
+  "38": {"answer": "yes", "quote": "Mean and standard deviations for all metrics were calculated across the 10-fold MCCV.", "section": "methods"}
+ }}

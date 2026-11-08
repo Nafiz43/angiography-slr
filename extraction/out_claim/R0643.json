@@ -1,0 +1,17 @@
+{"record_id": "R0643",
+ "items": {
+  "6":  {"answer": "yes", "quote": "Our goal is to improve predictive performance of post-PCI mortality compared to single-modality models.", "section": "introduction"},
+  "9":  {"answer": "yes", "quote": "Continuous features were normalized using min–max scaling to a range of 0–1 and categorical features were encoded one-hot as appropriate.", "section": "methods"},
+  "10": {"answer": "yes", "quote": "The selector assigns a vessel-visibility score to each frame and retains only those with clearly opacified coronary anatomy, reducing the frame count by approximately 90 %", "section": "methods"},
+  "12": {"answer": "yes", "quote": "Missing values in continuous variables were imputed using the median values, while categorical variables were imputed with the mode values.", "section": "methods"},
+  "15": {"answer": "yes", "quote": "Consequently, the 5-year period serves as a pivotal window for evaluating the efficacy of secondary prevention, extending beyond the immediate post-procedural period.", "section": "introduction"},
+  "17": {"answer": "no", "quote": null, "section": null},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "Four ensemble tree algorithms were trained and compared: XGBoost, LightGBM, CatBoost, and Random Forest.", "section": "methods"},
+  "26": {"answer": "yes", "quote": "Among the evaluated models, LightGBM achieved the best performance across all primary metrics, with a mean AUC-ROC of 0.790, PR-AUC of 0.462, and F1-macro of 0.674. Therefore, LightGBM was selected for all subsequent analyzes.", "section": "results"},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The metrics are calculated in the held-out fold-1 test split, 95 % confidence intervals are derived from 500 bootstrap resamples.", "section": "results"},
+  "38": {"answer": "yes", "quote": "Discrimination of LightGBM models by input modality. Values are point estimates with 95 % bootstrap CIs.", "section": "results"}
+ }}

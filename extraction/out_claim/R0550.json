@@ -1,0 +1,17 @@
+{"record_id": "R0550",
+ "items": {
+  "6": {"answer": "yes", "quote": "A retrospective analysis was conducted on DSA surgical images of 60 patients who underwent endovascular aortic interventions", "section": "methods"},
+  "9": {"answer": "yes", "quote": "Each surgical video was exported using DICOM software and compiled into AVI segments of approximately 8 min for delivery and 4 min for retrieval at 1,920 × 1,080 resolution.", "section": "methods"},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "yes", "quote": "Skeleton structures were defined as follows: DS (13 keypoints / 12 links), SS (17 keypoints / 25 links), BS (34 keypoints / 50 links). Annotations were completed by three experienced vascular surgeons.", "section": "methods"},
+  "20": {"answer": "no", "quote": null, "section": null},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "yes", "quote": "All models were implemented in PyTorch", "section": "methods"},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "Stent-RD-UNet achieved CE Dice of 0.94/0.95/0.94 and OKS of 0.96 ± 0.17/0.90 ± 0.05/0.91 ± 0.14 for BS/SS/DS, respectively", "section": "abstract"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

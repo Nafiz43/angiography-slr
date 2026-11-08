@@ -1,0 +1,272 @@
+\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
+\documentclass[a4paper,fleqn]{cas-dc}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% ===== REVIEW SWITCH =====================================================
+% Text edited in the Nov 2026 revision is wrapped in \edit{...}.
+% Review:      \colorlet{editcolor}{edityellow}
+% Submission:  \colorlet{editcolor}{black}
+\definecolor{edityellow}{HTML}{D4A800}
+\colorlet{editcolor}{black}
+\newcommand{\edit}[1]{{\color{editcolor}#1}}
+% ==========================================================================
+
+% Each upload item starts with \SubmissionPart{name}; its first PDF page is written to
+% \jobname.parts, which tools/split_submission.py uses to split the compiled PDF.
+\newwrite\partsfile
+\immediate\openout\partsfile=\jobname.parts
+\newcommand{\SubmissionPart}[1]{\clearpage\thispagestyle{empty}%
+  \write\partsfile{#1 \the\ReadonlyShipoutCounter}}
+\usepackage{soul}
+\soulregister{\hl}{1}
+\usetikzlibrary{positioning, calc, backgrounds}
+\usepackage{pdflscape}   % for landscape wrapping
+
+
+% --- Figures & tables ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{subcaption}
+\usepackage{mdframed}
+\mdfsetup{nobreak=true} % keep each Finding box in one piece
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{pdflscape}
+\usepackage{microtype}
+% arydshln removed: it breaks tabularx in current TeX Live; tables use \dashedrule.
+\usepackage{enumerate}
+\usepackage{tabularx}
+% --- Lists/columns ---
+\usepackage{multicol}
+% flushend removed: with current TeX Live it overflowed columns into the footer.
+\usepackage{enumitem}
+\usepackage{longtable}
+% \usepackage{listings}
+% --- Colors ---
+% \usepackage[dvipsnames,svgnames,x11names]{xcolor}  % merged into line 3 (option clash)
+
+% --- Hyperlinks ---
+% \usepackage[colorlinks=true,
+%             linkcolor=RoyalBlue,
+%             citecolor=ForestGreen,
+%             urlcolor=Maroon]{hyperref}
+
+
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+
+\usepackage[most]{tcolorbox}
+\usepackage{caption}
+\usepackage{xcolor}
+
+\tcbset{
+    promptbox/.style={
+        enhanced,
+        breakable,
+        colback=gray!5,
+        colframe=black!60,
+        boxrule=0.5pt,
+        arc=0pt,
+        left=6pt,
+        right=6pt,
+        top=6pt,
+        bottom=6pt
+    }
+}
+
+\newcommand{\dashedrule}{\noalign{\vskip3pt{\color{gray!40}\hrule height 0.4pt}\vskip3pt}}
+\newcommand{\tabitem}{\hspace{2pt}\textbullet\hspace{5pt}}
+
+
+\usepackage{ragged2e}
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+% --- Code listings ---
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space}
+}
+
+% --- REQUIRED for author/affiliation formatting ---
+% \usepackage{authblk}
+
+% If the frontmatter runs over more than one page
+% use the longmktitle option.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
+
+%\usepackage[numbers]{natbib}
+%\usepackage[authoryear]{natbib}
+% \usepackage[authoryear,longnamesfirst]{natbib}
+\usepackage[numbers]{natbib}
+\usepackage{xurl}
+% print "Email addresses:" as text instead of the cas icon images, which are not in this repo
+\ExplSyntaxOn\bool_gset_true:N \g_stm_nologo_bool\ExplSyntaxOff
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+% Uncomment and use as if needed
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newdefinition{rmk}{Remark}
+%\newproof{pf}{Proof}
+%\newproof{pot}{Proof of Theorem \ref{thm}}
+
+\begin{document}
+\let\WriteBookmarks\relax
+% Let floats sit with text instead of being deferred to half-empty float pages.
+\renewcommand{\topfraction}{0.9}\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\textfraction}{0.07}\renewcommand{\floatpagefraction}{0.7}\renewcommand{\dblfloatpagefraction}{0.7}
+\setcounter{topnumber}{3}\setcounter{dbltopnumber}{3}\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{.9}
+\renewcommand{\bottomfraction}{.7}
+\renewcommand{\textfraction}{.05}
+\renewcommand{\floatpagefraction}{.85}
+\renewcommand{\dbltopfraction}{.95}
+\renewcommand{\dblfloatpagefraction}{.95}
+\makeatletter % float pages fill from the top
+\setlength{\@fptop}{0pt}\setlength{\@dblfptop}{0pt}
+\makeatother
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+\setcounter{dbltopnumber}{3}
+% Short title
+\shorttitle{}
+
+% Short author
+\shortauthors{N.I. Khan, V. Filkov and R.E. Goldman}
+
+% Suppress the generic CAS preprint footer; retain the page counter.
+\ExplSyntaxOn
+\cs_set:Npn \__first_footerline: {\mbox{}}
+\ExplSyntaxOff
+
+% Main title of the paper
+\title[mode = title]{Artificial Intelligence for Angiographic Sequence Analysis: A Systematic Review of Temporal Modeling, Clinical Readiness, and Research Gaps}
+
+\author[1]{Nafiz Imtiaz Khan}[orcid=0000-0003-0149-6012]
+\cormark[1]
+\ead{nikhan@ucdavis.edu}
+\credit{Conceptualization, Methodology, Software, Formal analysis, Investigation, Data curation, Writing -- original draft}
+
+
+\author[2]{Roger Eric Goldman}[orcid=0000-0003-0394-3744]
+\ead{regoldman@health.ucdavis.edu}
+\credit{Conceptualization, Methodology, Validation, Supervision, Funding acquisition, Writing -- review \& editing}
+
+
+\author[1,2]{Vladimir Filkov}[orcid=0000-0003-0492-4393]
+\ead{filkov@cs.ucdavis.edu}
+\credit{Conceptualization, Supervision, Writing -- review \& editing}
+
+
+\affiliation[1]{organization={Department of Computer Science, University of California, Davis},
+            city={Davis},
+            postcode={95616},
+            state={CA},
+            country={USA}}
+
+\affiliation[2]{organization={Department of Radiology, School of Medicine, University of California, Davis},
+            city={Sacramento},
+            postcode={95817},
+            state={CA},
+            country={USA}}
+
+\cortext[1]{Corresponding author}
+
+\begin{abstract}
+Digital subtraction angiography (DSA) and fluoroscopy are the reference standard for imaging blood vessels and guiding  endovascular procedures. Angiographic interpretation relies on the temporal pattern of contrast filling and washout. Physicians use the dynamics of the blood flow as an important component of interpretation. How AI methods capture this temporal information has not been systematically examined. We conducted a PRISMA 2020-guided systematic review of AI methods that analyze angiographic image sequences. PubMed/MEDLINE and Semantic Scholar were searched from January 2000 to July 2026, identifying 5,829 records. These records were screened by a large language model (LLM), and two independent human reviewers validated its decisions (inter-rater Cohen's $\kappa=0.98$); after full-text review, 115 studies were included. Another LLM extracted study characteristics and the 44 CLAIM 2024 checklist items, and two human reviewers audited the extraction (97.1\% of audited values correct). Results were synthesized descriptively, without a risk-of-bias tool or meta-analysis. Publications grew sharply after 2020, with 78\% appearing from 2022 to 2026. Cardiac and neurologic applications account for nearly 90\% of studies, and only 4\% combine \edit{DSA} with fluoroscopy. Most studies \edit{(82.6\%)} model temporal information, but half do so with fixed operations rather than learned models. The open question is therefore not whether time is modeled, but how. External validation \edit{(16.5\%),} code release \edit{(21.7\%)} and data release \edit{(2.6\%)} are uncommon, and heterogeneous datasets and metrics prevent comparison of reported performance. We identify twelve research gaps and outline a roadmap toward reproducible, clinically deployable AI for angiography-guided interventions. Funding: RSNA (RSCH2306). Registration: OSF Registries (\url{https://doi.org/10.17605/OSF.IO/6XJK7}).
+\end{abstract}
+
+
+\begin{keywords}
+Digital subtraction angiography \sep Fluoroscopy \sep Deep learning \sep Temporal modeling \sep Medical image analysis \sep Interventional radiology \sep Systematic review
+\end{keywords}
+
+\maketitle
+
+
+\input{01-intro}
+\input{02-methodology}
+\input{03-analysis}
+\input{04-research_gaps}
+\input{05-discussion}
+\FloatBarrier % flush any pending table/figure before the back matter and references (no page break if none pending)
+\printcredits
+
+
+
+
+\edit{\nocite{R0058,R0099,R0100,R0521,R0554,R0570,R0643,R1213,R1222,R1263,R1362,R1503,R1541,R1565,R1609,R1674,R1680,R1939,R2400,R2411,R2443,R2466,R2490,R2786,R2873,R3052,R3093,R3126,R3129,R3149,R3155,R3164,R3338,R3661,R3707,R3712,R3910,R4114,R4204,R4208,R4220,R4557,R4804,ref10,ref100,ref102,ref104,ref127,ref144,ref148,ref15,ref152,ref155,ref161,ref162,ref172,ref173,ref178,ref179,ref190,ref198,ref2,ref20,ref202,ref208,ref211,ref227,ref25,ref28,ref30,ref32,ref34,ref35,ref36,ref38,ref39,ref4,ref40,ref42,ref43,ref46,ref48,ref50,ref51,ref52,ref56,ref57,ref60,ref62,ref63,ref64,ref65,ref66,ref67,ref69,ref71,ref72,ref74,ref75,ref76,ref78,ref79,ref80,ref82,ref84,ref89,ref91,ref92,ref93,ref94,ref95,ref96,ref97,ref99,shi2021temporal}}
+
+\section*{Data availability}
+The screening decisions for all 5,064 records, the 491-record dual-review sample, the \edit{115} structured extraction records \edit{(and the 5 excluded or merged reports)} and all screening, extraction and analysis code are publicly available at \edit{\url{https://github.com/Nafiz43/angiography-slr}}. Full texts of the included articles are not redistributed because of copyright. Supplementary material is provided as a separate file. It contains Table~S1: the full title/abstract screening validation sample (491 records with both reviewers' decisions, the consensus label and the pipeline decision); Table~S2: the completed PRISMA 2020 checklist; and Table~S3: the topic model and its correspondence to the research gaps.
+
+\newcommand{\EthicsText}{Ethical approval and informed consent were not required because this study reviewed previously published literature and did not recruit participants or collect identifiable individual-level data.}
+\section*{Ethics statement}
+\EthicsText
+
+\section*{Funding}
+This work was supported by the Radiological Society of North America (RSNA) under grant RSCH2306. The funder had no role in the study design, the collection, analysis or interpretation of the data, the writing of the report, or the decision to submit the article for publication.
+
+\section*{Declaration of competing interest}
+The authors declare no competing interests. 
+
+\section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+Large language models were used as research instruments in this review: an open-weight model (Qwen3.8:27B) for title and abstract screening and Claude Opus 5.5 (Anthropic) for structured full-text data extraction, \edit{as described in Sections~\ref{sec:llm-pipeline} and~\ref{sec:full-text-screening}}; their outputs were validated against human review as reported there. In addition, Claude was used to assist with fixing grammatical errors and paraphrasing. After using these tools, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
+
+\bibliographystyle{unsrtnat}
+% Loading bibliography database
+\bibliography{references}
+
+\appendix
+\input{06-appendix}
+
+% ===== SUBMISSION ITEMS (split into separate uploads by tools/split_submission.py) =====
+\clearpage
+\makeatletter
+\xdef\mslast{\the\numexpr\value{page}-1\relax}% manuscript ends here; keep "Page n of N" counting only the manuscript
+\AtEndDocument{\immediate\write\@auxout{\string\csxdef{lastpage}{\mslast}}}
+\makeatother
+\onecolumn
+\pagestyle{empty}
+
+\SubmissionPart{supplementary}
+\input{submission/supplementary}
+
+\SubmissionPart{cover_letter}
+\input{submission/cover_letter}
+
+\SubmissionPart{highlights}
+\input{submission/highlights}
+
+\SubmissionPart{abstract}
+\section*{Abstract}
+\input{\jobname.abs}
+
+\SubmissionPart{ethics_statement}
+\section*{Ethics statement}
+\EthicsText
+
+\end{document}
+

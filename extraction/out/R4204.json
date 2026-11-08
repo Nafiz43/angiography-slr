@@ -1,0 +1,145 @@
+{
+  "record_id": "R4204",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Automated Deep Learning Analysis of Angiography Video Sequences for Coronary Artery Disease",
+    "year": 2021,
+    "venue": "arXiv.org",
+    "publication_type": "preprint",
+    "text_is_full_paper": true,
+    "country_of_data": "Singapore"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Coronary angiography video sequences (contrast-injected fluoroscopy), LAO and RAO views of the RCA, 512x512 frames",
+    "territory": "cardiac",
+    "territory_detail": "Right coronary artery (LAO straight projection for training/testing; RAO for generalization test)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "average 86 ± 22 frames per video",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 102,
+    "n_sequences": 102,
+    "n_images_or_frames": 8731,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {"value": false, "detail": "Private anonymized angiograms from a tertiary cardiac institution"},
+    "data_released": {"value": null, "detail": null},
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 3,
+      "annotator_expertise": "Student research assistants trained and supervised by an interventional cardiologist and postdoctoral researcher; segmentation labels via semi-supervised label propagation with manual correction; stenosis reference from clinical reports",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": ["temporal_sequence_modeling", "vessel_segmentation"],
+    "task_description": "Three-stage pipeline: ResNet18 key frame extraction (top-5 frames per video), U-Net RCA vessel segmentation, and geometric stenosis measurement (percent stenosis) from segmentation masks; generalization tested on RAO view.",
+    "clinical_application": "Automated quantification of coronary stenosis from coronary angiograms in coronary artery disease"
+  },
+  "method": {
+    "architecture_names": ["ResNet18", "U-Net"],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "none",
+    "temporal_evidence": {"quote": "the algorithm was trained on individual frames and analyzed frames one at a time", "section": "discussion"},
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "mixed",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": "Per-iteration sampling of 16 key and 64 non-key frames with key frames augmented 7-fold vs non-key 1-fold; F1-score reported",
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "cross_validation",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Accuracy (avg over folds)", "family": "accuracy", "value_raw": "90.3%", "value_0_100": 90.3, "split": "cross_validation", "task": "key frame extraction (LAO)"},
+      {"metric": "Accuracy (avg over folds)", "family": "accuracy", "value_raw": "89.3%", "value_0_100": 89.3, "split": "test", "task": "key frame extraction (LAO)"},
+      {"metric": "Top-5 Precision", "family": "precision_ppv", "value_raw": "97.3%", "value_0_100": 97.3, "split": "cross_validation", "task": "key frame extraction (LAO)"},
+      {"metric": "Top-5 Precision", "family": "precision_ppv", "value_raw": "98.4%", "value_0_100": 98.4, "split": "test", "task": "key frame extraction (LAO)"},
+      {"metric": "F1-Score", "family": "f1", "value_raw": "0.816", "value_0_100": 81.6, "split": "cross_validation", "task": "key frame extraction (LAO)"},
+      {"metric": "F1-Score", "family": "f1", "value_raw": "0.812", "value_0_100": 81.2, "split": "test", "task": "key frame extraction (LAO)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.761", "value_0_100": 76.1, "split": "test", "task": "key frame extraction (LAO)"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.873", "value_0_100": 87.3, "split": "test", "task": "key frame extraction (LAO)"},
+      {"metric": "F1-Score", "family": "f1", "value_raw": "0.894", "value_0_100": 89.4, "split": "cross_validation", "task": "vessel segmentation (LAO)"},
+      {"metric": "F1-Score", "family": "f1", "value_raw": "0.891", "value_0_100": 89.1, "split": "test", "task": "vessel segmentation (LAO)"},
+      {"metric": "MAE ± SD of absolute error (n=48)", "family": "error_distance", "value_raw": "15.9% ± 13.3%", "value_0_100": null, "split": "other", "task": "stenosis measurement (LAO)"},
+      {"metric": "Accuracy for severe lesion (70% threshold, n=48)", "family": "accuracy", "value_raw": "79.2%", "value_0_100": 79.2, "split": "other", "task": "stenosis measurement (LAO)"},
+      {"metric": "Accuracy for moderate lesion (50% threshold, n=48)", "family": "accuracy", "value_raw": "81.3%", "value_0_100": 81.3, "split": "other", "task": "stenosis measurement (LAO)"},
+      {"metric": "Type I Error rate", "family": "other", "value_raw": "20.7%", "value_0_100": null, "split": "other", "task": "stenosis measurement (LAO)"},
+      {"metric": "MAE ± SD (Table IV)", "family": "error_distance", "value_raw": "13.5 ± 10.2", "value_0_100": null, "split": "other", "task": "stenosis measurement (LAO, Table IV)"},
+      {"metric": "Accuracy for severe lesion (Table IV)", "family": "accuracy", "value_raw": "71.4%", "value_0_100": 71.4, "split": "other", "task": "stenosis measurement (LAO, Table IV)"},
+      {"metric": "Accuracy for moderate lesion (Table IV)", "family": "accuracy", "value_raw": "95.2%", "value_0_100": 95.2, "split": "other", "task": "stenosis measurement (LAO, Table IV)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "84.6%", "value_0_100": 84.6, "split": "test", "task": "key frame extraction (RAO view)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.716", "value_0_100": 71.6, "split": "test", "task": "key frame extraction (RAO view)"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.834", "value_0_100": 83.4, "split": "test", "task": "key frame extraction (RAO view)"},
+      {"metric": "Top-5 Precision", "family": "precision_ppv", "value_raw": "94.7%", "value_0_100": 94.7, "split": "test", "task": "key frame extraction (RAO view)"},
+      {"metric": "F1-Score", "family": "f1", "value_raw": "0.826", "value_0_100": 82.6, "split": "test", "task": "vessel segmentation (RAO view)"},
+      {"metric": "MAE ± SD", "family": "error_distance", "value_raw": "10.1 ± 8.1", "value_0_100": null, "split": "test", "task": "stenosis measurement (RAO view)"},
+      {"metric": "Accuracy for severe lesion", "family": "accuracy", "value_raw": "88.2%", "value_0_100": 88.2, "split": "test", "task": "stenosis measurement (RAO view)"},
+      {"metric": "Accuracy for moderate lesion", "family": "accuracy", "value_raw": "82.4%", "value_0_100": 82.4, "split": "test", "task": "stenosis measurement (RAO view)"}
+    ],
+    "comparators": ["Yang et al. [19] U-Net segmentation", "MWCE-End-to-End [22]", "12-feature classifier [34]"],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "documents", "quote": "Data augmentation was performed to mitigate our limited data.", "section": "methods"},
+    "G2": {"status": "both", "quote": "tested the generalizability of our technique to the Right Anterior Oblique (RAO) view", "section": "abstract"},
+    "G3": {"status": "documents", "quote": "we did not incorporate temporal information that may provide additional information to the machine learning", "section": "discussion"},
+    "G4": {"status": "documents", "quote": "Due to the 2D nature of X-ray projections, scans are typically", "section": "introduction"},
+    "G5": {"status": "both", "quote": "Due to the time-consuming nature of producing precise pixel-level labels for learning segmentation, we implemented semi-supervised label propagation", "section": "methods"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "addresses", "quote": "broke down the assessment process into explainable steps", "section": "introduction"},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "both", "quote": "in order to mitigate the small and unbalanced nature of our dataset", "section": "methods"},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Stages evaluated separately on ground-truth inputs; true end-to-end performance not reflected",
+    "Skeletonization errors at early proximal and late distal segments",
+    "Segmentation errors near distal RCA bifurcation",
+    "Maximum vessel width used as reference width",
+    "Excluded low-quality videos and 100% stenosis cases"
+  ],
+  "future_work": [
+    "Add videos with artefacts and near-complete occlusions and retune models",
+    "Incorporate time-series data into the key frame classification model",
+    "More complex stenosis measurement or regression models for stage 3",
+    "Extend to the left coronary artery and more view projections",
+    "Combine information from multiple views",
+    "Evaluate end-to-end performance on larger unseen datasets"
+  ],
+  "claim2024": {"items": "ynyyynynyyynnyynyyyyyynnyyynnnnynnyyyynyyynn"}
+}

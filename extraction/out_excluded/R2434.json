@@ -1,0 +1,156 @@
+{
+  "record_id": "R2434",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Optimizing Input Selection for Cardiac Model Training and Inference: An Efficient 3D Convolutional Neural Networks-Based Approach to Automate Coronary Angiogram Video Selection",
+    "year": 2025,
+    "venue": "Mayo Clinic Proceedings: Digital Health",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "USA"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "Invasive X-ray coronary angiogram cine video clips",
+    "territory": "cardiac",
+    "territory_detail": "Coronary arteries (coronary angiography)",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 2934,
+    "n_sequences": 21425,
+    "n_images_or_frames": null,
+    "n_centers": 3,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Board-certified cardiologists",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Cohen's kappa inter-observer 0.81-0.87; intra-observer 0.80-0.87"
+    }
+  },
+  "task": {
+    "primary_task": "disease_classification_grading",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary video-clip-level quality classification (satisfactory vs unsatisfactory) of coronary angiogram videos to automate input selection for downstream ML models, comparing 2D and 3D CNNs.",
+    "clinical_application": "Automated quality screening/selection of coronary angiogram videos for model training and pre-inference input selection in the cath lab"
+  },
+  "method": {
+    "architecture_names": [
+      "X3D-L",
+      "X3D-S",
+      "ResNet 3D 18",
+      "ResNet 3D 152",
+      "ResNet 2D 18",
+      "ResNet 2D 152"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "2D models handle each frame independently and merge the results, which may lead to inefficiencies, whereas 3D models process multiple frames in sequence, directly yielding predictions",
+      "section": "discussion"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": "Additional independent dataset (3208 examinations, 20,388 videos, 2725 patients) from the same institution (3 Mayo Clinic sites); authors state no external validation was performed",
+    "metrics": [
+      {"metric": "AUC", "family": "auc", "value_raw": "0.98", "value_0_100": 98.0, "split": "test", "task": "angiogram video quality classification (X3D-L)"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.96", "value_0_100": 96.0, "split": "test", "task": "angiogram video quality classification (X3D-L)"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.87", "value_0_100": 87.0, "split": "test", "task": "angiogram video quality classification (X3D-L)"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.98", "value_0_100": 98.0, "split": "test", "task": "angiogram video quality classification (X3D-L)"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.95", "value_0_100": 95.0, "split": "test", "task": "angiogram video quality classification (X3D-L)"},
+      {"metric": "F1 score", "family": "f1", "value_raw": "0.92", "value_0_100": 92.0, "split": "test", "task": "angiogram video quality classification (X3D-L)"},
+      {"metric": "AUC", "family": "auc", "value_raw": "0.95", "value_0_100": 95.0, "split": "other", "task": "angiogram video quality classification (X3D-L), independent dataset"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.92", "value_0_100": 92.0, "split": "other", "task": "angiogram video quality classification (X3D-L), independent dataset"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "0.63", "value_0_100": 63.0, "split": "other", "task": "angiogram video quality classification (X3D-L), independent dataset"},
+      {"metric": "Sensitivity", "family": "sensitivity_recall", "value_raw": "0.82", "value_0_100": 82.0, "split": "other", "task": "angiogram video quality classification (X3D-L), independent dataset"},
+      {"metric": "Specificity", "family": "specificity", "value_raw": "0.93", "value_0_100": 93.0, "split": "other", "task": "angiogram video quality classification (X3D-L), independent dataset"},
+      {"metric": "F1 score", "family": "f1", "value_raw": "0.71", "value_0_100": 71.0, "split": "other", "task": "angiogram video quality classification (X3D-L), independent dataset"},
+      {"metric": "Negative predictive value", "family": "other", "value_raw": "93.3%", "value_0_100": null, "split": "other", "task": "angiogram video quality classification (X3D-L), independent dataset"},
+      {"metric": "Processing speed", "family": "time", "value_raw": "235.1 fps", "value_0_100": null, "split": "other", "task": "inference speed (X3D-L)"},
+      {"metric": "Processing time per video clip", "family": "time", "value_raw": "68.1 millisecond", "value_0_100": null, "split": "other", "task": "inference speed (X3D-L)"}
+    ],
+    "comparators": [
+      "ResNet 2D 18",
+      "ResNet 2D 152",
+      "ResNet 3D 18",
+      "ResNet 3D 152",
+      "X3D-S (lower resolution)"
+    ],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {"value": null, "detail": null},
+    "model_weights_available": {"value": null, "detail": null},
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "documents", "quote": "This study's limitations stem from using datasets exclusively from the Mayo Clinic limiting the model's generalizability without external validation.", "section": "discussion"},
+    "G3": {"status": "both", "quote": "are often designed for still images, making them less suitable for video angiographic clips", "section": "introduction"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "These methods require large datasets and extensive annotations.", "section": "introduction"},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "No direct comparison of downstream models trained on manually curated vs automatically selected datasets",
+    "No universal standard for classifying images as unsatisfactory (e.g., CABG patients, foreign objects)",
+    "Performance decline (notably precision) on the independent dataset"
+  ],
+  "future_work": [
+    "Compare downstream models trained on manually curated vs automatically selected data",
+    "Evaluate combined generalizability of selection and downstream models on external datasets",
+    "Inter-institutional collaborations to gather images from varied regions and populations",
+    "Transfer learning strategies",
+    "Attention-based mechanisms"
+  ],
+  "claim2024": {
+    "items": "yyyyynyyyynynyyyyyynynnnnnyynynynnnyynnyyyny"
+  }
+}

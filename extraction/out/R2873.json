@@ -1,0 +1,145 @@
+{
+ "record_id": "R2873",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Automated Assessment of Cardiac Systolic Function From Coronary Angiograms With Video-Based Artificial Intelligence Algorithms",
+  "year": 2023,
+  "venue": "JAMA Cardiology",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "USA; Canada"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Standard left coronary artery (LCA) X-ray coronary angiogram videos (fluoroscopic cine), DICOM converted to 512 x 512 video",
+  "territory": "cardiac",
+  "territory_detail": "Left coronary artery angiograms used to estimate left ventricular ejection fraction",
+  "acquisition_geometry": "not_reported",
+  "frame_rate_fps": null,
+  "frames_per_sequence": "5-second clips of 72 frames used for training",
+  "vendors": []
+ },
+ "dataset": {
+  "n_patients": 3404,
+  "n_sequences": 26087,
+  "n_images_or_frames": null,
+  "n_centers": 2,
+  "n_vendors": null,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": null, "detail": "Data Sharing Statement: See Supplement 2"},
+  "split_level": "patient",
+  "annotation": {
+   "type": "weak_or_derived",
+   "n_annotators": null,
+   "annotator_expertise": "Labels derived from TTE LVEF (closest TTE); in external set, three board-certified cardiologists extracted LVEF by medical record review",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "disease_classification_grading",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Video-based DNN (CathEF, X3D) predicts continuous LVEF and discriminates reduced LVEF (<=40%) from left coronary angiogram videos, averaged to study level, against TTE LVEF.",
+  "clinical_application": "Intraprocedural estimation of LV systolic function during coronary angiography as an alternative to left ventriculography"
+ },
+ "method": {
+  "architecture_names": ["CathEF", "X3D", "CathAI"],
+  "architecture_family": "cnn_classifier",
+  "temporal_category": "cnn3d_video",
+  "temporal_evidence": {
+   "quote": "The DNN achieved this by simultaneously examining all frames of an angiogram video to determine both static and moving (interimage) features",
+   "section": "discussion"
+  },
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "fully_supervised",
+  "pretraining": null,
+  "uses_synthetic_training_data": false,
+  "physics_informed": false,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": "Guided class-discriminative gradient class activation mapping (GradCAM)",
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": true
+ },
+ "evaluation": {
+  "validation_design": "external_validation",
+  "external_validation_detail": "University of Ottawa Heart Institute (Canada), 776 angiograms from 744 patients (July 2020-March 2021), no additional training",
+  "metrics": [
+   {"metric": "AUROC (LVEF <=40%)", "family": "auc", "value_raw": "0.911 (95% CI, 0.887-0.934)", "value_0_100": 91.1, "split": "test", "task": "reduced LVEF <=40% classification"},
+   {"metric": "Sensitivity (LVEF <=40%)", "family": "sensitivity_recall", "value_raw": "83.9% (95% CI, 78.2%-89.1%)", "value_0_100": 83.9, "split": "test", "task": "reduced LVEF <=40% classification"},
+   {"metric": "Specificity (LVEF <=40%)", "family": "specificity", "value_raw": "81.3% (95% CI, 78.8%-84.1%)", "value_0_100": 81.3, "split": "test", "task": "reduced LVEF <=40% classification"},
+   {"metric": "PPV (LVEF <=40%)", "family": "precision_ppv", "value_raw": "49.0 (43.0-54.7)", "value_0_100": 49.0, "split": "test", "task": "reduced LVEF <=40% classification"},
+   {"metric": "NPV (LVEF <=40%)", "family": "other", "value_raw": "96.0 (94.4-97.4)", "value_0_100": null, "split": "test", "task": "reduced LVEF <=40% classification"},
+   {"metric": "Diagnostic odds ratio (LVEF <=40%)", "family": "other", "value_raw": "22.7 (95% CI, 14.0-37.0)", "value_0_100": null, "split": "test", "task": "reduced LVEF <=40% classification"},
+   {"metric": "AUROC (LVEF <50%)", "family": "auc", "value_raw": "0.879 (95% CI, 0.852-0.907)", "value_0_100": 87.9, "split": "test", "task": "reduced LVEF <50% classification"},
+   {"metric": "AUROC (LVEF <=40%, 3 prespecified projections)", "family": "auc", "value_raw": "0.908 (95% CI, 0.880-0.935)", "value_0_100": 90.8, "split": "test", "task": "reduced LVEF <=40% classification, 3 projections"},
+   {"metric": "MAE vs TTE LVEF", "family": "error_distance", "value_raw": "8.5% (95% CI, 8.1%-9.0%)", "value_0_100": null, "split": "test", "task": "continuous LVEF regression"},
+   {"metric": "Pearson r vs TTE LVEF", "family": "correlation", "value_raw": "0.71 (95% CI, 0.67-0.74)", "value_0_100": null, "split": "test", "task": "continuous LVEF regression"},
+   {"metric": "ICC vs TTE LVEF", "family": "correlation", "value_raw": "0.77 (95% CI, 0.73-0.82)", "value_0_100": null, "split": "test", "task": "continuous LVEF regression"},
+   {"metric": "AUROC (LVEF <=40%)", "family": "auc", "value_raw": "0.906 (95% CI, 0.881-0.931)", "value_0_100": 90.6, "split": "external", "task": "reduced LVEF <=40% classification"},
+   {"metric": "Sensitivity (LVEF <=40%)", "family": "sensitivity_recall", "value_raw": "77.9% (95% CI, 72.1%-83.6%)", "value_0_100": 77.9, "split": "external", "task": "reduced LVEF <=40% classification"},
+   {"metric": "Specificity (LVEF <=40%)", "family": "specificity", "value_raw": "88.6% (95% CI, 86.2%-90.9%)", "value_0_100": 88.6, "split": "external", "task": "reduced LVEF <=40% classification"},
+   {"metric": "PPV (LVEF <=40%)", "family": "precision_ppv", "value_raw": "66.0 (59.7-71.9)", "value_0_100": 66.0, "split": "external", "task": "reduced LVEF <=40% classification"},
+   {"metric": "NPV (LVEF <=40%)", "family": "other", "value_raw": "93.4 (91.3-95.3)", "value_0_100": null, "split": "external", "task": "reduced LVEF <=40% classification"},
+   {"metric": "Diagnostic odds ratio (LVEF <=40%)", "family": "other", "value_raw": "27.3 (95% CI, 17.6-42.4)", "value_0_100": null, "split": "external", "task": "reduced LVEF <=40% classification"},
+   {"metric": "AUROC (LVEF <=50%)", "family": "auc", "value_raw": "0.883 (95% CI, 0.858-0.909)", "value_0_100": 88.3, "split": "external", "task": "reduced LVEF <=50% classification"},
+   {"metric": "AUROC (LVEF <=40%, 3 prespecified projections)", "family": "auc", "value_raw": "0.905 (95% CI, 0.878-0.932)", "value_0_100": 90.5, "split": "external", "task": "reduced LVEF <=40% classification, 3 projections"},
+   {"metric": "MAE vs TTE LVEF", "family": "error_distance", "value_raw": "7.0% (95% CI, 6.6%-7.4%)", "value_0_100": null, "split": "external", "task": "continuous LVEF regression"},
+   {"metric": "Pearson r vs TTE LVEF", "family": "correlation", "value_raw": "0.72 (95% CI, 0.68-0.76)", "value_0_100": null, "split": "external", "task": "continuous LVEF regression"},
+   {"metric": "ICC vs TTE LVEF", "family": "correlation", "value_raw": "0.62 (95% CI, 0.56-0.67)", "value_0_100": null, "split": "external", "task": "continuous LVEF regression"},
+   {"metric": "Inference time per video", "family": "time", "value_raw": "less than 1 second per video (3 seconds for the 3 projections)", "value_0_100": null, "split": "other", "task": "LVEF prediction"}
+  ],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": true,
+  "statistical_testing": true,
+  "confidence_intervals": true,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "addresses", "quote": "then externally validated it in a separate data set from an institution in a different country", "section": "introduction"},
+  "G3": {"status": "addresses", "quote": "as opposed to imagebased neural networks that consider only static features", "section": "discussion"},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "documents", "quote": "the study team is currently conducting a multicenter prospective validation study in patients with ACS", "section": "discussion"},
+  "G7": {"status": "addresses", "quote": "we applied the GradCAM AI explainability technique to identify regions in the angiogram video important for the DNN to classify LVEF of 40% or less", "section": "results"},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "documents", "quote": "resampling techniques may help to reduce the bias at LVEF extremes", "section": "discussion"},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "none", "quote": null, "section": null},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "No information on regional wall motion abnormalities",
+  "TTE up to 3 months before or 1 month after angiogram; LVEF may have changed",
+  "Performance with abnormal epicardial flow (STEMI) not evaluated",
+  "Right coronary artery projections did not improve performance",
+  "Race and ethnicity data unavailable"
+ ],
+ "future_work": [
+  "Improve accuracy and reduce variability of the DNN",
+  "Alternative loss functions (Huber) and resampling to reduce bias at LVEF extremes",
+  "Validation against TTEs performed closer to angiography",
+  "Multicenter prospective validation in ACS patients with TTE within 48 hours",
+  "Algorithm refinement for right coronary artery projections"
+ ],
+ "claim2024": {"items": "yyyyyyyyyyyynyynyynnynnnnnyyyyyyyyynyyyyyyny"}
+}

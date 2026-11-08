@@ -1,0 +1,176 @@
+{
+  "record_id": "R1674",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Multi-Frame Coronary Vessel Segmentation in X-Ray Angiography",
+    "year": 2025,
+    "venue": "2025 32nd National and 10th International Iranian Conference on Biomedical Engineering (ICBME)",
+    "publication_type": "conference_full_paper",
+    "text_is_full_paper": true,
+    "country_of_data": "Iran"
+  },
+  "imaging": {
+    "modality": "xray_fluoroscopy",
+    "modality_detail": "X-ray coronary angiography (XCA) video sequences",
+    "territory": "cardiac",
+    "territory_detail": "coronary arteries",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "4 consecutive frames per model input (two preceding, target, one following); sequence length not reported",
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": null,
+    "n_sequences": 96,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": null,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": null,
+      "detail": null
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": null,
+      "annotator_expertise": "expert observers",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Binary coronary vessel segmentation of a target XCA frame using a 4-frame temporal stack (ATFNet: 3D SE-Res encoder, SATS temporal squeeze, UNet++-style 2D decoder, DSF fusion, structured sparsity loss).",
+    "clinical_application": "Coronary artery disease assessment; quantification of lumen, vessel length and stenosis; PCI planning"
+  },
+  "method": {
+    "architecture_names": [
+      "ATFNet (Attentive Temporal Fusion Network)",
+      "UNet++",
+      "SATS (Spatial Attention Temporal Squeeze)",
+      "SE_ResBlock3D/2D",
+      "DSF (Deep Supervision Fusion)"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "the input is a stack of 4 consecutive X‐ray angiography frames (two before, one target, one after), which are fed into a 3D encoder composed of SE-ResNet blocks",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": false
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Jaccard", "family": "iou", "value_raw": "0.7540±0.1385", "value_0_100": 75.4, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "F1", "family": "f1", "value_raw": "0.8596±0.1249", "value_0_100": 85.96, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Recall", "family": "sensitivity_recall", "value_raw": "0.8497±0.1433", "value_0_100": 84.97, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Precision (Table 1)", "family": "precision_ppv", "value_raw": "0.8722±0.1103", "value_0_100": 87.22, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Precision (Table 2)", "family": "precision_ppv", "value_raw": "0.8802±0.1103", "value_0_100": 88.02, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "Accuracy", "family": "accuracy", "value_raw": "0.9743±0.0147", "value_0_100": 97.43, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "AUPRC (Table 1)", "family": "auc", "value_raw": "0.8537", "value_0_100": 85.37, "split": "test", "task": "vessel_segmentation"},
+      {"metric": "AUPRC (Table 2)", "family": "auc", "value_raw": "0.8437", "value_0_100": 84.37, "split": "test", "task": "vessel_segmentation"}
+    ],
+    "comparators": [
+      "TVS-Net",
+      "SVS-Net",
+      "Ablated baseline variants (Baseline, +SE-ResBlocks, +Lion, +DSF)"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": false,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "the dataset is single-center and relatively small (56 training, 13 validation, 13 test volumes) with manual annotations produced in-house",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "multicenter data and larger annotation sets are required to fully establish generalization and reduce annotation bias",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "single-frame CNNs often suffer from temporal inconsistency and broken thin branches",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "documents",
+      "quote": "projection angle changes, vessel overlap, motion artifacts",
+      "section": "introduction"
+    },
+    "G5": {
+      "status": "documents",
+      "quote": "annotations on angiograms are inherently noisy (inter-observer variability, projection differences); addressing this will require consensus labeling, multi-expert adjudication, or weak/semisupervised strategies",
+      "section": "discussion"
+    },
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {
+      "status": "documents",
+      "quote": "broken thin branches due to class imbalance",
+      "section": "introduction"
+    },
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Compute constraints (Google Colab T4) limited model size",
+    "No exhaustive hyperparameter search or larger-scale ensembles"
+  ],
+  "future_work": [
+    "Expand dataset and multi-center validation",
+    "Self-supervised pretraining or domain adaptation",
+    "Lighter attention/temporal modules for faster inference",
+    "Cross-validation and external test sets",
+    "Model compression and mixed precision for real-time clinical inference",
+    "Integration with clinically oriented quantification pipelines"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnynynnynnnnynyynynnnnynnnynnnyynnn"
+  }
+}

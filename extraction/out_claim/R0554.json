@@ -1,0 +1,17 @@
+{"record_id": "R0554",
+ "items": {
+  "6": {"answer": "yes", "quote": "This paper proposes a deep learning model that implements a CNN model with the addition of a temporal attention mechanism for automatic analysis of sequential medical imaging data to detect CAD.", "section": "introduction"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "no", "quote": null, "section": null},
+  "12": {"answer": "no", "quote": null, "section": null},
+  "15": {"answer": "no", "quote": null, "section": null},
+  "17": {"answer": "na", "quote": null, "section": null},
+  "20": {"answer": "na", "quote": null, "section": null},
+  "21": {"answer": "na", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "The CNN model achieved an accuracy score of 0.9787, or 97.87%, on the final training cycle", "section": "results"},
+  "38": {"answer": "no", "quote": null, "section": null}
+ }}

@@ -1,0 +1,175 @@
+{
+  "record_id": "R2855",
+  "schema_version": "2.0",
+  "study": {
+    "title": "FSTIF-UNet: A Deep Learning-Based Method Towards Automatic Segmentation of Intracranial Aneurysms in Un-Reconstructed 3D-RA",
+    "year": 2023,
+    "venue": "IEEE Journal of Biomedical and Health Informatics",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Un-reconstructed 3D rotational angiography (3D-RA) projection sequences; 2D projections at 133 discrete angles over 180 degrees",
+    "territory": "neurologic",
+    "territory_detail": "Intracranial aneurysms (cerebral)",
+    "acquisition_geometry": "rotational_3D",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "133 projections per 3D-RA sequence; 15 equally-spaced images selected; 10-15 annotated projections per aneurysm",
+    "vendors": [
+      "Siemens Axiom Artis",
+      "GE Innova IGS 630",
+      "Philips Allura Xper FD20"
+    ]
+  },
+  "dataset": {
+    "n_patients": 300,
+    "n_sequences": 300,
+    "n_images_or_frames": null,
+    "n_centers": 1,
+    "n_vendors": 3,
+    "data_origin": "clinical",
+    "public_dataset_used": {
+      "value": false,
+      "detail": null
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Datasets available by contacting the corresponding author"
+    },
+    "split_level": "sequence",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 5,
+      "annotator_expertise": "Board-certified interventional neuroradiologists with more than 5 years of DSA interpretation experience; one reviewed all labels, discrepancies resolved by consensus",
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "vessel_segmentation",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Automatic segmentation of intracranial aneurysms in un-reconstructed 3D-RA projection sequences using a pre-detection network, Skip-Review attention, and closed-loop Conv-LSTM spatiotemporal fusion",
+    "clinical_application": "Computer-aided diagnosis of intracranial aneurysms to assist radiologists and support morphological measurement"
+  },
+  "method": {
+    "architecture_names": [
+      "FSTIF-UNet",
+      "VGG16",
+      "Conv-LSTM",
+      "CL-Conv-LSTM",
+      "Skip-Review attention mechanism"
+    ],
+    "architecture_family": "unet_encoder_decoder",
+    "temporal_category": "recurrent",
+    "temporal_evidence": {
+      "quote": "Then a Conv-LSTM is used to fuse the short-term spatiotemporal features of the selected 3D-RA images from the equally-spaced viewing angles.",
+      "section": "introduction"
+    },
+    "input_dimensionality": "2D_multi_frame",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "DSC (FSTIF-U-CL)", "family": "dice", "value_raw": "0.9109", "value_0_100": 91.09, "split": "test", "task": "IA segmentation"},
+      {"metric": "IoU (FSTIF-U-CL)", "family": "iou", "value_raw": "0.8586", "value_0_100": 85.86, "split": "test", "task": "IA segmentation"},
+      {"metric": "Sensitivity (FSTIF-U-CL, abstract)", "family": "sensitivity_recall", "value_raw": "0.9314", "value_0_100": 93.14, "split": "test", "task": "IA segmentation"},
+      {"metric": "Sensitivity (FSTIF-U-CL, results text)", "family": "sensitivity_recall", "value_raw": "0.9386", "value_0_100": 93.86, "split": "test", "task": "IA segmentation"},
+      {"metric": "Hausdorff distance (FSTIF-U-CL)", "family": "error_distance", "value_raw": "1.358", "value_0_100": null, "split": "test", "task": "IA segmentation"},
+      {"metric": "F1-Score (FSTIF-U-CL)", "family": "f1", "value_raw": "0.8883", "value_0_100": 88.83, "split": "test", "task": "IA segmentation"},
+      {"metric": "Segmentation time per case", "family": "time", "value_raw": "0.89 s/case", "value_0_100": null, "split": "test", "task": "IA segmentation"},
+      {"metric": "DSC (FSTIF-UNet without closed loop)", "family": "dice", "value_raw": "0.8993", "value_0_100": 89.93, "split": "test", "task": "IA segmentation"},
+      {"metric": "IoU (FSTIF-UNet without closed loop)", "family": "iou", "value_raw": "0.8429", "value_0_100": 84.29, "split": "test", "task": "IA segmentation"},
+      {"metric": "Sensitivity (FSTIF-UNet without closed loop)", "family": "sensitivity_recall", "value_raw": "0.9311", "value_0_100": 93.11, "split": "test", "task": "IA segmentation"},
+      {"metric": "Hausdorff distance (FSTIF-UNet without closed loop)", "family": "error_distance", "value_raw": "1.374", "value_0_100": null, "split": "test", "task": "IA segmentation"},
+      {"metric": "F1-Score (FSTIF-UNet without closed loop)", "family": "f1", "value_raw": "0.8818", "value_0_100": 88.18, "split": "test", "task": "IA segmentation"},
+      {"metric": "DSC, aneurysms <3 mm", "family": "dice", "value_raw": "0.84", "value_0_100": 84.0, "split": "test", "task": "IA segmentation (subgroup <3 mm)"},
+      {"metric": "DSC, aneurysms 3-5 mm", "family": "dice", "value_raw": "0.9024", "value_0_100": 90.24, "split": "test", "task": "IA segmentation (subgroup 3-5 mm)"},
+      {"metric": "DSC, aneurysms 5-7 mm", "family": "dice", "value_raw": "0.8732", "value_0_100": 87.32, "split": "test", "task": "IA segmentation (subgroup 5-7 mm)"},
+      {"metric": "DSC, aneurysms >7 mm", "family": "dice", "value_raw": "0.8863", "value_0_100": 88.63, "split": "test", "task": "IA segmentation (subgroup >7 mm)"}
+    ],
+    "comparators": [
+      "UNet",
+      "UNet + LSTM",
+      "Cheng's method (UNet with 5 stitched frames)",
+      "ResNet34 backbone",
+      "MobileV1 backbone",
+      "Conv-LSTM",
+      "Bi-Conv-LSTM"
+    ],
+    "compared_with_humans": false,
+    "ablation": true,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": false
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": null,
+      "detail": null
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {
+      "status": "documents",
+      "quote": "the training data and the radiologists who annotated the images are only from Beijing Tiantan Hospital, Capital Medical University",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "both",
+      "quote": "But the temporal and spatial information in a large range is not embeded, which would be helpful for IA detection and segmentation.",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "both",
+      "quote": "measurement accuracy would be affected by the reconstruction process",
+      "section": "introduction"
+    },
+    "G5": {"status": "none", "quote": null, "section": null},
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Interactive semi-automatic RoI extraction requires manual marking of the aneurysm in two frames"
+  ],
+  "future_work": [
+    "Extend training data and annotating radiologists to multiple medical institutions",
+    "Develop automated RoI extraction using object detection networks such as Faster RCNN"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyynnyyyynyyynnynnyyynnynynnnynynyynyy"
+  }
+}

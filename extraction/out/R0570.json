@@ -1,0 +1,162 @@
+{
+  "record_id": "R0570",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Development and application of AI enabled automated drug delivery system for TACE guided by DSA",
+    "year": 2026,
+    "venue": "The Innovation Oncology",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": "China"
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Intraoperative real-time 2D DSA fluoroscopic videos of drug injection during TACE; also rabbit and porcine DSA (NeuAngio 30F) for in vivo testing",
+    "territory": "abdominopelvic",
+    "territory_detail": "Hepatic proper artery and branches (TACE for HCC); rabbit left renal and left gastric arteries in animal tests",
+    "acquisition_geometry": "not_reported",
+    "frame_rate_fps": null,
+    "frames_per_sequence": "15-18 frames per DSA video; videos 0.4-264 s; ~15 FPS internal/external 1, 11 FPS external 2",
+    "vendors": ["Siemens", "Philips", "Shimadzu", "Neusoft"]
+  },
+  "dataset": {
+    "n_patients": 3672,
+    "n_sequences": 50909,
+    "n_images_or_frames": null,
+    "n_centers": 3,
+    "n_vendors": 4,
+    "data_origin": "mixed",
+    "public_dataset_used": {
+      "value": false,
+      "detail": "ImageNet used only for pretraining; no public angiographic dataset"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "DSA image data cannot be deposited publicly for privacy; de-identified clinical data on reasonable request"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "manual",
+      "n_annotators": 2,
+      "annotator_expertise": "Two annotators with >3 years interventional surgery experience (Labelme); reviewed by two interventional radiology experts with 10 and 13 years of experience",
+      "inter_rater_reported": true,
+      "inter_rater_value": "Cohen's kappa used to assess inter-annotator consistency; value not stated in main text"
+    }
+  },
+  "task": {
+    "primary_task": "object_detection_localization",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Two-stage DL model: YOLO with local self-attention localizes the drug reflux region near the microcatheter tip, then a PA-FPN network segments refluxing drug droplets within the box; per-frame outputs drive a closed-loop automated injector (AI-FlowTACE) that adjusts flow rate.",
+    "clinical_application": "Real-time reflux monitoring and closed-loop automated drug delivery during TACE for hepatocellular carcinoma, reducing nontarget embolization and operator radiation exposure"
+  },
+  "method": {
+    "architecture_names": ["YOLO Attention", "PA-FPN", "YOLOv8 with local self-attention"],
+    "architecture_family": "detector",
+    "temporal_category": "none",
+    "temporal_evidence": {
+      "quote": "five frames were evenly sampled as the feedback window to segment drug droplets within the reflux regions of each frame",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_single_frame",
+    "supervision": "fully_supervised",
+    "pretraining": "ImageNet",
+    "uses_synthetic_training_data": false,
+    "physics_informed": false,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "external_validation",
+    "external_validation_detail": "Two external cohorts (CMUSJSB, CMUSJNH) with different data sources and vendors; additional in vivo rabbit and porcine testing without fine-tuning",
+    "metrics": [
+      {"metric": "AP50", "family": "other", "value_raw": "94.1%", "value_0_100": null, "split": "test", "task": "reflux region detection"},
+      {"metric": "AUC", "family": "auc", "value_raw": "86.29%", "value_0_100": 86.29, "split": "test", "task": "reflux region detection"},
+      {"metric": "Inference speed", "family": "time", "value_raw": "165 FPS", "value_0_100": null, "split": "test", "task": "reflux region detection"},
+      {"metric": "AUC (folds 1-5)", "family": "auc", "value_raw": "97.79%, 98.03%, 99.69%, 99.36%, 97.14%", "value_0_100": null, "split": "cross_validation", "task": "reflux segmentation"},
+      {"metric": "Cohen's kappa (model vs manual annotation)", "family": "kappa", "value_raw": "0.83", "value_0_100": 83.0, "split": "cross_validation", "task": "reflux segmentation"},
+      {"metric": "PR-curve AUC", "family": "auc", "value_raw": "97.14%", "value_0_100": 97.14, "split": "external", "task": "reflux region localization, external test 1"},
+      {"metric": "PR-curve AUC", "family": "auc", "value_raw": "92.94%", "value_0_100": 92.94, "split": "external", "task": "reflux region localization, external test 2"},
+      {"metric": "AUC", "family": "auc", "value_raw": "98.15%", "value_0_100": 98.15, "split": "external", "task": "reflux segmentation, external cohort 1"},
+      {"metric": "AUC", "family": "auc", "value_raw": "97.23%", "value_0_100": 97.23, "split": "external", "task": "reflux segmentation, external cohort 2"},
+      {"metric": "AUC range across 4 vendors", "family": "auc", "value_raw": "86.5% to 96.46%", "value_0_100": null, "split": "external", "task": "reflux segmentation, vendor-stratified"},
+      {"metric": "Feedback response time", "family": "time", "value_raw": "~0.12 s", "value_0_100": null, "split": "external", "task": "reflux recognition to injection command"},
+      {"metric": "AUC on high-performance GPU", "family": "auc", "value_raw": "91.42%", "value_0_100": 91.42, "split": "external", "task": "multi-platform deployment, external cohort 1"},
+      {"metric": "Inference speed GPU", "family": "time", "value_raw": "29.26 FPS", "value_0_100": null, "split": "external", "task": "multi-platform deployment, external cohort 1"},
+      {"metric": "Inference speed Jetson Orin Nano", "family": "time", "value_raw": "9.38 FPS", "value_0_100": null, "split": "external", "task": "multi-platform deployment, external cohort 1"},
+      {"metric": "AUC", "family": "auc", "value_raw": "94.68%", "value_0_100": 94.68, "split": "other", "task": "reflux detection, rabbit hepatic artery"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "66.5%", "value_0_100": 66.5, "split": "other", "task": "reflux detection, rabbit hepatic artery"},
+      {"metric": "AUC", "family": "auc", "value_raw": "91.71%", "value_0_100": 91.71, "split": "other", "task": "reflux detection, rabbit left renal artery"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "98.6%", "value_0_100": 98.6, "split": "other", "task": "reflux detection, rabbit left renal artery"},
+      {"metric": "AUC", "family": "auc", "value_raw": "85.81%", "value_0_100": 85.81, "split": "other", "task": "reflux detection, rabbit left gastric artery"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "76.3%", "value_0_100": 76.3, "split": "other", "task": "reflux detection, rabbit left gastric artery"},
+      {"metric": "Drug-adjustment response time", "family": "time", "value_raw": "0.83 s, 0.70 s, 0.82 s", "value_0_100": null, "split": "other", "task": "closed-loop control, rabbit hepatic/renal/gastric"},
+      {"metric": "AUC", "family": "auc", "value_raw": "93.03%", "value_0_100": 93.03, "split": "other", "task": "reflux detection, porcine hepatic artery"},
+      {"metric": "Precision", "family": "precision_ppv", "value_raw": "93.7%", "value_0_100": 93.7, "split": "other", "task": "reflux detection, porcine hepatic artery"},
+      {"metric": "Drug-adjustment response time", "family": "time", "value_raw": "0.8 s", "value_0_100": null, "split": "other", "task": "closed-loop control, porcine model"},
+      {"metric": "Average response time", "family": "time", "value_raw": "0.78 s", "value_0_100": null, "split": "other", "task": "simulated intraoperative delivery, 6 real TACE cases"}
+    ],
+    "comparators": ["YOLOv8", "YOLO9", "YOLO10", "YOLO11", "RT-DETR", "direct single-stage reflux segmentation", "manual injection by interventional operators"],
+    "compared_with_humans": true,
+    "ablation": true,
+    "statistical_testing": true,
+    "confidence_intervals": true,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "retrospective",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": true
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": true,
+      "detail": "https://github.com/xiongyin666/AIFlowTACE"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": false
+  },
+  "gaps": {
+    "G1": {"status": "none", "quote": null, "section": null},
+    "G2": {"status": "both", "quote": "quantified its generalization ability in two external queues with different data sources", "section": "methods"},
+    "G3": {"status": "addresses", "quote": "a time-series feedback mechanism with a 1-second cycle was established", "section": "methods"},
+    "G4": {"status": "none", "quote": null, "section": null},
+    "G5": {"status": "documents", "quote": "Another limitation is the inherent subjectivity in visually assessing reflux on 2D DSA images, despite using inter-observer consensus and Kappa coefficients.", "section": "discussion"},
+    "G6": {"status": "documents", "quote": "applying its active control capability directly to human patients requires rigorous prospective clinical trials and strict ethics committee approval, which is beyond the scope of this preliminary translational study", "section": "discussion"},
+    "G7": {"status": "none", "quote": null, "section": null},
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "documents", "quote": "This exclusion may introduce a certain degree of selection bias and may lead to overestimation of model performance.", "section": "discussion"},
+    "G10": {"status": "documents", "quote": "The DSA image data reported in this study cannot be deposited in a public repository because they contain sensitive information that could compromise patient privacy.", "section": "other"},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Human clinical validation only indirect (retrospective simulation)",
+    "Performance uncertain under arteriosclerosis, hypotension or high-flow hemodynamics",
+    "Novel therapeutic agents may challenge continuous monitoring",
+    "Small operator validation sample (3 surgeons, 6 surgeries)",
+    "Need for manually controlled fail-safe mechanism"
+  ],
+  "future_work": [
+    "Phase I/II prospective multicenter RCTs versus manual TACE",
+    "Quantitative validation with in vitro phantom experiments",
+    "Low-power compact computational architecture for resource-limited settings",
+    "Larger multi-center interventional radiologist cohorts",
+    "Update and optimize perception module for novel agents",
+    "Explore ethical and regulatory pathways"
+  ],
+  "claim2024": {
+    "items": "ynyyyyyyyynyyyyyyyynyyynnnyyyynyyyyyyynyyyyy"
+  }
+}

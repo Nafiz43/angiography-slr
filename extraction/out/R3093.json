@@ -1,0 +1,124 @@
+{
+ "record_id": "R3093",
+ "schema_version": "2.0",
+ "study": {
+  "title": "Automatic assessment of collaterals physiology in chronic total occlusions by means of artificial intelligence",
+  "year": 2023,
+  "venue": "Cardiology Journal",
+  "publication_type": "journal",
+  "text_is_full_paper": true,
+  "country_of_data": "China"
+ },
+ "imaging": {
+  "modality": "xray_fluoroscopy",
+  "modality_detail": "Coronary X-ray angiography (cine) pre and post CTO-PCI, monoplane systems",
+  "territory": "cardiac",
+  "territory_detail": "Coronary arteries: CTO artery and primary/secondary collateral donor arteries",
+  "acquisition_geometry": "monoplane",
+  "frame_rate_fps": 15,
+  "frames_per_sequence": null,
+  "vendors": ["Philips (Allura Xper FD20)", "Siemens (Artist Q Zeego)", "GE (Innova IGS520)"]
+ },
+ "dataset": {
+  "n_patients": 105,
+  "n_sequences": null,
+  "n_images_or_frames": null,
+  "n_centers": 2,
+  "n_vendors": 3,
+  "data_origin": "clinical",
+  "public_dataset_used": {"value": false, "detail": null},
+  "data_released": {"value": null, "detail": null},
+  "split_level": "na",
+  "annotation": {
+   "type": "manual",
+   "n_annotators": 2,
+   "annotator_expertise": "Experienced interventional cardiologists grading Rentrop and CC collaterals; third interventional cardiologist as referee for disagreements",
+   "inter_rater_reported": false,
+   "inter_rater_value": null
+  }
+ },
+ "task": {
+  "primary_task": "contrast_flow_analysis",
+  "other_label": null,
+  "secondary_tasks": [],
+  "task_description": "Automatic computation of donor-artery flow velocity pre and post CTO-PCI from the length/time curve of contrast filling derived from deep-learning (U-Net) coronary segmentation, used to derive collateral flow change and collateral flow index, compared against Rentrop and CC angiographic grading.",
+  "clinical_application": "Physiologic assessment of coronary collateral circulation in chronic total occlusion PCI without dedicated wires or devices"
+ },
+ "method": {
+  "architecture_names": ["improved deep-learning U-Net"],
+  "architecture_family": "unet_encoder_decoder",
+  "temporal_category": "hemodynamic_physics",
+  "temporal_evidence": {
+   "quote": "Taking into account the frame rate, the curve of vessel length variation over time (length/time curve) could easily be derived during the phase of contrast injection.",
+   "section": "methods"
+  },
+  "input_dimensionality": "2D_plus_time_video",
+  "supervision": "not_applicable",
+  "pretraining": "U-Net segmentation model previously validated in a prior study (ref 13); applied without retraining description",
+  "uses_synthetic_training_data": false,
+  "physics_informed": true,
+  "multimodal_inputs": [],
+  "class_imbalance_handling": null,
+  "uncertainty_quantification": false,
+  "explainability_method": null,
+  "federated_or_privacy_preserving": false,
+  "uses_llm_or_vlm": false,
+  "real_time_or_inference_time_reported": false
+ },
+ "evaluation": {
+  "validation_design": "none",
+  "external_validation_detail": null,
+  "metrics": [
+   {"metric": "Feasibility of automatic AI analysis (105 of 112 patients)", "family": "other", "value_raw": "93.75%", "value_0_100": null, "split": "other", "task": "contrast_flow_analysis"}
+  ],
+  "comparators": [],
+  "compared_with_humans": false,
+  "ablation": false,
+  "statistical_testing": true,
+  "confidence_intervals": false,
+  "subgroup_or_per_class_reporting": true,
+  "failure_analysis": true
+ },
+ "clinical": {
+  "study_design": "retrospective",
+  "reader_study": false,
+  "patient_outcome_measured": false,
+  "clinical_deployment_or_live_use": false,
+  "regulatory_mentioned": false
+ },
+ "reproducibility": {
+  "code_available": {"value": null, "detail": null},
+  "model_weights_available": {"value": null, "detail": null},
+  "hyperparameters_reported": false
+ },
+ "gaps": {
+  "G1": {"status": "none", "quote": null, "section": null},
+  "G2": {"status": "documents", "quote": "the accuracy of the method at 7.5 frames/s is essentially unknown and should be specifically addressed in future studies", "section": "discussion"},
+  "G3": {"status": "none", "quote": null, "section": null},
+  "G4": {"status": "none", "quote": null, "section": null},
+  "G5": {"status": "none", "quote": null, "section": null},
+  "G6": {"status": "documents", "quote": "This was a retrospective study, thereby with the intrinsic limitations of this design, and potentially subject to selection bias.", "section": "discussion"},
+  "G7": {"status": "none", "quote": null, "section": null},
+  "G8": {"status": "none", "quote": null, "section": null},
+  "G9": {"status": "none", "quote": null, "section": null},
+  "G10": {"status": "none", "quote": null, "section": null},
+  "G11": {"status": "documents", "quote": "an eventual prognostic value of the collateral closure, which could be evaluated in sequential follow-up studies", "section": "discussion"},
+  "G12": {"status": "none", "quote": null, "section": null}
+ },
+ "other_limitations": [
+  "No head-to-head comparison with intracoronary Doppler or pressure wire",
+  "No comparison with invasive absolute coronary blood flow by thermodilution",
+  "Retrograde approach cases excluded",
+  "Microvascular dysfunction may introduce variability",
+  "Delta-CFI only approximates CFI because collateral flow persists after PCI"
+ ],
+ "future_work": [
+  "Head-to-head validation against intracoronary Doppler or pressure wire",
+  "Comparison with thermodilution-derived absolute coronary blood flow",
+  "Assess method accuracy at 7.5 frames/s",
+  "Evaluate method in retrograde CTO approach",
+  "Evaluate prognostic value of collateral closure in follow-up studies",
+  "Study coronary steal phenomena"
+ ],
+ "claim2024": {"items": "yyyyyyyyyynyyyynaaaaanaaaayynnnaayyyyynyyyny"}
+}

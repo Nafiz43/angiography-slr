@@ -1,0 +1,171 @@
+{
+  "record_id": "R1862",
+  "schema_version": "2.0",
+  "study": {
+    "title": "Simulation-informed learning for time-resolved angiographic contrast agent concentration reconstruction",
+    "year": 2024,
+    "venue": "Computers in Biology and Medicine",
+    "publication_type": "journal",
+    "text_is_full_paper": true,
+    "country_of_data": null
+  },
+  "imaging": {
+    "modality": "DSA",
+    "modality_detail": "Simulated rotational 4D-DSA projection images (DeepDRR forward projection of CFD-based contrast agent transport)",
+    "territory": "neurologic",
+    "territory_detail": "Cerebrovascular trees (ICA inlet, MCA, ACA); aneurysms removed",
+    "acquisition_geometry": "rotational_3D",
+    "frame_rate_fps": 60,
+    "frames_per_sequence": null,
+    "vendors": []
+  },
+  "dataset": {
+    "n_patients": 30,
+    "n_sequences": 1062,
+    "n_images_or_frames": null,
+    "n_centers": null,
+    "n_vendors": null,
+    "data_origin": "synthetic",
+    "public_dataset_used": {
+      "value": true,
+      "detail": "AneuX morphology database surface meshes (plus in-house segmentations)"
+    },
+    "data_released": {
+      "value": false,
+      "detail": "Raw and processed data cannot be shared due to legal reasons"
+    },
+    "split_level": "patient",
+    "annotation": {
+      "type": "automatic",
+      "n_annotators": null,
+      "annotator_expertise": null,
+      "inter_rater_reported": false,
+      "inter_rater_value": null
+    }
+  },
+  "task": {
+    "primary_task": "contrast_flow_analysis",
+    "other_label": null,
+    "secondary_tasks": [],
+    "task_description": "Learning-based reconstruction of spatially averaged, time-resolved (1D+T) contrast agent concentration at vessel centerline points from rotational angiographic projections, correcting vessel overlap and foreshortening artifacts; trained on CFD-based simulations.",
+    "clinical_application": "Time-resolved 4D-DSA flow reconstruction for neurovascular hemodynamic assessment"
+  },
+  "method": {
+    "architecture_names": [
+      "ResNet",
+      "CNN"
+    ],
+    "architecture_family": "cnn_classifier",
+    "temporal_category": "cnn3d_video",
+    "temporal_evidence": {
+      "quote": "the spatial dimensions of the image can be interpreted as the distance along the centerline and time",
+      "section": "methods"
+    },
+    "input_dimensionality": "2D_plus_time_video",
+    "supervision": "fully_supervised",
+    "pretraining": null,
+    "uses_synthetic_training_data": true,
+    "physics_informed": true,
+    "multimodal_inputs": [],
+    "class_imbalance_handling": null,
+    "uncertainty_quantification": false,
+    "explainability_method": null,
+    "federated_or_privacy_preserving": false,
+    "uses_llm_or_vlm": false,
+    "real_time_or_inference_time_reported": true
+  },
+  "evaluation": {
+    "validation_design": "internal_split",
+    "external_validation_detail": null,
+    "metrics": [
+      {"metric": "Mean absolute error (case-averaged, mean)", "family": "error_distance", "value_raw": "0.021", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Mean absolute error (case-averaged, median)", "family": "error_distance", "value_raw": "0.019", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Maximum mean absolute error (case-wise)", "family": "error_distance", "value_raw": "0.037", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Mean absolute percentage error (case-averaged, mean)", "family": "other", "value_raw": "5.18%", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Mean absolute percentage error (case-averaged, median)", "family": "other", "value_raw": "4.52%", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Maximum mean absolute percentage error (case-wise)", "family": "other", "value_raw": "15.8%", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Mean absolute error (mean +/- SD, abstract)", "family": "error_distance", "value_raw": "0.02±0.02", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Mean absolute percentage error (mean +/- SD, abstract)", "family": "other", "value_raw": "5.31±9.25 %", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"},
+      {"metric": "Coefficient of determination R2 (predicted vs ground truth)", "family": "correlation", "value_raw": "0.98", "value_0_100": null, "split": "test", "task": "CA concentration reconstruction"}
+    ],
+    "comparators": [],
+    "compared_with_humans": false,
+    "ablation": false,
+    "statistical_testing": false,
+    "confidence_intervals": false,
+    "subgroup_or_per_class_reporting": true,
+    "failure_analysis": true
+  },
+  "clinical": {
+    "study_design": "not_reported",
+    "reader_study": false,
+    "patient_outcome_measured": false,
+    "clinical_deployment_or_live_use": false,
+    "regulatory_mentioned": false
+  },
+  "reproducibility": {
+    "code_available": {
+      "value": false,
+      "detail": "Code available from the corresponding author upon reasonable request"
+    },
+    "model_weights_available": {
+      "value": null,
+      "detail": null
+    },
+    "hyperparameters_reported": true
+  },
+  "gaps": {
+    "G1": {
+      "status": "documents",
+      "quote": "Previous works only qualitatively assessed the performance of their methods, making a direct comparison to our approach impossible.",
+      "section": "discussion"
+    },
+    "G2": {
+      "status": "documents",
+      "quote": "our method was so far not evaluated on real angiographic projection images, for which image noise and out-of-distribution flow scenarios may lead to decreased model performance.",
+      "section": "discussion"
+    },
+    "G3": {
+      "status": "addresses",
+      "quote": "approximates the spatially averaged but time-resolved 1D+T CA concentration at all centerline points in the vasculature",
+      "section": "introduction"
+    },
+    "G4": {
+      "status": "both",
+      "quote": "However, due to the single view, 2D-DSA images are impaired by vascular overlay and vessel foreshortening, limiting their application for complex abnormalities.",
+      "section": "introduction"
+    },
+    "G5": {
+      "status": "both",
+      "quote": "One major advantage of the coupling of imaging and CFD simulations is the possibility to quantitatively evaluate 4D reconstruction algorithms, as real-world 4D contrast intensities cannot be measured with existing imaging modalities.",
+      "section": "introduction"
+    },
+    "G6": {"status": "none", "quote": null, "section": null},
+    "G7": {
+      "status": "documents",
+      "quote": "A combined estimation of CA concentrations and velocity fields could also improve interpretability and enables the computation of PDE residuals as a quality metric during inference.",
+      "section": "discussion"
+    },
+    "G8": {"status": "none", "quote": null, "section": null},
+    "G9": {"status": "none", "quote": null, "section": null},
+    "G10": {"status": "none", "quote": null, "section": null},
+    "G11": {"status": "none", "quote": null, "section": null},
+    "G12": {"status": "none", "quote": null, "section": null}
+  },
+  "other_limitations": [
+    "Reduced-order 1D+T model not applicable to complex hemodynamics in aneurysms or AVMs",
+    "Bifurcation regions excluded from reconstruction",
+    "Contrast agent calibration required for application to real images"
+  ],
+  "future_work": [
+    "Phantom studies with CFD fitted to flow probe or Doppler ultrasound measurements",
+    "Patient-specific CFD with boundary conditions fitted from projection images",
+    "Combining the learning-based approach with CFD parameter optimization",
+    "Physics-informed neural networks to infer hidden hemodynamics from reconstructed concentrations",
+    "Higher-dimensional representations for complex pathologies such as aneurysms",
+    "Generalizability across acquisition protocols including static viewpoints"
+  ],
+  "claim2024": {
+    "items": "ynyyynynnnnnyyaayyyayynyyyynyynynyynnynyyyyy"
+  }
+}

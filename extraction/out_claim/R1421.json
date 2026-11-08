@@ -1,0 +1,17 @@
+{"record_id": "R1421",
+ "items": {
+  "6": {"answer": "yes", "quote": "In this paper, we present an end-to-end learning-based approach aiming to provide a useful clinical tool that could provide faster diagnoses and reduce costs.", "section": "introduction"},
+  "9": {"answer": "no", "quote": null, "section": null},
+  "10": {"answer": "yes", "quote": "This exclusion involved removing cine loops categorized as \"other\" and any cine loops obtained after this category appeared in the sequence based on their timestamps.", "section": "methods"},
+  "12": {"answer": "yes", "quote": "values as zeros, corresponding to segments without stenosis. Therefore, we had a complete dataset", "section": "methods"},
+  "15": {"answer": "yes", "quote": "the reported visual assessments can be overoptimistic and biased towards FFR measurements, as they are typically reported after the FFR is measured and are not blinded to it.", "section": "discussion"},
+  "17": {"answer": "yes", "quote": "Every entry in the EDHR database was manually registered by interventional cardiologists as part of clinical practice.", "section": "methods"},
+  "20": {"answer": "yes", "quote": "we used 5179 randomly selected patients for evaluating the performance, which we will refer to as the internal test set", "section": "methods"},
+  "21": {"answer": "no", "quote": null, "section": null},
+  "23": {"answer": "no", "quote": null, "section": null},
+  "26": {"answer": "no", "quote": null, "section": null},
+  "27": {"answer": "na", "quote": null, "section": null},
+  "34": {"answer": "na", "quote": null, "section": null},
+  "37": {"answer": "yes", "quote": "For detection of significant stenosis on the external test set, the ROC AUC decreased to 0.833 (95% CI: 0.814–0.852), and PR AUC decreased to 0.219 (95% CI: 0.190–0.250)", "section": "results"},
+  "38": {"answer": "yes", "quote": "The confidence intervals were computed using 1000 bootstrap samples at a 95% confidence level defined by the 2.5th and 97.5th percentiles.", "section": "methods"}
+ }}

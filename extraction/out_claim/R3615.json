@@ -1,0 +1,75 @@
+{
+ "record_id": "R3615",
+ "items": {
+  "6": {
+   "answer": "yes",
+   "quote": "we aimed to propose a robust approach based on deep learning segmentation using the VBFT method to extract CAT and to assess the effectiveness of this VBFT versus the single‐frame method",
+   "section": "introduction"
+  },
+  "9": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "10": {
+   "answer": "yes",
+   "quote": "the number of vessel pixels in each frame is counted based on a vessel segmentation model, in which the highest number is selected as the target frame",
+   "section": "methods"
+  },
+  "12": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "15": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "17": {
+   "answer": "yes",
+   "quote": "the standard reference annotation of the CAT can be labelled along the center of the vessel. Every standard reference was labelled and checked by three experts, using a 1‐pixel‐wide line",
+   "section": "methods"
+  },
+  "20": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "21": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "23": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "26": {
+   "answer": "no",
+   "quote": null,
+   "section": null
+  },
+  "27": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "34": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  },
+  "37": {
+   "answer": "yes",
+   "quote": "using the VBFT method was 84.3% (95% CI: 82.4% 86.3%), which was significantly higher than the single‐frame method (72.3%, 95% CI: 69.9%‒74.7%, p < 0.001)",
+   "section": "results"
+  },
+  "38": {
+   "answer": "na",
+   "quote": null,
+   "section": null
+  }
+ }
+}
